@@ -87,66 +87,83 @@ public class KAMPF
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        anz[welt[feld]]=(int)(leben[welt[feld]]/welt[feld]);
-                        try { 
+                        try {                                                                         
                             Thread.sleep(1000);                 
                         } catch(InterruptedException ex) {
                             Thread.currentThread().interrupt();
                         }   
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
+                        dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         if(leben[welt[feld]]<=0) {              //kontolle tod
+                            anz[welt[feld]]=0;
                             grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
                             grafik.loeschemarkierung(feld);
-                            kontrollesieg();
-                                }
+                            kontrollesieg();   
+                        }
                         gekaempft=true;
                     }else if(kaempfer[reihenfolge[0]].name=="Speerkaempfer" && (kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-2==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+2==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]-10==feld || kepos[reihenfolge[0]]+5==feld || kepos[reihenfolge[0]]+10==feld || kepos[reihenfolge[0]]-6==feld || kepos[reihenfolge[0]]-4==feld || kepos[reihenfolge[0]]+4==feld || kepos[reihenfolge[0]]+6==feld)) {  
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        try { 
+                        try {                                                                         
                             Thread.sleep(1000);                 
                         } catch(InterruptedException ex) {
                             Thread.currentThread().interrupt();
-                        }
-                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);
-                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
+                        }   
+                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
+                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;                      
+                        dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
-                        if(leben[welt[feld]]<=0) {             //kontolle tod
+                        if(leben[welt[feld]]<=0) {              //kontolle tod
+                            anz[welt[feld]]=0;
                             grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
                             grafik.loeschemarkierung(feld);
                             kontrollesieg();
-                                }
+                        }
                         gekaempft=true;
                     }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
-                        grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
-                        grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
-                        try { 
+                        try {                                                                         
                             Thread.sleep(1000);                 
                         } catch(InterruptedException ex) {
                             Thread.currentThread().interrupt();
+                        }   
+                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
+                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;        
+                        dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
+                        grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
+                        grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
+                        if(kaempfer[welt[feld]].name!="Bogenschütze" && kaempfer[welt[feld]].name!="Speerkämpfer") {
+                            grafik.kons("Gegenattacke");
+                            try {                                                                         
+                                Thread.sleep(500);                 
+                            } catch(InterruptedException ex) {
+                                Thread.currentThread().interrupt();
+                            } 
+                            leben[reihenfolge[0]]=leben[reihenfolge[0]]-dmg[welt[feld]];
+                            anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
+                            grafik.anzahl(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+                            grafik.anzahlreihenfolge(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                         }
-                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);  
-                        if(leben[welt[feld]]<=0) {             //kontolle tod
-                            grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod ");
+                        if(leben[welt[feld]]<=0) {              //kontolle tod
+                            anz[welt[feld]]=0;
+                            grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
                             grafik.loeschemarkierung(feld);
                             kontrollesieg();
-                                }
+                        }
                         gekaempft=true;
                     }else if(kepos[reihenfolge[0]]-1==feld && kepos[reihenfolge[0]]+1==feld && kepos[reihenfolge[0]]-5==feld && kepos[reihenfolge[0]]+5==feld){
                         grafik.kons("für "+kaempfer[reihenfolge[0]].name+" unerreichbar");
@@ -165,8 +182,7 @@ public class KAMPF
             grafik.kons("Max. Aktionen bereits gemacht");
         }       
     }
-    
-    
+     
     public void bewegen(int feld) {
         if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
