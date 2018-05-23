@@ -356,6 +356,12 @@ public class KAMPF
         alg = new ALGORITHMUS(0,welt);
         return alg.getType();
     }
+    
+        public int[] algRange() {
+        alg = new ALGORITHMUS(0,welt);
+        alg.setRange();
+        return alg.getRange();
+    }
 }
 
 //          try {
