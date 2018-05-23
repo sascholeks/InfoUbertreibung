@@ -352,16 +352,18 @@ public class KAMPF
         }
     }
 
-    public int algTest() {
-        alg = new ALGORITHMUS(0,welt);
-        return alg.getType();
+    public int[] algPath() {
+        alg = new ALGORITHMUS(5,welt);
+        alg.setPath();
+        return alg.getPath();
     }
     
-        public int[] algRange() {
-        alg = new ALGORITHMUS(0,welt);
-        alg.setRange();
-        return alg.getRange();
+    public void checkEnemie() {
+        alg = new ALGORITHMUS(3,welt);
+        alg.checkEnemie();
     }
+    
+    
 }
 
 //          try {

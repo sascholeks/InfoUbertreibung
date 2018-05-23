@@ -3,11 +3,15 @@ public class ALGORITHMUS
     int[] welt;
     int pos;
     int range[];
+    int path[];
+    GRAFIKELEMENTE grafik;
     public ALGORITHMUS(int pos, int[] welt)
     {
         this.welt = welt;
         this.pos =pos;
         range = new int[25];
+        path = new int[25];
+        grafik=new GRAFIKELEMENTE();
     }
 
     public int getType() {
@@ -15,7 +19,7 @@ public class ALGORITHMUS
     }
 
     public void setRange() {
-        if(getType()==5) {
+        if(getType()==0) {
             for(int i=0;i<25;i++) {
                 range[i] = 1;
             }
@@ -43,12 +47,66 @@ public class ALGORITHMUS
             if(pos+6<25) {
                 range[pos+6] = 0;
             }
+            range[pos] = 0;
+        } else {
+            for(int i=0;i<25;i++) {
+                range[i] = 0;
+            }
+            if(pos-5>=0) {
+                range[pos-5] = 1;
+            }
+            if(pos-1>=0) {
+                range[pos-1] = 1;
+            }
+            if(pos+1<25) {
+                range[pos+1] = 1;
+            }
+            if(pos+5<25) {
+                range[pos+5] = 1;
+            }
         }
-
     }  
 
     public int[] getRange() {
+        setRange();
         return range;
     }
 
+    public boolean checkEnemie() {
+        setRange();
+        boolean check=false;
+        for(int i=0;i<25;i++) {
+            if(range[i]==1) {
+                if(welt[i]>=5 && welt[i] < 10) {
+                    grafik.kons("Gegner gefunden! (Pos: " + i + ", ID: " + welt[i] + ")");
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+
+    public void setPath() {
+        for(int i=0;i<25;i++) {
+            path[i] = 0;
+        }
+        if(pos-1>=0) {
+            path[pos-1] = 1;
+        }
+        if(pos-5>=0) {
+            path[pos+5] = 1;
+        }
+        if(pos+1<25) {
+            path[pos+1] = 1;
+        }
+        if(pos+5<25) {
+            path[pos+5] = 1;
+        }
+    }
+    
+    public int[] getPath() {
+        return path;
+    }
 }
