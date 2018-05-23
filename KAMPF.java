@@ -222,15 +222,16 @@ public class KAMPF
             if(tod[reihenfolge[a]]==true) {
                 grafik.markieretod(a);
             }
+            grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
     }
     
     public void beendezug() {
-        grafik.loeschemarkierung(kepos[reihenfolge[0]]);
-        if(tod[reihenfolge[0]]==false) {
+        grafik.loeschemarkierung(kepos[reihenfolge[0]]);                                                       
+        if(tod[reihenfolge[0]]==false) {                                                                             //markiere (wegen löschen weg
             grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
         }
-        int zughelp=reihenfolge[0];
+        int zughelp=reihenfolge[0];                                                                                  //aktualisiere riehenfolge
         for(int a=0;a<9;a++) {
             reihenfolge[a]=reihenfolge[a+1];
         }
