@@ -343,7 +343,7 @@ public class KAMPF
     public void hindernisse() {
         helphind=r.nextInt(3); 
         for(int a=0;a<=helphind;a++) {
-            feldhind=r.nextInt(2);
+            feldhind=r.nextInt(3);
             helphind2=r.nextInt(5);
             feldhind=feldhind+helphind2*5+1;
             grafik.zeichnehindernis(feldhind);

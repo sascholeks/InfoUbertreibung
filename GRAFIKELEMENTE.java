@@ -1,11 +1,12 @@
-
+import java.util.Random;
 
 public class GRAFIKELEMENTE
 {
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
-    
+    Random r;
     public GRAFIKELEMENTE()
     {
+        r=new Random();
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -62,8 +63,14 @@ public class GRAFIKELEMENTE
     }
     
     public void zeichnehindernis(int feld) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+8,y[feld/5]+12,30,25,7);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+15,y[feld/5]+20,25,20,7);
+        int zf=r.nextInt(2);
+        if(zf==0) {
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+8,y[feld/5]+12,30,25,7);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+15,y[feld/5]+20,25,20,7);
+        }else {
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+7,19,40,7);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+15,y[feld/5]+20,25,20,7);
+        }
     }
      
     public void zeichneinfeld(int kaempferID,int feld,int anz) {
