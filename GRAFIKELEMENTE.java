@@ -49,45 +49,16 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,6);
     }
     
-    public void anzahlreihenfolge(int reihe,int anz) {   
-        if(anz>999 && anz<10000) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe,241,29,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe,241,29,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe,252);
-        }else if(anz>99 && anz<1000) {
+    public void anzahlreihenfolge(int reihe,int anz) {           
             ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe,241,22,12,11);               
             ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe,241,22,12);
             ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe,252);
-        }else if(anz>9 && anz<100) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe,241,15,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe,241,15,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe,252);
-        }else if(anz>0 && anz<10) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe,241,8,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe,241,8,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe,252);
-        }
-        
     }
     
     public void anzahl(int feld,int anz) {
-        if(anz>999 && anz<10000) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,29,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,29,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46);
-        }else if(anz>99 && anz<1000) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,22,12,11);               
             ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,22,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46);
-        }else if(anz>9 &&anz<100) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,15,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,15,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46);
-        }else if(anz>0 && anz<10) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,8,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,8,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46);
-        }
+            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46); 
     }
      
     public void zeichneinfeld(int kaempferID,int feld,int anz) {
