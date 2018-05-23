@@ -75,7 +75,7 @@ public class KAMPF
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
         for(int a=0;a<10;a++) {         //zeichne in spielfeld
-            grafik.zeichneinfeld(a,kepos[a],anz[a]);
+            grafik.zeichneinfeld(a,kepos[a],anz[a]);                                                           //hat einfluss auf feld
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
     }
@@ -87,12 +87,16 @@ public class KAMPF
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
+                        anz[welt[feld]]=(int)(leben[welt[feld]]/welt[feld]);
                         try { 
                             Thread.sleep(1000);                 
                         } catch(InterruptedException ex) {
                             Thread.currentThread().interrupt();
                         }   
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
+                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
+                        grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
+                        grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
                             tod[welt[feld]]=true;
@@ -111,6 +115,9 @@ public class KAMPF
                             Thread.currentThread().interrupt();
                         }
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);
+                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
+                        grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
+                        grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         if(leben[welt[feld]]<=0) {             //kontolle tod
                             grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
                             tod[welt[feld]]=true;
@@ -123,6 +130,9 @@ public class KAMPF
                     }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
+                        anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
+                        grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
+                        grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         try { 
                             Thread.sleep(1000);                 
                         } catch(InterruptedException ex) {
