@@ -76,7 +76,7 @@ public class ZEICHENFENSTER
 
     public static ZEICHENFENSTER gibFenster()
     {
-        if (singleton==null){singleton=new ZEICHENFENSTER("Das Zeichenfenster", 700, 290);}
+        if (singleton==null){singleton=new ZEICHENFENSTER("Spiel", 700, 290);}
         singleton.zeige();
         return singleton;
     }
