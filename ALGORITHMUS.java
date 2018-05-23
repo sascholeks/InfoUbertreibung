@@ -23,28 +23,28 @@ public class ALGORITHMUS
             for(int i=0;i<25;i++) {
                 range[i] = 1;
             }
-            if(pos-6>=0) {
+            if(pos-6>=0 && checkLine(pos)!=checkLine(pos-6)) {
                 range[pos-6] = 0;
             }
-            if(pos-5>=0) {
+            if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5)) {
                 range[pos-5] = 0;
             }
-            if(pos-4>=0) {
+            if(pos-4>=0 && checkLine(pos)!=checkLine(pos-4)) {
                 range[pos-4] = 0;
             }
-            if(pos-1>=0) {
+            if(pos-1>=0 && checkLine(pos)==checkLine(pos-1)) {
                 range[pos-1] = 0;
             }
-            if(pos+1<25) {
+            if(pos+1<25 && checkLine(pos)==checkLine(pos+1)) {
                 range[pos+1] = 0;
             }
-            if(pos+4<25) {
+            if(pos+4<25 && checkLine(pos)!=checkLine(pos+4)) {
                 range[pos+4] = 0;
             }
-            if(pos+5<25) {
+            if(pos+5<25 && checkLine(pos)!=checkLine(pos+5)) {
                 range[pos+5] = 0;
             }
-            if(pos+6<25) {
+            if(pos+6<25 && checkLine(pos)!=checkLine(pos+6)) {
                 range[pos+6] = 0;
             }
             range[pos] = 0;
@@ -52,16 +52,16 @@ public class ALGORITHMUS
             for(int i=0;i<25;i++) {
                 range[i] = 0;
             }
-            if(pos-5>=0) {
+            if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5)) {
                 range[pos-5] = 1;
             }
-            if(pos-1>=0) {
+            if(pos-1>=0 && checkLine(pos)==checkLine(pos-1)) {
                 range[pos-1] = 1;
             }
-            if(pos+1<25) {
+            if(pos+1<25 && checkLine(pos)==checkLine(pos+1)) {
                 range[pos+1] = 1;
             }
-            if(pos+5<25) {
+            if(pos+5<25 && checkLine(pos)!=checkLine(pos+5)) {
                 range[pos+5] = 1;
             }
         }
@@ -92,21 +92,42 @@ public class ALGORITHMUS
         for(int i=0;i<25;i++) {
             path[i] = 0;
         }
-        if(pos-1>=0) {
+        if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5) && welt[pos-5] == 10) {
+            path[pos-5] = 1;
+        }
+        if(pos-1>=0 && checkLine(pos)==checkLine(pos-1) && welt[pos-1] == 10) {
             path[pos-1] = 1;
         }
-        if(pos-5>=0) {
-            path[pos+5] = 1;
-        }
-        if(pos+1<25) {
+        if(pos+1<25 && checkLine(pos)==checkLine(pos+1) && welt[pos+1] == 10) {
             path[pos+1] = 1;
         }
-        if(pos+5<25) {
+        if(pos+5<25 && checkLine(pos)!=checkLine(pos+5) && welt[pos+5] == 10) {
             path[pos+5] = 1;
         }
+        path[pos] = 0;
     }
-    
+
     public int[] getPath() {
         return path;
+    }
+
+    public int checkLine(int pos) {
+        int line = 0;
+        if(pos >= 0 && pos < 5) {
+            line = 0;
+        }
+        else if(pos >= 5 && pos < 10) {
+            line = 1;
+        }
+        else if(pos >= 10 && pos < 15) {
+            line = 2;
+        }
+        else if(pos >= 15 && pos < 20) {
+            line = 3;
+        }
+        else if(pos >= 20 && pos < 25) {
+            line = 4;
+        }
+        return line;
     }
 }
