@@ -158,7 +158,7 @@ public class KAMPF
     
     
     public void bewegen(int feld) {
-        if(aktionen!=2 && bewegt==false && welt[feld]==10) {
+        if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
                 grafik.loeschemarkierung(kepos[reihenfolge[0]]);
                 welt[kepos[reihenfolge[0]]]=10;
@@ -178,6 +178,8 @@ public class KAMPF
             grafik.kons("In dieser Runde bereits 2 mal bewegt");
         }else if(aktionen==2) {
             grafik.kons("Max. Aktionen bereits gemacht");
+        }else if(gekaempft==true) {
+            grafik.kons("Nach Kampf kann nicht gelaufen werden");
         }else {
             grafik.kons("Feld nicht in Reichweite");
         }
