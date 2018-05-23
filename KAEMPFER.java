@@ -5,9 +5,10 @@ public class KAEMPFER
     public int leben;
     public int dmg;
     public static int UUID;
-    public KAEMPFER(int typ)
+    public int type;
+    public KAEMPFER(int type)
     {
-        switch (typ) {
+        switch (type) {
             case 0:
             name="Bogenschütze";
             leben=70;
@@ -35,18 +36,7 @@ public class KAEMPFER
             break;
         }
         UUID++;
-    }
-    
-    public String getName() {
-        return name;
-    }
-    
-    public void setUUID(int UUID) {
-        this.UUID = UUID;
-    }
-    
-    public int getUUID() {
-        return UUID;
+        this.type = type;
     }
 }
 
