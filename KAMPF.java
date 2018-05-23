@@ -60,7 +60,7 @@ public class KAMPF
         
         kaempfer=new KAEMPFER[10];
         for(int a=0;a<10;a++) {
-            kaempfer[a]=new KAEMPFER(a%5);          //erhält rest zw. 0 und 4
+            kaempfer[a]=new KAEMPFER(a%5);          //erhält rest zw. 0 und 4                                   //hat einfluss auf name
             leben[a]=kaempfer[a].leben*anz[a];
             dmg[a]=kaempfer[a].dmg*anz[a];
         }
@@ -71,7 +71,7 @@ public class KAMPF
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         
         for(int a=0;a<6;a++) {           //zeichne Bilder in Reiehnfolge
-            grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);
+            grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);                         //hat einfluss auf reiehenfolg
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
         for(int a=0;a<10;a++) {         //zeichne in spielfeld

@@ -40,33 +40,6 @@ public class GRAFIKELEMENTE
         }
     }
     
-    public void kons(String st) {   
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(275,265,420,20,11);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,265,420,20);
-        ZEICHENFENSTER.gibFenster().zeichneText(st,280,280);
-    }
-    
-    public void markiereaktuell(int aktuellesfeld) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,7);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+3,y[aktuellesfeld/5]+3,45,45,8);
-    }
-    
-    public void loeschemarkierung(int aktuellesfeld) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,8);
-    }
-    
-    public void markieretod(int x) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*x,225,55,5,6);
-    }
-    
-    public void zeichnesieg() {
-        ZEICHENFENSTER.gibFenster().loescheAlles();
-    }
-    
-    public void zeichneverloren() {
-        ZEICHENFENSTER.gibFenster().loescheAlles();
-    }
-    
     public void zeichneaktionswahl() {
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,70,13);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,65,14);
@@ -192,7 +165,6 @@ public class GRAFIKELEMENTE
         }
     }
     
-    
     public void zeichneKaempferreihenfolge(int typ,int team,int x) {
         switch (team) {
             case 1:
@@ -264,6 +236,33 @@ public class GRAFIKELEMENTE
                 }
                 break;
         }
+    }
+    
+    public void kons(String st) {   
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(275,265,420,20,11);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,265,420,20);
+        ZEICHENFENSTER.gibFenster().zeichneText(st,280,280);
+    }
+    
+    public void markiereaktuell(int aktuellesfeld) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,7);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+3,y[aktuellesfeld/5]+3,45,45,8);
+    }
+    
+    public void loeschemarkierung(int aktuellesfeld) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,8);
+    }
+    
+    public void markieretod(int x) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*x,225,55,5,6);
+    }
+    
+    public void zeichnesieg() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
+    }
+    
+    public void zeichneverloren() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
     }
 }
 
