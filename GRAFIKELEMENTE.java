@@ -60,6 +60,11 @@ public class GRAFIKELEMENTE
             ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,22,12);
             ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46); 
     }
+    
+    public void zeichnehindernis(int feld) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+8,y[feld/5]+12,30,25,7);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+15,y[feld/5]+20,25,20,7);
+    }
      
     public void zeichneinfeld(int kaempferID,int feld,int anz) {
         switch(kaempferID) {

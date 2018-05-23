@@ -10,7 +10,7 @@ public class KAMPF
      
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
-    int aktionen,feld,bewhelp=0;
+    int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2;
     boolean geheilt=false,gekaempft=false,bewegt=false;
     public KAMPF()
     {
@@ -78,6 +78,7 @@ public class KAMPF
             grafik.zeichneinfeld(a,kepos[a],anz[a]);                                                           //hat einfluss auf feld
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
+        hindernisse();
     }
     
     public void kaempfen(int feld) {
@@ -335,6 +336,17 @@ public class KAMPF
                 Thread.currentThread().interrupt();
                 grafik.zeichnesieg();
             }
+        }
+    }
+    
+    public void hindernisse() {
+        helphind=r.nextInt(3); 
+        for(int a=0;a<=helphind;a++) {
+            feldhind=r.nextInt(2);
+            helphind2=r.nextInt(5);
+            feldhind=feldhind+helphind2*5+1;
+            grafik.zeichnehindernis(feldhind);
+            welt[feldhind]=11;
         }
     }
 }
