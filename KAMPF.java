@@ -184,6 +184,8 @@ public class KAMPF
                     bewhelp=0;
                     bewegt=true;
                 }
+            }else {
+                grafik.kons("Feld nicht in Reichweite");
             }
         }else if(welt[feld]!=10) {
             grafik.kons("Feld ist nicht frei");
@@ -193,8 +195,6 @@ public class KAMPF
             grafik.kons("Max. Aktionen bereits gemacht");
         }else if(gekaempft==true) {
             grafik.kons("Nach Kampf kann nicht gelaufen werden");
-        }else {
-            grafik.kons("Feld nicht in Reichweite");
         }
     }
 
@@ -266,6 +266,7 @@ public class KAMPF
         geheilt=false;      //kontollen zurücksetzen
         gekaempft=false;
         bewegt=false;
+        bewhelp=0;
         aktionen=0;
     }
 
@@ -304,7 +305,7 @@ public class KAMPF
 
     public void startpos() {
         int helppos1;
-        for(int a=0;a<5;a++) {                     //startposition der kaempder wird generiert
+        for(int a=0;a<5;a++) {                     //startposition der kaempfer wird generiert
             do {
                 helppos1=r.nextInt(5)*5;
             }while(welt[helppos1]!=10);

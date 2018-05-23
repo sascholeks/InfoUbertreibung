@@ -11,28 +11,28 @@ public class KAEMPFER
         switch (type) {
             case 0:
             name="Bogenschütze";
-            leben=70;
-            dmg=50;
+            leben=40;
+            dmg=55;
             break;
             case 1:
             name="Speerkämpfer";
-            leben=80;
+            leben=60;
             dmg=40;
             break;
             case 2:
             name="Schildknappe";
-            leben=140;
-            dmg=35;
+            leben=75;
+            dmg=20;
             break;
             case 3:
             name="Ritter";
-            leben=120;
-            dmg=50;
+            leben=60;
+            dmg=30;
             break;
             case 4:
             name="Paladin";
-            leben=150;
-            dmg=70;
+            leben=100;
+            dmg=35;
             break;
         }
         UUID++;
