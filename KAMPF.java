@@ -38,7 +38,7 @@ public class KAMPF
         }
         welt=new int[25];          //wenn welt[x]=10, dann ist feld frei
         for(int a=0;a<25;a++) {
-            welt[a]=10;
+            welt[a]=11;
         }
         team=new int[10];         //erg=team von [kaempferID]
         for(int a=0;a<5;a++) {
@@ -81,7 +81,7 @@ public class KAMPF
     
     public void kaempfen(int feld) {
         if(aktionen!=2 && gekaempft==false) {                   //kontolle bereits gekämpft und aktionen gemacht
-            if(welt[feld]!=10) {                                //kontrolle gegner auf feld
+            if(welt[feld]!=11) {                                //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
