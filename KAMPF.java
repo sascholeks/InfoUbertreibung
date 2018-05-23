@@ -123,11 +123,10 @@ public class KAMPF
                             welt[feld]=10;
                             zeichnereihenfolge();
                             grafik.loeschemarkierung(feld);
-<<<<<<< HEAD
+
                             kontrollesieg();
-=======
+
                             kontrollesieg();   
->>>>>>> bfb15536ce518858ab6177312a79d691c60457c0
                         }
                         gekaempft=true;
                     }else if(kaempfer[reihenfolge[0]].name=="Speerkaempfer" && (kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-2==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+2==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]-10==feld || kepos[reihenfolge[0]]+5==feld || kepos[reihenfolge[0]]+10==feld || kepos[reihenfolge[0]]-6==feld || kepos[reihenfolge[0]]-4==feld || kepos[reihenfolge[0]]+4==feld || kepos[reihenfolge[0]]+6==feld)) {  
@@ -205,11 +204,7 @@ public class KAMPF
             grafik.kons("Max. Aktionen bereits gemacht");
         }       
     }
-<<<<<<< HEAD
 
-=======
-     
->>>>>>> bfb15536ce518858ab6177312a79d691c60457c0
     public void bewegen(int feld) {
         if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
