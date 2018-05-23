@@ -1,4 +1,4 @@
-import java.util.Random;
+ import java.util.Random;
 
 public class KAMPF
 {
@@ -7,24 +7,18 @@ public class KAMPF
     GRAFIKELEMENTE grafik;
     Random r;
     KAEMPFER[] kaempfer;
-    KAMPFALGO[] keampferAlgo;
-
+     
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0;
     boolean geheilt=false,gekaempft=false,bewegt=false;
-    String UUIDname[];
-    int UUID[];
-
     public KAMPF()
     {
         inv=new SPIELERINVENTAR();
         invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
         r=new Random();
-        UUIDname = new String[10];
-        UUID = new int[10];
-
+       
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -33,7 +27,7 @@ public class KAMPF
             y[a]=xyp;
             xyp=xyp+50;
         }
-
+        
         reihenfolge=new int[10];    //index ID der Kaempfer
         kepos=new int[10];          //gibt an wo der kämpfer mit der[ID] steht
         leben=new int[10];
@@ -51,7 +45,7 @@ public class KAMPF
             team[a]=1;
             team[a+5]=2;
         }
-
+        
         anz=new int[10];      //eintrafen der anzahl, aufrufbar mit [kaempferID]
         anz[0]=inv.anz0;
         anz[1]=inv.anz1;
@@ -63,32 +57,19 @@ public class KAMPF
         anz[7]=invgeg.anz2;
         anz[8]=invgeg.anz3;
         anz[9]=invgeg.anz4;
-
-        kaempfer=new KAEMPFER[5];
-        keampferAlgo = new KAMPFALGO[5];
-        for(int a=0;a<5;a++) {
+        
+        kaempfer=new KAEMPFER[10];
+        for(int a=0;a<10;a++) {
             kaempfer[a]=new KAEMPFER(a%5);          //erhält rest zw. 0 und 4                                   //hat einfluss auf name
             leben[a]=kaempfer[a].leben*anz[a];
             dmg[a]=kaempfer[a].dmg*anz[a];
-            kaempfer[a].setUUID(a);
-            UUID[a] = kaempfer[a].getUUID();
-            UUIDname[a] = kaempfer[a].getName();
-        }
-
-        for(int a=0;a<5;a++) {
-            keampferAlgo[a]=new KAMPFALGO(a%5);          //erhält rest zw. 0 und 4                                   //hat einfluss auf name
-            leben[a]=kaempfer[a].leben*anz[a];
-            dmg[a]=kaempfer[a].dmg*anz[a];
-            kaempfer[a].setUUID(a+5);
-            UUID[a+5] = kaempfer[a].getUUID();
-            UUIDname[a+5] = kaempfer[a].getName();
         }
 
         zugreihenfolge();
         startpos();
         grafik.spielfeld();
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
-
+        
         for(int a=0;a<6;a++) {           //zeichne Bilder in Reiehnfolge
             grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);                         //hat einfluss auf reiehenfolg
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
@@ -96,21 +77,16 @@ public class KAMPF
         for(int a=0;a<10;a++) {         //zeichne in spielfeld
             grafik.zeichneinfeld(a,kepos[a],anz[a]);                                                           //hat einfluss auf feld
         } 
-        grafik.kons("An der Reihe: "+ UUIDname[reihenfolge[0]]+" Team "+team[reihenfolge[0]]+"  (UUID: " + UUID[reihenfolge[0]] +")");
+        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
     }
-
+    
     public void kaempfen(int feld) {
         if(aktionen!=2 && gekaempft==false) {                   //kontolle bereits gekämpft und aktionen gemacht
             if(welt[feld]!=10) {                                //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
-                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        try {                                                                         
-                            Thread.sleep(1000);                 
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }   
+                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
@@ -128,12 +104,7 @@ public class KAMPF
                         gekaempft=true;
                     }else if(kaempfer[reihenfolge[0]].name=="Speerkaempfer" && (kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-2==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+2==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]-10==feld || kepos[reihenfolge[0]]+5==feld || kepos[reihenfolge[0]]+10==feld || kepos[reihenfolge[0]]-6==feld || kepos[reihenfolge[0]]-4==feld || kepos[reihenfolge[0]]+4==feld || kepos[reihenfolge[0]]+6==feld)) {  
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
-                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        try {                                                                         
-                            Thread.sleep(1000);                 
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }   
+                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;                      
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
@@ -151,12 +122,7 @@ public class KAMPF
                         gekaempft=true;
                     }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
-                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");
-                        try {                                                                         
-                            Thread.sleep(1000);                 
-                        } catch(InterruptedException ex) {
-                            Thread.currentThread().interrupt();
-                        }   
+                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;        
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
@@ -201,6 +167,7 @@ public class KAMPF
             grafik.kons("Max. Aktionen bereits gemacht");
         }       
     }
+     
     public void bewegen(int feld) {
         if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
@@ -228,7 +195,7 @@ public class KAMPF
             grafik.kons("Feld nicht in Reichweite");
         }
     }
-
+    
     public void heilen(int gr) {
         if(aktionen!=2 && geheilt==false && team[reihenfolge[0]]==1) {
             if(gr==0) {
@@ -259,7 +226,7 @@ public class KAMPF
             grafik.kons("Max. Aktionen bereits gemacht");
         }
     }
-
+    
     public void zeichnereihenfolge() {
         for(int a=0;a<6;a++) {
             grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);
@@ -269,7 +236,7 @@ public class KAMPF
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
     }
-
+    
     public void beendezug() {
         grafik.loeschemarkierung(kepos[reihenfolge[0]]);                                                       
         if(tod[reihenfolge[0]]==false) {                                                                             //markiere (wegen löschen weg
@@ -290,16 +257,16 @@ public class KAMPF
             }
             beendezug();
         }
-        grafik.kons("An der Reihe: "+ UUIDname[reihenfolge[0]] +" Team "+team[reihenfolge[0]]+"  (UUID: " + UUID[reihenfolge[0]] + ")");
+        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
-
+            
         geheilt=false;      //kontollen zurücksetzen
         gekaempft=false;
         bewegt=false;
         aktionen=0;
     }
-
+  
     public void zugreihenfolge() {
         int help1=r.nextInt(2);                                  //Zugreihenfolge wird gewählt
         if(help1==0) {  
@@ -330,12 +297,12 @@ public class KAMPF
                 reihenfolge[help1]=a;
             }
         } 
-        grafik.kons("An der Reihe: " + UUIDname[reihenfolge[0]] + " Team "+ team[reihenfolge[0]] + "  (UUID: " + UUID[reihenfolge[0]] + ")");
+        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kamepfer "+reihenfolge[0]+")");
     }
-
+    
     public void startpos() {
         int helppos1;
-        for(int a=0;a<5;a++) {                     //startposition der kaempfer wird generiert
+        for(int a=0;a<5;a++) {                     //startposition der kaempder wird generiert
             do {
                 helppos1=r.nextInt(5)*5;
             }while(welt[helppos1]!=10);
@@ -350,7 +317,7 @@ public class KAMPF
             kepos[b+5]=helppos1;
         }
     }
-
+    
     public void kontrollesieg() {
         if(tod[0]==true && tod[1]==true && tod[2]==true && tod[3]==true && tod[4]==true) {
             grafik.kons("Verloren");
@@ -371,6 +338,7 @@ public class KAMPF
         }
     }
 }
+
 
 //          try {
 //              Thread.sleep(1000);                 
