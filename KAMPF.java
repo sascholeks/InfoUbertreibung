@@ -77,6 +77,7 @@ public class KAMPF
         for(int a=0;a<10;a++) {         //zeichne in spielfeld
             grafik.zeichneinfeld(a,kepos[a],anz[a]);
         } 
+        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
     }
     
     public void kaempfen(int feld) {
