@@ -18,6 +18,7 @@ public class GRAFIKELEMENTE
     }
     
     public void spielfeld() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
         kampffeld();
         kampfreihenfolge();
         zeichneaktionswahl();
@@ -247,7 +248,56 @@ public class GRAFIKELEMENTE
     public void zeichneverloren() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
     }
+    
+    public void zeichneinventar() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(40,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(40,90,50,14);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(41,41,49,49,1);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,45,5,40,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,50,20,5,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,80,20,5,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(65,45,5,15,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(65,65,5,15,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(44,65,45,3,3);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(86,61,3,10,2);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(90,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(90,90,50,14);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(91,41,49,49,1);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(95,63,40,4,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(127,59,2,10,2);    
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(140,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(140,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(190,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(190,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(240,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(240,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(340,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(340,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(390,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(390,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(440,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(440,90,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(490,40,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(490,90,50,14);
+        
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(75,140,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(125,140,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(175,140,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(225,140,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,140,50,50);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(75,190,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(125,190,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(175,190,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(225,190,50,14);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
+        
+    }
 }
+
+
 
 
 
