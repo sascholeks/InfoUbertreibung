@@ -364,17 +364,17 @@ public class KAMPF
     }
 
     public int[] getPath(int pos) {
-        alg = new ALGORITHM(pos,welt);
+        alg = new ALGORITHM(pos,welt,anz);
         return alg.getPath();
     }
-    
+
     public int[] checkEnemie(int pos) {
-        alg = new ALGORITHM(pos,welt);
+        alg = new ALGORITHM(pos,welt,anz);
         return alg.checkEnemie();
     }
-    
-     public int[] getRange(int pos) {
-        alg = new ALGORITHM(pos,welt);
+
+    public int[] getRange(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
         return alg.getRange();
     }
     

@@ -5,15 +5,23 @@ public class ALGORITHM
     int range[];
     int path[];
     int[] enemiePos;
-
+    int[] enemieDmg;
+    int[] enemieHP;
+    int[] enemieStr;
+    int[] anz;
+    int Str;
     GRAFIKELEMENTE graphic;
-    public ALGORITHM(int pos, int[] welt)
+    public ALGORITHM(int pos, int[] welt, int[] anz)
     {
         this.welt = welt;
         this.pos =pos;
         range = new int[25];
         path = new int[25];
         enemiePos = new int[25];
+        enemieHP = new int[25];
+        enemieDmg = new int[25];
+        enemieStr = new int[25];
+        this.anz = anz;
         graphic =new GRAFIKELEMENTE();
     }
 
@@ -186,6 +194,59 @@ public class ALGORITHM
     }
 
     public void setPriority() {
-       
+        checkEnemie();
+        for(int i=0;i<25;i++) {
+            if(enemiePos[i]==1) {
+                int eID = welt[i];
+                switch (eID) {
+                    case 0:
+                    enemieHP[i]=40;
+                    enemieDmg[i]=55;
+                    enemieStr[i]= enemieHP[i]*anz[i];
+                    break;
+                    case 1:
+                    enemieHP[i]=60;
+                    enemieDmg[i]=40;
+                    enemieStr[i]= enemieHP[i]*anz[i];
+                    break;
+                    case 2:
+                    enemieHP[i]=75;
+                    enemieDmg[i]=20;
+                    enemieStr[i]= enemieHP[i]*anz[i];
+                    break;
+                    case 3:
+                    enemieHP[i]=60;
+                    enemieDmg[i]=30;
+                    enemieStr[i]= enemieHP[i]*anz[i];
+                    break;
+                    case 4:
+                    enemieHP[i]=100;
+                    enemieDmg[i]=35;
+                    enemieStr[i]= enemieHP[i]*anz[i];
+                    break;
+                }
+            }
+        }
+    }
+    
+    public void setStrength() {
+        int ID = welt[pos];
+        switch (ID) {
+                    case 0:
+                    Str = 55 * anz[pos];
+                    break;
+                    case 1:
+                    Str = 40 * anz[pos];
+                    break;
+                    case 2:
+                    Str = 20 * anz[pos];
+                    break;
+                    case 3:
+                    Str = 30 * anz[pos];
+                    break;
+                    case 4:
+                    Str = 35 * anz[pos];
+                    break;
+                }
     }
 }

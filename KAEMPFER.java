@@ -11,28 +11,28 @@ public class KAEMPFER
         switch (type) {
             case 0:
             name="Bogenschütze";
-            leben=40;
-            dmg=55;
+            leben = CONFIG.HP0;
+            dmg = CONFIG.Dmg0;
             break;
             case 1:
             name="Speerkämpfer";
-            leben=60;
-            dmg=40;
+            leben = CONFIG.HP1;
+            dmg = CONFIG.Dmg1;
             break;
             case 2:
             name="Schildknappe";
-            leben=75;
-            dmg=20;
+            leben = CONFIG.HP2;
+            dmg = CONFIG.Dmg2;
             break;
             case 3:
             name="Ritter";
-            leben=60;
-            dmg=30;
+            leben = CONFIG.HP3;
+            dmg = CONFIG.Dmg3;
             break;
             case 4:
             name="Paladin";
-            leben=100;
-            dmg=35;
+            leben = CONFIG.HP4;
+            dmg = CONFIG.Dmg4;
             break;
         }
     }
