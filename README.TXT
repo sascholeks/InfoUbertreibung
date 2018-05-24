@@ -31,6 +31,6 @@ Typen:
         11: Leer
         
 Aktion: 
-    gehen, gehen, kämpfen
+    gehen, gehen, (kämpfen)
     kämpfen, (heilen)
     heilen, (gehen / kämpfen)
