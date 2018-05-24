@@ -301,9 +301,7 @@ public class ALGORITHM
         if(welt[pos]==0) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
-                if(welt[getAttackPos()[i]]==5 && getAttackPos()[i]==1) { //muss zu 0 geändert werden
-                    moveback = false;
-                } else {
+                if(welt[getAttackPos()[i]]!=5 && getAttackPos()[i]==1) { //5 muss zu 0 geändert werden
                     moveback = true;
                 }
             }
