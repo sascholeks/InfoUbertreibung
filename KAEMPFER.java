@@ -35,8 +35,6 @@ public class KAEMPFER
             dmg=35;
             break;
         }
-        UUID++;
-        this.type = type;
     }
 }
 

@@ -5,63 +5,116 @@ public class INVENTAR
     int[] ausanz;
     int[] kaeauswahl;
     int[] anzauswahl;   //siehe unten
+    int heiltrankkl=1,heiltrankgr=1;
     public INVENTAR()
     {
         grafik=new GRAFIKELEMENTE();
         anz=new int[10];
         ausanz=new int[5];
         kaeauswahl=new int[5];
-        for(int a=0;a<5;a++) {
-            anz[a]=0;
-            ausanz[a]=0;
-        }
+        for(int a=0;a<10;a++) {
+            anz[a]=10;
+            ausanz[a%5]=0;   
+        }     
     }
     
-    public void invnetar() {
-        grafik.zeichneinventar();
+    public void inventar() {
+        grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4],anz[5],anz[6],anz[7],anz[8],anz[9],ausanz[0],ausanz[1],ausanz[2],ausanz[3],ausanz[4],kaeauswahl[0],kaeauswahl[1],kaeauswahl[2],kaeauswahl[3],kaeauswahl[4]);                
     }
     
-    public void waehlekaempferaus(int typ,int anzaus,int platz) {
-        if(anz[typ]!=0) {
-            if(anz[typ]>anzaus) {
-                kaeauswahl[platz]=anzaus;
-                anz[typ]=anz[typ]-anzaus;
-                grafik.anzahlkaempfer(platz,anzaus);
+    public void waehlekaempferaus(int typ,int anza,int platz){
+        if(anz[typ]>=anza) {
+            if(ausanz[platz]==0) {
+                anz[typ]=anz[typ]-anza;
+                kaeauswahl[platz]=typ;
+                ausanz[platz]=anza;
+                inventar();
             }else {
-                grafik.kons("nicht genügend Einheiten");
+                grafik.kons("bereitsbelegt");
             }
-        }else if( anz[typ]==0) {
-            grafik.kons("keine Einheiten vorhanden");
-        }
-    }   
-    
-    public void ändereAuswahl(int anz,int feld) {
-        if(anzauswahl[kaeauswahl[feld]]==1) { //angepasst für keine Fehlermeldung 
-            
+        }else {
+            grafik.kons("Zu viele Kämpfer ausgewählt");
         }
     }
     
-    public void pluskaempfer(int anza, int feld) {
-        if(anz[kaeauswahl[feld]]>=anza) {
-            if(anza!=0) {
-                ausanz[kaeauswahl[feld]]=ausanz[kaeauswahl[feld]]+anza;
+    public void waehlekaempferab(int feld) {
+        if(ausanz[feld]>=0) {
+            anz[kaeauswahl[feld]]=anz[kaeauswahl[feld]]+ausanz[feld];
+            ausanz[feld]=0;
+            kaeauswahl[feld]=11;
+        }else {
+            grafik.kons("zuerst kaempfer auswählen");
+        }
+    }
+    
+    public void plusanz(int feld,int anza) {
+        if(ausanz[feld]>0) {
+            if(anz[kaeauswahl[feld]]>=anza) {
+                ausanz[feld]=ausanz[feld]+anza;
                 anz[kaeauswahl[feld]]=anz[kaeauswahl[feld]]-anza;
-            }else 
-            grafik.kons("Du weißt doch selber, dass das keinen Sinn macht");
+                inventar();
+            }else {
+                grafik.kons("Du hast nicht soviele Einheiten");
+            }
         }else {
-            grafik.kons("nicht genügend Einheiten");
+            grafik.kons("Du must zuerst Einheiten auswählen");
         }
     }
     
-    public void minuskaempfer(int anza,int feld) {
-        if(ausanz[kaeauswahl[feld]]>anza) {
-            if(anza!=0) {
-                ausanz[kaeauswahl[feld]]=ausanz[kaeauswahl[feld]]-anza;
+    public void minuskaempfer(int feld,int anza) {
+        if(ausanz[feld]>0) {
+            if (ausanz[feld]>=anza) {
+                ausanz[feld]=ausanz[feld]-anza;
                 anz[kaeauswahl[feld]]=anz[kaeauswahl[feld]]+anza;
-            }else 
-            grafik.kons("Du weißt doch selber, dass das keinen Sinn macht");
+                inventar();
+            }else {
+                grafik.kons("Zu viele Einheiten ausgewählt");
+            }
         }else {
-            grafik.kons("zu viele Einheiten ausgewählt");
+            grafik.kons("Du must zuerst Einheiten auswählen");
         }
+    }
+    
+    public void plusheiltrank(int gr ,int anz) {
+        switch (gr) {
+            case 0:
+                heiltrankkl=heiltrankkl+anz;
+                break;
+            case 1:
+                heiltrankgr=heiltrankgr+anz;
+                break;
+            default :
+                System.out.println("Ungültige Nummer");
+                break;
+        }
+    }
+    
+    public void benutzeheiltrank(int gr) {
+        switch (gr) {
+            case 0:
+                heiltrankkl--;
+                break;
+            case 1:
+                heiltrankgr--;
+                break;
+            default :
+                System.out.println("Ungültige Nummer");
+                break;
+        }
+    }
+    
+    public void fuellestandart() {
+        kaeauswahl[0]=0;
+        kaeauswahl[1]=1;
+        kaeauswahl[2]=2;
+        kaeauswahl[3]=3;
+        kaeauswahl[4]=4;
+        ausanz[0]=20;
+        ausanz[1]=25;
+        ausanz[2]=15;
+        ausanz[3]=10;
+        ausanz[4]=5;
     }
 }
+
+

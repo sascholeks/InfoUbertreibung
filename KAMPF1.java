@@ -1,27 +1,27 @@
 import java.util.Random;
 
-public class KAMPF
+public class KAMPF1
 {
     GEGNERINVENTAR invgeg;
     INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
     KAEMPFER[] kaempfer;
-    ALGORITHM alg; 
+    ALGORITHMUS alg; 
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2;
     boolean geheilt=false,gekaempft=false,bewegt=false;
-    public KAMPF()
+    public KAMPF1()
     {
         inv=new INVENTAR();
         invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
         r=new Random();
-
+        
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
-                
+ 
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -192,11 +192,11 @@ public class KAMPF
         }else if(welt[feld]!=10) {
             grafik.kons("Feld ist nicht frei");
         }else if(bewegt==true) {
-            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+            grafik.kons("In dieser Runde bereits 2 mal bewegt");
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits ausgeführt");
+            grafik.kons("Max. Aktionen bereits gemacht");
         }else if(gekaempft==true) {
-            grafik.kons("Nach dem Kampf kannst du nicht laufen");
+            grafik.kons("Nach Kampf kann nicht gelaufen werden");
         }
     }
 
@@ -355,17 +355,17 @@ public class KAMPF
     }
 
     public int[] getPath(int pos) {
-        alg = new ALGORITHM(pos,welt);
+        alg = new ALGORITHMUS(pos,welt);
         return alg.getPath();
     }
     
-    public int[] checkEnemie(int pos) {
-        alg = new ALGORITHM(pos,welt);
-        return alg.checkEnemie();
+    public void checkEnemie(int pos) {
+        alg = new ALGORITHMUS(pos,welt);
+        alg.checkEnemie();
     }
     
      public int[] getRange(int pos) {
-        alg = new ALGORITHM(pos,welt);
+        alg = new ALGORITHMUS(pos,welt);
         return alg.getRange();
     }
     
