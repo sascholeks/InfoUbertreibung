@@ -29,3 +29,8 @@ Typen:
     Welt:
         10: Objekt
         11: Leer
+        
+Aktion: 
+    gehen, gehen, kämpfen
+    kämpfen, (heilen)
+    heilen, (gehen / kämpfen)
