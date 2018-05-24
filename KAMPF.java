@@ -8,7 +8,8 @@ public class KAMPF
     Random r;
     KAEMPFER[] kaempfer;
     ALGORITHM alg;
-    SOUNDKAMPF schwertkampf;
+    SOUNDSCHWERTSCHLAG schwertkampf;
+    SOUNDARROW arrow;
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
@@ -19,7 +20,8 @@ public class KAMPF
         inv=new INVENTAR();
         invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
-        schwertkampf=new SOUNDKAMPF();
+        schwertkampf=new SOUNDSCHWERTSCHLAG();
+        arrow=new SOUNDARROW();
         r=new Random();
 
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
@@ -93,9 +95,10 @@ public class KAMPF
 
     public void kaempfen(int feld) {
         if(aktionen!=2 && gekaempft==false) {                   //kontolle bereits gekämpft und aktionen gemacht
-            if(welt[feld]!=10) {                                //kontrolle gegner auf feld
+            if(welt[feld]!=10 && welt[feld]!=11) {              //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
+                        arrow.play();
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
@@ -114,6 +117,7 @@ public class KAMPF
                         }
                         gekaempft=true;
                     }else if(kaempfer[reihenfolge[0]].name=="Speerkaempfer" && (kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-2==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+2==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]-10==feld || kepos[reihenfolge[0]]+5==feld || kepos[reihenfolge[0]]+10==feld || kepos[reihenfolge[0]]-6==feld || kepos[reihenfolge[0]]-4==feld || kepos[reihenfolge[0]]+4==feld || kepos[reihenfolge[0]]+6==feld)) {  
+                        arrow.play();
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
@@ -212,23 +216,35 @@ public class KAMPF
     public void heilen(int gr) {
         if(aktionen!=2 && geheilt==false && team[reihenfolge[0]]==1) {
             if(gr==0) {
-                if(inv.heiltrankkl>=1) {
-                    geheilt=true;
-                    inv.benutzeheiltrank(0);
-                    grafik.kons("kleiner Heiltrank genommen");
+                int helpberechnung=leben[reihenfolge[0]]+100;
+                anz[reihenfolge[0]]=(int)helpberechnung/kaempfer[reihenfolge[0]].leben;
+                if(inv.ausanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
+                    if(inv.heiltrankkl>=1) {
+                        geheilt=true;
+                        inv.benutzeheiltrank(0);
+                        leben[reihenfolge[0]]=leben[reihenfolge[0]]+100;
+                        anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
+                        grafik.kons("kleiner Heiltrank genommen");
+                    }else {
+                        grafik.kons("Nicht genügend kleine Tränke");
+                    }
                 }else {
-                    grafik.kons("Nicht genügend kleine Tränke");
+                    grafik.kons("nichtgenug leben verloren");
                 }
             }else if(gr==1) {
-                if(inv.heiltrankgr>=1) {
-                    geheilt=true;
-                    inv.benutzeheiltrank(1);
-                    grafik.kons("großer Heiltrank genommen");
-                }else{
-                    grafik.kons("Nicht genügend große Heiltränke");
-                } 
-            }else if(gr>1){
-                grafik.kons("ungültige Trankgröße");
+                int helpberechnung=leben[reihenfolge[0]]+300;
+                anz[reihenfolge[0]]=(int)helpberechnung/kaempfer[reihenfolge[0]].leben;
+                if(inv.ausanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
+                    if(inv.heiltrankgr>=1) {
+                        geheilt=true;
+                        inv.benutzeheiltrank(1);
+                        grafik.kons("großer Heiltrank genommen");
+                    }else{
+                        grafik.kons("Nicht genügend große Heiltränke");
+                    } 
+                }else if(gr>1){
+                    grafik.kons("ungültige Trankgröße");
+                }
             }
         }
         else if(team[reihenfolge[0]]==2){

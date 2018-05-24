@@ -8,7 +8,7 @@ public class DEV
     Random r;
     KAEMPFER[] kaempfer;
     ALGORITHM alg;
-    SOUNDKAMPF schwertkampf;
+    SOUNDSCHWERTSCHLAG schwertkampf;
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
@@ -19,7 +19,7 @@ public class DEV
         inv=new INVENTAR();
         invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
-        schwertkampf=new SOUNDKAMPF();
+        schwertkampf=new SOUNDSCHWERTSCHLAG();
         r=new Random();
 
         inv.fuellestandart();                                         //nur zu testzwecken später löschen

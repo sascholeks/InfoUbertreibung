@@ -1,9 +1,9 @@
 import java.io.File;
 import javax.sound.sampled.*;
-public class SOUNDKAMPF
+public class SOUNDSCHWERTSCHLAG
 {
     private Clip clip;
-    public SOUNDKAMPF() 
+    public SOUNDSCHWERTSCHLAG() 
     {
         try 
         {
