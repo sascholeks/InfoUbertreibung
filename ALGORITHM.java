@@ -277,7 +277,7 @@ public class ALGORITHM
         int cE=0;
         int cP=0;
         int cSC=0;
-        if(welt[pos]==0) { //muss durch 5 ersetzt werden
+        if(welt[pos]==0) { //muss durch 0 /5 ersetzt werden
             for(int i=0;i<25;i++) {
                 if(getRange()[i]!=checkEnemie()[i]) {
                     moveback();
@@ -326,20 +326,6 @@ public class ALGORITHM
                     attack();
                 }
             }
-        }
-    }
-
-    private void move() {
-        if(welt[pos]==0) { //muss durch 5 ersetzt werden
-            for(int i=0;i<25;i++) {
-                if(getRange()[i]!=checkEnemie()[i]) {
-                    moveback();
-                } else {
-                    movenormal();
-                }
-            }
-        } else {
-
         }
     }
 
