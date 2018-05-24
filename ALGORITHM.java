@@ -200,28 +200,28 @@ public class ALGORITHM
                 int eID = welt[i];
                 switch (eID) {
                     case 0:
-                    enemieHP[i]=40;
-                    enemieDmg[i]=55;
+                    enemieHP[i]=CONFIG.HP0;
+                    enemieDmg[i]=CONFIG.Dmg0;
                     enemieStr[i]= enemieHP[i]*anz[i];
                     break;
                     case 1:
-                    enemieHP[i]=60;
-                    enemieDmg[i]=40;
+                    enemieHP[i]=CONFIG.HP1;
+                    enemieDmg[i]=CONFIG.Dmg1;
                     enemieStr[i]= enemieHP[i]*anz[i];
                     break;
                     case 2:
-                    enemieHP[i]=75;
-                    enemieDmg[i]=20;
+                    enemieHP[i]=CONFIG.HP2;
+                    enemieDmg[i]=CONFIG.Dmg2;
                     enemieStr[i]= enemieHP[i]*anz[i];
                     break;
                     case 3:
-                    enemieHP[i]=60;
-                    enemieDmg[i]=30;
+                    enemieHP[i]=CONFIG.HP3;
+                    enemieDmg[i]=CONFIG.Dmg3;
                     enemieStr[i]= enemieHP[i]*anz[i];
                     break;
                     case 4:
-                    enemieHP[i]=100;
-                    enemieDmg[i]=35;
+                    enemieHP[i]=CONFIG.HP4;
+                    enemieDmg[i]=CONFIG.Dmg4;
                     enemieStr[i]= enemieHP[i]*anz[i];
                     break;
                 }
@@ -233,19 +233,19 @@ public class ALGORITHM
         int ID = welt[pos];
         switch (ID) {
                     case 0:
-                    Str = 55 * anz[pos];
+                    Str = CONFIG.Dmg0 * anz[pos];
                     break;
                     case 1:
-                    Str = 40 * anz[pos];
+                    Str = CONFIG.Dmg1 * anz[pos];
                     break;
                     case 2:
-                    Str = 20 * anz[pos];
+                    Str = CONFIG.Dmg2 * anz[pos];
                     break;
                     case 3:
-                    Str = 30 * anz[pos];
+                    Str = CONFIG.Dmg3 * anz[pos];
                     break;
                     case 4:
-                    Str = 35 * anz[pos];
+                    Str = CONFIG.Dmg4 * anz[pos];
                     break;
                 }
     }
