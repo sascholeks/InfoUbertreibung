@@ -1,17 +1,20 @@
-public class ALGORITHMUS
+public class ALGORITHM
 {
     int[] welt;
     int pos;
     int range[];
     int path[];
-    GRAFIKELEMENTE grafik;
-    public ALGORITHMUS(int pos, int[] welt)
+    int[] enemiePos;
+
+    GRAFIKELEMENTE graphic;
+    public ALGORITHM(int pos, int[] welt)
     {
         this.welt = welt;
         this.pos =pos;
         range = new int[25];
         path = new int[25];
-        grafik=new GRAFIKELEMENTE();
+        enemiePos = new int[25];
+        graphic =new GRAFIKELEMENTE();
     }
 
     public int getType() {
@@ -140,7 +143,7 @@ public class ALGORITHMUS
         }
         return check;
     }
-    
+
     public boolean sameLineCheck(int pos, int dif) {
         boolean check=false;
         if(checkLine(pos)==checkLine(pos+dif)) {
@@ -164,20 +167,25 @@ public class ALGORITHMUS
         }
         return check;
     }
-    
-    public boolean checkEnemie() {
+
+    public int[] checkEnemie() {
         setRange();
-        boolean check=false;
+        int count = 0;
+        for(int i=0;i<25;i++) {
+            enemiePos[i] = 0;
+        }
         for(int i=0;i<25;i++) {
             if(range[i]==1) {
                 if(welt[i]>=5 && welt[i] < 10) {
-                    grafik.kons("Gegner gefunden! (Pos: " + i + ", ID: " + welt[i] + ")");
-                    check = true;
-                } else {
-                    check = false;
+                    count ++;  
+                    enemiePos[i] = 1;
                 }
             }
-        }
-        return check;
+        }       
+        return enemiePos;
+    }
+
+    public void setPriority() {
+       
     }
 }

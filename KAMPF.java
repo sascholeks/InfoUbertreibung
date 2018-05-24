@@ -7,7 +7,7 @@ public class KAMPF
     GRAFIKELEMENTE grafik;
     Random r;
     KAEMPFER[] kaempfer;
-    ALGORITHMUS alg; 
+    ALGORITHM alg; 
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
@@ -190,11 +190,11 @@ public class KAMPF
         }else if(welt[feld]!=10) {
             grafik.kons("Feld ist nicht frei");
         }else if(bewegt==true) {
-            grafik.kons("In dieser Runde bereits 2 mal bewegt");
+            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits gemacht");
+            grafik.kons("Max. Aktionen bereits ausgeführt");
         }else if(gekaempft==true) {
-            grafik.kons("Nach Kampf kann nicht gelaufen werden");
+            grafik.kons("Nach dem Kampf kannst du nicht laufen");
         }
     }
 
@@ -353,17 +353,17 @@ public class KAMPF
     }
 
     public int[] getPath(int pos) {
-        alg = new ALGORITHMUS(pos,welt);
+        alg = new ALGORITHM(pos,welt);
         return alg.getPath();
     }
     
-    public void checkEnemie(int pos) {
-        alg = new ALGORITHMUS(pos,welt);
-        alg.checkEnemie();
+    public int[] checkEnemie(int pos) {
+        alg = new ALGORITHM(pos,welt);
+        return alg.checkEnemie();
     }
     
      public int[] getRange(int pos) {
-        alg = new ALGORITHMUS(pos,welt);
+        alg = new ALGORITHM(pos,welt);
         return alg.getRange();
     }
     
