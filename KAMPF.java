@@ -1,4 +1,4 @@
-import java.util.Random;
+    import java.util.Random;
 
 public class KAMPF
 {
@@ -98,7 +98,7 @@ public class KAMPF
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             anz[welt[feld]]=0;
-                            grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
+                            grafik.kons("Der feindliche "+kaempfer[kepos[feld]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
@@ -116,7 +116,7 @@ public class KAMPF
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             anz[welt[feld]]=0;
-                            grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
+                            grafik.kons("Der feindliche "+kaempfer[kepos[feld]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
@@ -124,7 +124,7 @@ public class KAMPF
                             kontrollesieg();
                         }
                         gekaempft=true;
-                    }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {
+                    }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {  //nahkämperangriff
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
@@ -132,7 +132,7 @@ public class KAMPF
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
-                        if(kaempfer[welt[feld]].name!="Bogenschütze" && kaempfer[welt[feld]].name!="Speerkämpfer") {
+                        if(kaempfer[welt[feld]].name!="Bogenschütze" && kaempfer[welt[feld]].name!="Speerkämpfer") {                       //gegenangriff
                             grafik.kons("Gegenattacke");
                             try {                                                                         
                                 Thread.sleep(500);                 
@@ -146,7 +146,7 @@ public class KAMPF
                         }
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             anz[welt[feld]]=0;
-                            grafik.kons("Der feindliche "+kaempfer[reihenfolge[0]].name+" ist tod");
+                            grafik.kons("Der feindliche "+kaempfer[kepos[feld]].name+" ist tod");
                             tod[welt[feld]]=true;
                             welt[feld]=10;
                             zeichnereihenfolge();
