@@ -7,13 +7,14 @@ public class KAMPFEINGABE implements MouseListener
     KAMPF kampf;
     MOUSE mouse;
     GRAFIKELEMENTE grafik;
-  
+    int help;
     public KAMPFEINGABE()
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         kampf=new KAMPF();
         mouse=new MOUSE();
         grafik=new GRAFIKELEMENTE();
+        help=0;
     }
     
     public void mouseReleased(MouseEvent e) {
@@ -31,10 +32,15 @@ public class KAMPFEINGABE implements MouseListener
             mouse.auswahlfreigabe();
             kampf.bewegen(mouse.feldauswahl); 
         }
-        else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {                                                    //zug beenden
+        else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {                                                    //zug beenden            
             grafik.zeichneaktionsauswahl(3);
-            kampf.beendezug();
-            
+            help++;
+            if(help==2) {
+                kampf.beendezug();
+                help=0;
+            }else {
+                grafik.kons("Sicher, dass du den Zug beenden möchtest");
+            }
         }
     }
     
