@@ -277,51 +277,69 @@ public class ALGORITHM
         int cE=0;
         int cP=0;
         int cSC=0;
-        for(int i=0;i<25;i++) {
-            if(checkEnemie()[i]==1) {
-                cE++;
-            }
-        }
-        if(cE==0) {
+        if(welt[pos]==0) { //muss durch 5 ersetzt werden
             for(int i=0;i<25;i++) {
-                if(getPath()[i]==1) {
-                    cP++;
+                if(getRange()[i]!=checkEnemie()[i]) {
+                    moveback();
+                } else {
+                    movenormal();
                 }
-            }
-            if(cP!=0) {
-                move();
-            } else {
-                stop();
             }
         } else {
+
             for(int i=0;i<25;i++) {
-                if(getStrengthCom()[i]==1) {
-                    cSC++;
+                if(checkEnemie()[i]==1) {
+                    cE++;
                 }
-            } 
-            if(cSC==0) {
-                cP = 0;
+            }
+
+            if(cE==0) {
                 for(int i=0;i<25;i++) {
                     if(getPath()[i]==1) {
                         cP++;
                     }
                 }
                 if(cP!=0) {
-                    move();
+                    movenormal();
                 } else {
                     stop();
                 }
             } else {
-                attack();
+                for(int i=0;i<25;i++) {
+                    if(getStrengthCom()[i]==1) {
+                        cSC++;
+                    }
+                } 
+                if(cSC==0) {
+                    cP = 0;
+                    for(int i=0;i<25;i++) {
+                        if(getPath()[i]==1) {
+                            cP++;
+                        }
+                    }
+                    if(cP!=0) {
+                        movenormal();
+                    } else {
+                        stop();
+                    }
+                } else {
+                    attack();
+                }
             }
         }
     }
 
     private void move() {
         if(welt[pos]==0) { //muss durch 5 ersetzt werden
-            
+            for(int i=0;i<25;i++) {
+                if(getRange()[i]!=checkEnemie()[i]) {
+                    moveback();
+                } else {
+                    movenormal();
+                }
+            }
         } else {
-            
+
         }
     }
 
@@ -331,6 +349,14 @@ public class ALGORITHM
 
     private void attack() {
         graphic.kons("attack()");
+    }
+
+    private void moveback() {
+        graphic.kons("moveback()");
+    }
+
+    private void movenormal() {
+        graphic.kons("movenormal()");
     }
 
 }
