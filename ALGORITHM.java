@@ -404,11 +404,34 @@ public class ALGORITHM
     }
 
     private void movenormal() {
-        graphic.kons("movenormal()");
         if(welt[pos]==5) { //muss zu 0 geändert werden
-            
+            boolean up=false,down=false,left=false,right=false;
+            for(int i=0;i<25;i++) {
+                if(pos-1==getPath()[i]) {
+                    left = true;
+                }
+                if(pos+1==getPath()[i]) {
+                    right = true;
+                }
+                if(pos+5==getPath()[i]) {
+                    up = true;
+                }
+                if(pos-5==getPath()[i]) {
+                    down = true;
+                }
+            }
+            if(left) {
+                graphic.kons("moveleft()");
+            }
+            if(up || down) {
+                if(checkLine(pos) < 2) { 
+                    graphic.kons("moveup()");
+                } else if(checkLine(pos) > 2) { 
+                    graphic.kons("movedown()");
+                }
+            }
         } else {
-            
+            graphic.kons("movenormal()");
         }
     }
 
