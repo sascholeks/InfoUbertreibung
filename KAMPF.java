@@ -353,7 +353,7 @@ public class KAMPF
     }
 
     public int[] algPath() {
-        alg = new ALGORITHMUS(12,welt);
+        alg = new ALGORITHMUS(10,welt);
         alg.setPath();
         return alg.getPath();
     }
@@ -364,7 +364,7 @@ public class KAMPF
     }
     
      public int[] getRange() {
-        alg = new ALGORITHMUS(5,welt);
+        alg = new ALGORITHMUS(10,welt);
         return alg.getRange();
     }
     

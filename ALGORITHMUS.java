@@ -19,7 +19,7 @@ public class ALGORITHMUS
     }
 
     public void setRange() {
-        if(getType()==0) {
+        if(getType()==5) {
             for(int i=0;i<25;i++) {
                 range[i] = 1;
             }
@@ -92,7 +92,7 @@ public class ALGORITHMUS
         for(int i=0;i<25;i++) {
             path[i] = 0;
         }
-        if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5) && welt[pos-5] == 10) {
+        if(pos-5>=0 && difLineCheck(pos,-5) && welt[pos-5] == 10) {
             path[pos-5] = 1;
         }
         if(pos-1>=0 && checkLine(pos)==checkLine(pos-1) && welt[pos-1] == 10) {
@@ -101,7 +101,7 @@ public class ALGORITHMUS
         if(pos+1<25 && checkLine(pos)==checkLine(pos+1) && welt[pos+1] == 10) {
             path[pos+1] = 1;
         }
-        if(pos+5<25 && checkLine(pos)!=checkLine(pos+5) && welt[pos+5] == 10) {
+        if(pos+5<25 && difLineCheck(pos,+5) && welt[pos+5] == 10) {
             path[pos+5] = 1;
         }
         path[pos] = 0;
@@ -111,7 +111,7 @@ public class ALGORITHMUS
         return path;
     }
 
-    public int checkLine(int pos) {
+    private int checkLine(int pos) {
         int line = 0;
         if(pos >= 0 && pos < 5) {
             line = 0;
@@ -129,5 +129,30 @@ public class ALGORITHMUS
             line = 4;
         }
         return line;
+    }
+
+    public boolean difLineCheck(int pos, int dif) {
+        boolean check=false;
+        int difLine = 0;
+        if(checkLine(pos)!=checkLine(pos+dif)) {
+            check = true;
+        }
+        if(check) {
+            if(pos<pos+dif) {
+                if(checkLine(pos)==checkLine(pos+dif)-1) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+            if(pos>pos+dif) {
+                if(checkLine(pos)==checkLine(pos+dif)+1) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        }
+        return check;
     }
 }

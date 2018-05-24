@@ -1,10 +1,10 @@
-
 public class INVENTAR
 {
     GRAFIKELEMENTE grafik;
     int[] anz;
     int[] ausanz;
     int[] kaeauswahl;
+    int[] anzauswahl;   //siehe unten
     public INVENTAR()
     {
         grafik=new GRAFIKELEMENTE();
@@ -36,10 +36,12 @@ public class INVENTAR
     }   
     
     public void ändereAuswahl(int anz,int feld) {
-        if(anzauswahl[kaeauswahl[feld]
+        if(anzauswahl[kaeauswahl[feld]]==1) { //angepasst für keine Fehlermeldung 
+            
+        }
     }
     
-    public void pluskaempfer(int anza,int feld) {
+    public void pluskaempfer(int anza, int feld) {
         if(anz[kaeauswahl[feld]]>=anza) {
             if(anza!=0) {
                 ausanz[kaeauswahl[feld]]=ausanz[kaeauswahl[feld]]+anza;
@@ -63,7 +65,3 @@ public class INVENTAR
         }
     }
 }
-
-
-
-
