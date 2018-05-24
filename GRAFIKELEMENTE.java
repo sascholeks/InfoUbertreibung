@@ -222,6 +222,29 @@ public class GRAFIKELEMENTE
         }
     }
     
+    public void zeichneaktionsauswahl(int nr) {
+        switch (nr) {
+            case 0:
+                ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,4); 
+                ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,18,6);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,1);     //kleine auswahl für größe
+                ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,1);
+                break;
+            case 1:
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,4); 
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,18,6);
+                break;
+            case 2:
+                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,4);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,18,6);
+                break;
+            case 3:
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,4);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,18,6);
+                break;
+        }
+    }
+    
     public void kons(String st) {   
         ZEICHENFENSTER.gibFenster().fuelleRechteck(275,265,420,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,265,420,20);
@@ -231,6 +254,11 @@ public class GRAFIKELEMENTE
     public void markiereaktuell(int aktuellesfeld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,7);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+3,y[aktuellesfeld/5]+3,45,45,8);
+    }
+    
+    public void auswahlfeld(int feld) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+1,y[feld/5]+1,49,49,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,8);
     }
     
     public void loeschemarkierung(int aktuellesfeld) {

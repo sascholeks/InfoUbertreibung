@@ -4,13 +4,15 @@ import java.awt.event.*;
 public class MOUSE implements MouseListener 
 {
     private ZEICHENFENSTER f;
-    int i=1,feld;
-    int xyp=20;
+    GRAFIKELEMENTE grafik;
+    int i=1,feldauswahl;
+    int xyp=20,auswahlfreigabe;
     int[] x,y;
     boolean kont=false;
     public MOUSE()
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        grafik=new GRAFIKELEMENTE();
         x=new int[5];
         y=new int[5];
         for(int a=0;a<5;a++) {
@@ -20,159 +22,112 @@ public class MOUSE implements MouseListener
         }
         kont=false;
     }
+    public void auswahlfreigabe() {
+        auswahlfreigabe=1;
+    }
 
     public void mousePressed(MouseEvent e) { 
-        if(i==0) {  
+        if(auswahlfreigabe==1) {  
             if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81 ) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[0]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,x[0]+3,45,45,8);
-                feld=0;
-                kont=true;
-                i++;
+                feldauswahl=0;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[0]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[0]+3,45,45,8);
-                feld=1;
-                kont=true;
-                i++;
+                feldauswahl=1;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[0]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[0]+3,45,45,8);
-                feld=2;
-                kont=true;
-                i++;
+                feldauswahl=2;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+1,y[0]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[0]+3,45,45,8);
-                feld=3;
-                kont=true;
-                i++;
+                feldauswahl=3;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[0]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[0]+3,45,45,8);
-                feld=4;
-                kont=true;
-                i++;
+                feldauswahl=4;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[1]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[1]+3,45,45,8);
-                feld=5;
-                kont=true;
-                i++;
+                feldauswahl=5;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[1]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[1]+3,45,45,8);
-                feld=6;
-                kont=true;
-                i++;
+                feldauswahl=6;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[1]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[1]+3,45,45,8);
-                feld=7;
-                kont=true;
-                i++;
+                feldauswahl=7;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+1,y[1]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[1]+3,45,45,8);
-                feld=8;
-                kont=true;
-                i++;
+                feldauswahl=8;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[1]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[1]+3,45,45,8);
-                feld=9;
-                kont=true;
-                i++;
+                feldauswahl=9;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[2]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[2]+3,45,45,8);
-                feld=10;
-                kont=true;
-                i++;
+                feldauswahl=10;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[2]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[2]+3,45,45,8);
-                feld=11;
-                kont=true;
-                i++;
+                feldauswahl=11;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[2]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[2]+3,45,45,8);
-                feld=12;
-                kont=true;
-                i++;
+                feldauswahl=12;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+1,y[2]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[2]+3,45,45,8);
-                feld=13;
-                kont=true;
-                i++;
+                feldauswahl=13;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[2]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[2]+3,45,45,8);
-                feld=14;
-                kont=true;
-                i++;
+                feldauswahl=14;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[3]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[3]+3,45,45,8);
-                feld=15;
-                kont=true;
-                i++;
+                feldauswahl=15;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[3]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[3]+3,45,45,8);
-                feld=16;
-                kont=true;
-                i++;
+                feldauswahl=16;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[3]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[3]+3,45,45,8);
-                feld=17;
-                kont=true;
-                i++;
+                feldauswahl=17;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+1,y[3]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[3]+3,45,45,8);
-                feld=18;
-                kont=true;
-                i++;
+                feldauswahl=18;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[3]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[3]+3,45,45,8);
-                feld=19;
-                kont=true;
-                i++;
+                feldauswahl=19;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[4]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[4]+3,45,45,8);
-                feld=20;
-                kont=true;
-                i++;
+                feldauswahl=20;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[4]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[4]+3,45,45,8);
-                feld=21;
-                kont=true;
-                i++;
+                feldauswahl=21;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[4]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[4]+3,45,45,8);
-                feld=22;
-                kont=true;
-                i++;
+                feldauswahl=22;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+1,y[4]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[4]+3,45,45,8);
-                feld=23;
-                kont=true;
-                i++;
+                feldauswahl=23;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[4]+1,49,49,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[4]+3,45,45,8);
-                feld=24;
-                kont=true;
-                i++;
+                feldauswahl=24;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
             }           
         }
     }
