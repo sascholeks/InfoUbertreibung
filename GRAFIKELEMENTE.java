@@ -2,6 +2,9 @@ import java.util.Random;
 
 public class GRAFIKELEMENTE
 {
+    int ra = 10; //Verschiebung nach rechts
+    
+    
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
     public GRAFIKELEMENTE()
@@ -9,14 +12,19 @@ public class GRAFIKELEMENTE
         r=new Random();
         x=new int [5];
         y=new int [5];
-        int xyp=20;              //anfangskordinaten 
+        int xyp=20;              //anfangskordinaten
+
         for(int a=0;a<5;a++) {
             x[a]=xyp;
             y[a]=xyp;
             xyp=xyp+50;
         }
     }
-    
+
+    public void setTitle(String title){
+        ZEICHENFENSTER.gibFenster().setzeTitel(title);
+    }
+
     public void spielfeld() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kampffeld();
@@ -32,16 +40,18 @@ public class GRAFIKELEMENTE
             }
         }
     }
-    
+
     public void kampfreihenfolge() {
         int c=0;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(300,192,71,70,12);
-        for(int a=0;a<6;a++) {
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(305+c,197,60,60);
+        c=c+60+ra;
+        for(int a=0;a<5;a++) {
             ZEICHENFENSTER.gibFenster().zeichneRechteck(305+c,197,60,60);
             c=c+60;
         }
     }
-    
+
     public void zeichneaktionswahl() {
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,70,13);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,65,14);
@@ -50,19 +60,25 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,6);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,6);
     }
-    
-    public void anzahlreihenfolge(int reihe,int anz) {           
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe,241,22,12,11);               
+
+    public void anzahlreihenfolge(int reihe,int anz) {   
+        if(reihe==0) {
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(308,241,22,12,11);               
             ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe,241,22,12);
             ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe,252);
+        } else {
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*reihe+ra,241,22,12,11);               
+            ZEICHENFENSTER.gibFenster().zeichneRechteck(308+60*reihe+ra,241,22,12);
+            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",309+60*reihe+ra,252);
+        }
     }
-    
+
     public void anzahl(int feld,int anz) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,22,12,11);               
-            ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,22,12);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46); 
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+35,22,12,11);               
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(x[feld%5]+3,y[feld/5]+35,22,12);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz+"",x[feld%5]+4,y[feld/5]+46); 
     }
-    
+
     public void zeichnehindernis(int feld) {
         int zf=r.nextInt(2);
         if(zf==0) {
@@ -73,282 +89,259 @@ public class GRAFIKELEMENTE
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+15,y[feld/5]+20,25,20,7);
         }
     }
-     
+
+    public void bogenschütze(int[] x, int[] y, int feld, int f) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+4,5,40,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+9,20,5,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+39,20,5,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+4,5,15,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+24,5,15,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+24,45,3,3);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+45,y[feld/5]+21,3,10,2);
+    }
+
+    public void speerkämpfer(int[] x, int[] y, int feld, int f) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+20,40,4,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+35,y[feld/5]+18,2,10,2);
+    }
+
+    public void schildknappe(int[] x, int[] y, int feld, int f) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,15,2);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,3,f);
+    }
+
+    public void ritter(int[] x, int[] y, int feld, int f) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,5,40,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+17,y[feld/5]+23,15,3,2);
+    }
+
+    public void paladin(int[] x, int[] y, int feld, int f) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,10,40,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+23,45,10,2);
+    }
+
     public void zeichneinfeld(int kaempferID,int feld,int anz) {
         switch(kaempferID) {
             case 0:                //bogenschütze
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+4,5,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+9,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+39,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+4,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+24,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+24,45,3,3);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+45,y[feld/5]+21,3,10,2);
-                anzahl(feld,anz);
-                break;
+            bogenschütze(x,y,feld,1);
+            anzahl(feld,anz);
+            break;
             case 1:                //speerkämpfer
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+20,40,4,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+35,y[feld/5]+18,2,10,2);
-                anzahl(feld,anz);
-                break;
+            speerkämpfer(x,y,feld,1);
+            anzahl(feld,anz);
+            break;
             case 2:                 //schildknappe
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,1);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,3,1);
-                anzahl(feld,anz);
-                break;
+            schildknappe(x,y,feld,1);
+            anzahl(feld,anz);
+            break;
             case 3:                 //ritter
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,5,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+17,y[feld/5]+23,15,3,2);
-                anzahl(feld,anz);
-                break;
+            ritter(x,y,feld,1);
+            anzahl(feld,anz);
+            break;
             case 4:              //paladin
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,10,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+23,45,10,2);
-                anzahl(feld,anz);
-                break;
+            paladin(x,y,feld,1);
+            anzahl(feld,anz);
+            break;
             case 5:                //bogenschütze
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,4);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+4,5,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+9,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+39,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+4,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+24,y[feld/5]+24,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+24,45,3,3);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+45,y[feld/5]+21,3,10,2);
-                anzahl(feld,anz);
-                break;
+            bogenschütze(x,y,feld,4);
+            anzahl(feld,anz);
+            break;
             case 6:                //speerkämpfer
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,4);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+20,40,4,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+35,y[feld/5]+18,2,10,2);
-                anzahl(feld,anz);
-                break;
+            speerkämpfer(x,y,feld,4);
+            anzahl(feld,anz);
+            break;
             case 7:                 //schildknappe
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,4);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(x[feld%5]+25,y[feld/5]+25,3,4);
-                anzahl(feld,anz);
-                break;
+            schildknappe(x,y,feld,4);
+            anzahl(feld,anz);
+            break;
             case 8:                 //ritter
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,4);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,5,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+17,y[feld/5]+23,15,3,2);
-                anzahl(feld,anz);
-                break;
+            ritter(x,y,feld,4);
+            anzahl(feld,anz);
+            break;
             case 9:              //paladin
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,4);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+23,y[feld/5]+3,10,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+23,45,10,2);
-                anzahl(feld,anz);
-                break;           
+            paladin(x,y,feld,4);
+            anzahl(feld,anz);
+            break;           
         }
+    }
+
+    public void zeichenReihenfolgeEinheit(int typ, int x, int f) {
+        if(x!=0) {
+            x = x*60+ra;
+        }
+        switch(typ) {
+                case 0:                //bogenschütze
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(306+x,198,59,59,f);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(312+x,210,5,40,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(312+x,210,20,5,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(312+x,250,20,5,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(332+x,215,5,15,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(332+x,235,5,15,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(312+x,231,50,3,3);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(360+x,228,3,10,2);
+                break;
+                case 1:                //speerkämpfer
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(306+x,198,59,59,f);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(310+x,220,40,4,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(342+x,217,2,10,2);
+                break;
+                case 2:                 //schildknappe
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(306+x,198,59,59,f);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(336+x,228,20,2);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(336+x,228,5,f);
+                break;
+                case 3:                 //ritter
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(306+x,198,59,59,f);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(332+x,205,5,45,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(327+x,240,15,3,2);
+                break;
+                case 4:              //paladin
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(306+x,198,59,59,f);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(310+x,225,50,10,2);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(330+x,205,10,50,2);
+                break;
+            }
     }
     
     public void zeichneKaempferreihenfolge(int typ,int team,int x) {
         switch (team) {
             case 1:
-                switch(typ) {
-                    case 0:                //bogenschütze
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,1);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,210,5,40,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,210,20,5,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,250,20,5,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,215,5,15,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,235,5,15,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,231,50,3,3);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(360+60*x,228,3,10,2);
-                        break;
-                    case 1:                //speerkämpfer
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,1);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(310+60*x,220,40,4,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(342+60*x,217,2,10,2);
-                        break;
-                    case 2:                 //schildknappe
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,1);
-                        ZEICHENFENSTER.gibFenster().fuelleKreis(336+60*x,228,20,2);
-                        ZEICHENFENSTER.gibFenster().fuelleKreis(336+60*x,228,5,1);
-                        break;
-                    case 3:                 //ritter
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,1);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,205,5,45,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(327+60*x,240,15,3,2);
-                        break;
-                    case 4:              //paladin
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,1);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(310+60*x,225,50,10,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(330+60*x,205,10,50,2);
-                        break;
-                }
-                break;
+            zeichenReihenfolgeEinheit(typ,x,1);
+            break;
             case 2:
-                switch(typ) {
-                    case 0:                           //bogenschütze
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,4);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,210,5,40,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,210,20,5,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,250,20,5,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,215,5,15,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,235,5,15,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(312+60*x,231,50,3,3);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(360+60*x,228,3,10,2);
-                        break;
-                    case 1:                                   //speerkämpfer
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,4);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(310+60*x,220,40,4,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(342+60*x,217,2,10,2);
-                        break;
-                    case 2:                               //schildknappe
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,4);
-                        ZEICHENFENSTER.gibFenster().fuelleKreis(336+60*x,228,20,2);
-                        ZEICHENFENSTER.gibFenster().fuelleKreis(336+60*x,228,5,4);
-                        break;
-                    case 3:                        //ritter
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,4);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(332+60*x,205,5,45,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(327+60*x,240,15,3,2);
-                        break;
-                    case 4:                       //paladin
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(306+60*x,198,59,59,4);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(310+60*x,225,50,10,2);
-                        ZEICHENFENSTER.gibFenster().fuelleRechteck(330+60*x,205,10,50,2);
-                        break;
-                }
-                break;
+            zeichenReihenfolgeEinheit(typ,x,4);
+            break;
         }
     }
-    
+
     public void zeichneaktionsauswahl(int nr) {
         switch (nr) {
             case 0:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,4); 
-                ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,18,6);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,1);     //kleine auswahl für größe
-                ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,1);
-                break;
+            ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,4); 
+            ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,18,6);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,1);     //kleine auswahl für größe
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,1);
+            break;
             case 1:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,4); 
-                ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,18,6);
-                break;
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,4); 
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,18,6);
+            break;
             case 2:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,4);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,18,6);
-                break;
+            ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,4);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,18,6);
+            break;
             case 3:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,4);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,18,6);
-                break;
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,4);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,18,6);
+            break;
         }
     }
-    
+
     public void kons(String st) {   
         ZEICHENFENSTER.gibFenster().fuelleRechteck(275,265,420,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,265,420,20);
         ZEICHENFENSTER.gibFenster().zeichneText(st,280,280);
     }
-    
+
     public void markiereaktuell(int aktuellesfeld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,7);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+3,y[aktuellesfeld/5]+3,45,45,8);
     }
-    
+
     public void auswahlfeld(int feld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+1,y[feld/5]+1,49,49,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,8);
     }
-    
+
     public void loeschemarkierung(int aktuellesfeld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,8);
     }
-    
+
     public void markieretod(int x) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*x,225,55,5,6);
     }
-    
+
     public void zeichnesieg() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
     }
-    
+
     public void zeichneverloren() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
     }
-    
+
     public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4,int anz5,int anz6,int anz7,int anz8,int anz9,int anz10,int anz11,int anz12,int anz13,int anz14,int aus0,int aus1,int aus2,int aus3,int aus4) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz0+"",42,102);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(41,41,49,49,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,45,5,40,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,50,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(45,80,20,5,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(65,45,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(65,65,5,15,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(44,65,45,3,3);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(86,61,3,10,2);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz0+"",42,102);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(41,41,49,49,1);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(45,45,5,40,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(45,50,20,5,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(45,80,20,5,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(65,45,5,15,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(65,65,5,15,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(44,65,45,3,3);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(86,61,3,10,2);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(90,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(90,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz1+"",92,102);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(91,41,49,49,1);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(95,63,40,4,2);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(127,59,2,10,2);    
+        ZEICHENFENSTER.gibFenster().zeichneText(anz1+"",92,102);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(91,41,49,49,1);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(95,63,40,4,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(127,59,2,10,2);    
         ZEICHENFENSTER.gibFenster().zeichneRechteck(140,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(140,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz2+"",142,102);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(141,41,49,49,1);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(166,65,20,2);
-                ZEICHENFENSTER.gibFenster().fuelleKreis(166,65,5,1);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz2+"",142,102);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(141,41,49,49,1);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(166,65,20,2);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(166,65,5,1);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(190,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(190,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz3+"",192,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz3+"",192,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(240,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(240,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz4+"",242,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz4+"",242,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz5+"",292,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz5+"",292,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(340,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(340,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz6+"",342,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz6+"",342,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(390,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(390,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz7+"",392,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz7+"",392,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(440,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(440,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz8+"",442,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz8+"",442,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(490,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(490,90,50,14);
-            ZEICHENFENSTER.gibFenster().zeichneText(anz9+"",492,102);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz9+"",492,102);
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(75,140,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(125,140,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(175,140,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(225,140,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,140,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(75,190,50,14);
-         ZEICHENFENSTER.gibFenster().zeichneText(anz10+"",77,202);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz10+"",77,202);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(125,190,50,14);
-         ZEICHENFENSTER.gibFenster().zeichneText(anz11+"",127,202);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz11+"",127,202);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(175,190,50,14);
-         ZEICHENFENSTER.gibFenster().zeichneText(anz12+"",177,202);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz12+"",177,202);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(225,190,50,14);
-         ZEICHENFENSTER.gibFenster().zeichneText(anz13+"",227,202);
+        ZEICHENFENSTER.gibFenster().zeichneText(anz13+"",227,202);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
-         ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
+        ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
     }
 }
-
-
-
-
 

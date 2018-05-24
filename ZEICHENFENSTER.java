@@ -23,7 +23,6 @@ public class ZEICHENFENSTER
     private Graphics2D graphic;
     private Color backgroundColor;
     private Image canvasImage;
-    
     private static ZEICHENFENSTER singleton;
 
     /**
@@ -32,8 +31,9 @@ public class ZEICHENFENSTER
      */
     public ZEICHENFENSTER(String titel)
     {
-        this(titel, 700, 290, Color.white);        
+        this(titel, 700, 290, Color.white);          
     }
+    
 
     /**
      * Erzeugt ein Zeichenfenster mit wei�em Hintergrund.
@@ -44,6 +44,10 @@ public class ZEICHENFENSTER
     public ZEICHENFENSTER(String titel, int breite, int hoehe)
     {
         this(titel, breite, hoehe, Color.white);
+    }
+    
+    public void setTitle(String title){
+        
     }
 
     /**

@@ -22,6 +22,8 @@ public class DEV
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         r=new Random();
 
+        grafik.setTitle("Developer Mode");
+        
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
 
         x=new int [5];

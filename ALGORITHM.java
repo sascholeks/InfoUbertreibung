@@ -2,8 +2,8 @@ public class ALGORITHM
 {
     int[] welt;
     int pos;
-    int range[];
-    int path[];
+    int[] range;
+    int[] path;
     int[] enemiePos;
     int[] enemieDmg;
     int[] enemieHP;
@@ -301,12 +301,12 @@ public class ALGORITHM
         if(welt[pos]==0) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
-                if(welt[getAttackPos()[i]]!=5 && getAttackPos()[i]==1) { //5 muss zu 0 geändert werden
+                if(getAttackPos()[i]==1 && welt[i] != 5) { //5 muss zu 0 geändert werden
                     moveback = true;
                 }
             }
             if(moveback) {
-                moveback();
+                moveaway();
             } else {
                 for(int i=0;i<25;i++) {
                     if(checkEnemie()[i]==1) {
@@ -399,12 +399,17 @@ public class ALGORITHM
         graphic.kons("attack()");
     }
 
-    private void moveback() {
+    private void moveaway() {
         graphic.kons("moveback()");
     }
 
     private void movenormal() {
         graphic.kons("movenormal()");
+        if(welt[pos]==5) { //muss zu 0 geändert werden
+            
+        } else {
+            
+        }
     }
 
 }

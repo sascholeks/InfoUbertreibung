@@ -109,7 +109,7 @@ public class INVENTAR
         kaeauswahl[2]=2;
         kaeauswahl[3]=3;
         kaeauswahl[4]=4;
-        ausanz[0]=50;
+        ausanz[0]=5;
         ausanz[1]=25;
         ausanz[2]=15;
         ausanz[3]=10;
