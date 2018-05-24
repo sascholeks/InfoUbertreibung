@@ -318,13 +318,17 @@ public class ALGORITHM
     }
 
     private void move() {
-        graphic.kons("move()");
+        if(welt[pos]==0) { //muss durch 5 ersetzt werden
+            
+        } else {
+            
+        }
     }
 
     private void stop() {
         graphic.kons("stop()");
     }
-    
+
     private void attack() {
         graphic.kons("attack()");
     }
