@@ -362,35 +362,10 @@ public class KAMPF
             welt[feldhind]=11;
         }
     }
-
-    public int[] getPath(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
-        return alg.getPath();
-    }
-
-    public int[] checkEnemie(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
-        return alg.checkEnemie();
-    }
-
-    public int[] getRange(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
-        return alg.getRange();
-    }
-
-    public int getStrenght(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
-        return alg.getStrength();
-    }
     
-    public int[] getStrenghtCom(int pos) {
+    public void decide(int pos) {
         alg = new ALGORITHM(pos,welt,anz);
-        return alg.getStrengthCom();
-    }
-    
-    public int[] getEnemieStr(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
-        return alg.getEnemieStr();
+        alg.decide();
     }
 
 }

@@ -273,21 +273,10 @@ public class ALGORITHM
         return StrCom;
     }
 
-    /** int[] welt;
-     *   int pos;
-     *   int range[];
-     *   int path[];
-     *   int[] enemiePos;
-     *   int[] enemieDmg;
-     *   int[] enemieHP;
-     *   int[] enemieStr;
-     *   int[] anz;
-     *   int[] StrCom;
-     **/
-
     public void decide() {
         int cE=0;
         int cP=0;
+        int cSC=0;
         for(int i=0;i<25;i++) {
             if(checkEnemie()[i]==1) {
                 cE++;
@@ -299,10 +288,31 @@ public class ALGORITHM
                     cP++;
                 }
             }
-            if(cP==0) {
+            if(cP!=0) {
                 move();
             } else {
                 stop();
+            }
+        } else {
+            for(int i=0;i<25;i++) {
+                if(getStrengthCom()[i]==1) {
+                    cSC++;
+                }
+            } 
+            if(cSC==0) {
+                cP = 0;
+                for(int i=0;i<25;i++) {
+                    if(getPath()[i]==1) {
+                        cP++;
+                    }
+                }
+                if(cP!=0) {
+                    move();
+                } else {
+                    stop();
+                }
+            } else {
+                attack();
             }
         }
     }
@@ -310,9 +320,13 @@ public class ALGORITHM
     private void move() {
         graphic.kons("move()");
     }
-    
+
     private void stop() {
         graphic.kons("stop()");
+    }
+    
+    private void attack() {
+        graphic.kons("attack()");
     }
 
 }
