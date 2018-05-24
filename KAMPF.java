@@ -352,19 +352,18 @@ public class KAMPF
         }
     }
 
-    public int[] algPath() {
-        alg = new ALGORITHMUS(10,welt);
-        alg.setPath();
+    public int[] getPath(int pos) {
+        alg = new ALGORITHMUS(pos,welt);
         return alg.getPath();
     }
     
-    public void checkEnemie() {
-        alg = new ALGORITHMUS(3,welt);
+    public void checkEnemie(int pos) {
+        alg = new ALGORITHMUS(pos,welt);
         alg.checkEnemie();
     }
     
-     public int[] getRange() {
-        alg = new ALGORITHMUS(10,welt);
+     public int[] getRange(int pos) {
+        alg = new ALGORITHMUS(pos,welt);
         return alg.getRange();
     }
     
@@ -375,4 +374,4 @@ public class KAMPF
 //              Thread.sleep(1000);                 
 //          } catch(InterruptedException ex) {
 //              Thread.currentThread().interrupt();
-//          }
+//          } 

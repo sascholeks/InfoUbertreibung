@@ -18,33 +18,33 @@ public class ALGORITHMUS
         return welt[pos];
     }
 
-    public void setRange() {
-        if(getType()==5) {
+    private void setRange() {
+        if(getType()==0) { //muss am ende in 5 geändert werden, da Gegner Team
             for(int i=0;i<25;i++) {
                 range[i] = 1;
             }
-            if(pos-6>=0 && checkLine(pos)!=checkLine(pos-6)) {
+            if(pos-6>=0 && difLineCheck(pos,-6)) {
                 range[pos-6] = 0;
             }
-            if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5)) {
+            if(pos-5>=0 && difLineCheck(pos,-5)) {
                 range[pos-5] = 0;
             }
-            if(pos-4>=0 && checkLine(pos)!=checkLine(pos-4)) {
+            if(pos-4>=0 && difLineCheck(pos,-4)) {
                 range[pos-4] = 0;
             }
-            if(pos-1>=0 && checkLine(pos)==checkLine(pos-1)) {
+            if(pos-1>=0 && sameLineCheck(pos,-1)) {
                 range[pos-1] = 0;
             }
-            if(pos+1<25 && checkLine(pos)==checkLine(pos+1)) {
+            if(pos+1<25 && sameLineCheck(pos,+1)) {
                 range[pos+1] = 0;
             }
-            if(pos+4<25 && checkLine(pos)!=checkLine(pos+4)) {
+            if(pos+4<25 && difLineCheck(pos,+4)) {
                 range[pos+4] = 0;
             }
-            if(pos+5<25 && checkLine(pos)!=checkLine(pos+5)) {
+            if(pos+5<25 && difLineCheck(pos,+5)) {
                 range[pos+5] = 0;
             }
-            if(pos+6<25 && checkLine(pos)!=checkLine(pos+6)) {
+            if(pos+6<25 && difLineCheck(pos,+6)) {
                 range[pos+6] = 0;
             }
             range[pos] = 0;
@@ -52,16 +52,16 @@ public class ALGORITHMUS
             for(int i=0;i<25;i++) {
                 range[i] = 0;
             }
-            if(pos-5>=0 && checkLine(pos)!=checkLine(pos-5)) {
+            if(pos-5>=0 && difLineCheck(pos,-5)) {
                 range[pos-5] = 1;
             }
-            if(pos-1>=0 && checkLine(pos)==checkLine(pos-1)) {
+            if(pos-1>=0 && sameLineCheck(pos,-1)) {
                 range[pos-1] = 1;
             }
-            if(pos+1<25 && checkLine(pos)==checkLine(pos+1)) {
+            if(pos+1<25 && sameLineCheck(pos,+1)) {
                 range[pos+1] = 1;
             }
-            if(pos+5<25 && checkLine(pos)!=checkLine(pos+5)) {
+            if(pos+5<25 && difLineCheck(pos,+5)) {
                 range[pos+5] = 1;
             }
         }
@@ -72,33 +72,17 @@ public class ALGORITHMUS
         return range;
     }
 
-    public boolean checkEnemie() {
-        setRange();
-        boolean check=false;
-        for(int i=0;i<25;i++) {
-            if(range[i]==1) {
-                if(welt[i]>=5 && welt[i] < 10) {
-                    grafik.kons("Gegner gefunden! (Pos: " + i + ", ID: " + welt[i] + ")");
-                    check = true;
-                } else {
-                    check = false;
-                }
-            }
-        }
-        return check;
-    }
-
-    public void setPath() {
+    private void setPath() {
         for(int i=0;i<25;i++) {
             path[i] = 0;
         }
         if(pos-5>=0 && difLineCheck(pos,-5) && welt[pos-5] == 10) {
             path[pos-5] = 1;
         }
-        if(pos-1>=0 && checkLine(pos)==checkLine(pos-1) && welt[pos-1] == 10) {
+        if(pos-1>=0 && sameLineCheck(pos,-1) && welt[pos-1] == 10) {
             path[pos-1] = 1;
         }
-        if(pos+1<25 && checkLine(pos)==checkLine(pos+1) && welt[pos+1] == 10) {
+        if(pos+1<25 && sameLineCheck(pos,+1) && welt[pos+1] == 10) {
             path[pos+1] = 1;
         }
         if(pos+5<25 && difLineCheck(pos,+5) && welt[pos+5] == 10) {
@@ -108,6 +92,7 @@ public class ALGORITHMUS
     }
 
     public int[] getPath() {
+        setPath();
         return path;
     }
 
@@ -147,6 +132,46 @@ public class ALGORITHMUS
             }
             if(pos>pos+dif) {
                 if(checkLine(pos)==checkLine(pos+dif)+1) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+    
+    public boolean sameLineCheck(int pos, int dif) {
+        boolean check=false;
+        if(checkLine(pos)==checkLine(pos+dif)) {
+            check = true;
+        }
+        if(check) {
+            if(pos<pos+dif) {
+                if(checkLine(pos)==checkLine(pos+dif)) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+            if(pos>pos+dif) {
+                if(checkLine(pos)==checkLine(pos+dif)) {
+                    check = true;
+                } else {
+                    check = false;
+                }
+            }
+        }
+        return check;
+    }
+    
+    public boolean checkEnemie() {
+        setRange();
+        boolean check=false;
+        for(int i=0;i<25;i++) {
+            if(range[i]==1) {
+                if(welt[i]>=5 && welt[i] < 10) {
+                    grafik.kons("Gegner gefunden! (Pos: " + i + ", ID: " + welt[i] + ")");
                     check = true;
                 } else {
                     check = false;
