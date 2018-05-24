@@ -1,0 +1,18 @@
+import java.util.Random;
+public class HAUPTMENUE
+{
+    
+    public HAUPTMENUE()
+    {
+       
+    }
+    
+    public void 
+    
+    public void starte() {
+    }
+    
+    public void exit() {
+        System.exit(0);
+    }  
+}

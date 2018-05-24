@@ -1,0 +1,33 @@
+import javax.swing.*;
+import java.awt.event.*;
+public class BUTTONS
+{
+    private JButton beendezug;
+    private JButton kaempfe;
+    private JButton heile;
+    private JButton bewege;
+    KAMPF kampf;
+    public BUTTONS()
+    {
+        kampf=new KAMPF();
+        beendezug = new JButton("beendezug");
+        ZEICHENFENSTER.gibFenster().komponenteHinzufuegen(beendezug,"unten");
+        beendezug.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    kampf.beendezug();
+                }
+            });
+        kaempfe = new JButton("kaempfe");
+        ZEICHENFENSTER.gibFenster().komponenteHinzufuegen(kaempfe,"unten");
+        kaempfe.addActionListener(new ActionListener()
+            {
+                public void actionPerformed(ActionEvent e)
+                {
+                    kampf.kaempfen();
+                }
+            }); 
+    }
+
+}

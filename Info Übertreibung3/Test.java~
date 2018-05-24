@@ -1,0 +1,51 @@
+
+
+public class Test
+{
+    KAEMPFER kae0,kae1;
+    int leben[],dmg[];
+    double anz0,anz1;
+    public Test()
+    {
+        leben=new int[2];
+        dmg=new int[2];
+       kae0=new KAEMPFER(0);
+        leben[0]=kae0.leben*100;
+        dmg[0]=kae0.dmg*100;
+       kae1=new KAEMPFER(0);
+        leben[1]=kae1.leben*50;
+        dmg[1]=kae1.dmg*50;
+        System.out.println("dmg ka0 ="+dmg[0]);
+        System.out.println("dmg ke1 = "+dmg[1]);
+    }
+
+    public void kaempfe() {
+        leben[0]=leben[0]-dmg[1];
+        System.out.println(dmg[1]);
+    }
+    
+    public void kaempfe2() {
+        leben[1]=leben[1]-dmg[0];
+        System.out.println(dmg[0]);
+    }
+    
+        public void kaempfe3() {
+        leben[0]=leben[0]-dmg[1];
+        System.out.println(dmg[1]);
+    }
+    
+    public void berechnedmg() {
+        anz0=leben[0]/kae0.leben;
+        System.out.println("anz k0 "+anz0);
+        dmg[0]=kae0.dmg*(int)anz0;
+        System.out.println("dmg ke0 = "+dmg[0]);
+        anz1=leben[1]/kae1.leben;
+        System.out.println("anz k1 "+anz1);
+        dmg[1]=kae1.dmg*anz1;
+        System.out.println("dmg ke1 = "+dmg[1]);
+    }
+}
+
+
+
+

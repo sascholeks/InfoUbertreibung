@@ -1,0 +1,27 @@
+#BlueJ class context
+comment0.target=ALGORITHM
+comment1.params=pos\ welt\ anz
+comment1.target=ALGORITHM(int,\ int[],\ int[])
+comment10.params=
+comment10.target=int[]\ checkEnemie()
+comment11.params=
+comment11.target=void\ setPriority()
+comment12.params=
+comment12.target=void\ setStrength()
+comment2.params=
+comment2.target=int\ getType()
+comment3.params=
+comment3.target=void\ setRange()
+comment4.params=
+comment4.target=int[]\ getRange()
+comment5.params=
+comment5.target=void\ setPath()
+comment6.params=
+comment6.target=int[]\ getPath()
+comment7.params=pos
+comment7.target=int\ checkLine(int)
+comment8.params=pos\ dif
+comment8.target=boolean\ difLineCheck(int,\ int)
+comment9.params=pos\ dif
+comment9.target=boolean\ sameLineCheck(int,\ int)
+numComments=13
