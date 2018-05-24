@@ -353,19 +353,24 @@ public class DEV
     }
 
     /** public void hindernisse() {
-        helphind=r.nextInt(3); 
-        for(int a=0;a<=helphind;a++) {
-            feldhind=r.nextInt(3);
-            helphind2=r.nextInt(5);
-            feldhind=feldhind+helphind2*5+1;
-            grafik.zeichnehindernis(feldhind);
-            welt[feldhind]=11;
-        }
+    helphind=r.nextInt(3); 
+    for(int a=0;a<=helphind;a++) {
+    feldhind=r.nextInt(3);
+    helphind2=r.nextInt(5);
+    feldhind=feldhind+helphind2*5+1;
+    grafik.zeichnehindernis(feldhind);
+    welt[feldhind]=11;
+    }
     } **/
-    
+
     public void decide(int pos) {
         alg = new ALGORITHM(pos,welt,anz);
         alg.decide();
+    }
+
+    public int[] getAttack(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
+        return alg.getAttackPos();
     }
 
 }

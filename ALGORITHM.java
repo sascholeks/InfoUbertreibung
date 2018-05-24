@@ -10,6 +10,7 @@ public class ALGORITHM
     int[] enemieStr;
     int[] anz;
     int[] StrCom;
+    int[] attackPos;
     int Str;
     GRAFIKELEMENTE graphic;
     public ALGORITHM(int pos, int[] welt, int[] anz)
@@ -23,6 +24,7 @@ public class ALGORITHM
         enemieDmg = new int[25];
         enemieStr = new int[25];
         StrCom = new int[25];
+        attackPos = new int[25];
         this.anz = anz;
         graphic =new GRAFIKELEMENTE();
     }
@@ -273,16 +275,78 @@ public class ALGORITHM
         return StrCom;
     }
 
+    public int[] getAttackPos() {
+        for(int i=0;i<25;i++) {
+            attackPos[i]=0;
+        }
+        if(pos-5>=0 && difLineCheck(pos,-5) && welt[pos-5] < 10 && welt[pos-5] >= 5) { //muss am Ende  (welt[pos-5] < 5  && welt[pos-5] >= 0) heißen
+            attackPos[pos-5] = 1;
+        }
+        if(pos-1>=0 && sameLineCheck(pos,-1) && welt[pos-1] < 10 && welt[pos-1] >= 5) {
+            attackPos[pos-1] = 1;
+        }
+        if(pos+1<25 && sameLineCheck(pos,+1) && welt[pos+1] < 10 && welt[pos+1] >= 5) {
+            attackPos[pos+1] = 1;
+        }
+        if(pos+5<25 && difLineCheck(pos,+5) && welt[pos+5] < 10 && welt[pos+5] >= 5) {
+            attackPos[pos+5] = 1;
+        }
+        return attackPos;
+    }
+
     public void decide() {
         int cE=0;
         int cP=0;
         int cSC=0;
-        if(welt[pos]==0) { //muss durch 0 /5 ersetzt werden
+        if(welt[pos]==0) { //muss zu 5 geändert werden
+            boolean moveback = false;
             for(int i=0;i<25;i++) {
-                if(getRange()[i]!=checkEnemie()[i]) {
-                    moveback();
+                if(welt[getAttackPos()[i]]==5 && getAttackPos()[i]==1) { //muss zu 0 geändert werden
+                    moveback = false;
                 } else {
-                    movenormal();
+                    moveback = true;
+                }
+            }
+            if(moveback) {
+                moveback();
+            } else {
+                for(int i=0;i<25;i++) {
+                    if(checkEnemie()[i]==1) {
+                        cE++;
+                    }
+                }
+                if(cE==0) {
+                    for(int i=0;i<25;i++) {
+                        if(getPath()[i]==1) {
+                            cP++;
+                        }
+                    }
+                    if(cP!=0) {
+                        movenormal();
+                    } else {
+                        stop();
+                    }
+                } else {
+                    for(int i=0;i<25;i++) {
+                        if(getStrengthCom()[i]==1) {
+                            cSC++;
+                        }
+                    } 
+                    if(cSC==0) {
+                        cP = 0;
+                        for(int i=0;i<25;i++) {
+                            if(getPath()[i]==1) {
+                                cP++;
+                            }
+                        }
+                        if(cP!=0) {
+                            movenormal();
+                        } else {
+                            stop();
+                        }
+                    } else {
+                        attack();
+                    }
                 }
             }
         } else {
