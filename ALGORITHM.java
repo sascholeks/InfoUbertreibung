@@ -4,10 +4,10 @@ public class ALGORITHM
     int pos;
     int[] range;
     int[] path;
-    int[] enemiePos;
-    int[] enemieDmg;
-    int[] enemieHP;
-    int[] enemieStr;
+    int[] enemyPos;
+    int[] enemyDmg;
+    int[] enemyHP;
+    int[] enemyStr;
     int[] anz;
     int[] StrCom;
     int[] attackPos;
@@ -19,10 +19,10 @@ public class ALGORITHM
         this.pos =pos;
         range = new int[25];
         path = new int[25];
-        enemiePos = new int[25];
-        enemieHP = new int[25];
-        enemieDmg = new int[25];
-        enemieStr = new int[25];
+        enemyPos = new int[25];
+        enemyHP = new int[25];
+        enemyDmg = new int[25];
+        enemyStr = new int[25];
         StrCom = new int[25];
         attackPos = new int[25];
         this.anz = anz;
@@ -180,24 +180,24 @@ public class ALGORITHM
         return check;
     }
 
-    public int[] checkEnemie() {
+    public int[] checkEnemy() {
         setRange();
         for(int i=0;i<25;i++) {
-            enemiePos[i] = 0;
+            enemyPos[i] = 0;
         }
         for(int i=0;i<25;i++) {
             if(range[i]==1) {
                 if(welt[i]>=5 && welt[i] < 10) {    //muss am Ende in (welt[i] >=0 && welt[i]<10) abgeändert werden, da anderes Team
-                    enemiePos[i] = 1;
+                    enemyPos[i] = 1;
                 }
             }
         }       
-        return enemiePos;
+        return enemyPos;
     }
 
-    public int[] getEnemieStr() {
+    public int[] getenemyStr() {
         for(int i=0;i<25;i++) {
-            if(checkEnemie()[i]==1) {
+            if(checkEnemy()[i]==1) {
                 int eID = welt[i];
                 if(eID>=5 && eID < 10) {
                     eID = eID - 5;
@@ -205,39 +205,39 @@ public class ALGORITHM
 
                 switch (eID) {
                     case 0:
-                    enemieHP[i]=CONFIG.HP0;
-                    enemieDmg[i]=CONFIG.Dmg0;
-                    enemieStr[i]= enemieHP[i]*anz[welt[i]];
+                    enemyHP[i]=CONFIG.HP0;
+                    enemyDmg[i]=CONFIG.Dmg0;
+                    enemyStr[i]= enemyHP[i]*anz[welt[i]];
                     break;
                     case 1:
-                    enemieHP[i]=CONFIG.HP1;
-                    enemieDmg[i]=CONFIG.Dmg1;
-                    enemieStr[i]= enemieHP[i]*anz[welt[i]];
+                    enemyHP[i]=CONFIG.HP1;
+                    enemyDmg[i]=CONFIG.Dmg1;
+                    enemyStr[i]= enemyHP[i]*anz[welt[i]];
                     break;
                     case 2:
-                    enemieHP[i]=CONFIG.HP2;
-                    enemieDmg[i]=CONFIG.Dmg2;
-                    enemieStr[i]= enemieHP[i]*anz[welt[i]];
+                    enemyHP[i]=CONFIG.HP2;
+                    enemyDmg[i]=CONFIG.Dmg2;
+                    enemyStr[i]= enemyHP[i]*anz[welt[i]];
                     break;
                     case 3:
-                    enemieHP[i]=CONFIG.HP3;
-                    enemieDmg[i]=CONFIG.Dmg3;
-                    enemieStr[i]= enemieHP[i]*anz[welt[i]];
+                    enemyHP[i]=CONFIG.HP3;
+                    enemyDmg[i]=CONFIG.Dmg3;
+                    enemyStr[i]= enemyHP[i]*anz[welt[i]];
                     break;
                     case 4:
-                    enemieHP[i]=CONFIG.HP4;
-                    enemieDmg[i]=CONFIG.Dmg4;
-                    enemieStr[i]= enemieHP[i]*anz[welt[i]];
+                    enemyHP[i]=CONFIG.HP4;
+                    enemyDmg[i]=CONFIG.Dmg4;
+                    enemyStr[i]= enemyHP[i]*anz[welt[i]];
                     break;
                     default: 
-                    enemieStr[i] = 0;
+                    enemyStr[i] = 0;
                 }
             }
             else {
-                enemieStr[i] = 0;
+                enemyStr[i] = 0;
             }
         }
-        return enemieStr;
+        return enemyStr;
     }
 
     public int getStrength() {
@@ -264,9 +264,9 @@ public class ALGORITHM
 
     public int[] getStrengthCom() {
         for(int i=0;i<25;i++) {
-            if(getEnemieStr()[i]>=getStrength() && getEnemieStr()[i] != 0) {
+            if(getenemyStr()[i]>=getStrength() && getenemyStr()[i] != 0) {
                 StrCom[i]=0;
-            } else if(getEnemieStr()[i]==0) {
+            } else if(getenemyStr()[i]==0) {
                 StrCom[i]=0;
             } else {
                 StrCom[i]=1;
@@ -309,7 +309,7 @@ public class ALGORITHM
                 moveaway();
             } else {
                 for(int i=0;i<25;i++) {
-                    if(checkEnemie()[i]==1) {
+                    if(checkEnemy()[i]==1) {
                         cE++;
                     }
                 }
@@ -350,7 +350,7 @@ public class ALGORITHM
         } else {
 
             for(int i=0;i<25;i++) {
-                if(checkEnemie()[i]==1) {
+                if(checkEnemy()[i]==1) {
                     cE++;
                 }
             }
