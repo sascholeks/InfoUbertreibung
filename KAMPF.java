@@ -23,7 +23,7 @@ public class KAMPF
         r=new Random();
 
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
-                
+
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -87,7 +87,7 @@ public class KAMPF
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         hindernisse();
     }
-    
+
     public void zeichnespielfeld() {
     }
 
@@ -377,10 +377,23 @@ public class KAMPF
         alg = new ALGORITHM(pos,welt,anz);
         return alg.getRange();
     }
-    
-    
-}
 
+    public int getStrenght(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
+        return alg.getStrength();
+    }
+    
+    public int[] getStrenghtCom(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
+        return alg.getStrengthCom();
+    }
+    
+    public int[] getEnemieStr(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
+        return alg.getEnemieStr();
+    }
+
+}
 //          try {
 //              Thread.sleep(1000);                 
 //          } catch(InterruptedException ex) {
