@@ -1,0 +1,21 @@
+#BlueJ class context
+comment0.target=INVENTAR
+comment1.params=
+comment1.target=INVENTAR()
+comment2.params=
+comment2.target=void\ inventar()
+comment3.params=typ\ anza\ platz
+comment3.target=void\ waehlekaempferaus(int,\ int,\ int)
+comment4.params=feld
+comment4.target=void\ waehlekaempferab(int)
+comment5.params=feld\ anza
+comment5.target=void\ plusanz(int,\ int)
+comment6.params=feld\ anza
+comment6.target=void\ minuskaempfer(int,\ int)
+comment7.params=gr\ anz
+comment7.target=void\ plusheiltrank(int,\ int)
+comment8.params=gr
+comment8.target=void\ benutzeheiltrank(int)
+comment9.params=
+comment9.target=void\ fuellestandart()
+numComments=10

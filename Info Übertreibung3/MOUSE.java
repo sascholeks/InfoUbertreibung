@@ -1,0 +1,146 @@
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.*;
+public class MOUSE implements MouseListener 
+{
+    private ZEICHENFENSTER f;
+    GRAFIKELEMENTE grafik;
+    int i=1,feldauswahl;
+    int xyp=20,auswahlfreigabe;
+    int[] x,y;
+    boolean kont=false;
+    public MOUSE()
+    {
+        ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        grafik=new GRAFIKELEMENTE();
+        x=new int[5];
+        y=new int[5];
+        for(int a=0;a<5;a++) {
+            x[a]=xyp;
+            y[a]=xyp;
+            xyp=xyp+50;
+        }
+        kont=false;
+    }
+    public void auswahlfreigabe() {
+        auswahlfreigabe=1;
+    }
+
+    public void mousePressed(MouseEvent e) { 
+        if(auswahlfreigabe==1) {  
+            if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81 ) {
+                feldauswahl=0;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
+                feldauswahl=1;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
+                feldauswahl=2;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
+                feldauswahl=3;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
+                feldauswahl=4;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
+                feldauswahl=5;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
+                feldauswahl=6;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
+                feldauswahl=7;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
+                feldauswahl=8;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
+                feldauswahl=9;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
+                feldauswahl=10;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
+                feldauswahl=11;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
+                feldauswahl=12;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
+                feldauswahl=13;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[2]+30 && e.getY()<y[2]+81) {
+                feldauswahl=14;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
+                feldauswahl=15;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
+                feldauswahl=16;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
+                feldauswahl=17;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
+                feldauswahl=18;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
+                feldauswahl=19;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
+                feldauswahl=20;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
+                feldauswahl=21;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
+                feldauswahl=22;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[3]+7 && e.getX()<x[3]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
+                feldauswahl=23;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }else if(e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[4]+30 && e.getY()<y[4]+81) {
+                feldauswahl=24;
+                grafik.auswahlfeld(feldauswahl);
+                auswahlfreigabe=0;
+            }           
+        }
+    }
+    public void mouseReleased(MouseEvent e) 
+    {   
+    } 
+    public void mouseEntered(MouseEvent e) 
+    {  
+    }  
+    public void mouseExited(MouseEvent e) 
+    {     
+    } 
+    public void mouseClicked(MouseEvent e) 
+    {
+    }
+}

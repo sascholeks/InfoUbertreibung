@@ -1,0 +1,136 @@
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.*;
+public class KAMPFLISTENER implements MouseListener 
+{
+    KAMPF kampf;
+    GRAFIKELEMENTE grafik;
+    public KAMPFLISTENER()
+    {
+        ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        kampf=new KAMPF();
+        grafik=new GRAFIKELEMENTE();
+    }
+    
+    public void mousePressed(MouseEvent e) 
+    {  
+        if(e.getX()>458-20 && e.getX()<458+20 && e.getY()>130-20 && e.getY()<131+20 && aktionen<2) {                                                     //heilen
+            ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,4); 
+            ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,18,6);
+            
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,1);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,1);
+            if(e.getX()>420-20 && e.getX()<420+20 && e.getY()>110-20 && e.getY()<110+20){
+                ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,2);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,8,1);
+                kampf.heile(1);
+            }    
+            aktionen++;
+            //else if(e.getX()>420-20 && e.getX()<420+20 && e.getY()>90-20 && e.getY()<90+20) {
+            //    ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,2);
+            //    ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,8,1);
+            //    kampf.heile(2);
+            //}
+        }                                                                    
+        else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>82-20 && e.getY()<80+20 && aktionen<2) {                                                   //kämpfen
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,4); 
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,18,6);
+            kampf.kaempfe(2);
+            aktionen++;
+        }
+        else if(e.getX()>558-20 && e.getX()<558+20 && e.getY()>131-20 && e.getY()<131+20 && aktionen<2) {                                                  //bewegen
+
+                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,4);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,18,6);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                    auswahl.i=0;
+                    ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                    ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                    System.out.println("wähle weg");
+                    helpbew=true;
+                    if((kampf.kepos[kampf.aktnr]-1==auswahl.gruenpos[0] || kampf.kepos[kampf.aktnr]+1==auswahl.gruenpos[0] || kampf.kepos[kampf.aktnr]-5==auswahl.gruenpos[0] || kampf.kepos[kampf.aktnr]+5==auswahl.gruenpos[0])&& besetzt[kampf.aktnr+(auswahl.gruenpos[0]-kampf.aktnr)]==false) {
+                        besetzt[kampf.kepos[kampf.aktnr]]=false;
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,8);
+                        kampf.kepos[kampf.aktnr]=auswahl.gruenpos[0];         
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);   
+                        besetzt[kampf.kepos[kampf.aktnr]]=true;
+                        if((kampf.kepos[kampf.aktnr]-1==auswahl.gruenpos[1] || kampf.kepos[kampf.aktnr]+1==auswahl.gruenpos[1] || kampf.kepos[kampf.aktnr]-5==auswahl.gruenpos[1] || kampf.kepos[kampf.aktnr]+5==auswahl.gruenpos[1]) && besetzt[kampf.kepos[kampf.aktnr]+(auswahl.gruenpos[1]-auswahl.gruenpos[0])]==false)  {
+                            besetzt[auswahl.gruenpos[0]]=false;
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,8); 
+                            kampf.kepos[kampf.aktnr]=auswahl.gruenpos[1];
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                            besetzt[kampf.kepos[kampf.aktnr]]=true;
+                            if(kampf.kepos[kampf.aktnr]-1==auswahl.gruenpos[2] || kampf.kepos[kampf.aktnr]+1==auswahl.gruenpos[2] || kampf.kepos[kampf.aktnr]-5==auswahl.gruenpos[2] || kampf.kepos[kampf.aktnr]+5==auswahl.gruenpos[2] && besetzt[kampf.kepos[kampf.aktnr]+(auswahl.gruenpos[2]-auswahl.gruenpos[1])]==false) {
+                                besetzt[auswahl.gruenpos[1]]=false;
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,8);
+                                kampf.kepos[kampf.aktnr]=auswahl.gruenpos[2];
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                                besetzt[kampf.kepos[kampf.aktnr]]=true;
+                                aktionen++;
+                                auswahl.fr=0;
+                                auswahl.i++;
+                            }
+                            else if(auswahl.gruenpos[1]!=0 && auswahl.gruenpos[2]!=0){
+                                System.out.println("punkt 3 nicht erreichbar");
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(20,20,251,251,8);
+                                kampffeld();
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                            }
+                        }
+                        else if(auswahl.gruenpos[1]!=0 && auswahl.gruenpos[2]!=0) {
+                            System.out.println("punkt 2 nicht erreichbar");
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(20,20,251,251,8);
+                            kampffeld();
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                            ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                        }
+                    }
+                    else if(auswahl.fr==1){
+                        System.out.println("punkt 1 nicht erreichbar");
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(20,20,251,251,8);
+                        kampffeld();
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                    }
+        }
+        else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {                                                    //zug beenden
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,4);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,18,6);
+            kampf.beendezug();
+            if(kampf.f==1) {
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,6);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,6);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,6);
+                ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,6);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(410,80,20,40,8); 
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(20,20,251,251,8);
+                for(int a=0;a<5;a++) {
+                    for(int b=0;b<5;b++) {
+                        ZEICHENFENSTER.gibFenster().zeichneRechteck(x[a],y[b],50,50);
+                    }
+                }
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+1,y[(kampf.kepos[kampf.aktnr]/5)]+1,49,49,4);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[(kampf.kepos[kampf.aktnr]%5)]+3,y[(kampf.kepos[kampf.aktnr]/5)]+3,45,45,8);
+                auswahl.i=5;
+                aktionen=0;
+            } 
+        }
+    }
+    public void mouseReleased(MouseEvent e) 
+    {   
+    } 
+    public void mouseEntered(MouseEvent e) 
+    {  
+    }  
+    public void mouseExited(MouseEvent e) 
+    {     
+    } 
+    public void mouseClicked(MouseEvent e) 
+    {
+    }
+}
