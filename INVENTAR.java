@@ -5,7 +5,7 @@ public class INVENTAR
     int[] ausanz;
     int[] kaeauswahl;
     int[] anzauswahl;   //siehe unten
-    int heiltrankkl=1,heiltrankgr=1;
+    int heiltrankkl=1,heiltrankgr=1,geld=1000;
     public INVENTAR()
     {
         grafik=new GRAFIKELEMENTE();

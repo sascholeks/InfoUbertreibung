@@ -318,16 +318,6 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
          ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
     }
-    
-    public void anzahlkaempfer(int feld,int wert) {
-        ZEICHENFENSTER.gibFenster().zeichneText(wert+"",78+50*feld,202);
-    }
-    
-    public void anzkaemferauswahl(int feld, int wert){
-        
-    }
-    
-
 }
 
 
