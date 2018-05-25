@@ -275,7 +275,7 @@ public class ALGORITHM
         return StrCom;
     }
 
-    public int[] getAttackPos() {
+    public int[] getAttackPos(int pos) {
         for(int i=0;i<25;i++) {
             attackPos[i]=0;
         }
@@ -294,14 +294,26 @@ public class ALGORITHM
         return attackPos;
     }
 
+    public int getAttackCount(int pos) {
+        int AttackCount = 0;
+        for(int i=0;i<25;i++) {
+            if(getAttackPos(pos)[i]==1) {
+                AttackCount++;
+            }
+        }
+        return AttackCount;
+    }
+
     public void decide() {
         int cE=0;
         int cP=0;
         int cSC=0;
+        int EnemyStrCom = 0;
+        int EnemyPos = 0;
         if(welt[pos]==0) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
-                if(getAttackPos()[i]==1 && welt[i] != 5) { //5 muss zu 0 geändert werden
+                if(getAttackPos(pos)[i]==1 && welt[i] != 5) { //5 muss zu 0 geändert werden
                     moveback = true;
                 }
             }
@@ -309,52 +321,19 @@ public class ALGORITHM
                 moveaway();
             } else {
                 for(int i=0;i<25;i++) {
-                    if(checkEnemy()[i]==1) {
-                        cE++;
+                    if(getenemyStr()[i]>EnemyStrCom) {
+                        EnemyStrCom = getenemyStr()[i];
+                        EnemyPos = i;
                     }
                 }
-                if(cE==0) {
-                    for(int i=0;i<25;i++) {
-                        if(getPath()[i]==1) {
-                            cP++;
-                        }
-                    }
-                    if(cP!=0) {
-                        movenormal();
-                    } else {
-                        stop();
-                    }
-                } else {
-                    for(int i=0;i<25;i++) {
-                        if(getStrengthCom()[i]==1) {
-                            cSC++;
-                        }
-                    } 
-                    if(cSC==0) {
-                        cP = 0;
-                        for(int i=0;i<25;i++) {
-                            if(getPath()[i]==1) {
-                                cP++;
-                            }
-                        }
-                        if(cP!=0) {
-                            movenormal();
-                        } else {
-                            stop();
-                        }
-                    } else {
-                        attack();
-                    }
-                }
+                attackpos(EnemyPos);
             }
         } else {
-
             for(int i=0;i<25;i++) {
                 if(checkEnemy()[i]==1) {
                     cE++;
                 }
             }
-
             if(cE==0) {
                 for(int i=0;i<25;i++) {
                     if(getPath()[i]==1) {
@@ -399,39 +378,38 @@ public class ALGORITHM
         graphic.kons("attack()");
     }
 
+    private void attackpos(int pos) {
+        graphic.kons("attack(" + pos + ")");   
+    }
+
     private void moveaway() {
-        graphic.kons("moveback()");
+        graphic.kons("moveaway()");
     }
 
     private void movenormal() {
-        if(welt[pos]==5) { //muss zu 0 geändert werden
-            boolean up=false,down=false,left=false,right=false;
-            for(int i=0;i<25;i++) {
-                if(pos-1==getPath()[i]) {
-                    left = true;
-                }
-                if(pos+1==getPath()[i]) {
-                    right = true;
-                }
-                if(pos+5==getPath()[i]) {
-                    up = true;
-                }
-                if(pos-5==getPath()[i]) {
-                    down = true;
-                }
+        boolean up=false,down=false,left=false,right=false;
+        if(getPath()[pos-1] == 1) {
+            left = true;
+        }
+        if(getPath()[pos+1] == 1) {
+            right = true;
+        }
+        if(getPath()[pos+5] == 1) {
+            up = true;
+        }
+        if(getPath()[pos+5] == 1) {
+            down = true;
+        }
+        if(right) {
+            graphic.kons("moveright()");
+        } else if(up || down) {
+            if(checkLine(pos) < 2) { 
+                graphic.kons("moveup()");
+            } else if(checkLine(pos) > 2) { 
+                graphic.kons("movedown()");
             }
-            if(left) {
-                graphic.kons("moveleft()");
-            }
-            if(up || down) {
-                if(checkLine(pos) < 2) { 
-                    graphic.kons("moveup()");
-                } else if(checkLine(pos) > 2) { 
-                    graphic.kons("movedown()");
-                }
-            }
-        } else {
-            graphic.kons("movenormal()");
+        } else if(left) {
+            graphic.kons("moveleft()");
         }
     }
 

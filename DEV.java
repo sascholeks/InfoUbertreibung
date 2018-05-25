@@ -9,6 +9,7 @@ public class DEV
     KAEMPFER[] kaempfer;
     ALGORITHM alg;
     SOUNDSCHWERTSCHLAG schwertkampf;
+    SOUNDARROW arrow;
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
@@ -21,7 +22,8 @@ public class DEV
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         r=new Random();
-
+        arrow=new SOUNDARROW();
+        
         grafik.setTitle("Developer Mode");
         
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
@@ -98,6 +100,7 @@ public class DEV
             if(welt[feld]!=10) {                                //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
+                        arrow.play();
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
@@ -372,7 +375,12 @@ public class DEV
 
     public int[] getAttack(int pos) {
         alg = new ALGORITHM(pos,welt,anz);
-        return alg.getAttackPos();
+        return alg.getAttackPos(pos);
+    }
+    
+    public int getAttackCount(int pos) {
+        alg = new ALGORITHM(pos,welt,anz);
+        return alg.getAttackCount(pos);
     }
 
 }
