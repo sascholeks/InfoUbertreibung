@@ -3,8 +3,7 @@ import java.util.Random;
 public class GRAFIKELEMENTE
 {
     int ra = 10; //Verschiebung nach rechts
-    
-    
+   
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
     public GRAFIKELEMENTE()

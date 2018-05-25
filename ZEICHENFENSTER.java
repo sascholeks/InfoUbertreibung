@@ -26,12 +26,12 @@ public class ZEICHENFENSTER
     private static ZEICHENFENSTER singleton;
 
     /**
-     * Erzeugt eine Zeichenfenster mit Standardma�en 600*500 und Hintergrundfarbe wei� 
+     * Erzeugt eine Zeichenfenster mit Standardma�en 700*290 und Hintergrundfarbe wei� 
      * @param titel  Titel des Fensters     
      */
     public ZEICHENFENSTER(String titel)
     {
-        this(titel, 700, 290, Color.white);          
+        this(titel, 700, 400, Color.white);          
     }
     
 
@@ -80,7 +80,7 @@ public class ZEICHENFENSTER
 
     public static ZEICHENFENSTER gibFenster()
     {
-        if (singleton==null){singleton=new ZEICHENFENSTER("Spiel", 700, 290);}
+        if (singleton==null){singleton=new ZEICHENFENSTER("Spiel", 700, 400);}
         singleton.zeige();
         return singleton;
     }
