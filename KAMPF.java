@@ -375,7 +375,7 @@ public class KAMPF
             helphind2=r.nextInt(5);
             feldhind=feldhind+helphind2*5+1;
             grafik.zeichnehindernis(feldhind);
-            welt[feldhind]=11;
+            welt[feldhind]=11; 
         }
     }
     
