@@ -1,3 +1,5 @@
+import java.util.Random;
+
 public class ALGORITHM
 {
     int[] welt;
@@ -12,8 +14,11 @@ public class ALGORITHM
     int[] StrCom;
     int[] attackPos;
     int Str;
+    int[] order;
+    Random r;
+
     GRAFIKELEMENTE graphic;
-    public ALGORITHM(int pos, int[] welt, int[] anz)
+    public ALGORITHM(int pos, int[] welt, int[] anz, int[] order)
     {
         this.welt = welt;
         this.pos =pos;
@@ -27,6 +32,7 @@ public class ALGORITHM
         attackPos = new int[25];
         this.anz = anz;
         graphic =new GRAFIKELEMENTE();
+        r = new Random();
     }
 
     public int getType() {
@@ -307,8 +313,10 @@ public class ALGORITHM
     public int getSaveDeath() {
         int saveDeathCount=0;
         for(int i=0;i<25;i++) {
-            if(getenemyStr()[i]>getStrength()) {
-                saveDeathCount++;
+            if(getenemyStr()[i]>getStrength() && welt[i] !=5) { //muss zu 0 geändert werden
+                if(getRange()[i]==1) {
+                    saveDeathCount++; 
+                }
             }
         }
         return saveDeathCount;
@@ -376,8 +384,6 @@ public class ALGORITHM
                                 if(getSaveDeath()==0) {
                                     check = true;
                                     attackposition = i;
-                                } else {
-                                    System.out.println("Nö");
                                 }
                             }
                         }
@@ -387,7 +393,7 @@ public class ALGORITHM
                             moveaway();
                         }
                     } else {
-                        stop();
+                        stop(); //heilen überprüfen
                     }
                 } else {
                     attack();
@@ -412,18 +418,18 @@ public class ALGORITHM
         graphic.kons("moveaway()");
     }
 
-    public void movenormal() {
+    public void movenormal() { //Abstand zu Gegnern halten + StrCom + SaveDeath
         boolean up=false,down=false,left=false,right=false;
-        if(getPath()[pos-1] == 1) {
+        if(pos-1 >= 0 && getPath()[pos-1] == 1) {
             left = true;
         }
-        if(getPath()[pos+1] == 1) {
+        if(pos+1 < 25 && getPath()[pos+1] == 1) {
             right = true;
         }
-        if(getPath()[pos+5] == 1) {
+        if(pos+5 < 25 && getPath()[pos+5] == 1) {
             up = true;
         }
-        if(getPath()[pos+5] == 1) {
+        if(pos-5 >= 0 && getPath()[pos+5] == 1) {
             down = true;
         }
         if(right) {
@@ -433,6 +439,12 @@ public class ALGORITHM
                 graphic.kons("moveup()");
             } else if(checkLine(pos) > 2) { 
                 graphic.kons("movedown()");
+            } else {
+                if(r.nextInt(2)==0) {
+                    graphic.kons("moveup()");
+                } else {
+                    graphic.kons("movedown()");
+                }
             }
         } else if(left) {
             graphic.kons("moveleft()");

@@ -10,24 +10,32 @@ public class DEV
     ALGORITHM alg;
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
-
+    boolean normal;
+    boolean rocks;
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2;
     boolean geheilt=false,gekaempft=false,bewegt=false;
     public DEV()
     {
+        
+        //Config:
+        normal = false;
+        rocks = false;
+        
         inv=new INVENTAR();
         invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         r=new Random();
         arrow=new SOUNDARROW();
-        
+
         grafik.setTitle("Developer Mode");
-        
+
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
 
+        this.normal = normal;
+        
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -89,7 +97,11 @@ public class DEV
             grafik.zeichneinfeld(a,kepos[a],anz[a]);                                                           //hat einfluss auf feld
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
-        /**hindernisse(); **/
+        if(rocks&&normal) {
+            hindernisse();   
+        } else if(rocks && !normal) {
+            grafik.kons("Hindernisse können nur im normalen Modus erstellt werden!");
+        }
     }
 
     public void zeichnespielfeld() {
@@ -320,20 +332,38 @@ public class DEV
     }
 
     public void startpos() {
-        int helppos1;
-        for(int a=0;a<5;a++) {                     //startposition der kaempfer wird generiert
-            do {
-                helppos1=r.nextInt(5)*5+1;
-            }while(welt[helppos1]!=10);
-            welt[helppos1]=a;
-            kepos[a]=helppos1;
-        }
-        for(int b=0;b<5;b++) {
-            do {
-                helppos1=r.nextInt(5)*5+2;
-            }while(welt[helppos1]!=10);
-            welt[helppos1]=b+5;
-            kepos[b+5]=helppos1;
+        if(normal) {
+            int helppos1;
+            for(int a=0;a<5;a++) {                     //startposition der kaempfer wird generiert
+                do {
+                    helppos1=r.nextInt(5)*5;
+                }while(welt[helppos1]!=10);
+                welt[helppos1]=a;
+                kepos[a]=helppos1;
+            }
+            for(int b=0;b<5;b++) {
+                do {
+                    helppos1=r.nextInt(5)*5+4;
+                }while(welt[helppos1]!=10);
+                welt[helppos1]=b+5;
+                kepos[b+5]=helppos1;
+            } 
+        } else {
+            int helppos1;
+            for(int a=0;a<5;a++) {                     //startposition der kaempfer wird generiert
+                do {
+                    helppos1=r.nextInt(5)*5+1;
+                }while(welt[helppos1]!=10);
+                welt[helppos1]=a;
+                kepos[a]=helppos1;
+            }
+            for(int b=0;b<5;b++) {
+                do {
+                    helppos1=r.nextInt(5)*5+2;
+                }while(welt[helppos1]!=10);
+                welt[helppos1]=b+5;
+                kepos[b+5]=helppos1;
+            } 
         }
     }
 
@@ -357,29 +387,35 @@ public class DEV
         }
     }
 
-    /** public void hindernisse() {
-    helphind=r.nextInt(3); 
-    for(int a=0;a<=helphind;a++) {
-    feldhind=r.nextInt(3);
-    helphind2=r.nextInt(5);
-    feldhind=feldhind+helphind2*5+1;
-    grafik.zeichnehindernis(feldhind);
-    welt[feldhind]=11;
+    public void skipOrder(int ID) {
+        do {
+            beendezug();
+        } while (reihenfolge[0]!=ID);
     }
-    } **/
+
+    public void hindernisse() {
+        helphind=r.nextInt(3); 
+        for(int a=0;a<=helphind;a++) {
+            feldhind=r.nextInt(3);
+            helphind2=r.nextInt(5);
+            feldhind=feldhind+helphind2*5+1;
+            grafik.zeichnehindernis(feldhind);
+            welt[feldhind]=11;
+        }
+    }
 
     public void decide(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
+        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         alg.decide();
     }
 
     public int[] getAttack(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
+        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         return alg.getAttackPos(pos);
     }
-    
+
     public int getAttackCount(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
+        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         return alg.getAttackCount(pos);
     }
 

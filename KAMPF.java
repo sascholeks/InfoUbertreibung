@@ -380,7 +380,7 @@ public class KAMPF
     }
     
     public void decide(int pos) {
-        alg = new ALGORITHM(pos,welt,anz);
+        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         alg.decide();
     }
 
