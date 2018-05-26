@@ -4,76 +4,29 @@ public class WELT
     GRAFIKWELT grafik;
     Random r;
     int[] welt,ansicht;
-    int genwelthelp,bildpos,aktpos,aktansichtpos;   
+    int genwelthelp,bildpos,aktpos,aktansichtpos;  
+    int zerx ,zery,xzerbew,yzerbew;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu;
     public WELT() {
         grafik=new GRAFIKWELT();
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
-        aktpos=120000;
-        bildpos=aktpos-1503;
+        aktpos=248493;
+        bildpos=aktpos-1503; 
         aktansichtpos=24;
         grafik.zeichnerahmen();
         generierewelt();
         berechneansicht();
         zeichneansicht();
-    }
-    
-    public void zeichneansicht() {
-        berechneansicht();
-        grafik.loescheansicht();
-        for(int a=0;a<7;a++) {
-            for(int b=0;b<7;b++) {
-                grafik.weltteil(b,a,ansicht[a*7+b]);
-            }
-        }
-        grafik.zeichnespieler(aktansichtpos);
-    }
-    
-    public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
-        for(int a=0;a<7;a++) {           //xfelder
-            for(int b=0;b<7;b++) {       //yfelder
-                ansicht[a*7+b]=welt[bildpos+a*500+b];
-            }
-        }
-    }
-    
-    public void bewegen(int richtung) {
-        switch(richtung) {
-            case 0:
-                if(aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) {
-                    bildpos=bildpos-1;
-                }else {
-                    aktpos=aktpos-1;
-                    aktansichtpos=aktansichtpos-1;
-                }
-                break;
-            case 1:
-                if(aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) {
-                    bildpos=bildpos-500;
-                }else {
-                    aktpos=aktpos-500;
-                    aktansichtpos=aktansichtpos-7;
-                }
-                break;
-            case 2:
-                if(aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) {
-                    bildpos=bildpos+1;
-                }else {
-                    aktpos=aktpos+1;
-                    aktansichtpos=aktansichtpos+1;
-                }
-                break;
-            case 3:
-                if(aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) {
-                    bildpos=bildpos+500;
-                }else {
-                    aktpos=aktpos+500;
-                    aktansichtpos=aktansichtpos+7;
-                }
-                break;
-        }
-        zeichneansicht();
+        anzl=false;
+        anzo=false;
+        anzr=false;
+        anzu=false;
+        bewl=false;
+        bewo=false;
+        bewr=false;
+        bewu=false;
     }
     
     public void generierewelt() {          //weltteil darf innerhalb 12 felder nur einmal vorkommen
@@ -117,6 +70,123 @@ public class WELT
                 }while(welt[x+y*500-1000]==genwelthelp || welt[x+y*500-2]==genwelthelp || welt[x+y*500-1]==genwelthelp || welt[x+y*500-501]==genwelthelp || welt[x+y*500-500]==genwelthelp || welt[x+y*500-499]==genwelthelp);
                 welt[x+y*500]=genwelthelp;
             }
-        }    
+        } 
+        for(int a=0;a<500;a++) {   //randzuweisung  
+            welt[a]=25;            //oben
+            welt[a*500]=25;        //links
+            welt[499+a*500]=25;        //rechts
+            welt[249499+a]=25;     //unten
+        }
+    }
+    
+    public void zeichneansicht() {
+        berechneansicht();
+        grafik.loescheansicht();
+        for(int a=0;a<7;a++) {
+            for(int b=0;b<7;b++) {
+                grafik.weltteil(b,a,ansicht[a*7+b]);
+            }
+        }
+        grafik.zeichnespieler(aktansichtpos);
+    }
+    
+    public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
+        if(bildpos<0) {
+            bildpos=0;
+        }
+        if(bildpos>246993) {
+            bildpos=246993;
+        }
+        for(int a=0;a<7;a++) {           //xfelder
+            for(int b=0;b<7;b++) {       //yfelder
+                ansicht[a*7+b]=welt[bildpos+a*500+b];
+            }
+        }
+    }
+    
+    public void zerteileansicht() {
+        zerx=bildpos%500;
+        zery=bildpos/500;
+        xzerbew=(aktpos%500);
+        yzerbew=aktpos/500;
+    }
+
+    public void kontrollerand() {
+        zerteileansicht();
+        if(zerx==0) {
+            anzl=true;
+        }
+        if(zery==0) {
+            anzo=true;
+        }
+        if(zerx==493) {
+            anzr=true;
+        }
+        if(zery==493) {
+            anzu=true;
+        }
+        if(xzerbew==1) {
+            bewl=true;
+        }
+        if(yzerbew==1) {
+            bewo=true;
+        }
+        if(xzerbew==498) {
+            bewr=true;
+        }
+        if(yzerbew==498) {
+            bewu=true;
+        }
+    }
+    
+    public void bewegen(int richtung) {
+        kontrollerand();
+        switch(richtung) {
+            case 0:
+                if((aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) && anzl==false) {
+                    bildpos=bildpos-1;
+                    aktpos=aktpos-1;
+                }else if(bewl==false) {
+                    aktpos=aktpos-1;
+                    aktansichtpos=aktansichtpos-1;
+                }
+                anzr=false;
+                bewr=false;
+                break;
+            case 1:
+                if((aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) && anzo==false) {
+                    bildpos=bildpos-500;
+                    aktpos=aktpos-500;
+                }else if(bewo==false) {
+                    aktpos=aktpos-500;
+                    aktansichtpos=aktansichtpos-7;
+                }
+                anzu=false;
+                bewu=false;
+                break;
+            case 2:
+                if((aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) && anzr==false) {
+                    bildpos=bildpos+1;
+                    aktpos=aktpos+1;
+                }else if(bewr==false) {
+                    aktpos=aktpos+1;
+                    aktansichtpos=aktansichtpos+1;
+                }
+                anzl=false;
+                bewl=false;
+                break;
+            case 3:
+                if((aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) && anzu==false) {
+                    bildpos=bildpos+500;
+                    aktpos=aktpos+500;
+                }else if(bewu==false) {
+                    aktpos=aktpos+500;
+                    aktansichtpos=aktansichtpos+7;
+                }
+                anzo=false;
+                bewo=false;
+                break;
+        }
+        zeichneansicht();
     }
 }

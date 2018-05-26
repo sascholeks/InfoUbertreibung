@@ -13,7 +13,6 @@ public class TASTATUR implements KeyListener
     }
     
     public void keyPressed(KeyEvent e) { 
-        System.out.println("Taste: " + e.getKeyChar() + ", Code: " + e.getKeyCode()); 
         if(e.getKeyCode() == 65) {  //a
             welt.bewegen(0);
         }else if(e.getKeyCode() == 87) {  //w
