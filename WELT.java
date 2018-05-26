@@ -2,18 +2,20 @@ import java.util.Random;
 public class WELT
 {
     GRAFIKWELT grafik;
+    ALGOGR algsw;
     Random r;
     int[] welt,ansicht;
-    int genwelthelp,bildpos,aktpos,aktansichtpos;  
+    int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos;  
     int zerx ,zery,xzerbew,yzerbew;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu;
     public WELT() {
         grafik=new GRAFIKWELT();
+        algsw=new ALGOGR();
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
-        aktpos=248493;
-        bildpos=aktpos-1503; 
+        aktpos=248493;               //startpos bei tests ändern
+        bildpos=aktpos-2004; 
         aktansichtpos=24;
         grafik.zeichnerahmen();
         generierewelt();
@@ -77,6 +79,26 @@ public class WELT
             welt[499+a*500]=25;        //rechts
             welt[249499+a]=25;     //unten
         }
+        int genwelthelp3=aktpos-1503;
+        do{
+            genwelthelp=(aktpos-1503)+r.nextInt(7)*7+r.nextInt(7);
+            System.out.println(genwelthelp);
+        }while(genwelthelp==aktpos);
+        do {
+            genwelthelp2=(aktpos-1503)+r.nextInt(7)*7+r.nextInt(7);
+            System.out.println(genwelthelp2);
+            }while(genwelthelp2==aktpos || genwelthelp2==genwelthelp || genwelthelp2==genwelthelp-1 || genwelthelp2==genwelthelp-501 || genwelthelp2==genwelthelp-500 || genwelthelp2==genwelthelp-499 || genwelthelp2==genwelthelp+1 || genwelthelp2==genwelthelp-1 || genwelthelp2==genwelthelp+501 || genwelthelp2==genwelthelp+499 || genwelthelp2==genwelthelp+500);
+        algsw.eingabestartziel(genwelthelp-genwelthelp3,genwelthelp2-genwelthelp3);
+        System.out.println(genwelthelp);
+        System.out.println(genwelthelp2);
+        algsw.loese();
+        for(int b=0;b<49;b++) {
+            if(algsw.pos[b]!=0) {
+                welt[(algsw.pos[b]%7+(algsw.pos[b]/7)*500)+genwelthelp3]=28;
+            }
+        }
+        welt[genwelthelp]=26;
+        welt[genwelthelp2]=27;
     }
     
     public void zeichneansicht() {
@@ -186,7 +208,7 @@ public class WELT
                 anzo=false;
                 bewo=false;
                 break;
-        }
+        } 
         zeichneansicht();
     }
 }
