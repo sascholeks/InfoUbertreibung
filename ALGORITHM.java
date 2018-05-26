@@ -304,6 +304,16 @@ public class ALGORITHM
         return AttackCount;
     }
 
+    public int getSaveDeath() {
+        int saveDeathCount=0;
+        for(int i=0;i<25;i++) {
+            if(getenemyStr()[i]>getStrength()) {
+                saveDeathCount++;
+            }
+        }
+        return saveDeathCount;
+    }
+
     public void decide() {
         int cE=0;
         int cP=0;
@@ -343,7 +353,7 @@ public class ALGORITHM
                 if(cP!=0) {
                     movenormal();
                 } else {
-                    stop();
+                    stop(); //attack strongest
                 }
             } else {
                 for(int i=0;i<25;i++) {
@@ -359,7 +369,23 @@ public class ALGORITHM
                         }
                     }
                     if(cP!=0) {
-                        movenormal();
+                        boolean check = false;
+                        int attackposition = 0;
+                        for(int i=0;i<25;i++) {
+                            if(getRange()[i]==1 && welt[i] == 5) { //muss zu 0 geändert werden
+                                if(getSaveDeath()==0) {
+                                    check = true;
+                                    attackposition = i;
+                                } else {
+                                    System.out.println("Nö");
+                                }
+                            }
+                        }
+                        if(check) {
+                            attackpos(attackposition);
+                        } else {
+                            moveaway();
+                        }
                     } else {
                         stop();
                     }
@@ -370,23 +396,23 @@ public class ALGORITHM
         }
     }
 
-    private void stop() {
+    public void stop() {
         graphic.kons("stop()");
     }
 
-    private void attack() {
+    public void attack() {
         graphic.kons("attack()");
     }
 
-    private void attackpos(int pos) {
+    public void attackpos(int pos) {
         graphic.kons("attack(" + pos + ")");   
     }
 
-    private void moveaway() {
+    public void moveaway() {
         graphic.kons("moveaway()");
     }
 
-    private void movenormal() {
+    public void movenormal() {
         boolean up=false,down=false,left=false,right=false;
         if(getPath()[pos-1] == 1) {
             left = true;
