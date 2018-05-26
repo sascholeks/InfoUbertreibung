@@ -1,17 +1,14 @@
 import java.util.Random;
-
 public class ALGOGR {                           //graphische Klasse vonTESTLÖSUNGSALGO
-    
     private Random r;
     private WELTALGO alg;
     private boolean[] feld;    
-    private boolean[] mgrg;                           //mögliche richtungen die ausgegeben werden könnten
-    
+    private boolean[] mgrg;                           //mögliche richtungen die ausgegeben werden könnten  
+    int[] count;
     int start;
     int ziel;
     int aktfeld;   
-    int xzer=0, yzer=0;
-    
+    int xzer=0, yzer=0; 
     int helpa=0, helpb=0,farbn=11;
     public ALGOGR() {
        r=new Random();
@@ -20,7 +17,6 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
        for(int a=0;a<4;a++) {
            mgrg[a]=false;
        }
-       
        feld=new boolean[49];
        for(int a=0;a<49;a++) {
            feld[a]=false;              //feld benutzt = false
@@ -32,13 +28,17 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
            ziel=r.nextInt(49);
        } while(ziel==start);
        zeichen();
-       
        System.out.println("");
        System.out.println("blauer Kasten = Start");
        System.out.println("grauer Kreis = Ziel");
        System.out.println("  hellblaue-rote Punkte=Weg");
        System.out.println("    rote Makierungen = Versuch über Feldende zu gehen");
        System.out.println("    gelbe Makierungen = Versuch auf ein bereits belegtes Feld zu gehen");
+    }
+    
+    public void eingabestartziel(int start,int ziel) {
+        this.start=start;
+        this.ziel=ziel;
     }
     
     public void zeichen() {                       //graphische klasse
@@ -58,7 +58,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
         switch(rnd) {
             case 0:
                 if(mgrg[0]==false){
-                    if(aktfeld==0 || aktfeld==5 || aktfeld==10 || aktfeld==15 || aktfeld==20) {
+                    if(aktfeld==0 || aktfeld==7 || aktfeld==14 || aktfeld==21 || aktfeld==28 || aktfeld==35 || aktfeld==42) {
                         mgrg[0]=true;
                         System.out.println("am linken Rand angekommen");
                         
@@ -78,8 +78,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         System.out.println("aktuell: "+aktfeld);
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
-                        }
-                        
+                        }  
                         zerlegefeld(aktfeld);                  //graphisches Element
                         alg.setzeWeg(xzer,yzer,farbn);
                         farbn++;
@@ -88,14 +87,14 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                 break;
             case 1:
                 if(mgrg[1]==false) {
-                    if(aktfeld==0 || aktfeld==1 || aktfeld==2 || aktfeld==3 || aktfeld==4) {
+                    if(aktfeld==0 || aktfeld==1 || aktfeld==2 || aktfeld==3 || aktfeld==4 || aktfeld==5 || aktfeld==6) {
                         mgrg[1]=true;
                         System.out.println("am oberen Rand angekommen");
                          
                         zerlegefeld(aktfeld);                                    //graphisches Element
                         alg.testeRand(1,xzer,yzer);
                     }
-                    else if(feld[(aktfeld-5)]==true && mgrg[1]==false) {
+                    else if(feld[(aktfeld-7)]==true && mgrg[1]==false) {
                         mgrg[1]=true;
                         System.out.println("oberes Feld bereits benutzt");
                         
@@ -103,7 +102,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         alg.testebenutzt(1,xzer,yzer);
                     }
                     else if(mgrg[1]==false){
-                        aktfeld=aktfeld-5;
+                        aktfeld=aktfeld-7;
                         feld[aktfeld]=true;
                         System.out.println("aktuell: "+aktfeld);
                         for(int a=0;a<4;a++) {
@@ -118,7 +117,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                 break;
             case 2:
                 if(mgrg[2]==false) {
-                    if(aktfeld==4 || aktfeld==9 || aktfeld==14 || aktfeld==19 || aktfeld==24) {
+                    if(aktfeld==6 || aktfeld==13 || aktfeld==20 || aktfeld==27 || aktfeld==34 || aktfeld==41 || aktfeld==48) {
                         mgrg[2]=true;
                         System.out.println("am rechten Rand angekommen");
                          
@@ -148,14 +147,14 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                 break;
             case 3:
                 if (mgrg[3]==false) {
-                    if(aktfeld==20 || aktfeld==21 || aktfeld==22 || aktfeld==23 || aktfeld==24) {
+                    if(aktfeld==42|| aktfeld==43 || aktfeld==44 || aktfeld==45 || aktfeld==46 || aktfeld==47 || aktfeld==48) {
                         mgrg[3]=true;
                         System.out.println("am unteren Rand angekommen");
                          
                         zerlegefeld(aktfeld);                                    //graphisches Element
                         alg.testeRand(3,xzer,yzer);
                     }
-                    else if(feld[(aktfeld+5)]==true && mgrg[3]==false) {
+                    else if(feld[(aktfeld+7)]==true && mgrg[3]==false) {
                         mgrg[3]=true;
                         System.out.println("unteres Feld bereits benutzt");
                         
@@ -163,7 +162,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         alg.testebenutzt(3,xzer,yzer);
                     }
                     else if(mgrg[3]==false){
-                        aktfeld=aktfeld+5;
+                        aktfeld=aktfeld+7;
                         feld[aktfeld]=true;
                         System.out.println("aktuell: "+aktfeld);
                         for(int a=0;a<4;a++) {
@@ -179,46 +178,44 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
         }      
     }
     
-    public void loese() {    
-        zeichen();
-        
-        System.out.println("");
-        System.out.println("start: "+start+ " | Ziel: "+ziel);
-        System.out.println("");
-        
-
-        while(aktfeld!=ziel) {
-            kontrolle(r.nextInt(4));
-            if(mgrg[0]==true && mgrg[1]==true && mgrg[2]==true && mgrg[3]==true) {
-                for(int a=0;a<25;a++) {
-                    feld[a]=false;
-                }
-                feld[start]=true;
-                aktfeld=start;
-                for(int a=0;a<4;a++) {
-                    mgrg[a]=false;
-                }
-                System.out.println("");
-                System.out.println("Keine möglichen Wege");
-                System.out.println("fange von Vorne an");
-                System.out.println("");
-                farbn=11;
-                zeichen();                                 //graphisches element          
+    public void loese() {   
+        for(int c=0;c<10;c++) {
+            zeichen(); 
+            System.out.println("");
+            System.out.println("start: "+start+ " | Ziel: "+ziel);
+            System.out.println("");
+            while(aktfeld!=ziel) {
+                kontrolle(r.nextInt(4));
+                if(mgrg[0]==true && mgrg[1]==true && mgrg[2]==true && mgrg[3]==true) {
+                    for(int a=0;a<49;a++) {
+                        feld[a]=false;
+                    }
+                    feld[start]=true;
+                    aktfeld=start;
+                    for(int a=0;a<4;a++) {
+                        mgrg[a]=false;
+                    }
+                    System.out.println("");
+                    System.out.println("Keine möglichen Wege");
+                    System.out.println("fange von Vorne an");
+                    System.out.println("");
+                    farbn=11;
+                    zeichen();                                 //graphisches element          
+                }   
             }   
+            for(int a=0;a<49;a++) {
+                feld[a]=false;
+            }
+            feld[start]=true;
+            aktfeld=start;
+            System.out.println("Ziel erreicht");
+            farbn=11;
         }
-        
-        for(int a=0;a<25;a++) {
-            feld[a]=false;
-        }
-        feld[start]=true;
-        aktfeld=start;
-        System.out.println("Ziel erreicht");
-        farbn=11;
     }
     
     public void aendereobj(int starta ,int ziela) {
-        for(int a=0;a<5;a++) {                                                                //graphisches Element
-            for(int b=0;b<5;b++) {
+        for(int a=0;a<7;a++) {                                                                //graphisches Element
+            for(int b=0;b<7;b++) {
                 alg.loesche(b,a);
             }
         }
@@ -231,18 +228,7 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
     }
  
     public void zerlegefeld(int feld) {                                                      //graphische methode
-        yzer=feld/5;
-        xzer=feld%5;
-    }
-    
-    public void fun(int lengh) {
-        for(int a=0;a<lengh;a++) {
-            loese();
-            try {
-                Thread.sleep(1000);                 
-            } catch(InterruptedException ex) {
-                Thread.currentThread().interrupt();
-            }
-        }
+        yzer=feld/7;
+        xzer=feld%7;
     }
 }

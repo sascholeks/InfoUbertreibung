@@ -71,8 +71,4 @@ public class WELTALGO
                 break;
         }
     }
-    
-    public void zeichneGebiet(int xd, int yd,int farbn) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[xd]+1,y[yd]+1,48,48,farbn);
-    }
 }
