@@ -418,7 +418,7 @@ public class ALGORITHM
         graphic.kons("moveaway()");
     }
 
-    public void movenormal() { //Abstand zu Gegnern halten + StrCom + SaveDeath
+    public void movenormal() { //Abstand zu Gegnern halten + StrengthComparision + SaveDeath
         boolean up=false,down=false,left=false,right=false;
         if(pos-1 >= 0 && getPath()[pos-1] == 1) {
             left = true;
