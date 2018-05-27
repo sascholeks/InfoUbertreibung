@@ -1,4 +1,3 @@
-
 public class GRAFIKWELT
 {
     int x[],y[];
@@ -20,6 +19,10 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().zeichneRechteck(x[a],y[b],40,40);
             }
         }
+    }
+    
+    public void textfeld(String text) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(320,20,200,20,7);
     }
     
     public void kons(String st) {   
@@ -136,7 +139,6 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%7]+5,y[feld/7]+25,30,10,1);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%7]+10,y[feld/7]+10,20,20,6);
     }
- 
+    
 }
    
-

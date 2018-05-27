@@ -14,8 +14,8 @@ public class WELT
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
-        aktpos=248493;               //startpos bei tests ändern
-        bildpos=aktpos-2004; 
+        aktpos=2004;               //startpos bei tests ändern
+        bildpos=aktpos-1503; 
         aktansichtpos=24;
         grafik.zeichnerahmen();
         generierewelt();
@@ -76,29 +76,26 @@ public class WELT
         for(int a=0;a<500;a++) {   //randzuweisung  
             welt[a]=25;            //oben
             welt[a*500]=25;        //links
-            welt[499+a*500]=25;        //rechts
-            welt[249499+a]=25;     //unten
+            welt[499+a*500]=25;    //rechts
+            welt[249500+a]=25;     //unten
         }
-        int genwelthelp3=aktpos-1503;
-        do{
-            genwelthelp=(aktpos-1503)+r.nextInt(7)*7+r.nextInt(7);
-            System.out.println(genwelthelp);
-        }while(genwelthelp==aktpos);
+        int genwelthelp3=aktpos-1503;                //ab hier für algokor
         do {
-            genwelthelp2=(aktpos-1503)+r.nextInt(7)*7+r.nextInt(7);
-            System.out.println(genwelthelp2);
-            }while(genwelthelp2==aktpos || genwelthelp2==genwelthelp || genwelthelp2==genwelthelp-1 || genwelthelp2==genwelthelp-501 || genwelthelp2==genwelthelp-500 || genwelthelp2==genwelthelp-499 || genwelthelp2==genwelthelp+1 || genwelthelp2==genwelthelp-1 || genwelthelp2==genwelthelp+501 || genwelthelp2==genwelthelp+499 || genwelthelp2==genwelthelp+500);
-        algsw.eingabestartziel(genwelthelp-genwelthelp3,genwelthelp2-genwelthelp3);
-        System.out.println(genwelthelp);
-        System.out.println(genwelthelp2);
+            genwelthelp=r.nextInt(7)*7+r.nextInt(7);
+        }while((genwelthelp%7)+((genwelthelp/7)*500)+genwelthelp3==aktpos);
+        do {
+            genwelthelp2=r.nextInt(7)*7+r.nextInt(7);
+        }while((genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==aktpos || (genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==genwelthelp || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-499 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+499);                                                  
+        algsw.eingabestartziel(genwelthelp,genwelthelp2);
         algsw.loese();
-        for(int b=0;b<49;b++) {
-            if(algsw.pos[b]!=0) {
-                welt[(algsw.pos[b]%7+(algsw.pos[b]/7)*500)+genwelthelp3]=28;
+        for(int a=0;a<49;a++) {
+            if(algsw.pos[a]!=0) {
+                welt[a%7+(a/7)*500+genwelthelp3]=28;
+                System.out.println("wird aufgerufen");
             }
         }
-        welt[genwelthelp]=26;
-        welt[genwelthelp2]=27;
+        welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
+        welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
     }
     
     public void zeichneansicht() {

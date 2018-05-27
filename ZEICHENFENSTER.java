@@ -31,7 +31,7 @@ public class ZEICHENFENSTER
      */
     public ZEICHENFENSTER(String titel)
     {
-        this(titel, 700, 400, Color.white);          
+        this(titel, 700, 300, Color.white);          
     }
     
 
@@ -80,7 +80,7 @@ public class ZEICHENFENSTER
 
     public static ZEICHENFENSTER gibFenster()
     {
-        if (singleton==null){singleton=new ZEICHENFENSTER("Spiel", 700, 400);}
+        if (singleton==null){singleton=new ZEICHENFENSTER("Spiel", 700, 300);}
         singleton.zeige();
         return singleton;
     }

@@ -1,8 +1,6 @@
 import java.util.Random;
 public class ALGOGR {                           //graphische Klasse vonTESTLÖSUNGSALGO
     private Random r;
-    GRAFIKWELT grafik;
-    private boolean[] feld;    
     private boolean[] mgrg;                           //mögliche richtungen die ausgegeben werden könnten
     int[] pos;
     int start;
@@ -12,7 +10,6 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
     int helpa=0, helpb=0,c=0;
     public ALGOGR() {
         r=new Random();
-        grafik=new GRAFIKWELT();
         pos=new int[49];
         for(int a=0;a<49;a++) {
             pos[a]=0;
@@ -21,32 +18,19 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
         for(int a=0;a<4;a++) {
             mgrg[a]=false;
         }
-        feld=new boolean[49];
-        for(int a=0;a<49;a++) {
-            feld[a]=false;              //feld benutzt = false
-        }
         start=r.nextInt(49);
         aktfeld=start;                 //aktuelle position = startpunkt
-        feld[start]=true;              //startpunkt
         do {
             ziel=r.nextInt(49);
         } while(ziel==start);
-        zeichen();
     }
     
     public void eingabestartziel(int start,int ziel) {
         this.start=start;
         this.ziel=ziel;
         aktfeld=start;                 //aktuelle position = startpunkt
-        feld[start]=true;              //startpunkt
-    }
-    
-    public void zeichen() {                       //graphische klasse
-       zerlegefeld(start);
-       helpa=xzer;
-       helpb=yzer;
-       zerlegefeld(ziel);
-    }
+        pos[start]=26;              //startpunkt
+    } 
     
     public void kontrolle(int rnd) {                                               //kontrolle rand und benutzt und ziel        
         switch(rnd) {
@@ -56,19 +40,17 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         mgrg[0]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
-                    else if(feld[(aktfeld-1)]==true && mgrg[0]==false) {
+                    else if(pos[(aktfeld-1)]!=0 && mgrg[0]==false) {
                         mgrg[0]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }   
                     else if(mgrg[0]==false){
                         aktfeld--;
-                        feld[aktfeld]=true;
+                        pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
                         }  
                         zerlegefeld(aktfeld);                  //graphisches Element
-                        pos[c]=aktfeld;
-                        c++;
                     }
                 }
                 break;
@@ -78,19 +60,17 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         mgrg[1]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
-                    else if(feld[(aktfeld-7)]==true && mgrg[1]==false) {
+                    else if(pos[(aktfeld-7)]!=0 && mgrg[1]==false) {
                         mgrg[1]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[1]==false){
                         aktfeld=aktfeld-7;
-                        feld[aktfeld]=true;
+                        pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
                         }
                         zerlegefeld(aktfeld);                     //graphisches Element
-                        pos[c]=aktfeld;
-                        c++;
                     }
                 }
                 break;
@@ -100,19 +80,17 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         mgrg[2]=true;   
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
-                    else if(feld[(aktfeld+1)]==true && mgrg[2]==false) {
+                    else if(pos[(aktfeld+1)]!=0 && mgrg[2]==false) {
                         mgrg[2]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[2]==false){
                         aktfeld=aktfeld+1;
-                        feld[aktfeld]=true;
+                        pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
                         }
                         zerlegefeld(aktfeld);                 //graphisches Element
-                        pos[c]=aktfeld;
-                        c++;
                     }
                 }
                 break;
@@ -122,48 +100,38 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         mgrg[3]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
-                    else if(feld[(aktfeld+7)]==true && mgrg[3]==false) {
+                    else if(pos[(aktfeld+7)]!=0 && mgrg[3]==false) {
                         mgrg[3]=true;
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[3]==false){
                         aktfeld=aktfeld+7;
-                        feld[aktfeld]=true;
+                        pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
                         }
                         zerlegefeld(aktfeld);  //graphisches Element
-                        pos[c]=aktfeld;
-                        c++;
                     }
                 }
-                break;
+            break;
         }      
     }
     
     public void loese() {   
-            zeichen(); 
-            while(aktfeld!=ziel) {
-                kontrolle(r.nextInt(4));
-                if(mgrg[0]==true && mgrg[1]==true && mgrg[2]==true && mgrg[3]==true) {
-                    for(int a=0;a<49;a++) {
-                        feld[a]=false;
-                    }
-                    feld[start]=true;
-                    aktfeld=start;
-                    for(int a=0;a<4;a++) {
-                        mgrg[a]=false;
-                    }
-                    c=0;
-                    zeichen();                                 //graphisches element          
-                }   
-            }  
-            for(int a=0;a<49;a++) {
-                feld[a]=false;
-            }
-            feld[start]=true;
-            aktfeld=start;
-
+        while(aktfeld!=ziel) {
+            kontrolle(r.nextInt(4));
+            if(mgrg[0]==true && mgrg[1]==true && mgrg[2]==true && mgrg[3]==true) {
+                for(int a=0;a<49;a++) {
+                    pos[a]=0;
+                }
+                pos[start]=26;
+                aktfeld=start;
+                for(int a=0;a<4;a++) {
+                    mgrg[a]=false;
+                }
+                c=0;       
+            }   
+        }  
     }
 
     public void zerlegefeld(int feld) {                                                      //graphische methode
