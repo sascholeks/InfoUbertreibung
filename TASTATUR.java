@@ -21,6 +21,8 @@ public class TASTATUR implements KeyListener
             welt.bewegen(2);
         }else if(e.getKeyCode() == 83) {  //s
             welt.bewegen(3);
+        }else if(e.getKeyCode() == 73) {  //i
+            welt.inventaraufruf();
         }
     } 
     
