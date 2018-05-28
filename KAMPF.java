@@ -287,6 +287,7 @@ public class KAMPF
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+        grafik.zeichneaktionswahl();
 
         geheilt=false;      //kontollen zurücksetzen
         gekaempft=false;
