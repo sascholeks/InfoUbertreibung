@@ -39,7 +39,7 @@ public class ALGORITHM
         return welt[pos];
     }
 
-    private void setRange() {
+    private void setRange(int pos) {
         if(getType()==0) { //muss am ende in 5 geändert werden, da Gegner Team
             for(int i=0;i<25;i++) {
                 range[i] = 1;
@@ -88,8 +88,8 @@ public class ALGORITHM
         }
     }  
 
-    public int[] getRange() {
-        setRange();
+    public int[] getRange(int pos) {
+        setRange(pos);
         return range;
     }
 
@@ -187,7 +187,7 @@ public class ALGORITHM
     }
 
     public int[] checkEnemy() {
-        setRange();
+        setRange(pos);
         for(int i=0;i<25;i++) {
             enemyPos[i] = 0;
         }
@@ -246,7 +246,7 @@ public class ALGORITHM
         return enemyStr;
     }
 
-    public int getStrength() {
+    public int getStrength(int pos) {
         int ID = welt[pos];
         switch (ID) {
             case 0:
@@ -270,7 +270,7 @@ public class ALGORITHM
 
     public int[] getStrengthCom() {
         for(int i=0;i<25;i++) {
-            if(getenemyStr()[i]>=getStrength() && getenemyStr()[i] != 0) {
+            if(getenemyStr()[i]>=getStrength(pos) && getenemyStr()[i] != 0) {
                 StrCom[i]=0;
             } else if(getenemyStr()[i]==0) {
                 StrCom[i]=0;
@@ -310,11 +310,11 @@ public class ALGORITHM
         return AttackCount;
     }
 
-    public int getSaveDeath() {
+    public int getSaveDeath(int pos) {
         int saveDeathCount=0;
         for(int i=0;i<25;i++) {
-            if(getenemyStr()[i]>getStrength() && welt[i] !=5) { //muss zu 0 geändert werden
-                if(getRange()[i]==1) {
+            if(getenemyStr()[i]>getStrength(pos) && welt[i] !=5) { //muss zu 0 geändert werden
+                if(getRange(pos)[i]==1) {
                     saveDeathCount++; 
                 }
             }
@@ -328,7 +328,9 @@ public class ALGORITHM
         int cSC=0;
         int EnemyStrCom = 0;
         int EnemyPos = 0;
-        if(welt[pos]==0) { //muss zu 5 geändert werden
+        if(welt[pos]>=10) {
+            graphic.kons("Error: Please select an Entity!");
+        } else if(welt[pos]==0) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
                 if(getAttackPos(pos)[i]==1 && welt[i] != 5) { //5 muss zu 0 geändert werden
@@ -380,8 +382,8 @@ public class ALGORITHM
                         boolean check = false;
                         int attackposition = 0;
                         for(int i=0;i<25;i++) {
-                            if(getRange()[i]==1 && welt[i] == 5) { //muss zu 0 geändert werden
-                                if(getSaveDeath()==0) {
+                            if(getRange(pos)[i]==1 && welt[i] == 5) { //muss zu 0 geändert werden
+                                if(getSaveDeath(pos)==0) {
                                     check = true;
                                     attackposition = i;
                                 }
@@ -415,7 +417,45 @@ public class ALGORITHM
     }
 
     public void moveaway() {
-        graphic.kons("moveaway()");
+        boolean up=false,down=false,left=false,right=false;
+        int acl = 0; 
+        int acr = 0;
+        int acu = 0;
+        int acd = 0; 
+        int sac = 0;
+        int tc = 0;
+        if(pos-1 >= 0 && getPath()[pos-1] == 1) {
+            left = true;
+            acl = getSaveDeath(pos-1);
+            tc++;
+        }
+        if(pos+1 < 25 && getPath()[pos+1] == 1) {
+            right = true;
+            acr = getSaveDeath(pos+1);
+            tc++;
+        }
+        if(pos+5 < 25 && getPath()[pos+5] == 1) {
+            up = true;
+            acu = getSaveDeath(pos+5);
+            tc++;
+        }
+        if(pos-5 >= 0 && getPath()[pos-5] == 1) {
+            down = true;
+            acd = getSaveDeath(pos-5);
+            tc++;
+        }
+        if(acl>getSaveDeath(pos)) {
+            left = false;
+        }
+        if(acr>getSaveDeath(pos)) {
+            right = false;
+        }
+        if(acl>getSaveDeath(pos)) {
+            left = false;
+        }
+        if(acl>getSaveDeath(pos)) {
+            left = false;
+        }
     }
 
     public void movenormal() { //Abstand zu Gegnern halten + StrengthComparision + SaveDeath
@@ -429,7 +469,7 @@ public class ALGORITHM
         if(pos+5 < 25 && getPath()[pos+5] == 1) {
             up = true;
         }
-        if(pos-5 >= 0 && getPath()[pos+5] == 1) {
+        if(pos-5 >= 0 && getPath()[pos-5] == 1) {
             down = true;
         }
         if(right) {

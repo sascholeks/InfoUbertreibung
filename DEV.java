@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class DEV
 {
-    GEGNERINVENTAR invgeg;
+
     INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
@@ -18,13 +18,12 @@ public class DEV
     boolean geheilt=false,gekaempft=false,bewegt=false;
     public DEV()
     {
-        
+
         //Config:
         normal = false;
         rocks = false;
-        
+
         inv=new INVENTAR();
-        invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         r=new Random();
@@ -35,7 +34,7 @@ public class DEV
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
 
         this.normal = normal;
-        
+
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -69,11 +68,11 @@ public class DEV
         anz[2]=inv.ausanz[2];
         anz[3]=inv.ausanz[3];
         anz[4]=inv.ausanz[4];
-        anz[5]=invgeg.anz0;
-        anz[6]=invgeg.anz1;
-        anz[7]=invgeg.anz2;
-        anz[8]=invgeg.anz3;
-        anz[9]=invgeg.anz4;
+        anz[5]= r.nextInt(100);
+        anz[6]= r.nextInt(100);
+        anz[7]= r.nextInt(100);
+        anz[8]= r.nextInt(100);
+        anz[9]= r.nextInt(100);
 
         kaempfer=new KAEMPFER[10];
         for(int a=0;a<10;a++) {

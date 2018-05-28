@@ -303,14 +303,12 @@ public class KAMPF
                     help1=r.nextInt(5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a;
-                System.out.println(help1);
             }
             for(int a=0;a<5;a++) {
                 do {
                     help1=r.nextInt(5+5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a+5;
-                System.out.println(help1);
             }
         }
         else if(help1==1) {            //team rot als erstes
@@ -319,14 +317,12 @@ public class KAMPF
                     help1=r.nextInt(5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a+5;
-                System.out.println(help1);
             }
             for(int a=0;a<5;a++) {
                 do {
                     help1=r.nextInt(5)+5;
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a;
-                System.out.println(help1);
             }
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kamepfer "+reihenfolge[0]+")");
