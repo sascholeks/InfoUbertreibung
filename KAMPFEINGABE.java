@@ -8,10 +8,10 @@ public class KAMPFEINGABE implements MouseListener
     MOUSE mouse;
     GRAFIKELEMENTE grafik;
     int help;
-    public KAMPFEINGABE()
+    public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
-        kampf=new KAMPF();
+        kampf=new KAMPF(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr);
         mouse=new MOUSE();
         grafik=new GRAFIKELEMENTE();
         help=0;

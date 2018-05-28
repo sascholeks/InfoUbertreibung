@@ -1,6 +1,6 @@
 public class INVENTAR
 {
-    GRAFIKELEMENTE grafik;
+    GRAFIKWELT grafik;
     int[] anz;
     int[] ausanz;
     int[] kaeauswahl;
@@ -8,7 +8,7 @@ public class INVENTAR
     int heiltrankkl=1,heiltrankgr=1,geld=1000;
     public INVENTAR()
     {
-        grafik=new GRAFIKELEMENTE();
+        grafik=new GRAFIKWELT();
         anz=new int[10];
         ausanz=new int[5];
         kaeauswahl=new int[5];

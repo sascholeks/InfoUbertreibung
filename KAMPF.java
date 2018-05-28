@@ -2,8 +2,6 @@ import java.util.Random;
 
 public class KAMPF
 {
-    GEGNERINVENTAR invgeg;
-    INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
     KAEMPFER[] kaempfer;
@@ -11,21 +9,16 @@ public class KAMPF
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
 
-    int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz;  //im index steht die kaempferID  //indes in welt gibt feld an
+    int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz,startanz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
-    int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2;
+    int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr;
     boolean geheilt=false,gekaempft=false,bewegt=false;
-    public KAMPF()
+    public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)                                     
     {
-        inv=new INVENTAR();
-        invgeg=new GEGNERINVENTAR();
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         arrow=new SOUNDARROW();
         r=new Random();
-
-        inv.fuellestandart();                                         //nur zu testzwecken später löschen
-
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten 
@@ -54,24 +47,29 @@ public class KAMPF
         }
 
         anz=new int[10];      //eintrafen der anzahl, aufrufbar mit [kaempferID]
-        anz[0]=inv.ausanz[0];
-        anz[1]=inv.ausanz[1];
-        anz[2]=inv.ausanz[2];
-        anz[3]=inv.ausanz[3];
-        anz[4]=inv.ausanz[4];
-        anz[5]=invgeg.anz0;
-        anz[6]=invgeg.anz1;
-        anz[7]=invgeg.anz2;
-        anz[8]=invgeg.anz3;
-        anz[9]=invgeg.anz4;
-
+        anz[0]=ausanz0;
+        anz[1]=ausanz1;
+        anz[2]=ausanz2;
+        anz[3]=ausanz3;
+        anz[4]=ausanz4;
+        anz[5]=geganz0;
+        anz[6]=geganz1;
+        anz[7]=geganz2;
+        anz[8]=geganz3;
+        anz[9]=geganz4;
+        startanz=new int[10];
+        for(int a=0;a<10;a++) {
+            startanz[a]=anz[0];
+        }
         kaempfer=new KAEMPFER[10];
         for(int a=0;a<10;a++) {
             kaempfer[a]=new KAEMPFER(a%5);          //erhält rest zw. 0 und 4                                   //hat einfluss auf name
             leben[a]=kaempfer[a].leben*anz[a];
             dmg[a]=kaempfer[a].dmg*anz[a];
         }
-
+        
+        hlkl=heiltrkl;
+        hlgr=heiltrgr;
         ZEICHENFENSTER.gibFenster().loescheAlles();
         zugreihenfolge();
         startpos();
@@ -218,10 +216,10 @@ public class KAMPF
             if(gr==0) {
                 int helpberechnung=leben[reihenfolge[0]]+100;
                 anz[reihenfolge[0]]=(int)helpberechnung/kaempfer[reihenfolge[0]].leben;
-                if(inv.ausanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
-                    if(inv.heiltrankkl>=1) {
+                if(startanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
+                    if(hlkl>=1) {
                         geheilt=true;
-                        inv.benutzeheiltrank(0);
+                        hlkl--;
                         leben[reihenfolge[0]]=leben[reihenfolge[0]]+100;
                         anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
                         grafik.kons("kleiner Heiltrank genommen");
@@ -234,10 +232,10 @@ public class KAMPF
             }else if(gr==1) {
                 int helpberechnung=leben[reihenfolge[0]]+300;
                 anz[reihenfolge[0]]=(int)helpberechnung/kaempfer[reihenfolge[0]].leben;
-                if(inv.ausanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
-                    if(inv.heiltrankgr>=1) {
+                if(startanz[reihenfolge[0]]>=anz[reihenfolge[0]]) {
+                    if(hlgr>=1) {
                         geheilt=true;
-                        inv.benutzeheiltrank(1);
+                        hlgr--;
                         grafik.kons("großer Heiltrank genommen");
                     }else{
                         grafik.kons("Nicht genügend große Heiltränke");
