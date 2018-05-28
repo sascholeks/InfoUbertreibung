@@ -287,6 +287,7 @@ public class KAMPF
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+        grafik.zeichneaktionswahl();
 
         geheilt=false;      //kontollen zurücksetzen
         gekaempft=false;
@@ -303,14 +304,12 @@ public class KAMPF
                     help1=r.nextInt(5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a;
-                System.out.println(help1);
             }
             for(int a=0;a<5;a++) {
                 do {
                     help1=r.nextInt(5+5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a+5;
-                System.out.println(help1);
             }
         }
         else if(help1==1) {            //team rot als erstes
@@ -319,14 +318,12 @@ public class KAMPF
                     help1=r.nextInt(5);
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a+5;
-                System.out.println(help1);
             }
             for(int a=0;a<5;a++) {
                 do {
                     help1=r.nextInt(5)+5;
                 }while(reihenfolge[help1]>0);
                 reihenfolge[help1]=a;
-                System.out.println(help1);
             }
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kamepfer "+reihenfolge[0]+")");

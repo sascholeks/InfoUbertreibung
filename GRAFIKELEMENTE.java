@@ -52,6 +52,7 @@ public class GRAFIKELEMENTE
     }
 
     public void zeichneaktionswahl() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(400,50,200,80,8);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,70,13);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,65,14);
         ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,6);
@@ -215,6 +216,16 @@ public class GRAFIKELEMENTE
             case 2:
             zeichenReihenfolgeEinheit(typ,x,4);
             break;
+        }
+    }
+    
+    public void heileauswahl(int gr) {
+        if(gr==1) {
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,10,4);     //kleine auswahl für größe
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,110,8,1);
+        }else if(gr==0) {
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,10,4);
+            ZEICHENFENSTER.gibFenster().fuelleKreis(420,90,8,1);
         }
     }
 
