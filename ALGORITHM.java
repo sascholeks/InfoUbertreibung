@@ -404,7 +404,7 @@ public class ALGORITHM
         }
     }
 
-    public void stop() {
+    public void stop() { //heal überprüfen
         graphic.kons("stop()");
     }
 
@@ -450,11 +450,42 @@ public class ALGORITHM
         if(acr>getSaveDeath(pos)) {
             right = false;
         }
-        if(acl>getSaveDeath(pos)) {
-            left = false;
+        if(acu>getSaveDeath(pos)) {
+            up = false;
         }
-        if(acl>getSaveDeath(pos)) {
-            left = false;
+        if(acd>getSaveDeath(pos)) {
+            down = false;
+        }
+        if(tc==0) {
+            stop();
+        } else {
+            if(right) {
+                graphic.kons("moveright()");
+            } else if(up || down) {
+                if(checkLine(pos) < 2 && up) { 
+                    graphic.kons("moveup()");
+                } else if(checkLine(pos) > 2 && down) { 
+                    graphic.kons("movedown()");
+                } else {
+                    if(r.nextInt(2)==0) {
+                        if(up) {
+                            graphic.kons("moveup()");
+                        } else {
+                            graphic.kons("Error: Can't move! (moveaway)");
+                        }
+                    } else {
+                        if(down) {
+                            graphic.kons("movedown()");   
+                        } else {
+                            graphic.kons("Error: Can't move! (moveaway)");
+                        }
+                    }
+                }
+            } else if(left) {
+                graphic.kons("moveleft()");
+            } else {
+                graphic.kons("Error: General move failture! (moveaway)");
+            }
         }
     }
 
@@ -475,19 +506,29 @@ public class ALGORITHM
         if(right) {
             graphic.kons("moveright()");
         } else if(up || down) {
-            if(checkLine(pos) < 2) { 
+            if(checkLine(pos) < 2 && up) { 
                 graphic.kons("moveup()");
-            } else if(checkLine(pos) > 2) { 
+            } else if(checkLine(pos) > 2 && down) { 
                 graphic.kons("movedown()");
             } else {
                 if(r.nextInt(2)==0) {
-                    graphic.kons("moveup()");
+                    if(up) {
+                        graphic.kons("moveup()");
+                    } else {
+                        graphic.kons("Error: Can't move! (movenormal)");
+                    }
                 } else {
-                    graphic.kons("movedown()");
+                    if(down) {
+                        graphic.kons("movedown()");   
+                    } else {
+                        graphic.kons("Error: Can't move! (movenormal)");
+                    }
                 }
             }
         } else if(left) {
             graphic.kons("moveleft()");
+        } else {
+            graphic.kons("Error: General move failture! (moveaway)");
         }
     }
 

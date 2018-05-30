@@ -16,6 +16,11 @@ public class DEV
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2;
     boolean geheilt=false,gekaempft=false,bewegt=false;
+
+    //dev 
+
+    int decidepos = 0;
+
     public DEV()
     {
 
@@ -416,6 +421,29 @@ public class DEV
     public int getAttackCount(int pos) {
         alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         return alg.getAttackCount(pos);
+    }
+
+    public void decideOrder() {
+        int pos=-1;
+        for(int i=0;i<25;i++) {
+            if(welt[i]==reihenfolge[0]) {
+                if(reihenfolge[0]<5) { //muss zu >=4 und <10
+                    pos = i;
+                } else {
+                    grafik.kons("Error: Die KI ist nicht am Zug!");
+                    pos = -2;
+                }
+            }
+        }
+        decidepos = pos;
+        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
+        if(pos!=-1) {
+            alg.decide();
+        } else if(pos == -2) {
+            grafik.kons("Error: Die KI ist nicht am Zug!");
+        }else {
+            grafik.kons("Error: KI decide error!");
+        }
     }
 
 }
