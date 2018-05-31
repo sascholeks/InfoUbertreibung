@@ -18,7 +18,7 @@ public class DEV
     boolean geheilt=false,gekaempft=false,bewegt=false;
 
     //dev 
-
+    int actionpos;
     int decidepos = 0;
 
     public DEV()
@@ -408,21 +408,6 @@ public class DEV
         }
     }
 
-    public void decide(int pos) {
-        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
-        alg.decide();
-    }
-
-    public int[] getAttack(int pos) {
-        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
-        return alg.getAttackPos(pos);
-    }
-
-    public int getAttackCount(int pos) {
-        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
-        return alg.getAttackCount(pos);
-    }
-
     public void decideOrder() {
         int pos=-1;
         for(int i=0;i<25;i++) {
@@ -439,10 +424,31 @@ public class DEV
         alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         if(pos!=-1) {
             alg.decide();
+            action(alg.getActionType());
         } else if(pos == -2) {
             grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
             grafik.kons("Error: KI decide error!");
+        }
+    }
+
+    public int actionpos() {
+        return alg.getActionPos();
+    }
+
+    public void action(int action) {
+        switch(alg.getActionType()) {
+            case 0:     //move
+            bewegen(actionpos());
+            break;
+            case 1:     //attack    
+            kaempfen(actionpos());
+            break;
+            case 2:     //stop
+            beendezug();
+            break;
+            default:   //heilen etc. fehlt;
+            grafik.kons("AI Action Error!");
         }
     }
 

@@ -17,6 +17,9 @@ public class ALGORITHM
     int[] order;
     Random r;
 
+    int actionpos;
+    int action = -1;
+
     GRAFIKELEMENTE graphic;
     public ALGORITHM(int pos, int[] welt, int[] anz, int[] order)
     {
@@ -328,7 +331,7 @@ public class ALGORITHM
         int cSC=0;
         int EnemyStrCom = 0;
         int EnemyPos = 0;
-        if(welt[pos]>=10) {
+        if(pos>=10) {
             graphic.kons("Error: Please select an Entity!");
         } else if(welt[pos]==0) { //muss zu 5 geändert werden
             boolean moveback = false;
@@ -392,9 +395,11 @@ public class ALGORITHM
                         if(check) {
                             attackpos(attackposition);
                         } else {
+                            action = 0;
                             moveaway();
                         }
                     } else {
+                        action = 2;
                         stop(); //heilen überprüfen
                     }
                 } else {
@@ -413,7 +418,9 @@ public class ALGORITHM
     }
 
     public void attackpos(int pos) {
-        graphic.kons("attack(" + pos + ")");   
+        graphic.kons("attack(" + pos + ")");  
+        actionpos = pos;
+        action = 1;
     }
 
     public void moveaway() {
@@ -435,13 +442,13 @@ public class ALGORITHM
             tc++;
         }
         if(pos+5 < 25 && getPath()[pos+5] == 1) {
-            up = true;
-            acu = getSaveDeath(pos+5);
+            down = true;
+            acd = getSaveDeath(pos+5);
             tc++;
         }
         if(pos-5 >= 0 && getPath()[pos-5] == 1) {
-            down = true;
-            acd = getSaveDeath(pos-5);
+            up = true;
+            acu = getSaveDeath(pos-5);
             tc++;
         }
         if(acl>getSaveDeath(pos)) {
@@ -461,21 +468,31 @@ public class ALGORITHM
         } else {
             if(right) {
                 graphic.kons("moveright()");
+                action = 0;
+                actionpos = pos+1;
             } else if(up || down) {
                 if(checkLine(pos) < 2 && up) { 
                     graphic.kons("moveup()");
+                    action = 0;
+                    actionpos = pos-5;
                 } else if(checkLine(pos) > 2 && down) { 
                     graphic.kons("movedown()");
+                    action = 0;
+                    actionpos = pos+5;
                 } else {
                     if(r.nextInt(2)==0) {
                         if(up) {
                             graphic.kons("moveup()");
+                            action = 0;
+                            actionpos = pos-5;
                         } else {
                             graphic.kons("Error: Can't move! (moveaway)");
                         }
                     } else {
                         if(down) {
-                            graphic.kons("movedown()");   
+                            graphic.kons("movedown()");
+                            action = 0;
+                            actionpos = pos+5;
                         } else {
                             graphic.kons("Error: Can't move! (moveaway)");
                         }
@@ -483,6 +500,8 @@ public class ALGORITHM
                 }
             } else if(left) {
                 graphic.kons("moveleft()");
+                action = 0;
+                actionpos = pos-1;
             } else {
                 graphic.kons("Error: General move failture! (moveaway)");
             }
@@ -505,21 +524,31 @@ public class ALGORITHM
         }
         if(right) {
             graphic.kons("moveright()");
+            action = 0;
+            actionpos = pos+1;
         } else if(up || down) {
             if(checkLine(pos) < 2 && up) { 
                 graphic.kons("moveup()");
+                action = 0;
+                actionpos = pos-5;
             } else if(checkLine(pos) > 2 && down) { 
                 graphic.kons("movedown()");
+                action = 0;
+                actionpos = pos+5;
             } else {
                 if(r.nextInt(2)==0) {
                     if(up) {
                         graphic.kons("moveup()");
+                        action = 0;
+                        actionpos = pos-5;
                     } else {
                         graphic.kons("Error: Can't move! (movenormal)");
                     }
                 } else {
                     if(down) {
-                        graphic.kons("movedown()");   
+                        graphic.kons("movedown()");
+                        action = 0;
+                        actionpos = pos+5;
                     } else {
                         graphic.kons("Error: Can't move! (movenormal)");
                     }
@@ -527,9 +556,19 @@ public class ALGORITHM
             }
         } else if(left) {
             graphic.kons("moveleft()");
+            action = 0;
+            actionpos = pos-1;
         } else {
-            graphic.kons("Error: General move failture! (moveaway)");
+            graphic.kons("Error: General move failture! (movenormal)");
         }
+    }
+
+    public int getActionType() {
+        return action;
+    }
+
+    public int getActionPos() {
+        return actionpos;
     }
 
 }
