@@ -15,4 +15,5 @@ public class CONFIG
     /**Paladin**/  
     public static int HP4= 100;
     public static int Dmg4= 35;
+    // Test
 }
