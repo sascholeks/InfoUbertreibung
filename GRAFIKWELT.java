@@ -12,7 +12,7 @@ public class GRAFIKWELT
             xyp=xyp+40;
         }
     }
-    
+
     public void zeichnerahmen() {
         for(int a=0;a<7;a++) {
             for(int b=0;b<7;b++) {
@@ -20,17 +20,17 @@ public class GRAFIKWELT
             }
         }
     }
-    
+
     public void textfeld(String text) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(320,20,200,20,7);
     }
-    
+
     public void kons(String st) {   
         ZEICHENFENSTER.gibFenster().fuelleRechteck(275,265,420,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,265,420,20);
         ZEICHENFENSTER.gibFenster().zeichneText(st,280,280);
     }
-    
+
     public void weltteil(int x, int y,int nr) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
         switch (nr) {
@@ -41,19 +41,19 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,2);
                 break;     
             case 2:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,3);
+                Blume2(this.x[x]+5,this.y[y]+21);
                 break;
             case 3:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,4);
                 break;
             case 4:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,5);
+                 blume1(this.x[x]+28,this.y[y]+19);
                 break;
             case 5:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,6);
                 break;    
             case 6:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,7);
+                Blume3(this.x[x]+17,this.y[y]+23);
                 break;    
             case 7:
                 ZEICHENFENSTER.gibFenster().zeichneRechteck(this.x[x]+1,this.y[y]+1,39,39); //da 8 weis ist und nicht von weißem kries unterscheiden
@@ -62,7 +62,7 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,9);
                 break;
             case 9:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,10);
+                Blume3(this.x[x]+6,this.y[y]+18);
                 break;
             case 10:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,11);
@@ -74,40 +74,40 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,13);
                 break;
             case 13:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,1);
+                blume1(this.x[x]+0,this.y[y]+0);
                 break;
             case 14:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,2);
+                Blume2(this.x[x]+2,this.y[y]+15);
                 break;
             case 15:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,3);
                 break;
             case 16:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,4);
+                Blume3(this.x[x]+11,this.y[y]+25);
                 break;
             case 17:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,5);
+                 blume1(this.x[x]+20,this.y[y]+8);
                 break;
             case 18:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,6);
                 break;
             case 19:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,7);
+                Blume3(this.x[x]+3,this.y[y]+26);
                 break;
             case 20:
-                ZEICHENFENSTER.gibFenster().zeichneKreis(this.x[x]+20,this.y[y]+20,19);   //da 8 weis ist und nicht von weißem rechteck zu unterscheiden
+                blume1(this.x[x]+4,this.y[y]+20);
                 break;
             case 21:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,9);
                 break;
             case 22:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,10);
+                Blume3(this.x[x]+10,this.y[y]+19);
                 break;
             case 23:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,11);
                 break;
             case 24:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,12);
+                blume1(this.x[x]+20,this.y[y]+16);
                 break;
             case 25:  //berge
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+5,this.y[y]+5,35,35,12);
@@ -132,7 +132,7 @@ public class GRAFIKWELT
                 break;
         }
     }
-    
+
     public void loescheansicht() {
         for(int a=0;a<7;a++) {
             for(int b=0;b<7;b++) {
@@ -140,13 +140,13 @@ public class GRAFIKWELT
             }
         }
     }  
-    
-        public void zeichnespieler(int feld) {
+
+    public void zeichnespieler(int feld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%7]+5,y[feld/7]+25,30,10,1);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%7]+10,y[feld/7]+10,20,20,6);
     }
-    
-     public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4,int anz5,int anz6,int anz7,int anz8,int anz9,int anz10,int anz11,int anz12,int anz13,int anz14,int aus0,int aus1,int aus2,int aus3,int aus4) {
+
+    public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4,int anz5,int anz6,int anz7,int anz8,int anz9,int anz10,int anz11,int anz12,int anz13,int anz14,int aus0,int aus1,int aus2,int aus3,int aus4) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,90,50,14);
@@ -215,7 +215,7 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
         ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
     }
-    
+
     public void blume1(int x,int y) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+0,2,1,18);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+1,5,1,18);
@@ -230,5 +230,33 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+9,2,1,17);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+8,2,1,17);
     }  
+    
+    public void Blume2(int x,int y){
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+1,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+4,1,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+4,1,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+5,1,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+7,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+4,1,9,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+6,1,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+4,1,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+5,1,3,17);
+    }
+    
+    public void Blume3(int x,int y){
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+2,1,1,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+1,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+5,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+5,1,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+8,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+1,1,3,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+1,1,1,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+3,1,1,19);
+
+    }
 }
-   
+
