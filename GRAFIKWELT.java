@@ -35,7 +35,7 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
         switch (nr) {
             case 0:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,1);
+                blume1(this.x[x]+3,this.y[y]+25);
                 break;
             case 1:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,2);
@@ -215,5 +215,20 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
         ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
     }
+    
+    public void blume1(int x,int y) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+0,2,1,18);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+1,5,1,18);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+0,y+2,6,1,18);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+0,y+3,5,1,18);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+4,1,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+4,2,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+4,1,7,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+0,y+8,2,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+8,1,2,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+10,3,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+9,2,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+8,2,1,17);
+    }  
 }
    

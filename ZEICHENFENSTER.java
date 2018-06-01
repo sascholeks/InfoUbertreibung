@@ -474,11 +474,11 @@ public class ZEICHENFENSTER
                     return lel;
             case 14: Color lel2 =new Color(150,106,55);
                     return lel2; 
-            case 15: Color base = new Color(10,176,102);
+            case 15: Color base = new Color(43,190,21);
                     return base;
             case 16: Color grau = new Color(170,170,170);
                     return grau;
-            case 17: Color Gras = new Color(43,158,21);
+            case 17: Color Gras = new Color(10,150,90);
                     return Gras;
             case 18: Color rötlich= new Color(143,18,7);
                     return rötlich;
