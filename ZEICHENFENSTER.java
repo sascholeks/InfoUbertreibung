@@ -1,5 +1,4 @@
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.geom.*;
@@ -33,7 +32,6 @@ public class ZEICHENFENSTER
     {
         this(titel, 700, 300, Color.white);          
     }
-    
 
     /**
      * Erzeugt ein Zeichenfenster mit wei�em Hintergrund.
@@ -45,9 +43,9 @@ public class ZEICHENFENSTER
     {
         this(titel, breite, hoehe, Color.white);
     }
-    
+
     public void setTitle(String title){
-        
+
     }
 
     /**
@@ -112,7 +110,7 @@ public class ZEICHENFENSTER
     {
         return frame.isVisible();
     }
-    
+
     /**
      * Zeichnet einen Elipsenbogen (Siehe Graphics.drawArc)
      * @param x x-Koordinate des Elipsenmittelpunkts
@@ -156,7 +154,7 @@ public class ZEICHENFENSTER
         canvas.repaint();
         graphic.setColor(original);
     }
-    
+
     /**
      * F�llt das Innere eines Kreises mit der angegebenen Farbe. 
      * @param x x-Koordinate des Mittelpunkts
@@ -172,7 +170,7 @@ public class ZEICHENFENSTER
         canvas.repaint();
         graphic.setColor(original);
     }
-    
+
     /**
      * L�scht das Innere eines Kreises 
      * @param x x-Koordinate des Mittelpunkts
@@ -194,7 +192,7 @@ public class ZEICHENFENSTER
         graphic.draw(shape);
         canvas.repaint();
     }
- 
+
     /**
      * F�llt das Innere eines Shape-Objekts mit der angegebenen Farbe. 
      * @param  shape  das Shape-Objekt, welches gef�llt werden soll 
@@ -246,7 +244,7 @@ public class ZEICHENFENSTER
     {
         graphic.drawRect(xPos, yPos, breite, hoehe);
         canvas.repaint();
-       // fill(new Rectangle(xPos, yPos, breite, hoehe));
+        // fill(new Rectangle(xPos, yPos, breite, hoehe));
     }
 
     /**
@@ -289,7 +287,7 @@ public class ZEICHENFENSTER
     {
         loesche(new Rectangle(xPos, yPos, breite, hoehe));
     }
-    
+
     private Polygon gibDreieck(int x1, int y1, int x2, int y2, int x3, int y3)
     {
         Polygon p=new Polygon();
@@ -298,7 +296,7 @@ public class ZEICHENFENSTER
         p.addPoint(x3,y3);
         return p;
     }
-    
+
     /**
      * Zeichnet den Rand eines Dreiecks mit der aktuellen Farbe.
      * @param x1,y1 Koordinaten des ersten Eckpunkts 
@@ -444,11 +442,12 @@ public class ZEICHENFENSTER
     {
         graphic.setColor(farbeZuColor(neueFarbe));
     }
+
     private void setzeVordergrundFarbe(Color neueFarbe)
     {
         graphic.setColor(neueFarbe);
     }
-    
+
     private Color farbeZuColor(int farbnr)
     {
         switch (farbnr)
@@ -463,33 +462,54 @@ public class ZEICHENFENSTER
             case 7: return Color.gray;
             case 8: return Color.white;
             case 9: Color c1 = new Color(255,20,147);
-                    return c1;
+            return c1;
             case 10: Color c2 = new Color(127,126,0); 
-                    return c2;  
+            return c2;  
             case 11: Color whitegray = new Color(180,189,180);
-                    return whitegray; 
+            return whitegray; 
             case 12: Color hellbraun = new Color(181,160,95);
-                    return hellbraun;
+            return hellbraun;
             case 13: Color lel = new Color(115,81,42);
-                    return lel;
+            return lel;
             case 14: Color lel2 =new Color(150,106,55);
-                    return lel2; 
+            return lel2; 
             case 15: Color base = new Color(43,190,21);
-                    return base;
+            return base;
             case 16: Color grau = new Color(170,170,170);
-                    return grau;
+            return grau;
             case 17: Color Gras = new Color(10,150,90);
-                    return Gras;
+            return Gras;
             case 18: Color rötlich= new Color(143,18,7);
-                    return rötlich;
+            return rötlich;
             case 19: Color blau = new Color(8,38,112);
-                    return blau;
-            case 20: Color gelb = new Color(229,230,21);        
+            return blau;
+            case 20: Color gelb = new Color(229,230,21);
+            return gelb;
+            case 22: Color schnee = new Color(191,191,191);
+            return schnee;
+            case 23: Color berghellgrau = new Color(115,115,115);
+            return berghellgrau;
+            case 24: Color bergfusbemoost = new Color(81,105,89);
+            return bergfusbemoost;
+            case 25: Color hellrot = new Color (169,30,35);
+            return hellrot;
+            case 26: Color dunkelrot = new Color(123,19,20);
+            return dunkelrot;
+            case 27: Color hellgrau = new Color(177,177,177);
+            return hellgrau;
+            case 28: Color dunkelgrau = new Color(82,84,83)
+            return dunkelgrau;
+            case 29: Color hautfarbe = new Color(253,182,120);
+            return hautfarbe;
+            case 30: Color orange = new Color(244,118,34;
+            return orange;
+            
+
             default: return graphic.getColor();
         }
-        
+
     }
-    
+
     private Color farbeZuColor(String farbe)
     {
         if (farbe=="weiss") return Color.white;
@@ -503,7 +523,7 @@ public class ZEICHENFENSTER
         if (farbe=="grau") return Color.gray;
         return graphic.getColor();
     }
-    
+
     private String colorZuFarbe(Color color)
     {
         if (color==Color.white) return "weiss";
@@ -540,6 +560,7 @@ public class ZEICHENFENSTER
         backgroundColor = farbeZuColor(neueFarbe);   
         graphic.setBackground(backgroundColor);
     }
+
     private void setzeHintergrundFarbe(Color neueFarbe)
     {
         backgroundColor = neueFarbe;   
@@ -629,7 +650,7 @@ public class ZEICHENFENSTER
         else if (position=="unten") steuerungSued.add(element);
         frame.pack();
     }
-    
+
     /**
      * Beschriftet den Titel des Zeichenfensters neu.
      * @param  titelNeu  Text der neuen Fenster�berschrift
@@ -638,7 +659,7 @@ public class ZEICHENFENSTER
     {
         frame.setTitle(titelNeu);
     }
-    
+
     public void schliesse()
     {
         frame.dispose();
@@ -652,7 +673,7 @@ public class ZEICHENFENSTER
     private class CanvasPane extends JPanel
     {
         private static final long serialVersionUID = 20060330L;
-        
+
         public void paint(Graphics g)
         {
             g.drawImage(canvasImage, 0, 0, null);
