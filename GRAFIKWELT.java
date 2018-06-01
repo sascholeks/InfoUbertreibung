@@ -122,8 +122,49 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,18,1);
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,10,8);
                 break;
-            case 28:  //weg
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+8,this.y[y]+3,30,30,2);
+            case 28:  //links oben
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,17,12,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,25,31);
+                break;
+            case 29:  //links rechts
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,39,12,31);
+                break;
+            case 30:  //links unten
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,19,12,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,12,26,31);
+                break;
+            case 31:  //oben links
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,25,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,25,12,31);
+                break;
+            case 32:  //oben rechts
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,25,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,26,12,31);
+                break;
+            case 33:  //oben unten
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,39,31);
+                break;
+            case 34:  //rechts links
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,39,12,31);
+                break;
+            case 35:  //rechts oben
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,26,12,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,23,31);
+                break;
+            case 36:  //rechts unten
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,26,12,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,12,26,31);
+                break;
+            case 37:  //unten links
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,12,26,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,25,12,31);
+                break;
+            case 38:  //unten oben
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,39,31);
+                break;
+            case 39:  //unten rechts
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,12,26,31);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,26,12,31);
                 break;
             case 100:  //monster  
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,3,4);

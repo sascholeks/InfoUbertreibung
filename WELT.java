@@ -166,9 +166,60 @@ public class WELT
         algsw.loese();
         for(int a=0;a<49;a++) {
             if(algsw.pos[a]!=0) {
-                welt[a%7+(a/7)*500+genwelthelp3]=28;
+                switch (algsw.eing[a]) {
+                    case 0:
+                        switch(algsw.ausg[a]) {
+                            case 1:
+                                welt[a%7+(a/7)*500+genwelthelp3]=28;   //links oben
+                                break;
+                            case 2:
+                                welt[a%7+(a/7)*500+genwelthelp3]=29;   //links rechts;
+                                break;
+                            case 3:
+                                welt[a%7+(a/7)*500+genwelthelp3]=30;   //links unten
+                                break;
+                        }
+                        break;
+                    case 1:
+                        switch(algsw.ausg[a]) {
+                            case 0:
+                                welt[a%7+(a/7)*500+genwelthelp3]=31;  //oben links
+                                break;
+                            case 2:
+                                welt[a%7+(a/7)*500+genwelthelp3]=32;  //oben rechts
+                                break;
+                            case 3:
+                                welt[a%7+(a/7)*500+genwelthelp3]=33;  //oben unten
+                                break;
+                        }
+                        break;
+                    case 2:
+                        switch(algsw.ausg[a]) {
+                            case 0:
+                                welt[a%7+(a/7)*500+genwelthelp3]=34;  //rechts links(wie links rechts
+                                break;
+                            case 1:
+                                welt[a%7+(a/7)*500+genwelthelp3]=35;  //rechts oben
+                                break;
+                            case 3:
+                                welt[a%7+(a/7)*500+genwelthelp3]=36;  //rechts unten
+                        }
+                        break;
+                    case 3:
+                        switch(algsw.ausg[a]) {
+                            case 0:
+                                welt[a%7+(a/7)*500+genwelthelp3]=37;  //unten links
+                                break;
+                            case 1:
+                                welt[a%7+(a/7)*500+genwelthelp3]=38;  //unten oben
+                                break;
+                            case 2:
+                                welt[a%7+(a/7)*500+genwelthelp3]=39;  //unten rechts
+                                break;
+                        }
+                }
             }
-        }
+        }  
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
         welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
         for(int a=0;a<10000;a++) {

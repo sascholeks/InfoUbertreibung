@@ -503,7 +503,8 @@ public class ZEICHENFENSTER
             return hautfarbe;
             case 30: Color orange = new Color(244,118,34);
             return orange;
-            
+            case 31 : Color weg=new Color(130,119,98);
+            return weg;
 
             default: return graphic.getColor();
         }
