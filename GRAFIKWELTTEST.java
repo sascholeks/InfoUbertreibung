@@ -16,8 +16,8 @@ public class GRAFIKWELTTEST
 
     public void zeichne (int nr) 
     {
-        int x=20;
-        int y=20;
+        int x=1;
+        int y=1;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
         switch (nr) {
             case 0:
