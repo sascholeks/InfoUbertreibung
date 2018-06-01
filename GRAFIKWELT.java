@@ -32,6 +32,7 @@ public class GRAFIKWELT
     }
     
     public void weltteil(int x, int y,int nr) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
         switch (nr) {
             case 0:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,1);

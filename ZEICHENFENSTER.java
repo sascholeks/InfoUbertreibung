@@ -474,6 +474,8 @@ public class ZEICHENFENSTER
                     return lel;
             case 14: Color lel2 =new Color(150,106,55);
                     return lel2; 
+            case 15: Color base = new Color(10,176,102);
+                    return base;
             default: return graphic.getColor();
         }
         
