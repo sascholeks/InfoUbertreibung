@@ -497,11 +497,11 @@ public class ZEICHENFENSTER
             return dunkelrot;
             case 27: Color hellgrau = new Color(177,177,177);
             return hellgrau;
-            case 28: Color dunkelgrau = new Color(82,84,83)
+            case 28: Color dunkelgrau = new Color(82,84,83);
             return dunkelgrau;
             case 29: Color hautfarbe = new Color(253,182,120);
             return hautfarbe;
-            case 30: Color orange = new Color(244,118,34;
+            case 30: Color orange = new Color(244,118,34);
             return orange;
             
 
