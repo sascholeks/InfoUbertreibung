@@ -21,7 +21,6 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
         switch (nr) {
             case 0:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,1);
                 blume1(this.x[x]+3,this.y[y]+25);
                 break;
             case 1:
@@ -34,7 +33,7 @@ public class GRAFIKWELTTEST
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,4);
                 break;
             case 4:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,5);
+                 blume1(this.x[x]+28,this.y[y]+19);
                 break;
             case 5:
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,6);
@@ -61,7 +60,7 @@ public class GRAFIKWELTTEST
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,13);
                 break;
             case 13:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,1);
+                blume1(this.x[x]+0,this.y[y]+0);
                 break;
             case 14:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,2);
@@ -73,7 +72,7 @@ public class GRAFIKWELTTEST
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,4);
                 break;
             case 17:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,5);
+                 blume1(this.x[x]+20,this.y[y]+8);
                 break;
             case 18:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,6);
@@ -82,7 +81,7 @@ public class GRAFIKWELTTEST
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,7);
                 break;
             case 20:
-                ZEICHENFENSTER.gibFenster().zeichneKreis(this.x[x]+20,this.y[y]+20,19);   //da 8 weis ist und nicht von weißem rechteck zu unterscheiden
+                blume1(this.x[x]+4,this.y[y]+20);
                 break;
             case 21:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,9);
@@ -94,7 +93,7 @@ public class GRAFIKWELTTEST
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,11);
                 break;
             case 24:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,12);
+                blume1(this.x[x]+20,this.y[y]+16);
                 break;
             case 25:  //berge
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+5,this.y[y]+5,35,35,12);
@@ -135,4 +134,35 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+9,2,1,17);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+8,2,1,17);
     }  
+    
+    public void Blume2(int x,int y){
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+1,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y,1,3,21);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+4,1,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+4,1,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+5,1,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+7,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+4,1,9,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+6,1,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+4,1,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+5,1,3,17);
+    }
+    
+    public void Blume3(int x,int y){
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+2,1,1,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+1,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+5,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y,1,4,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+5,1,1,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+8,1,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+1,1,3,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+1,1,1,19);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+3,1,1,19);
+
+    }
+    
 }
+
+
