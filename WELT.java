@@ -10,7 +10,7 @@ public class WELT
     int[] welt,ansicht;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre;
     public WELT() {
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
@@ -34,6 +34,7 @@ public class WELT
         bewo=false;
         bewr=false;
         bewu=false;
+        bewegungssperre=false;
     }
    
     public void bewegen(int richtung) {
@@ -86,8 +87,10 @@ public class WELT
                     break;
                 } 
             zeichneansicht();
-            if(welt[aktpos]==100) {
+            if(welt[aktpos]==100) {  //kontrolle gegner
+                bewegungssperre=true;
                 kampf=new KAMPFEINGABE(inv.ausanz[0],inv.ausanz[1],inv.ausanz[2],inv.ausanz[3],inv.ausanz[4],r.nextInt(300)+20,r.nextInt(100+30),r.nextInt(20)+50,r.nextInt(50)+20,r.nextInt(20)+25,inv.heiltrankkl,inv.heiltrankgr);
+                
             }
             if(welt[aktpos]==26) {                                //ab hier kontrolle quests
                 objschirm.hauptstadt();

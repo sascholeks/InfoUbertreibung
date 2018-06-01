@@ -12,7 +12,7 @@ public class KAMPF
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz,startanz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr;
-    boolean geheilt=false,gekaempft=false,bewegt=false;
+    boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false;   //=ungültig (bei bewegung(int feld))
     public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)                                     
     {
         grafik=new GRAFIKELEMENTE();
@@ -46,7 +46,7 @@ public class KAMPF
             team[a+5]=2;
         }
 
-        anz=new int[10];      //eintrafen der anzahl, aufrufbar mit [kaempferID]
+        anz=new int[12];      //eintrafen der anzahl, aufrufbar mit [kaempferID]
         anz[0]=ausanz0;
         anz[1]=ausanz1;
         anz[2]=ausanz2;
@@ -57,6 +57,7 @@ public class KAMPF
         anz[7]=geganz2;
         anz[8]=geganz3;
         anz[9]=geganz4;
+        anz[11]=0;           //für hindernisse(wird bei kampfeigabe gebraucht)
         startanz=new int[10];
         for(int a=0;a<10;a++) {
             startanz[a]=anz[0];
@@ -67,11 +68,11 @@ public class KAMPF
             leben[a]=kaempfer[a].leben*anz[a];
             dmg[a]=kaempfer[a].dmg*anz[a];
         }
-        
+
         hlkl=heiltrkl;
         hlgr=heiltrgr;
         ZEICHENFENSTER.gibFenster().loescheAlles();
-        zugreihenfolge();
+        zreihenfolge();
         startpos();
         zeichnespielfeld();
         grafik.spielfeld();
@@ -104,6 +105,7 @@ public class KAMPF
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
+                        ug=false;
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             anz[welt[feld]]=0;
                             grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" ist tod");
@@ -123,6 +125,7 @@ public class KAMPF
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
+                        ug=false;
                         if(leben[welt[feld]]<=0) {              //kontolle tod
                             anz[welt[feld]]=0;
                             grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" ist tod");
@@ -142,7 +145,8 @@ public class KAMPF
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
                         grafik.anzahlreihenfolge(reihenfolge[welt[feld]],anz[welt[feld]]);
-                        if(kaempfer[welt[feld]].name!="Bogenschütze" && kaempfer[welt[feld]].name!="Speerkämpfer") {                       //gegenangriff
+                        ug=false;
+                        if(kaempfer[welt[feld]].name!="Bogenschütze" && kaempfer[welt[feld]].name!="Speerkämpfer") {            //gegenangriff
                             schwertkampf.playgeg();
                             grafik.kons("Gegenattacke");
                             try {                                                                         
@@ -165,21 +169,28 @@ public class KAMPF
                             kontrollesieg();
                         }
                         gekaempft=true;
+
                     }else if(kepos[reihenfolge[0]]-1==feld && kepos[reihenfolge[0]]+1==feld && kepos[reihenfolge[0]]-5==feld && kepos[reihenfolge[0]]+5==feld){
                         grafik.kons("für "+kaempfer[reihenfolge[0]].name+" unerreichbar");
+                        ug=true;
                     }else {
                         grafik.kons("Unerreichbar");
+                        ug=true;
                     }
                 }else if (team[welt[feld]]==team[reihenfolge[0]]) {
                     grafik.kons("Du kannst keine Kämpfer aus deinem Team angreifen");
+                    ug=true;
                 }
             }else {
                 grafik.kons("Kein Gegner gefunden");
+                ug=true;
             }
         }else if(gekaempft==true) {
             grafik.kons("In dieser Runde bereits gekämpft");
+            ug=false;
         }else if(aktionen==2) {
             grafik.kons("Max. Aktionen bereits gemacht");
+            ug=false;
         }       
     }
 
@@ -193,6 +204,7 @@ public class KAMPF
                 grafik.markiereaktuell(kepos[reihenfolge[0]]);
                 grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                 bewhelp++;
+                aktionen++;
                 if(bewhelp==2) {
                     bewhelp=0;
                     bewegt=true;
@@ -200,12 +212,12 @@ public class KAMPF
             }else {
                 grafik.kons("Feld nicht in Reichweite");
             }
-        }else if(welt[feld]!=10) {
-            grafik.kons("Feld ist nicht frei");
-        }else if(bewegt==true) {
-            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
         }else if(aktionen==2) {
             grafik.kons("Max. Aktionen bereits ausgeführt");
+        }else if(bewegt==true) {
+            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+        }else if(welt[feld]!=10) {
+            grafik.kons("Feld ist nicht frei");
         }else if(gekaempft==true) {
             grafik.kons("Nach dem Kampf kannst du nicht laufen");
         }
@@ -227,7 +239,7 @@ public class KAMPF
                         grafik.kons("Nicht genügend kleine Tränke");
                     }
                 }else {
-                    grafik.kons("nichtgenug leben verloren");
+                    grafik.kons("nicht gen Leben verloren");
                 }
             }else if(gr==1) {
                 int helpberechnung=leben[reihenfolge[0]]+300;
@@ -240,8 +252,8 @@ public class KAMPF
                     }else{
                         grafik.kons("Nicht genügend große Heiltränke");
                     } 
-                }else if(gr>1){
-                    grafik.kons("ungültige Trankgröße");
+                }else {
+                    grafik.kons("nicht gen Leben verloren");
                 }
             }
         }
@@ -264,17 +276,17 @@ public class KAMPF
         }
     }
 
-    public void beendezug() {
+    public void beendez() {
         grafik.loeschemarkierung(kepos[reihenfolge[0]]);                                                       
         if(tod[reihenfolge[0]]==false) {                                                                             //markiere (wegen löschen weg
             grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
         }
-        int zughelp=reihenfolge[0];                                                                                  //aktualisiere riehenfolge
+        int zhelp=reihenfolge[0];                                                                                  //aktualisiere riehenfolge
         for(int a=0;a<9;a++) {
             reihenfolge[a]=reihenfolge[a+1];
         }
         zeichnereihenfolge();
-        reihenfolge[9]=zughelp;   
+        reihenfolge[9]=zhelp;   
         if(tod[reihenfolge[0]]==true) {
             grafik.kons(kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+" ist Tod");
             try { 
@@ -282,22 +294,22 @@ public class KAMPF
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            beendezug();
+            beendez();
         }
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
         grafik.zeichneaktionswahl();
-
         geheilt=false;      //kontollen zurücksetzen
         gekaempft=false;
         bewegt=false;
+        ug=false;
         bewhelp=0;
         aktionen=0;
     }
 
-    public void zugreihenfolge() {
-        int help1=r.nextInt(2);                                  //Zugreihenfolge wird gewählt
+    public void zreihenfolge() {
+        int help1=r.nextInt(2);                                  //Zreihenfolge wird gewählt
         if(help1==0) {      //team blau als erstes
             for(int a=0;a<5;a++) {
                 do {
@@ -377,7 +389,7 @@ public class KAMPF
             welt[feldhind]=11; 
         }
     }
-    
+
     public void decide(int pos) {
         alg = new ALGORITHM(pos,welt,anz,reihenfolge);
         alg.decide();

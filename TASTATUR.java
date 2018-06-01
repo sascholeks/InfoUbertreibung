@@ -13,15 +13,15 @@ public class TASTATUR implements KeyListener
     }
     
     public void keyPressed(KeyEvent e) { 
-        if(e.getKeyCode() == 65) {  //a
+        if(e.getKeyCode() == 65 && welt.bewegungssperre==false) {  //a
             welt.bewegen(0);
-        }else if(e.getKeyCode() == 87) {  //w
+        }else if(e.getKeyCode() == 87 && welt.bewegungssperre==false) {  //w
             welt.bewegen(1);
-        }else if(e.getKeyCode() == 68) {  //d
+        }else if(e.getKeyCode() == 68 && welt.bewegungssperre==false) {  //d
             welt.bewegen(2);
-        }else if(e.getKeyCode() == 83) {  //s
+        }else if(e.getKeyCode() == 83 && welt.bewegungssperre==false) {  //s
             welt.bewegen(3);
-        }else if(e.getKeyCode() == 73) {  //i
+        }else if(e.getKeyCode() == 73 && welt.bewegungssperre==false) {  //i
             welt.inventaraufruf();
         }
     } 
