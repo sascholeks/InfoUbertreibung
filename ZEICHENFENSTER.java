@@ -476,6 +476,15 @@ public class ZEICHENFENSTER
                     return lel2; 
             case 15: Color base = new Color(10,176,102);
                     return base;
+            case 16: Color grau = new Color(170,170,170);
+                    return grau;
+            case 17: Color Gras = new Color(43,158,21);
+                    return Gras;
+            case 18: Color rötlich= new Color(143,18,7);
+                    return rötlich;
+            case 19: Color blau = new Color(8,38,112);
+                    return blau;
+            case 20: Color gelb = new Color(229,230,21);        
             default: return graphic.getColor();
         }
         
