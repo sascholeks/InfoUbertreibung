@@ -3,6 +3,7 @@ public class WELT
 {
     GRAFIKWELT grafik;
     ALGOGR algsw;
+    ALGOLEUTE algle;
     OBJBILDSCHIRM objschirm;
     KAMPFEINGABE kampf;
     INVENTAR inv;
@@ -14,12 +15,13 @@ public class WELT
     public WELT() {
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
+        algle=new ALGOLEUTE();
         objschirm=new OBJBILDSCHIRM();
         inv=new INVENTAR();
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
-        aktpos=2004;               //startpos bei tests ändern
+        generierestart();            //startpos bei tests ändern
         bildpos=aktpos-1503; 
         aktansichtpos=24;
         grafik.zeichnerahmen();
@@ -35,74 +37,75 @@ public class WELT
         bewr=false;
         bewu=false;
         bewegungssperre=false;
+        grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
     }
+
    
     public void bewegen(int richtung) {
-            kontrollerand();
-            grafik.zeichnerahmen();
-            switch(richtung) {
-                case 0:
-                    if((aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) && anzl==false) {
-                        bildpos=bildpos-1;
-                        aktpos=aktpos-1;
-                    }else if(bewl==false) {
-                        aktpos=aktpos-1;
-                        aktansichtpos=aktansichtpos-1;
-                    }
-                    anzr=false;
-                    bewr=false;
-                    break;
-                case 1:
-                    if((aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) && anzo==false) {
-                        bildpos=bildpos-500;
-                        aktpos=aktpos-500;
-                    }else if(bewo==false) {
-                        aktpos=aktpos-500;
-                        aktansichtpos=aktansichtpos-7;
-                    }
-                    anzu=false;
-                    bewu=false;
-                    break;
-                case 2:
-                    if((aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) && anzr==false) {
-                        bildpos=bildpos+1;
-                        aktpos=aktpos+1;
-                    }else if(bewr==false) {
-                        aktpos=aktpos+1;
-                        aktansichtpos=aktansichtpos+1;
-                    }
-                    anzl=false;
-                    bewl=false;
-                    break;
-                case 3:
-                    if((aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) && anzu==false) {
-                        bildpos=bildpos+500;
-                        aktpos=aktpos+500;
-                    }else if(bewu==false) {
-                        aktpos=aktpos+500;
-                        aktansichtpos=aktansichtpos+7;
-                    }
-                    anzo=false;
-                    bewo=false;
-                    break;
-                } 
-            zeichneansicht();
-            if(welt[aktpos]==100) {  //kontrolle gegner
-                bewegungssperre=true;
-                kampf=new KAMPFEINGABE(inv.ausanz[0],inv.ausanz[1],inv.ausanz[2],inv.ausanz[3],inv.ausanz[4],r.nextInt(300)+20,r.nextInt(100+30),r.nextInt(20)+50,r.nextInt(50)+20,r.nextInt(20)+25,inv.heiltrankkl,inv.heiltrankgr);
-                
+        kontrollerand();
+        grafik.zeichnerahmen();
+        switch(richtung) {
+            case 0:
+            if((aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) && anzl==false) {
+                bildpos=bildpos-1;
+                aktpos=aktpos-1;
+            }else if(bewl==false) {
+                aktpos=aktpos-1;
+                aktansichtpos=aktansichtpos-1;
             }
-            if(welt[aktpos]==26) {                                //ab hier kontrolle quests
-                objschirm.hauptstadt();
-                kongenehmigung=true;
-                wegkont=true;
-            }else if(welt[aktpos]==27 && kongenehmigung==true) {
-                objschirm.stadtmiene();
-                wegkont=false;
-                }
-                
+            anzr=false;
+            bewr=false;
+            break;
+            case 1:
+            if((aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) && anzo==false) {
+                bildpos=bildpos-500;
+                aktpos=aktpos-500;
+            }else if(bewo==false) {
+                aktpos=aktpos-500;
+                aktansichtpos=aktansichtpos-7;
+            }
+            anzu=false;
+            bewu=false;
+            break;
+            case 2:
+            if((aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) && anzr==false) {
+                bildpos=bildpos+1;
+                aktpos=aktpos+1;
+            }else if(bewr==false) {
+                aktpos=aktpos+1;
+                aktansichtpos=aktansichtpos+1;
+            }
+            anzl=false;
+            bewl=false;
+            break;
+            case 3:
+            if((aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) && anzu==false) {
+                bildpos=bildpos+500;
+                aktpos=aktpos+500;
+            }else if(bewu==false) {
+                aktpos=aktpos+500;
+                aktansichtpos=aktansichtpos+7;
+            }
+            anzo=false;
+            bewo=false;
+            break;
+        } 
+        zeichneansicht();
+        if(welt[aktpos]==100) {  //kontrolle gegner
+            bewegungssperre=true;
+            kampf=new KAMPFEINGABE(inv.ausanz[0],inv.ausanz[1],inv.ausanz[2],inv.ausanz[3],inv.ausanz[4],r.nextInt(300)+20,r.nextInt(100+30),r.nextInt(20)+50,r.nextInt(50)+20,r.nextInt(20)+25,inv.heiltrankkl,inv.heiltrankgr);
+        }
+        if(welt[aktpos]==26) {                                //ab hier kontrolle quests
+            objschirm.hauptstadt();
+            kongenehmigung=true;
+            wegkont=true;
+        }else if(welt[aktpos]==27 && kongenehmigung==true) {
+            objschirm.stadtmiene();
+            wegkont=false;
+        }
+        grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));  
     }
-    
+
     public void inventaraufruf() {
         inv.inventar();
     }
@@ -168,61 +171,61 @@ public class WELT
             if(algsw.pos[a]!=0) {
                 switch (algsw.eing[a]) {
                     case 0:
-                        switch(algsw.ausg[a]) {
-                            case 1:
-                                welt[a%7+(a/7)*500+genwelthelp3]=28;   //links oben
-                                break;
-                            case 2:
-                                welt[a%7+(a/7)*500+genwelthelp3]=29;   //links rechts;
-                                break;
-                            case 3:
-                                welt[a%7+(a/7)*500+genwelthelp3]=30;   //links unten
-                                break;
-                        }
+                    switch(algsw.ausg[a]) {
+                        case 1:
+                        welt[a%7+(a/7)*500+genwelthelp3]=28;   //links oben
                         break;
+                        case 2:
+                        welt[a%7+(a/7)*500+genwelthelp3]=29;   //links rechts;
+                        break;
+                        case 3:
+                        welt[a%7+(a/7)*500+genwelthelp3]=30;   //links unten
+                        break;
+                    }
+                    break;
                     case 1:
-                        switch(algsw.ausg[a]) {
-                            case 0:
-                                welt[a%7+(a/7)*500+genwelthelp3]=31;  //oben links
-                                break;
-                            case 2:
-                                welt[a%7+(a/7)*500+genwelthelp3]=32;  //oben rechts
-                                break;
-                            case 3:
-                                welt[a%7+(a/7)*500+genwelthelp3]=33;  //oben unten
-                                break;
-                        }
+                    switch(algsw.ausg[a]) {
+                        case 0:
+                        welt[a%7+(a/7)*500+genwelthelp3]=31;  //oben links
                         break;
+                        case 2:
+                        welt[a%7+(a/7)*500+genwelthelp3]=32;  //oben rechts
+                        break;
+                        case 3:
+                        welt[a%7+(a/7)*500+genwelthelp3]=33;  //oben unten
+                        break;
+                    }
+                    break;
                     case 2:
-                        switch(algsw.ausg[a]) {
-                            case 0:
-                                welt[a%7+(a/7)*500+genwelthelp3]=34;  //rechts links(wie links rechts
-                                break;
-                            case 1:
-                                welt[a%7+(a/7)*500+genwelthelp3]=35;  //rechts oben
-                                break;
-                            case 3:
-                                welt[a%7+(a/7)*500+genwelthelp3]=36;  //rechts unten
-                        }
+                    switch(algsw.ausg[a]) {
+                        case 0:
+                        welt[a%7+(a/7)*500+genwelthelp3]=34;  //rechts links(wie links rechts
                         break;
+                        case 1:
+                        welt[a%7+(a/7)*500+genwelthelp3]=35;  //rechts oben
+                        break;
+                        case 3:
+                        welt[a%7+(a/7)*500+genwelthelp3]=36;  //rechts unten
+                    }
+                    break;
                     case 3:
-                        switch(algsw.ausg[a]) {
-                            case 0:
-                                welt[a%7+(a/7)*500+genwelthelp3]=37;  //unten links
-                                break;
-                            case 1:
-                                welt[a%7+(a/7)*500+genwelthelp3]=38;  //unten oben
-                                break;
-                            case 2:
-                                welt[a%7+(a/7)*500+genwelthelp3]=39;  //unten rechts
-                                break;
-                        }
+                    switch(algsw.ausg[a]) {
+                        case 0:
+                        welt[a%7+(a/7)*500+genwelthelp3]=37;  //unten links
+                        break;
+                        case 1:
+                        welt[a%7+(a/7)*500+genwelthelp3]=38;  //unten oben
+                        break;
+                        case 2:
+                        welt[a%7+(a/7)*500+genwelthelp3]=39;  //unten rechts
+                        break;
+                    }
                 }
             }
         }  
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
         welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
-        for(int a=0;a<10000;a++) {
+        for(int a=0;a<10000;a++) {                                        //generierung kaempfer
             do {
                 genhelpkampf=r.nextInt(250000);
             }while(welt[genhelpkampf]>=24);
@@ -230,6 +233,29 @@ public class WELT
         }
     }
     
+    public void generierestart() {
+        int genstart1,genstart2;
+        do {
+            genstart1=r.nextInt(500);
+        }while(genstart1<2 || genstart1>496);
+        do {
+            genstart2=r.nextInt(500);
+        }while(genstart2<2 || genstart2>496);
+        aktpos=genstart2*100+genstart1;
+    }
+    
+    public void bewegegegner() {
+        for(int a=0;a<250000;a++) {
+            if(welt[a]==100) {
+                do {
+                    algle.aktion(a);
+                }while (welt[algle.aktpos]>24);
+                welt[a]=101;
+                welt[algle.aktpos]=100;
+            }
+        }
+    }
+
     public void zeichneansicht() {
         berechneansicht();
         grafik.loescheansicht();
@@ -240,7 +266,7 @@ public class WELT
         }
         grafik.zeichnespieler(aktansichtpos);
     }
-    
+
     public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
         if(bildpos<0) {
             bildpos=0;
@@ -254,14 +280,14 @@ public class WELT
             }
         }
     }
-    
+
     public void zerteileansicht() {
         zerx=bildpos%500;
         zery=bildpos/500;
         xzerbew=(aktpos%500);
         yzerbew=aktpos/500;
     }
-    
+
     public void kontrollerand() {
         zerteileansicht();
         if(zerx==0) {
@@ -289,4 +315,5 @@ public class WELT
             bewu=true;
         }
     }
+
 }

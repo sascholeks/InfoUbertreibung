@@ -87,6 +87,7 @@ public class KAMPF
         } 
         grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         hindernisse();
+        
     }
 
     public void zeichnespielfeld() {

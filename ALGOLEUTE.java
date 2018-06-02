@@ -10,76 +10,39 @@ public class ALGOLEUTE
        r=new Random();
     }
     
-    public void aktion() {
-        aktionsauswahl=r.nextInt(7);
-        switch(aktionsauswahl) {
-            case 0:                  //case 0&1=pause
-            if(konpause==true){
-                aktion();
-                break;
-            }
-            case 1:
-                konpause=true;
-                break;
-            case 2:                 //case 2,3&4=bewegen
-            case 3:    
-            case 4:
-                aktpos=aktpos+posfaktor;
-                break;
-            case 5:                 //case 5&6=drehen
-            case 6:
-                richtung=r.nextInt(4);
-                switch (richtung) {
-                    case 0:
-                        if(bewl==true) {
-                            aktion();
-                        }else {
-                            posfaktor=-1;
-                            bewr=false;
-                            break;
-                        }
-                        posfaktor=0;
-                        break;
-                    case 1:
-                        if(bewo==true) {
-                            aktion();
-                        }else {
-                            posfaktor=-500;
-                            bewu=false;
-                            break;
-                        }
-                        posfaktor=0;
-                        break;
-                    case 2:
-                        if(bewr==true) {
-                            aktion();
-                        }else {
-                            posfaktor=+1;
-                            bewl=false;
-                            break;
-                        }
-                        posfaktor=0;
-                        break;
-                    case 3:
-                        if(bewu==true) {
-                            aktion();
-                        }else {
-                            posfaktor=+500;
-                            bewo=false;
-                            break;
-                        }
-                        posfaktor=0;
-                        break;
+    public void aktion(int aktfeld) {
+        kontrollerand(aktfeld);
+        switch(r.nextInt(4)) {
+            case 0:
+                if(bewl==false)  {
+                    bewr=false;
+                    aktfeld=aktfeld-1;
                 }
-                aktpos=aktpos+posfaktor;
+                break;
+            case 1:
+                if(bewo==false)  {
+                    bewu=false;
+                    aktfeld=aktfeld-500;
+                }
+                break;
+            case 2:
+                if(bewr==false)  {
+                    bewl=false;
+                    aktfeld=aktfeld+1;
+                }
+                break;
+            case 3:
+                if(bewu==false)  {
+                    bewo=false;
+                    aktfeld=aktfeld+500;
+                }
                 break;
         }
-        kontrollerand();
     }
     
-    public void kontrollerand() {
-        xzer=(aktpos%500);
-        yzer=aktpos/500;
+    public void kontrollerand(int fedl) {
+        xzer=(fedl%500);
+        yzer=fedl/500;
         if(xzer==1) {
             bewl=true;
         }
