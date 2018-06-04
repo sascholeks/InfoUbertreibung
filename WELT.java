@@ -1,21 +1,25 @@
 import java.util.Random;
-public class WELT
+import java.awt.event.MouseListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.*;
+public class WELT implements MouseListener 
 {
+    private ZEICHENFENSTER f;
     GRAFIKWELT grafik;
     ALGOGR algsw;
-    ALGOLEUTE algle;
     OBJBILDSCHIRM objschirm;
     KAMPFEINGABE kampf;
     INVENTAR inv;
     Random r;
     int[] welt,ansicht;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,hp1,hp2=0;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false;
+    double schwerfaktor=1;
     public WELT() {
+        ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
-        algle=new ALGOLEUTE();
         objschirm=new OBJBILDSCHIRM();
         inv=new INVENTAR();
         r=new Random();
@@ -40,8 +44,8 @@ public class WELT
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
     }
 
-   
     public void bewegen(int richtung) {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
         kontrollerand();
         grafik.zeichnerahmen();
         switch(richtung) {
@@ -90,26 +94,78 @@ public class WELT
             bewo=false;
             break;
         } 
+               
+        
         zeichneansicht();
         if(welt[aktpos]==100) {  //kontrolle gegner
             bewegungssperre=true;
-            kampf=new KAMPFEINGABE(inv.ausanz[0],inv.ausanz[1],inv.ausanz[2],inv.ausanz[3],inv.ausanz[4],r.nextInt(300)+20,r.nextInt(100+30),r.nextInt(20)+50,r.nextInt(50)+20,r.nextInt(20)+25,inv.heiltrankkl,inv.heiltrankgr);
+            kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr);
         }
-        if(welt[aktpos]==26) {                                //ab hier kontrolle quests
-            objschirm.hauptstadt();
-            kongenehmigung=true;
-            wegkont=true;
-        }else if(welt[aktpos]==27 && kongenehmigung==true) {
-            objschirm.stadtmiene();
-            wegkont=false;
+        if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
+            bewegungssperre=true;
+            objschirm.hauptstadt();      
+        }else if(welt[aktpos]==27 && objschirm.kaserne==true) {
+            objschirm.kaserne();
+            bewegungssperre=true;
+            if (hp1==1) {
+                schwerfaktor=schwerfaktor+0.05;
+            }
         }
-        grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));  
     }
-
-    public void inventaraufruf() {
-        inv.inventar();
+    
+    public void mouseReleased(MouseEvent e) {
+        if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107) {          //fld1
+            if(objschirm.hpt==true) {
+                objschirm.kaserne=true;
+                hp2++;
+            }else if(objschirm.shp==true) {
+                inv.kaufetruppen(0);
+            }else if(objschirm.kas==true) {
+                if(hp2==1) {
+                    grafik.kons("Truppen,Heiltränke und Geld erhalten");
+                    inv.anz[0]=inv.anz[0]+100;
+                    inv.anz[1]=inv.anz[1]+80;
+                    inv.anz[2]=inv.anz[2]+65;
+                    inv.anz[3]=inv.anz[3]+50;
+                    inv.anz[4]=inv.anz[4]+45;
+                    inv.geld=inv.geld+5000;
+                    inv.heiltrankkl=inv.heiltrankkl+5;
+                    inv.heiltrankgr=inv.heiltrankgr+2;
+                }
+            }
+        }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127) {    //fld2
+            if(objschirm.hpt==true) {
+                objschirm.shop();
+            }else if(objschirm.shp==true) {
+                inv.kaufetruppen(1);
+            }else if(objschirm.kas==true) {
+                objschirm.shop();
+            }
+        }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147) {   //fld3
+            if(objschirm.hpt==true || objschirm.kas==true) {
+                bewegungssperre=false;
+                objschirm.hpt=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                grafik.zeichnerahmen();
+                zeichneansicht();
+            }else if(objschirm.shp==true) {
+                inv.kaufetruppen(2);
+            }
+        }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167) {  //fld4
+            if(objschirm.shp==true) {
+                inv.kaufetruppen(3);
+            }
+        }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187) {  //fld5
+            if(objschirm.shp==true) {
+                inv.kaufetruppen(4);
+            }
+        }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207) {  //fld6
+            if(objschirm.shp==true) {
+                objschirm.hauptstadt();
+            }
+        }
     }
-
+    
     public void generierewelt() {          //weltteil darf innerhalb 12 felder nur einmal vorkommen
         welt[0]=r.nextInt(25);             //IdentifikatorNr.1
         do {                               //IdfNR.2
@@ -158,7 +214,7 @@ public class WELT
             welt[499+a*500]=25;    //rechts
             welt[249500+a]=25;     //unten
         }
-        int genwelthelp3=aktpos-1503;                //ab hier für algokor
+        int genwelthelp3=aktpos-1503;                //ab hier für algokordinaten
         do {
             genwelthelp=r.nextInt(7)*7+r.nextInt(7);
         }while((genwelthelp%7)+((genwelthelp/7)*500)+genwelthelp3==aktpos);
@@ -225,40 +281,30 @@ public class WELT
         }  
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
         welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
-        for(int a=0;a<10000;a++) {                                        //generierung kaempfer
+        for(int a=0;a<10000;a++) {                                        //generierung kaempfer auf 10000
             do {
                 genhelpkampf=r.nextInt(250000);
             }while(welt[genhelpkampf]>=24);
             welt[genhelpkampf]=100;
         }
     }
-    
+
     public void generierestart() {
         int genstart1,genstart2;
         do {
             genstart1=r.nextInt(500);
-        }while(genstart1<2 || genstart1>496);
+        }while(genstart1<3 || genstart1>495);
         do {
             genstart2=r.nextInt(500);
-        }while(genstart2<2 || genstart2>496);
-        aktpos=genstart2*100+genstart1;
-    }
-    
-    public void bewegegegner() {
-        for(int a=0;a<250000;a++) {
-            if(welt[a]==100) {
-                do {
-                    algle.aktion(a);
-                }while (welt[algle.aktpos]>24);
-                welt[a]=101;
-                welt[algle.aktpos]=100;
-            }
-        }
+        }while(genstart2<3 || genstart2>495);
+        aktpos=genstart2*500+genstart1;
     }
 
     public void zeichneansicht() {
         berechneansicht();
         grafik.loescheansicht();
+        grafik.zeichnerahmen();
+        grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500)); 
         for(int a=0;a<7;a++) {
             for(int b=0;b<7;b++) {
                 grafik.weltteil(b,a,ansicht[a*7+b]);
@@ -315,5 +361,24 @@ public class WELT
             bewu=true;
         }
     }
+    
+    public void inventaraufruf() {
+        inv.inventar();
+    }
 
+    public void mousePressed(MouseEvent e) 
+    {   
+    } 
+
+    public void mouseEntered(MouseEvent e) 
+    {  
+    }  
+
+    public void mouseExited(MouseEvent e) 
+    {     
+    } 
+
+    public void mouseClicked(MouseEvent e) 
+    {
+    }
 }

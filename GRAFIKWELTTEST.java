@@ -1,4 +1,4 @@
-
+ 
 public class GRAFIKWELTTEST
 {
     int[] x,y;

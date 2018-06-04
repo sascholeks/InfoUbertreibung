@@ -262,7 +262,7 @@ public class GRAFIKELEMENTE
     }
 
     public void auswahlfeld(int feld) {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+1,y[feld/5]+1,49,49,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+1,y[feld/5]+1,49,49,32);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,8);
     }
 
@@ -270,7 +270,7 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[aktuellesfeld%5]+1,y[aktuellesfeld/5]+1,49,49,8);
     }
 
-    public void markieretod(int x) {
+    public void markieretot(int x) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*x,225,55,5,6);
     }
 

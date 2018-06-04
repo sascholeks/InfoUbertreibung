@@ -246,15 +246,13 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+3,this.y[y]+10,10,3,5);
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+12,this.y[y]+10,10,3,5);
                 break;
+            case 101:  //monsterzerstörung
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+2,this.y[y]+2,35,35,22);
         }
     }
 
     public void loescheansicht() {
-        for(int a=0;a<7;a++) {
-            for(int b=0;b<7;b++) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[b]+1,y[a]+1,39,39,8);
-            }
-        }
+        ZEICHENFENSTER.gibFenster().loescheAlles();
     }  
 
     public void zeichnespieler(int feld) {
@@ -379,6 +377,12 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,10,54,14,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,10,54,14);
         ZEICHENFENSTER.gibFenster().zeichneText(kord,292,22);
+    }
+    
+    public void questanzeige(String kords) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(290,28,150,14,11);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,28,150,14);
+        ZEICHENFENSTER.gibFenster().zeichneText(kords,292,40);
     }
 }
     

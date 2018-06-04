@@ -505,6 +505,8 @@ public class ZEICHENFENSTER
             return orange;
             case 31 : Color weg=new Color(130,119,98);
             return weg;
+            case 32 : Color markrot=new Color(122,4,4);
+            return markrot;
 
             default: return graphic.getColor();
         }

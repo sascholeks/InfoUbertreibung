@@ -5,7 +5,7 @@ public class INVENTAR
     int[] ausanz;
     int[] kaeauswahl;
     int[] anzauswahl;   //siehe unten
-    int heiltrankkl=1,heiltrankgr=1,geld=1000;
+    int heiltrankkl=1,heiltrankgr=1,geld;
     public INVENTAR()
     {
         grafik=new GRAFIKWELT();
@@ -15,11 +15,69 @@ public class INVENTAR
         for(int a=0;a<10;a++) {
             anz[a]=10;
             ausanz[a%5]=0;   
-        }     
+        }  
+        geld=5000;
+    }
+    
+    public void kaufetruppen(int typ) {
+        switch (typ) {
+            case 0:
+                if(geld>=150) {
+                    geld=geld-100;
+                    anz[0]=anz[0]+1;
+                    grafik.kons("Anz: "+anz[0]); 
+                }else {
+                    grafik.kons("nicht genug Geld");
+                }
+                break;
+            case 1:
+                if(geld>=200) {
+                    geld=geld-200;
+                    anz[1]=anz[1]+1;
+                    grafik.kons("Anz: "+anz[1]); 
+                }else {
+                    grafik.kons("nicht genug Geld");
+                }
+                break;
+            case 2:
+                if(geld>=100) {
+                    geld=geld-100;
+                    anz[2]=anz[2]+1;
+                    grafik.kons("Anz: "+anz[2]); 
+                }else {
+                    grafik.kons("nicht genug Geld");
+                }
+                break;
+            case 3:
+                if(geld>=350) {
+                    geld=geld-350;
+                    anz[3]=anz[3]+1;
+                    grafik.kons("Anz: "+anz[3]); 
+                }else {
+                    grafik.kons("nicht genug Geld");
+                }
+                break;
+            case 4:
+                if(geld>=500) {
+                    geld=geld-500;
+                    anz[4]=anz[4]+1;
+                    grafik.kons("Anz: "+anz[4]); 
+                }else {
+                    grafik.kons("nicht genug Geld");
+                }
+                break;
+            }
+        zeichnegeld();
+    }
+    
+    public void zeichnegeld() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(400,150,100,20,12);
+        ZEICHENFENSTER.gibFenster().zeichneText("Geld: "+geld,405,165);
     }
     
     public void inventar() {
-        grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4],anz[5],anz[6],anz[7],anz[8],anz[9],ausanz[0],ausanz[1],ausanz[2],ausanz[3],ausanz[4],kaeauswahl[0],kaeauswahl[1],kaeauswahl[2],kaeauswahl[3],kaeauswahl[4]);                
+        grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4],anz[5],anz[6],anz[7],anz[8],anz[9],ausanz[0],ausanz[1],ausanz[2],ausanz[3],ausanz[4],kaeauswahl[0],kaeauswahl[1],kaeauswahl[2],kaeauswahl[3],kaeauswahl[4]);   
+        zeichnegeld();
     }
     
     public void waehlekaempferaus(int typ,int anza,int platz){
@@ -115,6 +173,7 @@ public class INVENTAR
         ausanz[3]=10;
         ausanz[4]=5;
     }
+    
 }
 
 
