@@ -13,8 +13,8 @@ public class WELT implements MouseListener
     Random r;
     int[] welt,ansicht;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,hp1,hp2=0;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,hp1,hp2=0,hp3=0,help4=0;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false;
     double schwerfaktor=1;
     public WELT() {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
@@ -111,6 +111,20 @@ public class WELT implements MouseListener
                 schwerfaktor=schwerfaktor+0.05;
             }
         }
+        if(kontrolleweg==true) {
+            if(welt[aktpos]<26 || welt[aktpos]>39) {
+                if(help4==2) {
+                    grafik.kons("Quest abgebrochen");
+                    help4=0;
+                    objschirm.kaserne=false;
+                    hp3=0;
+                    hp2=0;
+                }else {
+                    grafik.kons("bleibe auf dem Weg");
+                    help4++;
+                }
+            }
+        }
     }
     
     public void mouseReleased(MouseEvent e) {
@@ -118,10 +132,23 @@ public class WELT implements MouseListener
             if(objschirm.hpt==true) {
                 objschirm.kaserne=true;
                 hp2++;
+                if(hp3==0) {
+                    hp3++;
+                    grafik.kons("folge dem Weg und Gelange zur Kaserne");
+                    kontrolleweg=true;
+                }else {
+                    grafik.kons("Quest bereits abgeschlossen");
+                }
             }else if(objschirm.shp==true) {
                 inv.kaufetruppen(0);
             }else if(objschirm.kas==true) {
                 if(hp2==1) {
+                    grafik.kons("Quest abgeschlossen");
+                    try {
+                        Thread.sleep(500);                 
+                    } catch(InterruptedException ex) {
+                        Thread.currentThread().interrupt();
+                    } 
                     grafik.kons("Truppen,Heiltränke und Geld erhalten");
                     inv.anz[0]=inv.anz[0]+100;
                     inv.anz[1]=inv.anz[1]+80;
@@ -131,6 +158,7 @@ public class WELT implements MouseListener
                     inv.geld=inv.geld+5000;
                     inv.heiltrankkl=inv.heiltrankkl+5;
                     inv.heiltrankgr=inv.heiltrankgr+2;
+                    kontrolleweg=false;
                 }
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127) {    //fld2
