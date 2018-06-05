@@ -1,9 +1,11 @@
 
-import java.util.*;
-public class GRAFIKWELT extends TimerTask
+import java.util.Timer;
+import java.util.TimerTask;
+public class GRAFIKWELT
 {
     int x[],y[];
     String str2="",str3="",str4="";
+    String sh1,sh2,sh3;
     int i=0;
 
     public GRAFIKWELT()
@@ -30,7 +32,41 @@ public class GRAFIKWELT extends TimerTask
         ZEICHENFENSTER.gibFenster().fuelleRechteck(320,20,200,20,7);
     }
 
+    public void clearKons(int ID, String st) {
+        switch(ID) {
+            case 1:
+            ZEICHENFENSTER.gibFenster().loescheRechteck(290,265,401,21);
+            ZEICHENFENSTER.gibFenster().loescheText(st, 295,280);
+            break;
+            case 2:
+            ZEICHENFENSTER.gibFenster().loescheRechteck(290,235,401,21);
+            ZEICHENFENSTER.gibFenster().loescheText(st, 295,250);
+            break;
+            case 3:
+            ZEICHENFENSTER.gibFenster().loescheRechteck(290,205,401,21);
+            ZEICHENFENSTER.gibFenster().loescheText(st, 295,220);
+            break;
+        }
+    }
+
+    public void deleteTop() {
+        switch(i) {
+            case 0:
+            clearKons(1,str2);
+            break;
+            case 1:
+            clearKons(2,str3);
+            break;
+            case 2:
+            clearKons(3,str4);
+            break;
+            default: 
+            System.out.println("Nö!");
+        }
+    }
+
     public void kons(String st) { 
+        sh1= st;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265,400,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,265,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(st,295,280); 
@@ -41,9 +77,11 @@ public class GRAFIKWELT extends TimerTask
             i=1; 
         } 
         str2=st;
+        deleteTop();
     }
 
     public void kons2(String str2) {   
+        sh2= str2;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,235,400,20,33);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,235,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(str2,295,250);
@@ -56,18 +94,14 @@ public class GRAFIKWELT extends TimerTask
         str3=str2;
     }
 
-    public void run() {
-
-    }
-
     public void kons3(String str3) {   
+        sh3= str3;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,205,400,20,34);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,205,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(str3,295,220);
+        str4 = str3; //Prinzip
         i=3; //aus Prinzip :)
-
     }
-
 
     public void weltteil(int x, int y,int nr) {
         switch (nr) {

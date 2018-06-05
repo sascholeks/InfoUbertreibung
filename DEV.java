@@ -26,8 +26,8 @@ public class DEV
     {
 
         //Config:
-        normal = false;
-        rocks = false;
+        normal = true;
+        rocks = true;
 
         inv=new INVENTAR();
         grafik=new GRAFIKELEMENTE();
@@ -460,11 +460,16 @@ public class DEV
         Orderpos = alg.getOrderPos(); 
         return Orderpos;
     }
-    
+
     public int getAction() {
-       alg = new ALGORITHM(welt,anz,reihenfolge);
-       alg.decide();
-       return alg.getActionType();
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        alg.decide();
+        return alg.getActionType();
+    }
+
+    public int[] getExtendRange() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        return alg.getExtendedAttack();
     }
 }
 //          try {
