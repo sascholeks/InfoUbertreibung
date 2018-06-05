@@ -42,6 +42,10 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+31,this.y[y]+16,1,1,17);
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+34,this.y[y]+17,1,3,17);
                 ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+33,this.y[y]+16,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+4,this.y[y]+34,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+3,this.y[y]+33,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+5,this.y[y]+34,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+4,this.y[y]+33,1,1,17);
                 break;     
             case 2:
                 Blume2(this.x[x]+5,this.y[y]+21);
@@ -66,13 +70,23 @@ public class GRAFIKWELT
                 ZEICHENFENSTER.gibFenster().zeichneRechteck(this.x[x]+1,this.y[y]+1,39,39); //da 8 weis ist und nicht von weißem kries unterscheiden
                 break;
             case 8:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,9);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+11,this.y[y]+26,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+10,this.y[y]+25,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+11,this.y[y]+26,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+10,this.y[y]+25,1,1,17);
                 break;
             case 9:
                 Blume3(this.x[x]+6,this.y[y]+18);
                 break;
             case 10:
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,11);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+20,this.y[y]+2,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+19,this.y[y]+1,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+20,this.y[y]+2,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+19,this.y[y]+1,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+32,this.y[y]+22,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+31,this.y[y]+21,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+34,this.y[y]+22,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+33,this.y[y]+21,1,1,17);
                 break;
             case 11:
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+31,this.y[y]+7,2,16);
@@ -90,7 +104,10 @@ public class GRAFIKWELT
                 Blume2(this.x[x]+2,this.y[y]+15);
                 break;
             case 15:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,19,3);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+9,this.y[y]+17,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+8,this.y[y]+16,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+9,this.y[y]+17,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+8,this.y[y]+16,1,1,17);
                 break;
             case 16:
                 Blume3(this.x[x]+11,this.y[y]+25);
@@ -99,7 +116,18 @@ public class GRAFIKWELT
                  blume1(this.x[x]+20,this.y[y]+8);
                 break;
             case 18:
-                ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+12,this.y[y]+21,2,16);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+7,this.y[y]+6,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+6,this.y[y]+5,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+8,this.y[y]+6,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+7,this.y[y]+5,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+26,this.y[y]+17,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+25,this.y[y]+16,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+26,this.y[y]+17,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+25,this.y[y]+16,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+29,this.y[y]+35,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+28,this.y[y]+34,1,1,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+30,this.y[y]+35,1,3,17);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+29,this.y[y]+34,1,1,17);
                 break;
             case 19:
                 Blume3(this.x[x]+3,this.y[y]+26);
@@ -188,12 +216,12 @@ public class GRAFIKWELT
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+22,this.y[y]+10,2,1,22);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+23,this.y[y]+9,1,1,22);
                 break;
-            case 26:  //startpos  //schloss/hauptstadt
+            case 26:  //hauptstadt
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,18,12);
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,15,1);
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,12,2);
                 break;
-            case 27:  //zielpos  //miene
+            case 27:    //kaserne
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,18,1);
                 ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,10,8);
                 break;

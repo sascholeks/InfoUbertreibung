@@ -34,7 +34,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,50,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,50,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,50,13);       
-        ZEICHENFENSTER.gibFenster().zeichneText("Quest (kommt noch)",60,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("Quest",60,75);
         ZEICHENFENSTER.gibFenster().zeichneText("Shop",60,95);
         ZEICHENFENSTER.gibFenster().zeichneText("Exit",60,115);
        
@@ -83,7 +83,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,150,13);
-        ZEICHENFENSTER.gibFenster().zeichneText("Questabgabe",60,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("Quest",60,75);
         ZEICHENFENSTER.gibFenster().zeichneText("shop",60,95);
         ZEICHENFENSTER.gibFenster().zeichneText("Exit",60,115);
     }  

@@ -12,7 +12,7 @@ public class KAMPF
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz,startanz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr;
-    boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false;   //=ungültig (bei bewegung(int feld))
+    boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false,sieg,verloren;   //=ungültig (bei bewegung(int feld))
     public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)                                     
     {
         grafik=new GRAFIKELEMENTE();
@@ -271,7 +271,7 @@ public class KAMPF
         for(int a=0;a<6;a++) {
             grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);
             if(tod[reihenfolge[a]]==true) {
-                grafik.markieretod(a);
+                grafik.markieretot(a);
             }
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
@@ -369,6 +369,7 @@ public class KAMPF
                 Thread.currentThread().interrupt();
             }
             grafik.zeichneverloren();
+            verloren=true;
         }else if(tod[5]==true && tod[6]==true && tod[7]==true && tod[8]==true && tod[9]==true) {
             grafik.kons("Sieg");
             try {
@@ -377,6 +378,7 @@ public class KAMPF
                 Thread.currentThread().interrupt();
             }
             grafik.zeichnesieg();
+            sieg=true;
         }
     }
 

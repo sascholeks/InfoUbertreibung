@@ -23,7 +23,7 @@ public class INVENTAR
         switch (typ) {
             case 0:
                 if(geld>=150) {
-                    geld=geld-100;
+                    geld=geld-150;
                     anz[0]=anz[0]+1;
                     grafik.kons("Anz: "+anz[0]); 
                 }else {

@@ -8,7 +8,7 @@ public class KAMPFEINGABE implements MouseListener
     GRAFIKELEMENTE grafik;
     int[] x,y;
     int help,feld=100,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
-    boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false;
+    boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false;
     public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
@@ -39,6 +39,8 @@ public class KAMPFEINGABE implements MouseListener
             grafik.zeichneaktionsauswahl(1);
             kampffreigabe=true;
             grafik.kons("wähle Gegner");
+            sieg=kampf.sieg;
+            verloren=kampf.verloren;
         }else if(e.getX()>558-20 && e.getX()<558+20 && e.getY()>131-20 && e.getY()<131+20) {            //bewegen
             if(konbewegt>0) {
                 grafik.loeschemarkierung(feld);
