@@ -77,7 +77,6 @@ public class GRAFIKWELT
             i=1; 
         } 
         str2=st;
-        deleteTop();
     }
 
     public void kons2(String str2) {   
