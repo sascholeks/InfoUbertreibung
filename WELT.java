@@ -17,7 +17,7 @@ public class WELT implements MouseListener
     int[] gegnerpos;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,counter;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
     double schwerfaktor=1;
     public WELT() {
@@ -118,10 +118,12 @@ public class WELT implements MouseListener
             }
         }
         if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
+            grafik.loeschekons();
             bewegungssperre=true;
             objschirm.hauptstadt();  
             mausfreigabe=true;
         }else if(welt[aktpos]==27 && objschirm.kaserne==true) {
+            grafik.loeschekons();
             objschirm.kaserne();
             bewegungssperre=true;
             mausfreigabe=true;
@@ -158,7 +160,10 @@ public class WELT implements MouseListener
                     hp3++;
                     grafik.kons("folge dem Weg und Gelange zur Kaserne");
                     kontrolleweg=true;
-                }else {
+                    hp8=1;
+                }else if(hp8==1) {
+                    grafik.kons("Quest bereits angenommen");
+                }else if(objschirm.kaserne==true) {
                     grafik.kons("Quest bereits abgeschlossen");
                 }
             }else if(objschirm.shp==true) {
@@ -183,6 +188,7 @@ public class WELT implements MouseListener
                     kontrolleweg=false;
                     hp2++;
                     hp5=1;
+                    hp8=0;
                 }else if(hp5==1) {
                     grafik.kons("Jetzt geh und Töte 10 Gegner");
                     hp6=1;

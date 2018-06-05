@@ -7,7 +7,7 @@ public class GRAFIKWELT
     String str2="",str3="",str4="";
     String sh1,sh2,sh3;
     int i=0;
-
+    int hlp1=0;
     public GRAFIKWELT()
     {
         x=new int [7];
@@ -32,45 +32,42 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(320,20,200,20,7);
     }
 
-    public void clearKons(int ID, String st) {
-        switch(ID) {
-            case 1:
-            ZEICHENFENSTER.gibFenster().loescheRechteck(290,265,401,21);
-            ZEICHENFENSTER.gibFenster().loescheText(st, 295,280);
-            break;
-            case 2:
-            ZEICHENFENSTER.gibFenster().loescheRechteck(290,235,401,21);
-            ZEICHENFENSTER.gibFenster().loescheText(st, 295,250);
-            break;
-            case 3:
-            ZEICHENFENSTER.gibFenster().loescheRechteck(290,205,401,21);
-            ZEICHENFENSTER.gibFenster().loescheText(st, 295,220);
-            break;
-        }
-    }
-
     public void kons(String st) { 
-        sh1= st;
+        if(i>=1) {   
+            int y=0;
+            while(y!=30) {
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265-y,400,20,33);
+                ZEICHENFENSTER.gibFenster().zeichneRechteck(290,265-y,400,20);
+                ZEICHENFENSTER.gibFenster().zeichneText(str2,295,280-y);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,283-y,401,20,8);
+                y=y+3;
+            }
+            kons2(str2);
+        }
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265,400,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,265,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(st,295,280); 
-        if(i>=1) {   
-            kons2(str2);
-        }
         if(i==0)  {
             i=1; 
         } 
         str2=st;
     }
 
-    public void kons2(String str2) {   
-        sh2= str2;
+    public void kons2(String str2) {  
+        if(i>=2) {  
+            int y=0;
+            while(y!=30) {
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,235-y,400,20,33);
+                ZEICHENFENSTER.gibFenster().zeichneRechteck(290,235-y,400,20);
+                ZEICHENFENSTER.gibFenster().zeichneText(str2,295,250-y);
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,253-y,401,20,8);
+                y=y+3;
+            }            
+            kons3(str3);
+        }
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,235,400,20,33);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,235,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(str2,295,250);
-        if(i>=2) {  
-            kons3(str3);
-        }
         if(i==1)  {
             i=2; 
         } 
@@ -78,12 +75,18 @@ public class GRAFIKWELT
     }
 
     public void kons3(String str3) {   
-        sh3= str3;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,205,400,20,34);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,205,400,20);
         ZEICHENFENSTER.gibFenster().zeichneText(str3,295,220);
         str4 = str3; //Prinzip
         i=3; //aus Prinzip :)
+    }
+    
+    public void loeschekons() {
+        for(int a=0;a<3;a++) {
+            kons("");
+        }
+        i=0;
     }
 
     public void weltteil(int x, int y,int nr) {
