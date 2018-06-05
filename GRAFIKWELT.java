@@ -49,22 +49,6 @@ public class GRAFIKWELT
         }
     }
 
-    public void deleteTop() {
-        switch(i) {
-            case 0:
-            clearKons(1,str2);
-            break;
-            case 1:
-            clearKons(2,str3);
-            break;
-            case 2:
-            clearKons(3,str4);
-            break;
-            default: 
-            System.out.println("Nö!");
-        }
-    }
-
     public void kons(String st) { 
         sh1= st;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265,400,20,11);
