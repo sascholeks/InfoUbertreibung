@@ -2,6 +2,7 @@ import java.util.Random;
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
+import java.util.Timer;
 public class WELT implements MouseListener 
 {
     private ZEICHENFENSTER f;
@@ -11,9 +12,12 @@ public class WELT implements MouseListener
     KAMPFEINGABE kampf;
     INVENTAR inv;
     Random r;
+    Timer t;
     int[] welt,ansicht;
+    int[] gegnerpos;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,counter;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
     double schwerfaktor=1;
     public WELT() {
@@ -25,6 +29,11 @@ public class WELT implements MouseListener
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
+        gegnerpos=new int[250000];
+        t = new Timer();
+        for(int a=0;a<250000;a++) {
+            gegnerpos[a]=101;
+        }
         generierestart();            //startpos bei tests ändern
         bildpos=aktpos-1503; 
         aktansichtpos=24;
@@ -94,15 +103,19 @@ public class WELT implements MouseListener
             bewo=false;
             break;
         } 
-
         zeichneansicht();
-        if(welt[aktpos]==100) {  //kontrolle gegner
+        if(gegnerpos[aktpos]==100) {  //kontrolle gegner
             bewegungssperre=true;
             kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr);
-            while(kampf.sieg!=false || kampf.verloren!=false) {
-                
+            while(kampf.sieg!=false || kampf.verloren!=false) {       
             }
-            bewegungssperre=false;
+            if(kampf.sieg==true) {
+                //obj sieg
+                bewegungssperre=false;
+                schwerfaktor=schwerfaktor+0.4;
+            }else if(kampf.verloren==true) {
+                //obj game over
+            }
         }
         if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
             bewegungssperre=true;
@@ -115,6 +128,9 @@ public class WELT implements MouseListener
             if (hp1==1) {
                 schwerfaktor=schwerfaktor+0.05;
             }
+        }else if(welt[aktpos]==27 && objschirm.kaserne==false) {
+            grafik.kons("Du darfst hier noch nicht rein!");
+            grafik.kons("Gehe zur Hauptstadt nach X: "+getpos(26)%500+" Y: "+getpos(26)/500);
         }
         if(kontrolleweg==true) {
             if(welt[aktpos]<26 || welt[aktpos]>39) {
@@ -124,6 +140,7 @@ public class WELT implements MouseListener
                     objschirm.kaserne=false;
                     hp3=0;
                     hp2=0;
+                    kontrolleweg=false;
                 }else {
                     grafik.kons("bleibe auf dem Weg");
                     help4++;
@@ -258,7 +275,7 @@ public class WELT implements MouseListener
             welt[499+a*500]=25;    //rechts
             welt[249500+a]=25;     //unten
         }
-        int genwelthelp3=aktpos-1503;                //ab hier für algokordinaten
+        int genwelthelp3=aktpos-1503;                //ab hier für algosw
         do {
             genwelthelp=r.nextInt(7)*7+r.nextInt(7);
         }while((genwelthelp%7)+((genwelthelp/7)*500)+genwelthelp3==aktpos);
@@ -267,7 +284,7 @@ public class WELT implements MouseListener
         }while((genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==aktpos || (genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==genwelthelp || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-499 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+499);                                                  
         algsw.eingabestartziel(genwelthelp,genwelthelp2);
         algsw.loese();
-        for(int a=0;a<49;a++) {
+        for(int a=0;a<49;a++) {              //richung der wegteile
             if(algsw.pos[a]!=0) {
                 switch (algsw.eing[a]) {
                     case 0:
@@ -325,11 +342,11 @@ public class WELT implements MouseListener
         }  
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
         welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
-        for(int a=0;a<10000;a++) {                                        //generierung kaempfer auf 10000
+        for(int a=0;a<10000;a++) {                                        //generierung von ca. 10000 gegnern 
             do {
                 genhelpkampf=r.nextInt(250000);
-            }while(welt[genhelpkampf]>=24);
-            welt[genhelpkampf]=100;
+            }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100);
+            gegnerpos[genhelpkampf]=100;
         }
     }
 
@@ -348,10 +365,22 @@ public class WELT implements MouseListener
         berechneansicht();
         grafik.loescheansicht();
         grafik.zeichnerahmen();
+        if(grafik.str4!="") {
+            grafik.konsz3(grafik.str4); 
+        }
+        if(grafik.str3!="") {
+            grafik.konsz2(grafik.str3); 
+        }
+        if(grafik.str2!="") {
+            grafik.konsz(grafik.str2); 
+        }
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500)); 
         for(int a=0;a<7;a++) {
             for(int b=0;b<7;b++) {
                 grafik.weltteil(b,a,ansicht[a*7+b]);
+                if(gegnerpos[bildpos+a*500+b]==100) {
+                    grafik.weltteil(b,a,100);
+                }
             }
         }
         grafik.zeichnespieler(aktansichtpos);
@@ -404,6 +433,15 @@ public class WELT implements MouseListener
         if(yzerbew==498) {
             bewu=true;
         }
+    }
+
+    public int getpos(int typ) {
+        for(int a=0;a<250000;a++) {
+            if(welt[a]==typ) {
+                hp7=a;
+            }
+        }
+        return hp7;
     }
 
     public void inventaraufruf() {

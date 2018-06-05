@@ -266,7 +266,7 @@ public class DEV
         for(int a=0;a<6;a++) {
             grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);
             if(tod[reihenfolge[a]]==true) {
-                grafik.markieretod(a);
+                grafik.markieretot(a);
             }
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }

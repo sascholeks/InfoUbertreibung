@@ -5,7 +5,7 @@ public class INVENTAR
     int[] ausanz;
     int[] kaeauswahl;
     int[] anzauswahl;   //siehe unten
-    int heiltrankkl=1,heiltrankgr=1,geld;
+    int heiltrankkl=0,heiltrankgr=0,geld;
     public INVENTAR()
     {
         grafik=new GRAFIKWELT();
@@ -16,7 +16,7 @@ public class INVENTAR
             anz[a]=10;
             ausanz[a%5]=0;   
         }  
-        geld=5000;
+        geld=0;
     }
     
     public void kaufetruppen(int typ) {

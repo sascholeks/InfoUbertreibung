@@ -28,6 +28,7 @@ public class OBJBILDSCHIRM
          //png
         ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,120,7);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,120);
+        
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,50,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,50,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,50,13,16);
@@ -44,6 +45,7 @@ public class OBJBILDSCHIRM
         shp=true;
         hpt=false;
         kas=false;
+        //png
         ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,120,7);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,120);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);

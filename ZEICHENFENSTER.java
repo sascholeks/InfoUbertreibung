@@ -23,6 +23,7 @@ public class ZEICHENFENSTER
     private Color backgroundColor;
     private Image canvasImage;
     private static ZEICHENFENSTER singleton;
+    int i=0;
 
     /**
      * Erzeugt eine Zeichenfenster mit Standardma�en 700*290 und Hintergrundfarbe wei� 
@@ -73,6 +74,7 @@ public class ZEICHENFENSTER
         frame.setTitle(titel);
         backgroundColor = hintergrundFarbe;
         frame.pack();
+        frame.setResizable(false);
         zeige();
     }
 
@@ -465,7 +467,7 @@ public class ZEICHENFENSTER
             return c1;
             case 10: Color c2 = new Color(127,126,0); 
             return c2;  
-            case 11: Color whitegray = new Color(180,189,180);
+            case 11: Color whitegray = new Color(180,180,180);
             return whitegray; 
             case 12: Color hellbraun = new Color(181,160,95);
             return hellbraun;
@@ -507,6 +509,10 @@ public class ZEICHENFENSTER
             return weg;
             case 32 : Color markrot=new Color(122,4,4);
             return markrot;
+            case 33: Color whitegray2 = new Color(205,205,205);
+            return whitegray2; 
+            case 34: Color whitegray3 = new Color(230,230,230);
+            return whitegray3; 
 
             default: return graphic.getColor();
         }
