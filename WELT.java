@@ -14,10 +14,10 @@ public class WELT implements MouseListener
     Random r;
     Timer t;
     int[] welt,ansicht;
-    int[] gegnerpos;
+    int[] gegnerpos,hp11;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,counter;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
     double schwerfaktor=1;
     public WELT() {
@@ -34,6 +34,7 @@ public class WELT implements MouseListener
         for(int a=0;a<250000;a++) {
             gegnerpos[a]=101;
         }
+        hp11=new int [500];
         generierestart();            //startpos bei tests ändern
         bildpos=aktpos-1503; 
         aktansichtpos=24;
@@ -105,7 +106,7 @@ public class WELT implements MouseListener
         } 
         bewegegegner();
         zeichneansicht();
-        if(gegnerpos[aktpos]==100) {  //kontrolle gegner
+        if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
             bewegungssperre=true;
             kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr);
             while(kampf.sieg!=false || kampf.verloren!=false) {       
@@ -396,45 +397,47 @@ public class WELT implements MouseListener
         }
         grafik.zeichnespieler(aktansichtpos);
     }
-    
+
     public void bewegegegner() {
         for(int a=0;a<250000;a++) {
-            if(gegnerpos[a]==100) {
+            if(gegnerpos[a]==100 && hp10!=a && hp11[a%500]!=a) {
                 switch(r.nextInt(8)) {
                     case 0:
-                        if(welt[a-1]<25) {
-                            gegnerpos[a-1]=100;
-                            gegnerpos[a]=101;
-                        }
-                        break;
-                        case 1:
-                        if(welt[a-500]<25) {
-                            gegnerpos[a-500]=100;
-                            gegnerpos[a]=101;
-                        }
-                        break;
-                    case 2:
-                        if(welt[a+1]<25) {
-                            gegnerpos[a+1]=100;
-                            gegnerpos[a]=101;
-                        }
-                        break;
-                    case 3:
-                        if(welt[a+500]<25) {
-                            gegnerpos[a+500]=100;
-                            gegnerpos[a]=101;
-                        }
-                        break;
-                        case 4:  //case 4,5,6,7 = warten/nichts tun
-                        case 5:
-                        case 6:
-                        case 7:
-                        break;
+                    if(welt[a-1]<25) {
+                        gegnerpos[a-1]=100;
+                        gegnerpos[a]=101;
+                        hp10=a+1;
                     }
+                    break;
+                    case 1:
+                    if(welt[a-500]<25) {
+                        gegnerpos[a-500]=100;
+                        gegnerpos[a]=101;
+                        hp11[a%500]=a+500;
+                    }
+                    break;
+                    case 2:
+                    if(welt[a+1]<25) {
+                        gegnerpos[a+1]=100;
+                        gegnerpos[a]=101;
+                    }
+                    break;
+                    case 3:
+                    if(welt[a+500]<25) {
+                        gegnerpos[a+500]=100;
+                        gegnerpos[a]=101;
+                    }
+                    break;
+                    case 4:  //case 4,5,6,7 = warten/nichts tun
+                    case 5:
+                    case 6:
+                    case 7:
+                    break;
+                }
             }
         }
     }
-        
+
     public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
         if(bildpos<0) {
             bildpos=0;

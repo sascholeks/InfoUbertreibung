@@ -8,7 +8,7 @@ public class KAMPFEINGABE implements MouseListener
     GRAFIKELEMENTE grafik;
     int[] x,y;
     int help,feld=100,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
-    boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false;
+    boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
     public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr)
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
@@ -32,6 +32,7 @@ public class KAMPFEINGABE implements MouseListener
             heilen=true;
             grafik.kons("wähle Größe");
         }else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>82-20 && e.getY()<80+20) {              //kämpfen
+            konbewegen=false;
             if(kampf.ug==true) {
                 grafik.loeschemarkierung(feld);
                 grafik.markiereaktuell(kampf.kepos[kampf.reihenfolge[0]]);
@@ -87,13 +88,11 @@ public class KAMPFEINGABE implements MouseListener
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,x[0]+3,45,45,8);
             feld=0;
             konbewegt++;
-
         }else if(konbewegen==true && e.getX()>x[1]+7 && e.getX()<x[1]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+1,y[0]+1,49,49,2);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[1]+3,y[0]+3,45,45,8);
             feld=1;
             konbewegt++;
-
         }else if(konbewegen==true && e.getX()>x[2]+7 && e.getX()<x[2]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+1,y[0]+1,49,49,2);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[2]+3,y[0]+3,45,45,8);
@@ -105,13 +104,11 @@ public class KAMPFEINGABE implements MouseListener
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[3]+3,y[0]+3,45,45,8);
             feld=3;
             konbewegt++;
-
         }else if(konbewegen==true && e.getX()>x[4]+7 && e.getX()<x[4]+58 && e.getY()>y[0]+30 && e.getY()<y[0]+81) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+1,y[0]+1,49,49,2);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[0]+3,45,45,8);
             feld=4;
             konbewegt++;
-
         }else if(konbewegen==true && e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[1]+30 && e.getY()<y[1]+81) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[1]+1,49,49,2);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[1]+3,45,45,8);

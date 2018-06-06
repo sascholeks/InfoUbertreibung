@@ -275,7 +275,7 @@ public class GRAFIKELEMENTE
     }
 
     public void zeichnesieg() {
-        ZEICHENFENSTER.gibFenster().loescheAlles();
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(80,80,400,200,11);
     }
 
     public void zeichneverloren() {
