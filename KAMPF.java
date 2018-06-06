@@ -235,6 +235,8 @@ public class KAMPF
                         hlkl--;
                         leben[reihenfolge[0]]=leben[reihenfolge[0]]+100;
                         anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
+                        grafik.anzahl(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+                        grafik.anzahlreihenfolge(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                         grafik.kons("kleiner Heiltrank genommen");
                     }else {
                         grafik.kons("Nicht genügend kleine Tränke");
@@ -249,6 +251,10 @@ public class KAMPF
                     if(hlgr>=1) {
                         geheilt=true;
                         hlgr--;
+                        leben[reihenfolge[0]]=leben[reihenfolge[0]]+400;
+                        anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
+                        grafik.anzahl(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+                        grafik.anzahlreihenfolge(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                         grafik.kons("großer Heiltrank genommen");
                     }else{
                         grafik.kons("Nicht genügend große Heiltränke");

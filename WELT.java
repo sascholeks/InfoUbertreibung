@@ -17,7 +17,7 @@ public class WELT implements MouseListener
     int[] gegnerpos;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,counter;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
     double schwerfaktor=1;
     public WELT() {
@@ -103,6 +103,7 @@ public class WELT implements MouseListener
             bewo=false;
             break;
         } 
+        bewegegegner();
         zeichneansicht();
         if(gegnerpos[aktpos]==100) {  //kontrolle gegner
             bewegungssperre=true;
@@ -190,13 +191,17 @@ public class WELT implements MouseListener
                     hp5=1;
                     hp8=0;
                 }else if(hp5==1) {
-                    grafik.kons("Jetzt geh und Töte 10 Gegner");
+                    hp9=hp9+10;
+                    grafik.kons("Geh und Töte 10 Gegner");
                     hp6=1;
                 }else  if(hp6==1 && counter==10) {
                     grafik.kons("Heiltränke und Geld erhalten");
-                    inv.geld=inv.geld+8000;
-                    inv.heiltrankkl=inv.heiltrankkl+10;
-                    hp6++;                                                            
+                    inv.geld=inv.geld+8000*(int)hp9/100+1000;
+                    inv.heiltrankkl=inv.heiltrankkl+5*(int)hp9/50+2; 
+                    hp6=0;
+                    hp5=0;
+                }else {
+                    grafik.kons("keine Quest angenommen");
                 }
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
@@ -381,7 +386,7 @@ public class WELT implements MouseListener
             grafik.konsz(grafik.str2); 
         }
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500)); 
-        for(int a=0;a<7;a++) {
+        for(int a=0;a<7;a++) {    //zeichnung bei gegner auf feld
             for(int b=0;b<7;b++) {
                 grafik.weltteil(b,a,ansicht[a*7+b]);
                 if(gegnerpos[bildpos+a*500+b]==100) {
@@ -391,7 +396,45 @@ public class WELT implements MouseListener
         }
         grafik.zeichnespieler(aktansichtpos);
     }
-
+    
+    public void bewegegegner() {
+        for(int a=0;a<250000;a++) {
+            if(gegnerpos[a]==100) {
+                switch(r.nextInt(8)) {
+                    case 0:
+                        if(welt[a-1]<25) {
+                            gegnerpos[a-1]=100;
+                            gegnerpos[a]=101;
+                        }
+                        break;
+                        case 1:
+                        if(welt[a-500]<25) {
+                            gegnerpos[a-500]=100;
+                            gegnerpos[a]=101;
+                        }
+                        break;
+                    case 2:
+                        if(welt[a+1]<25) {
+                            gegnerpos[a+1]=100;
+                            gegnerpos[a]=101;
+                        }
+                        break;
+                    case 3:
+                        if(welt[a+500]<25) {
+                            gegnerpos[a+500]=100;
+                            gegnerpos[a]=101;
+                        }
+                        break;
+                        case 4:  //case 4,5,6,7 = warten/nichts tun
+                        case 5:
+                        case 6:
+                        case 7:
+                        break;
+                    }
+            }
+        }
+    }
+        
     public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
         if(bildpos<0) {
             bildpos=0;
