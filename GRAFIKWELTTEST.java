@@ -234,7 +234,6 @@ public class GRAFIKWELTTEST
 
     }
     
-    
     public void Stein(int x, int y) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y,5,1,37);    //schwarzgrau
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+1,7,1,37);
