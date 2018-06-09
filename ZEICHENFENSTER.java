@@ -513,7 +513,12 @@ public class ZEICHENFENSTER
             return whitegray2; 
             case 34: Color whitegray3 = new Color(230,230,230);
             return whitegray3; 
-
+            case 35: Color dunkelbraun = new Color(64,35,13);
+            return dunkelbraun;
+            case 36: Color dunkelgrau2= new Color(61,62,61);
+            return dunkelgrau2;
+            case 37: Color dunkeldunkelgrau =new Color(29,29,29);
+            return dunkeldunkelgrau;
             default: return graphic.getColor();
         }
 

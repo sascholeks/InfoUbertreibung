@@ -274,12 +274,37 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleRechteck(308+60*x,225,55,5,6);
     }
 
-    public void zeichnesieg() {
+    public void zeichnesieg(int anz1,int anz2,int anz3,int anz4,int anz5,int hlkl,int hlgr,int gld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(80,80,400,200,11);
+        ZEICHENFENSTER.gibFenster().zeichneText("Verlorene Truppen: ",90,100);
+        
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(95,110,100,50,16);        
+        ZEICHENFENSTER.gibFenster().zeichneText("Bogenschützen: ",100,125);
+        
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(205,110,100,50,16);     
+        ZEICHENFENSTER.gibFenster().zeichneText("Speerkämpfer:",210,125);
+        
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(315,110,100,50,16);       
+        ZEICHENFENSTER.gibFenster().zeichneText("Schildknappe:",320,125);
+        
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(95,170,100,50,16);      
+        ZEICHENFENSTER.gibFenster().zeichneText("Ritter:",100,185);
+        
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(205,170,100,50,16);    
+        ZEICHENFENSTER.gibFenster().zeichneText("Paladin:",210,185);
+        
+        ZEICHENFENSTER.gibFenster().zeichneText("Erhaltene Tränke: ",95,240); 
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(100,245,110,30,16);
+        ZEICHENFENSTER.gibFenster().zeichneText("Kleine Tränke: "+hlkl,105,260);
+        ZEICHENFENSTER.gibFenster().zeichneText("Große Tränke: "+hlgr,105,275);
+        ZEICHENFENSTER.gibFenster().zeichneText("Erhaltenes Gold: ",250,240);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(255,245,50,20,16);
+        ZEICHENFENSTER.gibFenster().zeichneText(gld+"",260,260);
     }
 
     public void zeichneverloren() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
+        kons("Verloren");
     }
 
 }

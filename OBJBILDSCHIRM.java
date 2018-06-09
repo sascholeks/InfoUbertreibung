@@ -20,7 +20,7 @@ public class OBJBILDSCHIRM
         kaserne=false;
     }
     
-    public void hauptstadt() {
+    public void hauptstadt(boolean erfüllt) {
         hpt=true;
         shp=false;
         grafik=new GRAFIKELEMENTE();
@@ -35,10 +35,12 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,50,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,50,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,50,13);       
-        ZEICHENFENSTER.gibFenster().zeichneText("Quest",60,75);
-        ZEICHENFENSTER.gibFenster().zeichneText("Shop",60,95);
-        ZEICHENFENSTER.gibFenster().zeichneText("Exit",60,115);
-       
+        ZEICHENFENSTER.gibFenster().zeichneText("Quest",61,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("Shop",61,95);
+        ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,115);
+        if(erfüllt==true) {
+            haken();
+        }
     }
     
     public void shop() {
@@ -60,19 +62,15 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,144,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,164,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,164,150,13);
-        ZEICHENFENSTER.gibFenster().zeichneText("1 Bogenschütze",60,75);
-        ZEICHENFENSTER.gibFenster().zeichneText("1 Speerkämpfer",60,95);
-        ZEICHENFENSTER.gibFenster().zeichneText("1 Schildknappe",60,115);
-        ZEICHENFENSTER.gibFenster().zeichneText("1 Ritter",60,135);
-        ZEICHENFENSTER.gibFenster().zeichneText("1 Paladin",60,155);
-        ZEICHENFENSTER.gibFenster().zeichneText("Exit",60,175);
+        ZEICHENFENSTER.gibFenster().zeichneText("1 Bogenschütze",61,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("1 Speerkämpfer",61,95);
+        ZEICHENFENSTER.gibFenster().zeichneText("1 Schildknappe",61,115);
+        ZEICHENFENSTER.gibFenster().zeichneText("1 Ritter",61,135);
+        ZEICHENFENSTER.gibFenster().zeichneText("1 Paladin",61,155);
+        ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,175);
     }
     
-    public void quest() {
-        kaserne=true;
-    }
-    
-    public void kaserne() {
+    public void kaserne(boolean erfüllt) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kas=true;
         shp=false;
@@ -85,8 +83,31 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,150,13);
-        ZEICHENFENSTER.gibFenster().zeichneText("Quest",60,75);
-        ZEICHENFENSTER.gibFenster().zeichneText("shop",60,95);
-        ZEICHENFENSTER.gibFenster().zeichneText("Exit",60,115);
+        ZEICHENFENSTER.gibFenster().zeichneText("Quest",61,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("shop",61,95);
+        ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,115);
+        if(erfüllt==true) {
+            haken();
+        }
     }  
+    
+    public void haken() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(112,70,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(113,71,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(114,72,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(115,73,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(116,76,3,1,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(117,73,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(118,72,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(119,71,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(120,70,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(121,69,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(122,68,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(123,67,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(124,66,3,3,2);
+    }
+    
+    public void quest() {
+        kaserne=true;
+    }
 }

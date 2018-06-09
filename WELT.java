@@ -15,9 +15,10 @@ public class WELT implements MouseListener
     Timer t;
     int[] welt,ansicht;
     int[] gegnerpos,hp11;
+    boolean[] quest;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,counter;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
     double schwerfaktor=1;
     public WELT() {
@@ -52,6 +53,7 @@ public class WELT implements MouseListener
         bewu=false;
         bewegungssperre=false;
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
+        quest=new boolean[100];
     }
 
     public void bewegen(int richtung) {
@@ -108,7 +110,7 @@ public class WELT implements MouseListener
         zeichneansicht();
         if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
             bewegungssperre=true;
-            kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr);
+            kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor);
             while(kampf.sieg!=false || kampf.verloren!=false) {       
             }
             if(kampf.sieg==true) {
@@ -122,11 +124,11 @@ public class WELT implements MouseListener
         if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
             grafik.loeschekons();
             bewegungssperre=true;
-            objschirm.hauptstadt();  
+            objschirm.hauptstadt(quest[0]);  
             mausfreigabe=true;
-        }else if(welt[aktpos]==27 && objschirm.kaserne==true) {
+        }else if(welt[aktpos]==27 && objschirm.kaserne==true) {       //kontrolle kaserne
             grafik.loeschekons();
-            objschirm.kaserne();
+            objschirm.kaserne(quest[1]);
             bewegungssperre=true;
             mausfreigabe=true;
             if (hp1==1) {
@@ -171,13 +173,7 @@ public class WELT implements MouseListener
             }else if(objschirm.shp==true) {
                 inv.kaufetruppen(0);
             }else if(objschirm.kas==true) {
-                if(hp2==1) {
-                    grafik.kons("Quest abgeschlossen");
-                    try {
-                        Thread.sleep(500);                 
-                    } catch(InterruptedException ex) {
-                        Thread.currentThread().interrupt();
-                    } 
+                if(hp2==1) { 
                     grafik.kons("Truppen,Heiltränke und Geld erhalten");
                     inv.anz[0]=inv.anz[0]+100;
                     inv.anz[1]=inv.anz[1]+80;
@@ -191,6 +187,7 @@ public class WELT implements MouseListener
                     hp2++;
                     hp5=1;
                     hp8=0;
+                    quest[0]=true;
                 }else if(hp5==1) {
                     hp9=hp9+10;
                     grafik.kons("Geh und Töte 10 Gegner");
@@ -201,6 +198,11 @@ public class WELT implements MouseListener
                     inv.heiltrankkl=inv.heiltrankkl+5*(int)hp9/50+2; 
                     hp6=0;
                     hp5=0;
+                    counter++;
+                    if(counter==10) {
+                        quest[1]=true;
+                        objschirm.haken();
+                    }
                 }else {
                     grafik.kons("keine Quest angenommen");
                 }
@@ -234,7 +236,7 @@ public class WELT implements MouseListener
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
             if(objschirm.shp==true) {
-                objschirm.hauptstadt();
+                objschirm.hauptstadt(quest[0]);
             }
         }
     }
@@ -281,6 +283,37 @@ public class WELT implements MouseListener
                 welt[x+y*500]=genwelthelp;
             }
         } 
+        for(int b=0;b<=4;b++) {       //wald generierung
+            for(int a=0;a<250000;a++) {
+                if(welt[a]==3 && a>500 && a<249499) {
+                    switch(r.nextInt(3)) {  //typgenerierung
+                        case 0:
+                            hp12=3;
+                            break;
+                        case 1:
+                            hp12=5;
+                            break;
+                        case 2:
+                            hp12=11;
+                            break;
+                        }
+                    switch(r.nextInt(4)) {  //richtung
+                        case 0:
+                            welt[a-1]=hp12;
+                            break;
+                        case 1:
+                            welt[a-500]=hp12;
+                            break;
+                        case 2:
+                            welt[a+1]=hp12;
+                            break;
+                        case 3:
+                            welt[a+500]=hp12;
+                            break;
+                        }
+                }
+            }
+        }
         for(int a=0;a<500;a++) {   //randzuweisung  
             welt[a]=25;            //oben
             welt[a*500]=25;        //links
@@ -377,7 +410,7 @@ public class WELT implements MouseListener
         berechneansicht();
         grafik.loescheansicht();
         grafik.zeichnerahmen();
-        if(grafik.str4!="") {
+        if(grafik.str4!="") {  //konsole
             grafik.konsz3(grafik.str4); 
         }
         if(grafik.str3!="") {
@@ -390,7 +423,7 @@ public class WELT implements MouseListener
         for(int a=0;a<7;a++) {    //zeichnung bei gegner auf feld
             for(int b=0;b<7;b++) {
                 grafik.weltteil(b,a,ansicht[a*7+b]);
-                if(gegnerpos[bildpos+a*500+b]==100) {
+                if(gegnerpos[bildpos+a*500+b]==100 && welt[bildpos+a*500+b]!=3 && welt[bildpos+a*500+b]!=5 && welt[bildpos+a*500+b]!=11) {  //kontrolle wald
                     grafik.weltteil(b,a,100);
                 }
             }

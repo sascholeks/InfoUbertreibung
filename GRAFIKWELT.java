@@ -81,7 +81,7 @@ public class GRAFIKWELT
         str4 = str3; //Prinzip
         i=3; //aus Prinzip :)
     }
-    
+
     public void loeschekons() {
         for(int a=0;a<3;a++) {
             kons("");
@@ -109,9 +109,16 @@ public class GRAFIKWELT
             case 2:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
             Blume2(this.x[x]+5,this.y[y]+21);
+            busch(this.x[x]+13,this.y[y]+7);
             break;
             case 3:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            baum(this.x[x]-1,this.y[y]+1);
+            baum(this.x[x]+20,this.y[y]+7);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+18,this.y[y]+34,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+17,this.y[y]+33,1,1,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+20,this.y[y]+34,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+19,this.y[y]+33,1,1,17);
             break;
             case 4:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
@@ -122,14 +129,20 @@ public class GRAFIKWELT
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+11,this.y[y]+23,1,1,17);
             break;
             case 5:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            baum(this.x[x]+2,this.y[y]+9);
             break;    
             case 6:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
             Blume3(this.x[x]+17,this.y[y]+23);
             break;    
             case 7:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            busch(this.x[x]+6,this.y[y]+20);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+28,this.y[y]+18,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+27,this.y[y]+17,1,1,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+30,this.y[y]+20,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+29,this.y[y]+19,1,1,17);
             break;
             case 8:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
@@ -154,7 +167,10 @@ public class GRAFIKWELT
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+33,this.y[y]+21,1,1,17);
             break;
             case 11:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            baum(this.x[x]+16,this.y[y]+3);
+            baum(this.x[x],this.y[y]+8);
+            busch(this.x[x]+18,this.y[y]+30);
             break;
             case 12:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
@@ -490,6 +506,24 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+1,1,1,19);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+3,1,1,19);
 
+    }
+    
+    public void busch(int x,int y) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+7,5,2,35);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+3,y+3,4,17);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+7,y+2,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+6,y+2,5,17);
+    }
+    
+    public void baum(int x,int y) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+10,5,20,35);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+8,y+6,5,17);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+12,y+5,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+14,y+8,6,17);
+        ZEICHENFENSTER.gibFenster().fuelleKreis(x+11,y+8,7,17);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+15,y+10,2,2,4);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+13,y+3,2,2,4);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+8,2,2,4);    
     }
 
     public void kordinatenanzeige(String kord) {  
