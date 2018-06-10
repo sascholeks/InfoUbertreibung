@@ -1,31 +1,23 @@
 PROJEKTBEZEICHNUNG:
-PROJEKTZWECK: 
-VERSION oder DATUM:
-WIE IST DAS PROJEKT ZU STARTEN:
-AUTOR(EN):
-BENUTZERHINWEISE:
+PROJEKTZWECK: Entwicklung eines Computerspiels mit Java 
 
-Typen:
-    Blau:
-        0: Bogenschützen
-        1: Speerkämpfer
-        2: Schildknappen
-        3: Ritter
-        4: Paladien
-    Rot:
-        5: Bogenschützen
-        6: Speerkämpfer
-        7: Schildknappen
-        8: Ritter
-        9: Paladien
-    Welt:
-        10: Objekt
-        11: Leer
-        
-Aktion: 
-    gehen, gehen, (kämpfen)
-    kämpfen, (heilen)
-    heilen, (gehen / kämpfen)
+
+Generelle Informationen:
+    Dieses Projekt umfasst xx Zeichen auf xx Zeilen und xx Klassen.
+    Das Projekt entstand im Zeitraum vom 07.05.2018 - xx.2018.
+    Version 0.101
+
+Steuerung:
+    Bewegen: WASD oder Pfeiltasten
+    Inventar: I
+    Welt zeichnen lassen(falls Möglich): Enter
+    Menü: Esc
+    
+
+Generelle Informationen:
+    Gegner können sich in Wäldern(wlttyp 3,5,11) verstecken, also sei Vorsichtig!
+
+
     
     
     

@@ -16,15 +16,19 @@ public class ALGORITHM
     int Str;
     int[] order;
     Random r;
-
-    int actionpos;
+    int[] ExtendedAttack;
+    
+    
     int action = -1;
+    int actionPos = -1;
 
     GRAFIKELEMENTE graphic;
-    public ALGORITHM(int pos, int[] welt, int[] anz, int[] order)
+    public ALGORITHM(int[] welt, int[] anz, int[] order)
     {
         this.welt = welt;
-        this.pos =pos;
+        this.order = order;
+        this.anz = anz;
+        this.pos = getOrderPos();
         range = new int[25];
         path = new int[25];
         enemyPos = new int[25];
@@ -33,9 +37,26 @@ public class ALGORITHM
         enemyStr = new int[25];
         StrCom = new int[25];
         attackPos = new int[25];
-        this.anz = anz;
         graphic =new GRAFIKELEMENTE();
         r = new Random();
+    }
+
+    public void updateOrder(int[] order) {
+        this.order = order;
+    }
+
+    public int getOrderPos() {
+        int pos=-1;
+        for(int i=0;i<25;i++) {
+            if(order[0]==welt[i]) {
+                this.pos = i;
+                pos = i;
+            }
+        }
+        if(pos==-1) {
+            graphic.kons("AI Position Getter Error!");
+        }
+        return pos;  
     }
 
     public int getType() {
@@ -326,6 +347,7 @@ public class ALGORITHM
     }
 
     public void decide() {
+        this.pos = getOrderPos();
         int cE=0;
         int cP=0;
         int cSC=0;
@@ -395,11 +417,9 @@ public class ALGORITHM
                         if(check) {
                             attackpos(attackposition);
                         } else {
-                            action = 0;
                             moveaway();
                         }
                     } else {
-                        action = 2;
                         stop(); //heilen überprüfen
                     }
                 } else {
@@ -411,16 +431,66 @@ public class ALGORITHM
 
     public void stop() { //heal überprüfen
         graphic.kons("stop()");
+        setActionType(2);
     }
 
     public void attack() {
         graphic.kons("attack()");
+        setActionType(0);
+        setActionPos(pos);
     }
 
     public void attackpos(int pos) {
         graphic.kons("attack(" + pos + ")");  
-        actionpos = pos;
-        action = 1;
+        setActionType(0);
+        setActionPos(pos);
+    }
+
+    public boolean checkArrayOrder(int pos) {
+        boolean ArrayOrder=false;
+        if(pos>=0 && pos<25) {
+            ArrayOrder = true;
+        }
+        return ArrayOrder;
+    }
+
+    public boolean DifArrayCreator(int pos,int dif) {
+        boolean check=false;
+        if(checkArrayOrder(pos+dif) && difLineCheck(pos,dif)) {
+            check=true;   
+        }
+        return check;
+    }
+    
+    public boolean SameArrayCreator(int pos,int dif) {
+        boolean check=false;
+        if(checkArrayOrder(pos+dif) && sameLineCheck(pos,dif)) {
+            check=true;   
+        }
+        return check;
+    }
+
+    public int[] getExtendedAttack() {
+        int[] difPos = new int[8];
+        difPos[0] = -11;
+        difPos[1] = -10;
+        difPos[2] = -9;
+        difPos[3] = -7;
+        difPos[4] = -6;
+        difPos[5] = -5;
+        difPos[6] = -4;
+        difPos[7] = -3;
+        for(int i=0;i<8;i++) {
+            if(DifArrayCreator(pos,-1*difPos[i])) {
+                ExtendedAttack[pos+difPos[i]] = 1;
+            }
+        }
+        for(int i=0;i<8;i++) {
+            if(DifArrayCreator(pos,-1*difPos[i])) {
+                ExtendedAttack[pos-difPos[i]] = 1;
+            }
+        }
+        return ExtendedAttack;
     }
 
     public void moveaway() {
@@ -468,31 +538,31 @@ public class ALGORITHM
         } else {
             if(right) {
                 graphic.kons("moveright()");
-                action = 0;
-                actionpos = pos+1;
+                setActionType(1);
+                setActionPos(pos+1);
             } else if(up || down) {
                 if(checkLine(pos) < 2 && up) { 
                     graphic.kons("moveup()");
-                    action = 0;
-                    actionpos = pos-5;
+                    setActionType(1);
+                    setActionPos(pos-5);
                 } else if(checkLine(pos) > 2 && down) { 
                     graphic.kons("movedown()");
-                    action = 0;
-                    actionpos = pos+5;
+                    setActionType(1);
+                    setActionPos(pos+5);
                 } else {
                     if(r.nextInt(2)==0) {
                         if(up) {
                             graphic.kons("moveup()");
-                            action = 0;
-                            actionpos = pos-5;
+                            setActionType(1);
+                            setActionPos(pos-5);
                         } else {
                             graphic.kons("Error: Can't move! (moveaway)");
                         }
                     } else {
                         if(down) {
                             graphic.kons("movedown()");
-                            action = 0;
-                            actionpos = pos+5;
+                            setActionType(1);
+                            setActionPos(pos+5);
                         } else {
                             graphic.kons("Error: Can't move! (moveaway)");
                         }
@@ -500,8 +570,8 @@ public class ALGORITHM
                 }
             } else if(left) {
                 graphic.kons("moveleft()");
-                action = 0;
-                actionpos = pos-1;
+                setActionType(1);
+                setActionPos(pos-1);
             } else {
                 graphic.kons("Error: General move failture! (moveaway)");
             }
@@ -524,31 +594,31 @@ public class ALGORITHM
         }
         if(right) {
             graphic.kons("moveright()");
-            action = 0;
-            actionpos = pos+1;
+            setActionType(1);
+            setActionPos(pos+1);
         } else if(up || down) {
             if(checkLine(pos) < 2 && up) { 
                 graphic.kons("moveup()");
-                action = 0;
-                actionpos = pos-5;
+                setActionType(1);
+                setActionPos(pos-5);
             } else if(checkLine(pos) > 2 && down) { 
                 graphic.kons("movedown()");
-                action = 0;
-                actionpos = pos+5;
+                setActionType(1);
+                setActionPos(pos+5);
             } else {
                 if(r.nextInt(2)==0) {
                     if(up) {
                         graphic.kons("moveup()");
-                        action = 0;
-                        actionpos = pos-5;
+                        setActionType(1);
+                        setActionPos(pos-5);
                     } else {
                         graphic.kons("Error: Can't move! (movenormal)");
                     }
                 } else {
                     if(down) {
                         graphic.kons("movedown()");
-                        action = 0;
-                        actionpos = pos+5;
+                        setActionType(1);
+                        setActionPos(pos+5);
                     } else {
                         graphic.kons("Error: Can't move! (movenormal)");
                     }
@@ -556,11 +626,19 @@ public class ALGORITHM
             }
         } else if(left) {
             graphic.kons("moveleft()");
-            action = 0;
-            actionpos = pos-1;
+            setActionType(1);
+            setActionPos(pos-1);
         } else {
             graphic.kons("Error: General move failture! (movenormal)");
         }
+    }
+
+    public void setActionType(int action) {
+        this.action = action;
+    }
+
+    public void setActionPos(int actionPos) {
+        this.actionPos = actionPos;
     }
 
     public int getActionType() {
@@ -568,7 +646,7 @@ public class ALGORITHM
     }
 
     public int getActionPos() {
-        return actionpos;
+        return actionPos;
     }
 
 }

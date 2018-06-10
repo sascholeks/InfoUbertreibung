@@ -2,7 +2,7 @@ import java.util.Random;
 public class ALGOGR {                           //graphische Klasse vonTESTLÖSUNGSALGO
     private Random r;
     private boolean[] mgrg;                           //mögliche richtungen die ausgegeben werden könnten
-    int[] pos;
+    int[] pos,eing,ausg;  
     int start;
     int ziel;
     int aktfeld;   
@@ -11,8 +11,12 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
     public ALGOGR() {
         r=new Random();
         pos=new int[49];
+        eing=new int[49];
+        ausg=new int[49];
         for(int a=0;a<49;a++) {
             pos[a]=0;
+            eing[a]=4;
+            ausg[a]=4;
         }
         mgrg=new boolean[4];
         for(int a=0;a<4;a++) {
@@ -45,7 +49,9 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }   
                     else if(mgrg[0]==false){
+                        ausg[aktfeld]=0;
                         aktfeld--;
+                        eing[aktfeld]=2;
                         pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
@@ -65,7 +71,9 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[1]==false){
+                        ausg[aktfeld]=1;
                         aktfeld=aktfeld-7;
+                        eing[aktfeld]=3;
                         pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
@@ -85,7 +93,9 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[2]==false){
+                        ausg[aktfeld]=2;
                         aktfeld=aktfeld+1;
+                        eing[aktfeld]=0;
                         pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;
@@ -105,7 +115,9 @@ public class ALGOGR {                           //graphische Klasse vonTESTLÖSU
                         zerlegefeld(aktfeld);                                    //graphisches Element
                     }
                     else if(mgrg[3]==false){
+                        ausg[aktfeld]=3;
                         aktfeld=aktfeld+7;
+                        eing[aktfeld]=1;
                         pos[aktfeld]=28;
                         for(int a=0;a<4;a++) {
                             mgrg[a]=false;

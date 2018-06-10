@@ -18,15 +18,16 @@ public class DEV
     boolean geheilt=false,gekaempft=false,bewegt=false;
 
     //dev 
-    int actionpos;
+    int getActionPos;
     int decidepos = 0;
+    int Orderpos;
 
     public DEV()
     {
 
         //Config:
-        normal = false;
-        rocks = false;
+        normal = true;
+        rocks = true;
 
         inv=new INVENTAR();
         grafik=new GRAFIKELEMENTE();
@@ -265,7 +266,7 @@ public class DEV
         for(int a=0;a<6;a++) {
             grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);
             if(tod[reihenfolge[a]]==true) {
-                grafik.markieretod(a);
+                grafik.markieretot(a);
             }
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
@@ -410,6 +411,8 @@ public class DEV
 
     public void decideOrder() {
         int pos=-1;
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        alg.updateOrder(reihenfolge);
         for(int i=0;i<25;i++) {
             if(welt[i]==reihenfolge[0]) {
                 if(reihenfolge[0]<5) { //muss zu >=4 und <10
@@ -420,11 +423,11 @@ public class DEV
                 }
             }
         }
-        decidepos = pos;
-        alg = new ALGORITHM(pos,welt,anz,reihenfolge);
-        if(pos!=-1) {
+        decidepos = pos;  
+        Orderpos = alg.getOrderPos();
+        if(pos!=-1 && pos!=-2) {
             alg.decide();
-            action(alg.getActionType());
+            //action(alg.getActionType());
         } else if(pos == -2) {
             grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
@@ -432,26 +435,42 @@ public class DEV
         }
     }
 
-    public int actionpos() {
+    public int getActionPos() {
         return alg.getActionPos();
     }
 
     public void action(int action) {
-        switch(alg.getActionType()) {
+        switch(action) {
             case 0:     //move
-            bewegen(actionpos());
+            bewegen(getActionPos());
             break;
             case 1:     //attack    
-            kaempfen(actionpos());
+            kaempfen(getActionPos());
             break;
             case 2:     //stop
             beendezug();
             break;
             default:   //heilen etc. fehlt;
-            grafik.kons("AI Action Error!");
+            //grafik.kons("AI Action Error!");
         }
     }
 
+    public int getOrderPos() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        Orderpos = alg.getOrderPos(); 
+        return Orderpos;
+    }
+
+    public int getAction() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        alg.decide();
+        return alg.getActionType();
+    }
+
+    public int[] getExtendRange() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        return alg.getExtendedAttack();
+    }
 }
 //          try {
 //              Thread.sleep(1000);                 

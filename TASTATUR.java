@@ -5,6 +5,7 @@ public class TASTATUR implements KeyListener
 {
     private JFrame f;
     WELT welt;
+    boolean help=false;
     public TASTATUR()
     {
         f = ZEICHENFENSTER.gibFenster().frame;     
@@ -13,16 +14,24 @@ public class TASTATUR implements KeyListener
     }
     
     public void keyPressed(KeyEvent e) { 
-        if(e.getKeyCode() == 65 && welt.bewegungssperre==false) {  //a
+        if((e.getKeyCode() == 65 || e.getKeyCode() == 37) && welt.bewegungssperre==false) {         //a
             welt.bewegen(0);
-        }else if(e.getKeyCode() == 87 && welt.bewegungssperre==false) {  //w
+        }else if((e.getKeyCode() == 87 || e.getKeyCode() == 38)  && welt.bewegungssperre==false) {  //w
             welt.bewegen(1);
-        }else if(e.getKeyCode() == 68 && welt.bewegungssperre==false) {  //d
+        }else if((e.getKeyCode() == 68 || e.getKeyCode() == 39)  && welt.bewegungssperre==false) {  //d
             welt.bewegen(2);
-        }else if(e.getKeyCode() == 83 && welt.bewegungssperre==false) {  //s
+        }else if((e.getKeyCode() == 83 || e.getKeyCode() == 40) && welt.bewegungssperre==false) {  //s
             welt.bewegen(3);
-        }else if(e.getKeyCode() == 73 && welt.bewegungssperre==false) {  //i
-            welt.inventaraufruf();
+        }else if(e.getKeyCode() == 73 && welt.bewegungssperre==false) {                           //i
+            if(help==false) {
+                welt.inventaraufruf();
+                help=true;
+            }else {
+                help=false;
+                welt.zeichneansicht();
+            }
+        }else if(e.getKeyCode() == 27) {                                  //esc
+            
         }
     } 
     
