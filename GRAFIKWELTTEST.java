@@ -168,6 +168,77 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+3,1,1,19);
 
     }
+    
+    public void Bogenschießerer(int x,int y){
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+17,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+16,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+18,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+15,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+16,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+17,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+19,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+21,1,4,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+14,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+15,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+16,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+17,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+18,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+20,1,5,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+13,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+15,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+16,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+17,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+19,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+20,1,6,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+14,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+16,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+17,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+19,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+21,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+23,1,1,12);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+26,1,3,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+15,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+16,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+18,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+20,1,3,12);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+21,1,1,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+22,1,3,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+32,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+33,1,1,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+35,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+17,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+19,1,2,12);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+21,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+22,1,1,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+23,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+24,1,3,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+30,1,2,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+33,1,2,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+10,y+35,1,1,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+18,1,2,12);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+20,1,2,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+22,1,1,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+23,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+24,1,1,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+25,1,2,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+27,1,3,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+30,1,1,30);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+31,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+33,1,2,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+11,y+35,1,1,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+14,1,9,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+23,1,2,25);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+25,1,2,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+27,1,3,28);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+30,1,1,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+31,1,3,26);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+34,1,1,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+35,1,1,25);
+        
+        
 
+
+    
+
+    }
 }
-
