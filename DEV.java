@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class DEV
 {
-
+    private static DEV dev;
     INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
@@ -388,7 +388,6 @@ public class DEV
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            grafik.zeichnesieg();
         }
     }
 
@@ -470,6 +469,13 @@ public class DEV
     public int[] getExtendRange() {
         alg = new ALGORITHM(welt,anz,reihenfolge);
         return alg.getExtendedAttack();
+    }
+
+    public static DEV getDev() {
+        if (dev==null) {
+            dev=new DEV();
+        }
+        return dev;
     }
 }
 //          try {

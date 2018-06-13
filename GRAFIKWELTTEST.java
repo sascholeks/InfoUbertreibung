@@ -1,4 +1,4 @@
- 
+
 public class GRAFIKWELTTEST
 {
     int[] x,y;
@@ -126,7 +126,7 @@ public class GRAFIKWELTTEST
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+16,34,1,24);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+17,34,1,24);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+18,36,1,24);
-            
+
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+39,39,1,24);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+2,this.y[y]+38,37,1,24);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+2,this.y[y]+37,36,1,24);
@@ -233,9 +233,8 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+3,1,1,19);
 
     }
-    
-<<<<<<< HEAD
-    public void Bogenschießerer(int x,int y){
+
+    public void Bogenschießerer(int x,int y) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+17,1,1,26);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+16,1,2,25);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+4,y+18,1,1,26);
@@ -300,13 +299,8 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+31,1,3,26);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+34,1,1,29);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+12,y+35,1,1,25);
-        
-        
+    }
 
-
-    
-
-=======
     public void Stein(int x, int y) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y,5,1,37);    //schwarzgrau
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+1,7,1,37);
@@ -337,17 +331,10 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+1,y+25,16,1,37);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+26,7,1,37);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+3,y+27,5,1,37);
-        
+
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+4,2,2,37);     //dunkelgrau
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+5,3,2,37);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+6,9,1,37);
->>>>>>> e1093aaa9bd5fa41e8461870512d4f29db6e384a
     }
 }
-<<<<<<< HEAD
-=======
 
-
-
-
->>>>>>> e1093aaa9bd5fa41e8461870512d4f29db6e384a
