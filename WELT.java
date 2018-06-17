@@ -6,6 +6,7 @@ import java.util.Timer;
 public class WELT implements MouseListener 
 {
     private ZEICHENFENSTER f;
+    SOUNDMUSIKwelt musik;
     GRAFIKWELT grafik;
     ALGOGR algsw;
     OBJBILDSCHIRM objschirm;
@@ -18,11 +19,13 @@ public class WELT implements MouseListener
     boolean[] quest;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,counter;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,counter;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16;
     double schwerfaktor=1;
+    String ort1,ort2;
     public WELT() {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        musik=new SOUNDMUSIKwelt();
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
         objschirm=new OBJBILDSCHIRM();
@@ -42,6 +45,7 @@ public class WELT implements MouseListener
         grafik.zeichnerahmen();
         generierewelt();
         berechneansicht();
+        hp14=1;
         zeichneansicht();
         anzl=false;
         anzo=false;
@@ -54,6 +58,7 @@ public class WELT implements MouseListener
         bewegungssperre=false;
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
         quest=new boolean[100];
+        musik.play();
     }
 
     public void bewegen(int richtung) {
@@ -106,20 +111,12 @@ public class WELT implements MouseListener
             bewo=false;
             break;
         } 
-        bewegegegner();
         zeichneansicht();
         if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
             bewegungssperre=true;
             kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor);
-            while(kampf.sieg!=false || kampf.verloren!=false) {       
-            }
-            if(kampf.sieg==true) {
-                //obj sieg
-                bewegungssperre=false;
-                schwerfaktor=schwerfaktor+0.4;
-            }else if(kampf.verloren==true) {
-                //obj game over
-            }
+            hp16=true;
+            musik.stop();
         }
         if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
             grafik.loeschekons();
@@ -134,6 +131,8 @@ public class WELT implements MouseListener
             if (hp1==1) {
                 schwerfaktor=schwerfaktor+0.05;
             }
+        }else if(welt[aktpos]==40) {                                //kontrolle dungeon
+            //ratsel
         }else if(welt[aktpos]==27 && objschirm.kaserne==false) {
             grafik.kons("Du darfst hier noch nicht rein!");
             grafik.kons("Gehe zur Hauptstadt nach X: "+getpos(26)%500+" Y: "+getpos(26)/500);
@@ -156,10 +155,17 @@ public class WELT implements MouseListener
     }
 
     public void mouseReleased(MouseEvent e) {
+        if(hp16==true && kampf.kampf.sieg==true) {    //weiter
+            hp16=false;
+            bewegungssperre=false;
+            gegnerpos[aktpos]=101;
+            musik.play();
+        }
         if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107 && mausfreigabe==true) {          //fld1
             if(objschirm.hpt==true) {
                 objschirm.kaserne=true;
                 hp2++;
+                hp13=0;
                 if(hp3==0) {
                     hp3++;
                     grafik.kons("folge dem Weg und Gelange zur Kaserne");
@@ -174,6 +180,7 @@ public class WELT implements MouseListener
                 inv.kaufetruppen(0);
             }else if(objschirm.kas==true) {
                 if(hp2==1) { 
+                    hp13=1;
                     grafik.kons("Truppen,Heiltränke und Geld erhalten");
                     inv.anz[0]=inv.anz[0]+100;
                     inv.anz[1]=inv.anz[1]+80;
@@ -206,6 +213,11 @@ public class WELT implements MouseListener
                 }else {
                     grafik.kons("keine Quest angenommen");
                 }
+            }else if(objschirm.nav==true) {
+                hp14=0;
+                ort1=(getpos(26)%500)+" : "+(getpos(26)/500);
+                ort2="Hauptstadt";
+                grafik.ortsanzeige(ort1,ort2);
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
             if(objschirm.hpt==true) {
@@ -214,6 +226,11 @@ public class WELT implements MouseListener
                 inv.kaufetruppen(1);
             }else if(objschirm.kas==true) {
                 objschirm.shop();
+            }else if(objschirm.nav==true) {
+                hp14=0;
+                ort1=(getpos(27)%500)+" : "+(getpos(27)/500);
+                ort2="Kaserne";
+                grafik.ortsanzeige(ort1,ort2);
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
             if(objschirm.hpt==true || objschirm.kas==true) {
@@ -233,10 +250,22 @@ public class WELT implements MouseListener
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187 && mausfreigabe==true) {  //fld5
             if(objschirm.shp==true) {
                 inv.kaufetruppen(4);
+            }else if(objschirm.nav==true) {
+                hp14=1;
+                grafik.loescheort();
             }
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
-            if(objschirm.shp==true) {
+            if(objschirm.shp==true && hp13==0) {
                 objschirm.hauptstadt(quest[0]);
+            }else if(objschirm.shp==true && hp13==1) {
+                objschirm.kaserne(quest[1]);
+            }else if(objschirm.nav==true) {
+                bewegungssperre=false;
+                objschirm.nav=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                grafik.zeichnerahmen();
+                zeichneansicht();
+                mausfreigabe=false;
             }
         }
     }
@@ -323,7 +352,7 @@ public class WELT implements MouseListener
         int genwelthelp3=aktpos-1503;                //ab hier für algosw
         do {
             genwelthelp=r.nextInt(7)*7+r.nextInt(7);
-        }while((genwelthelp%7)+((genwelthelp/7)*500)+genwelthelp3==aktpos);
+        }while((genwelthelp3%500+(genwelthelp%7))+(genwelthelp/500+(genwelthelp/7))*500==aktpos);
         do {
             genwelthelp2=r.nextInt(7)*7+r.nextInt(7);
         }while((genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==aktpos || (genwelthelp2%7)+((genwelthelp2/7)*500)+genwelthelp3==genwelthelp || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp-499 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+1 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+501 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+500 || ((genwelthelp2/7)*500)+genwelthelp3==genwelthelp+499);                                                  
@@ -385,14 +414,21 @@ public class WELT implements MouseListener
                 }
             }
         }  
+        for(int a=0;a<2000;a++) {
+            do {
+                hp15=r.nextInt(250000);
+            }while(welt[hp15]>25);
+            welt[hp15]=40;
+        }
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
-        welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;
+        welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;  
         for(int a=0;a<10000;a++) {                                        //generierung von ca. 10000 gegnern 
             do {
                 genhelpkampf=r.nextInt(250000);
             }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100);
             gegnerpos[genhelpkampf]=100;
         }
+        welt[aktpos-1]=40;   //zeile nur zu testzwecken
     }
 
     public void generierestart() {
@@ -429,45 +465,8 @@ public class WELT implements MouseListener
             }
         }
         grafik.zeichnespieler(aktansichtpos);
-    }
-
-    public void bewegegegner() {
-        for(int a=0;a<250000;a++) {
-            if(gegnerpos[a]==100 && hp10!=a && hp11[a%500]!=a) {
-                switch(r.nextInt(8)) {
-                    case 0:
-                    if(welt[a-1]<25) {
-                        gegnerpos[a-1]=100;
-                        gegnerpos[a]=101;
-                        hp10=a+1;
-                    }
-                    break;
-                    case 1:
-                    if(welt[a-500]<25) {
-                        gegnerpos[a-500]=100;
-                        gegnerpos[a]=101;
-                        hp11[a%500]=a+500;
-                    }
-                    break;
-                    case 2:
-                    if(welt[a+1]<25) {
-                        gegnerpos[a+1]=100;
-                        gegnerpos[a]=101;
-                    }
-                    break;
-                    case 3:
-                    if(welt[a+500]<25) {
-                        gegnerpos[a+500]=100;
-                        gegnerpos[a]=101;
-                    }
-                    break;
-                    case 4:  //case 4,5,6,7 = warten/nichts tun
-                    case 5:
-                    case 6:
-                    case 7:
-                    break;
-                }
-            }
+        if(hp14==0) {
+            grafik.ortsanzeige(ort1,ort2);
         }
     }
 
@@ -483,6 +482,10 @@ public class WELT implements MouseListener
                 ansicht[a*7+b]=welt[bildpos+a*500+b];
             }
         }
+    }
+    
+    public void navi() {
+        objschirm.navi();
     }
 
     public void zerteileansicht() {

@@ -3,7 +3,7 @@ public class OBJBILDSCHIRM
 {
     GRAFIKELEMENTE grafik;
     int[] anz,ausanz,kaeauswahl,anzauswahl;
-    boolean freigabe,hpt,shp,kas,kaserne;
+    boolean freigabe,hpt,shp,kas,kaserne,nav;
     public OBJBILDSCHIRM()
     {
         anz=new int[10];
@@ -23,11 +23,13 @@ public class OBJBILDSCHIRM
     public void hauptstadt(boolean erfüllt) {
         hpt=true;
         shp=false;
+        kas=false;
+        nav=false;
         grafik=new GRAFIKELEMENTE();
         ZEICHENFENSTER.gibFenster().loescheAlles();
          //png
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,120,7);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,120);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
         
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,50,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,50,13);
@@ -47,9 +49,10 @@ public class OBJBILDSCHIRM
         shp=true;
         hpt=false;
         kas=false;
+        nav=false;
         //png
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,120,7);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,120);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
@@ -74,9 +77,10 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kas=true;
         shp=false;
+        nav=false;
         //png
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,120,7);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,120);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
@@ -90,6 +94,37 @@ public class OBJBILDSCHIRM
             haken();
         }
     }  
+    
+    public void navi() {
+        nav=true;
+        hpt=false;
+        shp=false;
+        kas=false;
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,150,13);      
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,124,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,124,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,144,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,144,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,164,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,164,150,13);
+        ZEICHENFENSTER.gibFenster().zeichneText("Hauptstadt",61,75);
+        ZEICHENFENSTER.gibFenster().zeichneText("Kaserne",61,95);
+        ZEICHENFENSTER.gibFenster().zeichneText("--",61,115);
+        ZEICHENFENSTER.gibFenster().zeichneText("--",61,135);
+        ZEICHENFENSTER.gibFenster().zeichneText("Entferne Anzeige",61,155);
+        ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,175);
+    }
+    
+    public void esc() {
+        //fertig machen
+    }
     
     public void haken() {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(112,70,3,3,2);
