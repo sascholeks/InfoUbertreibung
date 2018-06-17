@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class DEV
 {
-    private static DEV dev;
+    private static DEV devr;
     INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
@@ -40,6 +40,7 @@ public class DEV
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
 
         this.normal = normal;
+        devr = this;
 
         x=new int [5];
         y=new int [5];
@@ -414,7 +415,7 @@ public class DEV
         alg.updateOrder(reihenfolge);
         for(int i=0;i<25;i++) {
             if(welt[i]==reihenfolge[0]) {
-                if(reihenfolge[0]<5) { //muss zu >=4 und <10
+                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=4 und <10
                     pos = i;
                 } else {
                     grafik.kons("Error: Die KI ist nicht am Zug!");
@@ -426,7 +427,7 @@ public class DEV
         Orderpos = alg.getOrderPos();
         if(pos!=-1 && pos!=-2) {
             alg.decide();
-            //action(alg.getActionType());
+            action(alg.getActionType());
         } else if(pos == -2) {
             grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
@@ -440,10 +441,10 @@ public class DEV
 
     public void action(int action) {
         switch(action) {
-            case 0:     //move
+            case 1:     //move
             bewegen(getActionPos());
             break;
-            case 1:     //attack    
+            case 0:     //attack    
             kaempfen(getActionPos());
             break;
             case 2:     //stop
@@ -466,16 +467,11 @@ public class DEV
         return alg.getActionType();
     }
 
-    public int[] getExtendRange() {
-        alg = new ALGORITHM(welt,anz,reihenfolge);
-        return alg.getExtendedAttack();
-    }
-
     public static DEV getDev() {
-        if (dev==null) {
-            dev=new DEV();
+        if (devr==null) {
+            devr=new DEV();
         }
-        return dev;
+        return devr;
     }
 }
 //          try {

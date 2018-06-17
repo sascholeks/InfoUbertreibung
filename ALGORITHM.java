@@ -17,8 +17,7 @@ public class ALGORITHM
     int[] order;
     Random r;
     int[] ExtendedAttack;
-    
-    
+
     int action = -1;
     int actionPos = -1;
 
@@ -63,8 +62,8 @@ public class ALGORITHM
         return welt[pos];
     }
 
-    private void setRange(int pos) {
-        if(getType()==0) { //muss am ende in 5 geändert werden, da Gegner Team
+    private int[] getRange(int pos) {
+        if(getType()==5) { //muss am ende in 5 geändert werden, da Gegner Team
             for(int i=0;i<25;i++) {
                 range[i] = 1;
             }
@@ -110,12 +109,8 @@ public class ALGORITHM
                 range[pos+5] = 1;
             }
         }
-    }  
-
-    public int[] getRange(int pos) {
-        setRange(pos);
         return range;
-    }
+    }  
 
     private void setPath() {
         for(int i=0;i<25;i++) {
@@ -211,13 +206,12 @@ public class ALGORITHM
     }
 
     public int[] checkEnemy() {
-        setRange(pos);
         for(int i=0;i<25;i++) {
             enemyPos[i] = 0;
         }
         for(int i=0;i<25;i++) {
-            if(range[i]==1) {
-                if(welt[i]>=5 && welt[i] < 10) {    //muss am Ende in (welt[i] >=0 && welt[i]<10) abgeändert werden, da anderes Team
+            if(getRange(pos)[i]==1) {
+                if(welt[i]>=0 && welt[i] < 5) {    //muss am Ende in (welt[i] >=0 && welt[i]<10) abgeändert werden, da anderes Team
                     enemyPos[i] = 1;
                 }
             }
@@ -225,13 +219,22 @@ public class ALGORITHM
         return enemyPos;
     }
 
+    public int[] getAllEnemies() {
+        int[] aEnemies = new int[25];
+        for(int i=0;i<25;i++) {
+            if(welt[i]>= 0 && welt[i] <5) {
+                aEnemies[i] = 1;
+            } else {
+                aEnemies[i] = 0;
+            }
+        }
+        return aEnemies;
+    }
+
     public int[] getenemyStr() {
         for(int i=0;i<25;i++) {
             if(checkEnemy()[i]==1) {
                 int eID = welt[i];
-                if(eID>=5 && eID < 10) {
-                    eID = eID - 5;
-                }
 
                 switch (eID) {
                     case 0:
@@ -272,6 +275,10 @@ public class ALGORITHM
 
     public int getStrength(int pos) {
         int ID = welt[pos];
+        if(ID>=0 && ID < 5) {
+            ID = ID-5;
+        }
+
         switch (ID) {
             case 0:
             Str = CONFIG.Dmg0 * anz[welt[pos]];
@@ -309,16 +316,16 @@ public class ALGORITHM
         for(int i=0;i<25;i++) {
             attackPos[i]=0;
         }
-        if(pos-5>=0 && difLineCheck(pos,-5) && welt[pos-5] < 10 && welt[pos-5] >= 5) { //muss am Ende  (welt[pos-5] < 5  && welt[pos-5] >= 0) heißen
+        if(pos-5>=0 && difLineCheck(pos,-5) && welt[pos-5] < 5 && welt[pos-5] >= 0) { //muss am Ende  (welt[pos-5] < 5  && welt[pos-5] >= 0) heißen
             attackPos[pos-5] = 1;
         }
-        if(pos-1>=0 && sameLineCheck(pos,-1) && welt[pos-1] < 10 && welt[pos-1] >= 5) {
+        if(pos-1>=0 && sameLineCheck(pos,-1) && welt[pos-1] < 5 && welt[pos-1] >=0) {
             attackPos[pos-1] = 1;
         }
-        if(pos+1<25 && sameLineCheck(pos,+1) && welt[pos+1] < 10 && welt[pos+1] >= 5) {
+        if(pos+1<25 && sameLineCheck(pos,+1) && welt[pos+1] < 5 && welt[pos+1] >= 0) {
             attackPos[pos+1] = 1;
         }
-        if(pos+5<25 && difLineCheck(pos,+5) && welt[pos+5] < 10 && welt[pos+5] >= 5) {
+        if(pos+5<25 && difLineCheck(pos,+5) && welt[pos+5] < 5 && welt[pos+5] >= 0) {
             attackPos[pos+5] = 1;
         }
         return attackPos;
@@ -337,7 +344,7 @@ public class ALGORITHM
     public int getSaveDeath(int pos) {
         int saveDeathCount=0;
         for(int i=0;i<25;i++) {
-            if(getenemyStr()[i]>getStrength(pos) && welt[i] !=5) { //muss zu 0 geändert werden
+            if(getenemyStr()[i]>getStrength(pos) && welt[i] !=0) { //muss zu 0 geändert werden
                 if(getRange(pos)[i]==1) {
                     saveDeathCount++; 
                 }
@@ -353,12 +360,12 @@ public class ALGORITHM
         int cSC=0;
         int EnemyStrCom = 0;
         int EnemyPos = 0;
-        if(pos>=10) {
+        if(getType()>=10) {
             graphic.kons("Error: Please select an Entity!");
-        } else if(welt[pos]==0) { //muss zu 5 geändert werden
+        } else if(getType()==5) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
-                if(getAttackPos(pos)[i]==1 && welt[i] != 5) { //5 muss zu 0 geändert werden
+                if(getAttackPos(pos)[i]==1 && welt[i] != 0) { //5 muss zu 0 geändert werden
                     moveback = true;
                 }
             }
@@ -407,7 +414,7 @@ public class ALGORITHM
                         boolean check = false;
                         int attackposition = 0;
                         for(int i=0;i<25;i++) {
-                            if(getRange(pos)[i]==1 && welt[i] == 5) { //muss zu 0 geändert werden
+                            if(getRange(pos)[i]==1 && welt[i] == 0) { //muss zu 0 geändert werden
                                 if(getSaveDeath(pos)==0) {
                                     check = true;
                                     attackposition = i;
@@ -423,7 +430,14 @@ public class ALGORITHM
                         stop(); //heilen überprüfen
                     }
                 } else {
-                    attack();
+                    int EnPos = 0;
+                    int EnStr = 0;
+                    for(int i=0;i<25;i++) {
+                        if(checkEnemy()[i]==1 && getStrength(i) >= EnStr) {
+                            EnPos = i;
+                        }
+                    }
+                    attackpos(EnPos);
                 }
             }
         }
@@ -461,36 +475,13 @@ public class ALGORITHM
         }
         return check;
     }
-    
+
     public boolean SameArrayCreator(int pos,int dif) {
         boolean check=false;
         if(checkArrayOrder(pos+dif) && sameLineCheck(pos,dif)) {
             check=true;   
         }
         return check;
-    }
-
-    public int[] getExtendedAttack() {
-        int[] difPos = new int[8];
-        difPos[0] = -11;
-        difPos[1] = -10;
-        difPos[2] = -9;
-        difPos[3] = -7;
-        difPos[4] = -6;
-        difPos[5] = -5;
-        difPos[6] = -4;
-        difPos[7] = -3;
-        for(int i=0;i<8;i++) {
-            if(DifArrayCreator(pos,-1*difPos[i])) {
-                ExtendedAttack[pos+difPos[i]] = 1;
-            }
-        }
-        for(int i=0;i<8;i++) {
-            if(DifArrayCreator(pos,-1*difPos[i])) {
-                ExtendedAttack[pos-difPos[i]] = 1;
-            }
-        }
-        return ExtendedAttack;
     }
 
     public void moveaway() {
@@ -501,45 +492,140 @@ public class ALGORITHM
         int acd = 0; 
         int sac = 0;
         int tc = 0;
-        if(pos-1 >= 0 && getPath()[pos-1] == 1) {
-            left = true;
-            acl = getSaveDeath(pos-1);
-            tc++;
+
+        int EnPos = -1;
+        int EnStr = 0;
+        for(int i=0;i<25;i++) {
+            if(checkEnemy()[i]==1 && getStrength(i) >= EnStr) {
+                EnPos = i;
+            }
         }
-        if(pos+1 < 25 && getPath()[pos+1] == 1) {
-            right = true;
-            acr = getSaveDeath(pos+1);
-            tc++;
-        }
-        if(pos+5 < 25 && getPath()[pos+5] == 1) {
-            down = true;
-            acd = getSaveDeath(pos+5);
-            tc++;
-        }
-        if(pos-5 >= 0 && getPath()[pos-5] == 1) {
-            up = true;
-            acu = getSaveDeath(pos-5);
-            tc++;
-        }
-        if(acl>getSaveDeath(pos)) {
-            left = false;
-        }
-        if(acr>getSaveDeath(pos)) {
-            right = false;
-        }
-        if(acu>getSaveDeath(pos)) {
-            up = false;
-        }
-        if(acd>getSaveDeath(pos)) {
-            down = false;
-        }
-        if(tc==0) {
-            stop();
+        if(EnPos!=-1) {
+            attackpos(EnPos);
         } else {
-            if(right) {
-                graphic.kons("moveright()");
+            if(pos-1 >= 0 && getPath()[pos-1] == 1) {
+                left = true;
+                acl = getSaveDeath(pos-1);
+                tc++;
+            }
+            if(pos+1 < 25 && getPath()[pos+1] == 1) {
+                right = true;
+                acr = getSaveDeath(pos+1);
+                tc++;
+            }
+            if(pos+5 < 25 && getPath()[pos+5] == 1) {
+                down = true;
+                acd = getSaveDeath(pos+5);
+                tc++;
+            }
+            if(pos-5 >= 0 && getPath()[pos-5] == 1) {
+                up = true;
+                acu = getSaveDeath(pos-5);
+                tc++;
+            }
+            if(acl>getSaveDeath(pos)) {
+                left = false;
+            }
+            if(acr>getSaveDeath(pos)) {
+                right = false;
+            }
+            if(acu>getSaveDeath(pos)) {
+                up = false;
+            }
+            if(acd>getSaveDeath(pos)) {
+                down = false;
+            }
+            if(tc==0) {
+                stop();
+            } else {
+                if(left) {
+                    graphic.kons("moveleft()");
+                    setActionType(1);
+                    setActionPos(pos-1);
+                } else if(up || down) {
+                    if(checkLine(pos) < 2 && up) { 
+                        graphic.kons("moveup()");
+                        setActionType(1);
+                        setActionPos(pos-5);
+                    } else if(checkLine(pos) > 2 && down) { 
+                        graphic.kons("movedown()");
+                        setActionType(1);
+                        setActionPos(pos+5);
+                    } else {
+                        if(r.nextInt(2)==0) {
+                            if(up) {
+                                graphic.kons("moveup()");
+                                setActionType(1);
+                                setActionPos(pos-5);
+                            } else {
+                                stop();
+                            }
+                        } else {
+                            if(down) {
+                                graphic.kons("movedown()");
+                                setActionType(1);
+                                setActionPos(pos+5);
+                            } else {
+                                stop();
+                            }
+                        }
+                    }
+                } else if(right) {
+                    graphic.kons("moveright()");
+                    setActionType(1);
+                    setActionPos(pos+1);
+                } else {
+                    stop();
+                }
+            }
+        }
+    }
+
+    public void movenormal() { //Abstand zu Gegnern halten + StrengthComparision + SaveDeath
+        boolean up=false,down=false,left=false,right=false;
+
+        int EnPos = -1;
+        int EnStr = 0;
+        for(int i=0;i<25;i++) {
+            if(checkEnemy()[i]==1 && getStrength(i) >= EnStr) {
+                EnPos = i;
+            }
+        }
+        if(EnPos!=-1) {
+            attackpos(EnPos);
+        } else {
+            if(pos-1 >= 0 && getPath()[pos-1] == 1) {
+                if(pos-2 >= 0 && getAllEnemies()[pos-2] == 0) {
+                    left = true;
+                } else if(pos-2 >=0 && getSaveDeath(pos-2)==0) {
+                    left = true;
+                }
+            }
+            if(pos+1 < 25 && getPath()[pos+1] == 1) {
+                if(pos+2 <25 && getAllEnemies()[pos+2] == 0) {
+                    right = true;
+                } else if(pos+2 < 25 && getSaveDeath(pos+2)==0) {
+                    right = true;
+                }
+            }
+            if(pos+5 < 25 && getPath()[pos+5] == 1) {
+                if(pos+10 < 25 && getAllEnemies()[pos+10] == 0) {
+                    down = true;
+                } else if(pos+10 < 25 && getSaveDeath(pos+10)==0) {
+                    down = true;
+                }
+            }
+            if(pos-5 >= 0 && getPath()[pos-5] == 1) {
+                if(pos-10 >= 0 && getAllEnemies()[pos-10] == 0) {
+                    up = true;
+                } else if(pos-10 >= 0 && getSaveDeath(pos-10)==0) {
+                    up = true;
+                }
+            }
+            if(left) {
+                graphic.kons("moveleft()");
                 setActionType(1);
-                setActionPos(pos+1);
+                setActionPos(pos-1);
             } else if(up || down) {
                 if(checkLine(pos) < 2 && up) { 
                     graphic.kons("moveup()");
@@ -556,7 +642,7 @@ public class ALGORITHM
                             setActionType(1);
                             setActionPos(pos-5);
                         } else {
-                            graphic.kons("Error: Can't move! (moveaway)");
+                            stop();
                         }
                     } else {
                         if(down) {
@@ -564,72 +650,17 @@ public class ALGORITHM
                             setActionType(1);
                             setActionPos(pos+5);
                         } else {
-                            graphic.kons("Error: Can't move! (moveaway)");
+                            stop();
                         }
                     }
                 }
-            } else if(left) {
-                graphic.kons("moveleft()");
+            } else if(right) {
+                graphic.kons("moveright()");
                 setActionType(1);
-                setActionPos(pos-1);
+                setActionPos(pos+1);
             } else {
-                graphic.kons("Error: General move failture! (moveaway)");
+                stop();
             }
-        }
-    }
-
-    public void movenormal() { //Abstand zu Gegnern halten + StrengthComparision + SaveDeath
-        boolean up=false,down=false,left=false,right=false;
-        if(pos-1 >= 0 && getPath()[pos-1] == 1) {
-            left = true;
-        }
-        if(pos+1 < 25 && getPath()[pos+1] == 1) {
-            right = true;
-        }
-        if(pos+5 < 25 && getPath()[pos+5] == 1) {
-            up = true;
-        }
-        if(pos-5 >= 0 && getPath()[pos-5] == 1) {
-            down = true;
-        }
-        if(right) {
-            graphic.kons("moveright()");
-            setActionType(1);
-            setActionPos(pos+1);
-        } else if(up || down) {
-            if(checkLine(pos) < 2 && up) { 
-                graphic.kons("moveup()");
-                setActionType(1);
-                setActionPos(pos-5);
-            } else if(checkLine(pos) > 2 && down) { 
-                graphic.kons("movedown()");
-                setActionType(1);
-                setActionPos(pos+5);
-            } else {
-                if(r.nextInt(2)==0) {
-                    if(up) {
-                        graphic.kons("moveup()");
-                        setActionType(1);
-                        setActionPos(pos-5);
-                    } else {
-                        graphic.kons("Error: Can't move! (movenormal)");
-                    }
-                } else {
-                    if(down) {
-                        graphic.kons("movedown()");
-                        setActionType(1);
-                        setActionPos(pos+5);
-                    } else {
-                        graphic.kons("Error: Can't move! (movenormal)");
-                    }
-                }
-            }
-        } else if(left) {
-            graphic.kons("moveleft()");
-            setActionType(1);
-            setActionPos(pos-1);
-        } else {
-            graphic.kons("Error: General move failture! (movenormal)");
         }
     }
 
