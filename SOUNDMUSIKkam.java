@@ -1,13 +1,13 @@
 import java.io.File;
 import javax.sound.sampled.*;
-public class SOUNDSCHWERTSCHLAG
+public class SOUNDMUSIKkam
 {
     private Clip clip;
-    public SOUNDSCHWERTSCHLAG() 
+    public SOUNDMUSIKkam()
     {
         try 
         {
-            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("schwerthieb.wav"));  //hier .wav datei einfügen
+                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("warmusik.wav"));  //hier .wav datei einfügen
             AudioFormat format = ais.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format, ((int) ais.getFrameLength() * format.getFrameSize()));
             clip = (Clip) AudioSystem.getLine(info);
@@ -20,14 +20,11 @@ public class SOUNDSCHWERTSCHLAG
             e.printStackTrace();
         }
     }
-
-    public void play() 
-    {
-        clip.loop(0);
-    }
     
-    public void playgeg() {
-        clip.loop(0);
+    public void play() 
+    {                   //ca. 27min
+        clip.start();
+        clip.loop(222);
     }
 
     public void stop() 

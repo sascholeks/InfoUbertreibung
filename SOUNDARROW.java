@@ -23,7 +23,7 @@ public class SOUNDARROW
 
     public void play() 
     {
-        clip.start();
+        clip.loop(0);
     }
 
     public void stop() 

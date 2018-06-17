@@ -20,9 +20,13 @@ public class TASTATUR implements KeyListener
             welt.bewegen(1);
         }else if((e.getKeyCode() == 68 || e.getKeyCode() == 39)  && welt.bewegungssperre==false) {  //d
             welt.bewegen(2);
-        }else if((e.getKeyCode() == 83 || e.getKeyCode() == 40) && welt.bewegungssperre==false) {  //s
+        }else if((e.getKeyCode() == 83 || e.getKeyCode() == 40) && welt.bewegungssperre==false) {   //s
             welt.bewegen(3);
-        }else if(e.getKeyCode() == 73 && welt.bewegungssperre==false) {                           //i
+        }else if((e.getKeyCode() == 77) && welt.bewegungssperre==false) {                           //m
+            welt.navi();
+            welt.mausfreigabe=true;
+            welt.bewegungssperre=true;
+        }else if(e.getKeyCode() == 73 && welt.bewegungssperre==false) {                             //i
             if(help==false) {
                 welt.inventaraufruf();
                 help=true;
@@ -30,8 +34,12 @@ public class TASTATUR implements KeyListener
                 help=false;
                 welt.zeichneansicht();
             }
-        }else if(e.getKeyCode() == 27) {                                  //esc
-            
+        }else if (e.getKeyCode() == 10 && welt.bewegungssperre==false) {     //enter
+            welt.zeichneansicht();
+        }else if(e.getKeyCode() == 27) {                                     //esc
+
+        }else if(welt.kampf.sieg==true) {
+            welt.bewegungssperre=false;
         }
     } 
     
