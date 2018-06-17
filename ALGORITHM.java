@@ -21,7 +21,7 @@ public class ALGORITHM
     int action = -1;
     int actionPos = -1;
 
-    GRAFIKELEMENTE graphic;
+    //GRAFIKELEMENTE graphic;
     public ALGORITHM(int[] welt, int[] anz, int[] order)
     {
         this.welt = welt;
@@ -36,7 +36,7 @@ public class ALGORITHM
         enemyStr = new int[25];
         StrCom = new int[25];
         attackPos = new int[25];
-        graphic =new GRAFIKELEMENTE();
+        //graphic =new GRAFIKELEMENTE();
         r = new Random();
     }
 
@@ -53,7 +53,7 @@ public class ALGORITHM
             }
         }
         if(pos==-1) {
-            graphic.kons("AI Position Getter Error!");
+            // graphic.kons("AI Position Getter Error!");
         }
         return pos;  
     }
@@ -361,7 +361,7 @@ public class ALGORITHM
         int EnemyStrCom = 0;
         int EnemyPos = 0;
         if(getType()>=10) {
-            graphic.kons("Error: Please select an Entity!");
+            // graphic.kons("Error: Please select an Entity!");
         } else if(getType()==5) { //muss zu 5 geändert werden
             boolean moveback = false;
             for(int i=0;i<25;i++) {
@@ -444,18 +444,18 @@ public class ALGORITHM
     }
 
     public void stop() { //heal überprüfen
-        graphic.kons("stop()");
+        // graphic.kons("stop()");
         setActionType(2);
     }
 
     public void attack() {
-        graphic.kons("attack()");
+        // graphic.kons("attack()");
         setActionType(0);
         setActionPos(pos);
     }
 
     public void attackpos(int pos) {
-        graphic.kons("attack(" + pos + ")");  
+        // graphic.kons("attack(" + pos + ")");  
         setActionType(0);
         setActionPos(pos);
     }
@@ -539,22 +539,22 @@ public class ALGORITHM
                 stop();
             } else {
                 if(left) {
-                    graphic.kons("moveleft()");
+                    // graphic.kons("moveleft()");
                     setActionType(1);
                     setActionPos(pos-1);
                 } else if(up || down) {
                     if(checkLine(pos) < 2 && up) { 
-                        graphic.kons("moveup()");
+                        // graphic.kons("moveup()");
                         setActionType(1);
                         setActionPos(pos-5);
                     } else if(checkLine(pos) > 2 && down) { 
-                        graphic.kons("movedown()");
+                        // graphic.kons("movedown()");
                         setActionType(1);
                         setActionPos(pos+5);
                     } else {
                         if(r.nextInt(2)==0) {
                             if(up) {
-                                graphic.kons("moveup()");
+                                // graphic.kons("moveup()");
                                 setActionType(1);
                                 setActionPos(pos-5);
                             } else {
@@ -562,7 +562,7 @@ public class ALGORITHM
                             }
                         } else {
                             if(down) {
-                                graphic.kons("movedown()");
+                                // graphic.kons("movedown()");
                                 setActionType(1);
                                 setActionPos(pos+5);
                             } else {
@@ -571,7 +571,7 @@ public class ALGORITHM
                         }
                     }
                 } else if(right) {
-                    graphic.kons("moveright()");
+                    // graphic.kons("moveright()");
                     setActionType(1);
                     setActionPos(pos+1);
                 } else {
@@ -623,22 +623,22 @@ public class ALGORITHM
                 }
             }
             if(left) {
-                graphic.kons("moveleft()");
+                // graphic.kons("moveleft()");
                 setActionType(1);
                 setActionPos(pos-1);
             } else if(up || down) {
                 if(checkLine(pos) < 2 && up) { 
-                    graphic.kons("moveup()");
+                    // graphic.kons("moveup()");
                     setActionType(1);
                     setActionPos(pos-5);
                 } else if(checkLine(pos) > 2 && down) { 
-                    graphic.kons("movedown()");
+                    // graphic.kons("movedown()");
                     setActionType(1);
                     setActionPos(pos+5);
                 } else {
                     if(r.nextInt(2)==0) {
                         if(up) {
-                            graphic.kons("moveup()");
+                            // graphic.kons("moveup()");
                             setActionType(1);
                             setActionPos(pos-5);
                         } else {
@@ -646,7 +646,7 @@ public class ALGORITHM
                         }
                     } else {
                         if(down) {
-                            graphic.kons("movedown()");
+                            // graphic.kons("movedown()");
                             setActionType(1);
                             setActionPos(pos+5);
                         } else {
@@ -655,7 +655,7 @@ public class ALGORITHM
                     }
                 }
             } else if(right) {
-                graphic.kons("moveright()");
+                // graphic.kons("moveright()");
                 setActionType(1);
                 setActionPos(pos+1);
             } else {

@@ -1,7 +1,9 @@
 import java.util.Random;
- 
+
 public class KAMPF
 {
+    static KAMPF statKampf;
+
     GRAFIKELEMENTE grafik;
     Random r;
     KAEMPFER[] kaempfer;
@@ -15,8 +17,13 @@ public class KAMPF
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr,aanz1,aanz2,aanz3,aanz4,aanz5,posx,posy;
     double schwer;
     boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false,sieg,verloren,ton=true;   //=ungültig (bei bewegung(int feld))
+
+    int Orderpos;
+
     public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone)                                     
     {
+        statKampf = this;
+
         ton=tone;
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
@@ -101,12 +108,28 @@ public class KAMPF
         if(ton==true) {
             //musik.play();
         }
+
+        new Thread( new Runnable() 
+        {
+                public void run()  {
+                    try { 
+                        Thread.sleep( 1000 ); 
+                    } catch (InterruptedException ie) {
+
+                    }
+                }
+            } 
+        ).start();
+
+        if(reihenfolge[0]>=5 && reihenfolge[0] <10) {
+            complDecide();
+        }
     }
 
     public void zeichnespielfeld() {
     }
 
-    public void kaempfen(int feld) {
+    public void kaempfen(int feld,boolean AI) {
         if(aktionen!=2 && gekaempft==false) {                   //kontolle bereits gekämpft und aktionen gemacht
             if(welt[feld]!=10 && welt[feld]!=11) {              //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
@@ -203,15 +226,19 @@ public class KAMPF
                 ug=true;
             }
         }else if(gekaempft==true) {
-            grafik.kons("In dieser Runde bereits gekämpft");
+            if(!AI) {
+                grafik.kons("In dieser Runde bereits gekämpft"); 
+            }
             ug=false;
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits gemacht");
+            if(!AI) {
+                grafik.kons("Max. Aktionen bereits ausgeführt!");
+            }
             ug=false;
         }       
     }
 
-    public void bewegen(int feld) {
+    public void bewegen(int feld, boolean AI) {
         if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
                 grafik.loeschemarkierung(kepos[reihenfolge[0]]);
@@ -230,13 +257,19 @@ public class KAMPF
                 grafik.kons("Feld nicht in Reichweite");
             }
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits ausgeführt");
+            if(!AI) {
+                grafik.kons("Max. Aktionen bereits ausgeführt");
+            }
         }else if(bewegt==true) {
-            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+            if(!AI) {
+                grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+            }
         }else if(welt[feld]!=10) {
             grafik.kons("Feld ist nicht frei");
         }else if(gekaempft==true) {
-            grafik.kons("Nach dem Kampf kannst du nicht laufen");
+            if(!AI) {
+                grafik.kons("Nach dem Kampf kannst du nicht laufen");
+            }
         }
     }
 
@@ -326,6 +359,9 @@ public class KAMPF
         aktionen=0;
         posx=kepos[reihenfolge[0]]%5;
         posy=kepos[reihenfolge[0]]/5;
+        if(reihenfolge[0]>=5 && reihenfolge[0] <10) {
+            complDecide();
+        }
     }
 
     public void zreihenfolge() {
@@ -414,11 +450,90 @@ public class KAMPF
         }
     }
 
-    public void decide(int pos) {
-        alg = new ALGORITHM(welt,anz,reihenfolge);
-        alg.decide();
+    public static KAMPF createKampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone) 
+    {
+        if(statKampf==null) {
+            statKampf = new KAMPF(ausanz0, ausanz1,ausanz2, ausanz3, ausanz4, geganz0, geganz1, geganz2, geganz3, geganz4, heiltrkl, heiltrgr, swer, tone);
+        }
+        return statKampf;
     }
 
+    public static KAMPF getKampf() {
+        return statKampf;
+    }
+
+    public void decideOrder() {
+        int pos=-1;
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        alg.updateOrder(reihenfolge);
+        for(int i=0;i<25;i++) {
+            if(welt[i]==reihenfolge[0]) {
+                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=4 und <10
+                    pos = i;
+                } else {
+                    grafik.kons("Error: Die KI ist nicht am Zug!");
+                    pos = -2;
+                }
+            }
+        }
+        Orderpos = alg.getOrderPos();
+        if(pos!=-1 && pos!=-2) {
+            alg.decide();
+            action(alg.getActionType());
+        } else if(pos == -2) {
+            grafik.kons("Error: Die KI ist nicht am Zug!");
+        }else {
+            grafik.kons("Error: KI decide error!");
+        }
+    }
+
+    public int getActionPos() {
+        return alg.getActionPos();
+    }
+
+    public void action(int action) {
+        switch(action) {
+            case 1:     //move
+            bewegen(getActionPos(),true);
+            break;
+            case 0:     //attack    
+            kaempfen(getActionPos(),true);
+            break;
+            case 2:     //stop
+            beendez();
+            break;
+            default:   //heilen etc. fehlt;
+            //grafik.kons("AI Action Error!");
+        }
+    }
+
+    public int getOrderPos() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        Orderpos = alg.getOrderPos(); 
+        return Orderpos;
+    }
+
+    public int getAction() {
+        alg = new ALGORITHM(welt,anz,reihenfolge);
+        alg.decide();
+        return alg.getActionType();
+    }
+
+    public void complDecide() {
+        decideOrder();
+        if(getAction()!=2) {
+            decideOrder(); 
+            if(getAction()!=2) {
+                decideOrder(); 
+                beendez();
+            } else {
+                beendez();
+            }
+        } else {
+            beendez();
+        }
+
+    }
 }
 //          try {
 //              Thread.sleep(1000);                 

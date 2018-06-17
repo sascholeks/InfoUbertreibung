@@ -155,7 +155,7 @@ public class WELT implements MouseListener
     }
 
     public void mouseReleased(MouseEvent e) {
-        if(hp16==true && kampf.kampf.sieg==true) {    //weiter
+        if(hp16==true && kampf.sieg==true) {    //weiter
             hp16=false;
             bewegungssperre=false;
             gegnerpos[aktpos]=101;

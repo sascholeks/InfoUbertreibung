@@ -4,10 +4,10 @@ import java.awt.event.*;
 public class KAMPFEINGABE implements MouseListener 
 {
     private ZEICHENFENSTER f;
-    KAMPF kampf;
     GRAFIKELEMENTE grafik;
+    KAMPF kampf;
     int[] x,y;
-    int help,feld=100,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
+    int help,feld=0,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
     boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
     public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer,boolean tone)
     {
@@ -19,7 +19,7 @@ public class KAMPFEINGABE implements MouseListener
             y[a]=xyp;
             xyp=xyp+50;
         }
-        kampf=new KAMPF(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr,schwer,tone);
+        kampf = KAMPF.createKampf(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr,schwer,tone);
         grafik=new GRAFIKELEMENTE();
         help=0;
         konbewegt=0;
@@ -56,7 +56,7 @@ public class KAMPFEINGABE implements MouseListener
                 konbewegt=0;
             }
             grafik.zeichneaktionsauswahl(2);
-            grafik.kons("wähle Feld");
+            grafik.kons("Wähle ein Feld!");
             konbewegen=true;
         }else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {           //zug beenden            
             grafik.zeichneaktionsauswahl(3);
@@ -346,15 +346,15 @@ public class KAMPFEINGABE implements MouseListener
             feld=24;
             gekämpft=true;
         }
-        grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
+        // grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
         if(konbewegt==2 && konbewegen==true) {
             konbewegen=false;
-            kampf.bewegen(feld);
+            kampf.bewegen(feld,false);
         }else if(konbewegt==1 && konbewegen==true) {
             helpbew=feld;
-            kampf.bewegen(feld);
+            kampf.bewegen(feld,false);
         }else if(kampffreigabe==true && gekämpft==true) {
-            kampf.kaempfen(feld);
+            kampf.kaempfen(feld,false);
             kampffreigabe=false;
             gekämpft=false;
             if(kampf.ug==true) {

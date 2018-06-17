@@ -3,17 +3,17 @@ import java.awt.*;
 import java.awt.event.*;
 
 public class DEVTASTATUR implements KeyListener {
-    
+
     private JFrame f;
     public DEVTASTATUR() {
         f = ZEICHENFENSTER.gibFenster().frame;     
         f.addKeyListener(this);
         DEV.getDev();
     }
-    
+
     public void keyPressed(KeyEvent e) { 
         if(e.getKeyChar()=='a') {
-           DEV.getDev().decideOrder();
+            DEV.getDev().complDecide();
         }
         if(e.getKeyChar()=='0') {
             DEV.getDev().skipOrder(0);
@@ -34,12 +34,12 @@ public class DEVTASTATUR implements KeyListener {
             DEV.getDev().beendezug();
         }
     } 
-    
+
     public void keyTyped(KeyEvent e) { 
-        
+
     }    
-    
+
     public void keyReleased(KeyEvent e) {  
-        
+
     } 
 }
