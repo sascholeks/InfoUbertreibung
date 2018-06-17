@@ -8,6 +8,7 @@ public class KAMPF
     ALGORITHM alg;
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
+    SOUNDMUSIKkam musik;
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz,startanz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
@@ -19,6 +20,7 @@ public class KAMPF
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         arrow=new SOUNDARROW();
+        musik=new SOUNDMUSIKkam();
         r=new Random();
         x=new int [5];
         y=new int [5];
@@ -93,6 +95,9 @@ public class KAMPF
         aanz3=anz[2];
         aanz4=anz[3];
         aanz5=anz[4];
+        sieg=false;
+        verloren=false;
+        musik.play();
     }
 
     public void zeichnespielfeld() {
@@ -211,10 +216,10 @@ public class KAMPF
                 grafik.markiereaktuell(kepos[reihenfolge[0]]);
                 grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                 bewhelp++;
-                aktionen++;
                 if(bewhelp==2) {
                     bewhelp=0;
                     bewegt=true;
+                    aktionen++;
                 }
             }else {
                 grafik.kons("Feld nicht in Reichweite");
@@ -316,8 +321,6 @@ public class KAMPF
         aktionen=0;
         posx=kepos[reihenfolge[0]]%5;
         posy=kepos[reihenfolge[0]]/5;
-        System.out.println(posx);
-        System.out.println(posy);
     }
 
     public void zreihenfolge() {
@@ -372,6 +375,7 @@ public class KAMPF
     }
 
     public void kontrollesieg() {
+        musik.stop();
         if(tod[0]==true && tod[1]==true && tod[2]==true && tod[3]==true && tod[4]==true) {
             grafik.kons("Verloren");
             try {
@@ -390,6 +394,7 @@ public class KAMPF
             }
             grafik.zeichnesieg(aanz1-anz[0],aanz2-anz[1],aanz3-anz[2],aanz4-anz[3],aanz5-anz[4],(int)(r.nextInt(5)*schwer),(int)(r.nextInt(4)*schwer),(int)(r.nextInt(5000)*schwer));
             sieg=true;
+            grafik.kons("Klicken und Taste drücken um Fortzufahren");
         }
     }
 
