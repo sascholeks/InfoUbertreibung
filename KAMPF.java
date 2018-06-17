@@ -14,7 +14,7 @@ public class KAMPF
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr,aanz1,aanz2,aanz3,aanz4,aanz5,posx,posy;
     double schwer;
-    boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false,sieg,verloren;   //=ungültig (bei bewegung(int feld))
+    boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false,sieg,verloren,ton=true;   //=ungültig (bei bewegung(int feld))
     public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer)                                     
     {
         grafik=new GRAFIKELEMENTE();
@@ -97,7 +97,9 @@ public class KAMPF
         aanz5=anz[4];
         sieg=false;
         verloren=false;
-        musik.play();
+        if(ton==true) {
+            musik.play();
+        }
     }
 
     public void zeichnespielfeld() {
@@ -109,7 +111,9 @@ public class KAMPF
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
                     if(kaempfer[reihenfolge[0]].name=="Bogenschütze") {                 //kontolle kaempferart
                         arrow.play();
-                        leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
+                        if(dmg[reihenfolge[0]]>=0) {
+                            leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
+                        }
                         grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
                         grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;

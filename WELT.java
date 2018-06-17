@@ -20,7 +20,7 @@ public class WELT implements MouseListener
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
     int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,counter;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true;
     double schwerfaktor=1;
     String ort1,ort2;
     public WELT() {
@@ -159,7 +159,11 @@ public class WELT implements MouseListener
             hp16=false;
             bewegungssperre=false;
             gegnerpos[aktpos]=101;
-            musik.play();
+            if(ton==true) {
+                if(ton==true) {
+                    musik.play();
+                }
+            }
         }
         if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107 && mausfreigabe==true) {          //fld1
             if(objschirm.hpt==true) {
@@ -530,6 +534,18 @@ public class WELT implements MouseListener
             }
         }
         return hp7;
+    }
+    
+    public void tonaus() {
+        ton=false;
+        musik.stop();
+        kampf.kampf.ton=false;
+        kampf.kampf.musik.stop();
+    }
+    
+    public void tonweltaus() {
+        musik.stop();
+        ton=false;
     }
 
     public void inventaraufruf() {

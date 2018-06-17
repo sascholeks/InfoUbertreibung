@@ -5,7 +5,8 @@ public class TASTATUR implements KeyListener
 {
     private JFrame f;
     WELT welt;
-    boolean help=false;
+    boolean help=false,kom=false;
+    int eingabe;
     public TASTATUR()
     {
         f = ZEICHENFENSTER.gibFenster().frame;     
@@ -37,9 +38,68 @@ public class TASTATUR implements KeyListener
         }else if (e.getKeyCode() == 10 && welt.bewegungssperre==false) {     //enter
             welt.zeichneansicht();
         }else if(e.getKeyCode() == 27) {                                     //esc
-
-        }else if(welt.kampf.sieg==true) {
+            
+        }//else if(welt.kampf.sieg==true && welt.bewegungssperre==true) {
+           // welt.bewegungssperre=false;
+        //}
+        
+        //kommands
+        if(e.getKeyCode() == 130) {
+            if(kom==false) {
+                kom=true;
+                eingabe=0;
+                welt.grafik.kons("Cheateingabe");
+                welt.bewegungssperre=true;
+            }else {
+                kom=false;
+                welt.bewegungssperre=false;
+                welt.grafik.kons("Cheateingabe beendet");
+            }
+        }
+        if(e.getKeyCode() ==77 && kom==true) {        //m
+            eingabe=eingabe+1;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==85 && kom==true) {  //u
+            eingabe=eingabe+2;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==84 && kom==true) {  //t
+            eingabe=eingabe+3;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==69 && kom==true) {  //e
+            eingabe=eingabe+4;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==87 && kom==true) {  //w
+            eingabe=eingabe+5;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==76 && kom==true) {  //l
+            eingabe=eingabe+6;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==75 && kom==true) {  //k
+            eingabe=eingabe+7;
+            System.out.println(eingabe);   
+        }else if(e.getKeyCode() ==65 && kom==true) {  //a
+            eingabe=eingabe+8;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==87 && kom==true) {  //f
+            eingabe=eingabe+9;
+            System.out.println(eingabe);
+        }else if(e.getKeyCode() ==10) {
+            switch (eingabe) {
+                case 10:
+                    welt.tonaus();
+                    welt.grafik.kons("Ton aus");
+                    eingabe=0;
+                    break;
+                case 28:
+                    welt.tonweltaus();
+                    welt.grafik.kons("TonWelt aus");
+                    eingabe=0;
+                    break;
+                default:
+                    welt.grafik.kons("ungültiger Cheat"); 
+            }
             welt.bewegungssperre=false;
+            kom=false;
         }
     } 
     
@@ -48,3 +108,9 @@ public class TASTATUR implements KeyListener
     public void keyReleased(KeyEvent e) {    
     } 
 }
+
+
+
+
+
+

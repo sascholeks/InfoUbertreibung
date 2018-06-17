@@ -18,7 +18,13 @@ Steuerung:
 Generelle Informationen:
     Gegner können sich in Wäldern(wlttyp 3,5,11) verstecken, also sei Vorsichtig!
 
-
+Chests:
+    mute
+      -ton in WELT und KAMPF aus
+    mutewelt
+      -ton in welt aus
+    mutekampf
+      -ton in kampf aus
     
     
     
