@@ -108,19 +108,7 @@ public class KAMPF
         if(ton==true) {
             //musik.play();
         }
-
-        new Thread( new Runnable() 
-        {
-                public void run()  {
-                    try { 
-                        Thread.sleep( 1000 ); 
-                    } catch (InterruptedException ie) {
-
-                    }
-                }
-            } 
-        ).start();
-
+        
         if(reihenfolge[0]>=5 && reihenfolge[0] <10) {
             complDecide();
         }
@@ -532,7 +520,6 @@ public class KAMPF
         } else {
             beendez();
         }
-
     }
 }
 //          try {
