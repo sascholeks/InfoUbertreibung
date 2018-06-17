@@ -226,14 +226,17 @@ public class GRAFIKWELT
             blume1(this.x[x]+4,this.y[y]+20);
             break;
             case 21:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            blume1(this.x[x]+12,this.y[y]+18);
             break;
             case 22:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
             Blume3(this.x[x]+10,this.y[y]+19);
             break;
             case 23:
-
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            Blume2(this.x[x]+5,this.y[y]+4);
+            Blume3(this.x[x]+26,this.y[y]+14);
             break;
             case 24:
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
@@ -324,6 +327,10 @@ public class GRAFIKWELT
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+14,17,12,31);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+1,12,25,31);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+28,this.y[y]+24,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+27,this.y[y]+23,1,1,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+30,this.y[y]+24,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+29,this.y[y]+23,1,1,17);
             break;
             case 29:  //links rechts
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
@@ -375,9 +382,15 @@ public class GRAFIKWELT
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,12,26,31);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+14,this.y[y]+14,26,12,31);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+10,this.y[y]+4,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+9,this.y[y]+3,1,1,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+12,this.y[y]+4,1,3,17);
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+11,this.y[y]+3,1,1,17);
             break;
-            
-            
+            case 40:   //dungeon
+            ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+            dungeon(this.x[x]+2,this.y[y]+6);
+            break;
             
             case 100:  //monster  
             ZEICHENFENSTER.gibFenster().fuelleKreis(this.x[x]+20,this.y[y]+20,3,4);
@@ -528,11 +541,36 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+13,y+3,2,2,4);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+8,2,2,4);    
     }
+    
+    public void dungeon(int x ,int y) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+5,7,25,27);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+10,25,20,27);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+30,y+5,7,25,27);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+14,y+13,9,17,7);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+15,y+14,7,16,0);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+5,7,3,37);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+30,y+5,7,3,36);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+2,y+18,3,3,37);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+31,y+18,3,3,37);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+7,y+7,5,5,27);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+17,y+7,5,5,27);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+26,y+7,4,5,27);
+    }
 
     public void kordinatenanzeige(String kord) {  
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,10,54,14,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(290,10,54,14);
         ZEICHENFENSTER.gibFenster().zeichneText(kord,292,22);
+    }
+    
+    public void ortsanzeige(String kord,String name) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(360,10,134,14,11);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(360,10,134,14);
+        ZEICHENFENSTER.gibFenster().zeichneText(name+":  "+kord,362,22);
+    }
+    
+    public void loescheort() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(359,9,137,17,8);
     }
 
     public void questanzeige(String kords) {

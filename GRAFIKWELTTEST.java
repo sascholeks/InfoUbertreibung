@@ -336,5 +336,12 @@ public class GRAFIKWELTTEST
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+5,3,2,37);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+6,y+6,9,1,37);
     }
+    
+    public void kaserne(int x, int y) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,39,39,15);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+1,2,39,35);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+37,this.y[y]+1,2,39,35);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(this.x[x]+1,this.y[y]+35,39,5,35);
+    }
 }
 
