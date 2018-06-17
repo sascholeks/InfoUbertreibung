@@ -6,7 +6,7 @@ import java.util.Timer;
 public class WELT implements MouseListener 
 {
     private ZEICHENFENSTER f;
-    SOUNDMUSIKwelt musik;
+    //SOUNDMUSIKwelt musik;
     GRAFIKWELT grafik;
     ALGOGR algsw;
     OBJBILDSCHIRM objschirm;
@@ -20,12 +20,12 @@ public class WELT implements MouseListener
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
     int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,counter;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true;;
     double schwerfaktor=1;
     String ort1,ort2;
     public WELT() {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
-        musik=new SOUNDMUSIKwelt();
+        //musik=new SOUNDMUSIKwelt();
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
         objschirm=new OBJBILDSCHIRM();
@@ -58,7 +58,7 @@ public class WELT implements MouseListener
         bewegungssperre=false;
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
         quest=new boolean[100];
-        musik.play();
+        //musik.play();
     }
 
     public void bewegen(int richtung) {
@@ -114,9 +114,9 @@ public class WELT implements MouseListener
         zeichneansicht();
         if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
             bewegungssperre=true;
-            kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor);
+            kampf=new KAMPFEINGABE(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor,kampfton);
             hp16=true;
-            musik.stop();
+            //musik.stop();
         }
         if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
             grafik.loeschekons();
@@ -161,7 +161,7 @@ public class WELT implements MouseListener
             gegnerpos[aktpos]=101;
             if(ton==true) {
                 if(ton==true) {
-                    musik.play();
+                    //musik.play();
                 }
             }
         }
@@ -432,17 +432,16 @@ public class WELT implements MouseListener
             }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100);
             gegnerpos[genhelpkampf]=100;
         }
-        welt[aktpos-1]=40;   //zeile nur zu testzwecken
     }
 
     public void generierestart() {
         int genstart1,genstart2;
         do {
             genstart1=r.nextInt(500);
-        }while(genstart1<3 || genstart1>495);
+        }while(genstart1<4 || genstart1>494);
         do {
             genstart2=r.nextInt(500);
-        }while(genstart2<3 || genstart2>495);
+        }while(genstart2<4 || genstart2>494);
         aktpos=genstart2*500+genstart1;
     }
 
@@ -538,18 +537,29 @@ public class WELT implements MouseListener
     
     public void tonaus() {
         ton=false;
-        musik.stop();
-        kampf.kampf.ton=false;
-        kampf.kampf.musik.stop();
+        //musik.stop();
+        kampfton=false;
+        //kampf.kampf.musik.stop();
+    }
+    
+    public void tonan() {
+        ton=true;
+        //musik.play();
+        kampfton=true;        
     }
     
     public void tonweltaus() {
-        musik.stop();
+        //musik.stop();
         ton=false;
     }
 
     public void inventaraufruf() {
         inv.inventar();
+    }
+    
+    public void tonkampfaus() {
+        kampfton=false;
+        //kampf.kampf.musik.stop();
     }
 
     public void mousePressed(MouseEvent e) 

@@ -8,19 +8,20 @@ public class KAMPF
     ALGORITHM alg;
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
-    SOUNDMUSIKkam musik;
+    //SOUNDMUSIKkam musik;
 
     int[] leben,dmg,welt,reihenfolge,kepos,team,x,y,anz,startanz;  //im index steht die kaempferID  //indes in welt gibt feld an
     boolean[] tod;
     int aktionen,feld,bewhelp=0,feldhind,helphind,helphind2,hlkl,hlgr,aanz1,aanz2,aanz3,aanz4,aanz5,posx,posy;
     double schwer;
     boolean geheilt=false,gekaempft=false,bewegt=false,konlinks,konrechts,ug=false,sieg,verloren,ton=true;   //=ungültig (bei bewegung(int feld))
-    public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer)                                     
+    public KAMPF(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone)                                     
     {
+        ton=tone;
         grafik=new GRAFIKELEMENTE();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         arrow=new SOUNDARROW();
-        musik=new SOUNDMUSIKkam();
+        //musik=new SOUNDMUSIKkam();
         r=new Random();
         x=new int [5];
         y=new int [5];
@@ -98,7 +99,7 @@ public class KAMPF
         sieg=false;
         verloren=false;
         if(ton==true) {
-            musik.play();
+            //musik.play();
         }
     }
 
@@ -379,7 +380,7 @@ public class KAMPF
     }
 
     public void kontrollesieg() {
-        musik.stop();
+        //musik.stop();
         if(tod[0]==true && tod[1]==true && tod[2]==true && tod[3]==true && tod[4]==true) {
             grafik.kons("Verloren");
             try {

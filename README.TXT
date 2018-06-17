@@ -19,18 +19,25 @@ Generelle Informationen:
     Gegner können sich in Wäldern(wlttyp 3,5,11) verstecken, also sei Vorsichtig!
 
 Chests:
-    mute
-      -ton in WELT und KAMPF aus
-    mutewelt
-      -ton in welt aus
-    mutekampf
-      -ton in kampf aus
+    * mute
+        -ton in WELT und KAMPF aus
+    *unmute
+        -ton in WELT und KAMPF an
+    * mutewelt
+        -ton in welt aus
+    * mutekampf
+        -ton in kampf aus
+    * spawn*  (*0-101)
+        -erstellt auf aktfeld obj
+    *give*   (*ID KAEMPFER)
+        -gibt kaempfer 100 truppen
+    *neuewelt
+        -erstellt neue welt
     
     
     
-    
-    
-    
+Dev Info: 
+ -ton/musik abgeschaltet
     
     
     
