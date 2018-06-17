@@ -8,12 +8,13 @@ Generelle Informationen:
     Version 0.101
 
 Steuerung:
-    Bewegen: WASD oder Pfeiltasten
+    Bewegen:  WASD oder Pfeiltasten
     Inventar: I
-    Welt zeichnen lassen(falls Möglich): Enter
-    Menü: Esc
-    
+    Welt zeichnen (falls Möglich): Enter
+    Menü:     Esc
+    Navi:     M
 
+    
 Generelle Informationen:
     Gegner können sich in Wäldern(wlttyp 3,5,11) verstecken, also sei Vorsichtig!
 
