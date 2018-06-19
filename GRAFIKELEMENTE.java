@@ -59,6 +59,10 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,6);
         ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,6);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,6);
+        ZEICHENFENSTER.gibFenster().zeichneText("Heilen",430,130);
+        ZEICHENFENSTER.gibFenster().zeichneText("Kämpfen",478,80);
+        ZEICHENFENSTER.gibFenster().zeichneText("Bewegen",530,130);
+        ZEICHENFENSTER.gibFenster().zeichneText("Zug beenden",475,178);
     }
 
     public void anzahlreihenfolge(int reihe,int anz) {   

@@ -33,9 +33,17 @@ Chests:
         -gibt kaempfer 100 truppen
     *neuewelt
         -erstellt neue welt
-    
-    
-    
+    *exitkmpf 
+        -verlässt den aktuellen Kampf
+    *nonotice
+        -lässt dich Events ignorieren
+    *notice
+        -Events werden wieder beachted
+    *tphpt
+        -telepotiert zur Hauptstadt
+        
+        
+        
 Dev Info: 
  -ton/musik abgeschaltet
     

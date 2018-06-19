@@ -52,6 +52,12 @@ public class GRAFIKWELT
         } 
         str2=st;
     }
+    
+    public void cheat(String cheat) {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(290,165,400,20,4);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,165,400,20);
+        ZEICHENFENSTER.gibFenster().zeichneText(cheat,295,180); 
+    }
 
     public void kons2(String str2) {  
         if(i>=2) {  

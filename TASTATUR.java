@@ -1,12 +1,12 @@
 import javax.swing.*;
-import java.awt.*;
+import java.awt.*; 
 import java.awt.event.*;
 public class TASTATUR implements KeyListener
 {
     private JFrame f;
     WELT welt;
     boolean help=false,kom=false;
-    int eingabe;
+    int eingabe,hlp;
     public TASTATUR() {
         f = ZEICHENFENSTER.gibFenster().frame;     
         f.addKeyListener(this);
@@ -47,12 +47,12 @@ public class TASTATUR implements KeyListener
             if(kom==false) {
                 kom=true;
                 eingabe=0;
-                welt.grafik.kons("Cheateingabe");
+                welt.grafik.cheat("Cheateingabe");
                 welt.bewegungssperre=true;
             }else {
                 kom=false;
                 welt.bewegungssperre=false;
-                welt.grafik.kons("Cheateingabe beendet");
+                welt.grafik.cheat("Cheateingabe beendet");
             }
         }
         if(e.getKeyCode() ==77 && kom==true) {        //m
@@ -87,72 +87,113 @@ public class TASTATUR implements KeyListener
             eingabe=eingabe+15; 
         }else if(e.getKeyCode() ==79 && kom==true) {  //o
             eingabe=eingabe+16; 
+        }else if(e.getKeyCode() ==88 && kom==true) {  //x
+            eingabe=eingabe+17; 
+        }else if(e.getKeyCode() ==82 && kom==true) {  //r
+            eingabe=eingabe+18; 
+        }else if(e.getKeyCode() ==67 && kom==true) {  //c
+            eingabe=eingabe+19;    
+        }else if(e.getKeyCode() ==72 && kom==true) {  //h
+            eingabe=eingabe+20;  
         }else if(e.getKeyCode() ==48 && kom==true) {  //0
             eingabe=eingabe+100;
         }else if(e.getKeyCode() ==49 && kom==true) {  //1
             eingabe=eingabe+101;
         }else if(e.getKeyCode() ==52 && kom==true) {  //4
             eingabe=eingabe+102;
-        }else if(e.getKeyCode() ==52 && kom==true) {  //2
+        }else if(e.getKeyCode() ==50 && kom==true) {  //2
             eingabe=eingabe+103;
-        }else if(e.getKeyCode() ==52 && kom==true) {  //3
+        }else if(e.getKeyCode() ==51 && kom==true) {  //3
             eingabe=eingabe+104;
         }else if(e.getKeyCode() ==10) {
             switch (eingabe) {
                 case 24:
                     welt.tonan();
-                    welt.grafik.kons("Ton an");
+                    welt.grafik.cheat("Ton an");
                     break;
                 case 10:
                     welt.tonaus();
-                    welt.grafik.kons("Ton aus");
+                    welt.grafik.cheat("Ton aus");
                     break;
                 case 28:
                     welt.tonweltaus();
-                    welt.grafik.kons("TonWelt aus");
+                    welt.grafik.cheat("TonWelt aus");
                     break;
                 case 45:
                     welt.tonkampfaus();
-                    welt.grafik.kons("Tonkampf aus");
+                    welt.grafik.cheat("Tonkampf aus");
                     break;
                 case 347:
                     welt.gegnerpos[welt.aktpos]=100;
-                    welt.grafik.kons("erstelle kaempfer");
+                    welt.zeichneansicht();
+                    welt.grafik.cheat("erstelle kaempfer");
                     break;
                 case 248: 
                     welt.welt[welt.aktpos]=40;
-                    welt.grafik.kons("erstelle dungeon");
+                    welt.zeichneansicht();
+                    welt.grafik.cheat("erstelle dungeon");
                     break;
                 case 146:
                     welt.inv.anz[0]=welt.inv.anz[0]+100;
-                    welt.grafik.kons("100 Bogenschützen erhalten");
+                    welt.grafik.cheat("100 Bogenschützen erhalten");
                     break;
                 case 147:
                     welt.inv.anz[1]=welt.inv.anz[1]+100;
-                    welt.grafik.kons("100 Speerkämpfer erhalten");
+                    welt.grafik.cheat("100 Speerkämpfer erhalten");
                     break;
                 case 149:
                     welt.inv.anz[2]=welt.inv.anz[3]+100;
-                    welt.grafik.kons("100 Schildknappen erhalten");
+                    welt.grafik.cheat("100 Schildknappen erhalten");
                     break;
                 case 150:
                     welt.inv.anz[3]=welt.inv.anz[3]+100;
-                    welt.grafik.kons("100 Ritter erhalten");
+                    welt.grafik.cheat("100 Ritter erhalten");
                     break;
                 case 148:
                     welt.inv.anz[4]=welt.inv.anz[4]+100;
-                    welt.grafik.kons("100 Paladin erhalten");
+                    welt.grafik.cheat("100 Paladin erhalten");
                     break;
                 case 40:
                     welt=new WELT();
                     welt.tonweltaus();
-                    welt.grafik.kons("Generiere Welt");
+                    welt.grafik.cheat("Generiere Welt");
+                    welt.zeichneansicht();
+                    kom=false;
                     break;
-                default:
-                    welt.grafik.kons("ungültiger Cheat"); 
+               case 73:
+                    welt.zeichneansicht();
+                    welt.grafik.cheat("Exit Kampf");
+                    break;
+               case 96:
+                    welt.ignor=true;
+                    welt.grafik.cheat("ignoriere Events");
+                    break;
+               case 68:
+                    welt.ignor=false;
+                    welt.grafik.cheat("beachte Events");
+                    break;
+               case 46:
+                    for(int a=0;a<250000;a++) {
+                        if(welt.welt[a]==26) {
+                            hlp=a;
+                        }
+                    }
+                    welt.grafik.cheat("Tp Hpt");
+                    welt.aktpos=hlp;
+                    welt.bildpos=24;
+                    welt.zeichneansicht();
+                    break;
+               case 249:
+                    welt.welt[welt.aktpos]=41;
+                    welt.zeichneansicht();
+                    welt.grafik.cheat("spawne Dorf");
+                    break;
+               default:
+                    welt.grafik.cheat("ungültiger Cheat"); 
             }
+            kom=false;
             eingabe=0;
-            welt.zeichneansicht();
+            welt.bewegungssperre=false;
         }
     } 
     
