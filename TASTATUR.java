@@ -105,7 +105,7 @@ public class TASTATUR implements KeyListener
             eingabe=eingabe+103;
         }else if(e.getKeyCode() ==51 && kom==true) {  //3
             eingabe=eingabe+104;
-        }else if(e.getKeyCode() ==10) {
+        }else if(e.getKeyCode() ==10 && kom==true) {
             switch (eingabe) {
                 case 24:
                     welt.tonan();
@@ -160,9 +160,10 @@ public class TASTATUR implements KeyListener
                     welt.zeichneansicht();
                     kom=false;
                     break;
-               case 73:
+               case 38:
                     welt.zeichneansicht();
-                    welt.grafik.cheat("Exit Kampf");
+                    welt.hp16=false;
+                    welt.grafik.cheat("Exit Screen");
                     break;
                case 96:
                     welt.ignor=true;
@@ -180,13 +181,25 @@ public class TASTATUR implements KeyListener
                     }
                     welt.grafik.cheat("Tp Hpt");
                     welt.aktpos=hlp;
-                    welt.bildpos=24;
                     welt.zeichneansicht();
                     break;
                case 249:
                     welt.welt[welt.aktpos]=41;
                     welt.zeichneansicht();
                     welt.grafik.cheat("Spawne Dorf");
+                    break;
+               case 66:
+                    welt.inv.anz[0]=welt.inv.anz[0]+100;
+                    welt.inv.anz[1]=welt.inv.anz[1]+100;
+                    welt.inv.anz[2]=welt.inv.anz[2]+100;
+                    welt.inv.anz[3]=welt.inv.anz[3]+100;
+                    welt.inv.anz[4]=welt.inv.anz[4]+100;
+                    welt.grafik.cheat("alle Kaempfer erhalten");
+                    break;
+               case 64:
+                    welt.gegnerpos[welt.aktpos]=100;
+                    welt.bewegen(0);
+                    welt.bewegen(2);
                     break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 

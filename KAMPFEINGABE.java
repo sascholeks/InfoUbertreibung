@@ -35,8 +35,10 @@ public class KAMPFEINGABE implements MouseListener
             konbewegen=false;
             if(kampf.ug==true) {
                 grafik.loeschemarkierung(feld);
-                grafik.markiereaktuell(kampf.kepos[kampf.reihenfolge[0]]);
+                grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
             }
+            grafik.markiereaktuell(kampf.kepos[kampf.reihenfolge[0]]);
+            grafik.zeichneinfeld(kampf.reihenfolge[0],kampf.kepos[kampf.reihenfolge[0]],kampf.anz[kampf.reihenfolge[0]]);
             grafik.zeichneaktionsauswahl(1);
             kampffreigabe=true;
             grafik.kons("Wähle einen Gegner");
@@ -350,7 +352,7 @@ public class KAMPFEINGABE implements MouseListener
             feld=24;
             gekämpft=true;
         }
-        // grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
+        grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
         if(konbewegt==2 && konbewegen==true) {
             konbewegen=false;
             kampf.bewegen(feld,false);

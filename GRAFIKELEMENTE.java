@@ -2,12 +2,13 @@ import java.util.Random;
 
 public class GRAFIKELEMENTE
 {
+    GRAFIKWELT weltgr;
     int ra = 10; //Verschiebung nach rechts
-
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
     public GRAFIKELEMENTE()
     {
+        weltgr= new GRAFIKWELT();
         r=new Random();
         x=new int [5];
         y=new int [5];
@@ -63,6 +64,24 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().zeichneText("Kämpfen",478,80);
         ZEICHENFENSTER.gibFenster().zeichneText("Bewegen",530,130);
         ZEICHENFENSTER.gibFenster().zeichneText("Zug beenden",475,178);
+    }
+    
+    public void zeichnehinder(int wert,int feld) {
+        switch (wert) {
+            case 0:
+            case 1:
+            case 2:
+            case 3:
+            case 4:
+            case 5:
+            case 6:
+            case 7:
+            case 8:
+            case 9:
+            case 11:
+                zeichnehindernis(feld);
+                break;
+        }
     }
 
     public void anzahlreihenfolge(int reihe,int anz) {   
@@ -308,6 +327,14 @@ public class GRAFIKELEMENTE
     public void zeichneverloren() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kons("Verloren");
+    }
+    
+    public void conveyeransicht() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,800,400,15);
+        //weltgr.baum();
+        //weltgr.blume1();
+        //weltgr.Blume2();
+        //weltgr.Blume3();
     }
 
 }

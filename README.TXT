@@ -27,20 +27,22 @@ Cheats:
         -ton in welt aus
     * mutekampf
         -ton in kampf aus
-    * spawn*  (*0-101)
-        -erstellt auf aktfeld obj
+    *spawn*  (*0-101)
+        -erstellt auf aktfeld Objekt
     *give*   (*ID KAEMPFER)
-        -gibt kaempfer 100 truppen
+        -gibt kaempfer 100 Truppen
+    *giveall
+        -gibt von jedem kaempfer 100 Truppen
     *neuewelt
-        -erstellt neue welt
-    *exitkmpf 
-        -verlässt den aktuellen Kampf
+        -erstellt neue Welt
+    *genkampf
+        -erstellt neuen Kampf
+    *exit 
+        -verlässt den aktuellen Bildschirm und kehrt zur Welt zurück
     *nonotice
         -lässt dich Events ignorieren
     *notice
         -Events werden wieder beachted
-    *tphpt
-        -telepotiert zur Hauptstadt
         
         
         

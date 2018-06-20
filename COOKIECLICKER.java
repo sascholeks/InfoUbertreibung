@@ -67,6 +67,7 @@ public class COOKIECLICKER implements MouseListener
         for(int i=0;i<count;i++) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(100+((tl-1)*10),50,10,15,4);
             tl--;
+            System.out.println(tl);
         }
        
         ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
