@@ -279,6 +279,10 @@ public class ZEICHENFENSTER
         canvas.repaint();
         graphic.setColor(original);
     }
+    
+    public Graphics2D getRechteck() {
+        return graphic;
+    }
 
     /**
      * L�scht das Innere eines Rechtecks.
@@ -519,6 +523,8 @@ public class ZEICHENFENSTER
             return dunkelgrau2;
             case 37: Color dunkeldunkelgrau =new Color(29,29,29);
             return dunkeldunkelgrau;
+            case 38: Color hellgrün = new Color(0,180,20);
+            return hellgrün;
             default: return graphic.getColor();
         }
 
