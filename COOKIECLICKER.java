@@ -8,7 +8,9 @@ import java.awt.geom.*;
 public class COOKIECLICKER implements MouseListener
 {
     JFrame j;
-    double aleben = 500;
+    COOKIEGRAFIK cg;
+
+    double aleben = 3000;
     double leben = aleben;
     double lebentl = aleben/50;
 
@@ -16,20 +18,22 @@ public class COOKIECLICKER implements MouseListener
     int tl = 50;
 
     double attack = 30;
-    
-    double count = lebentl/attack;
-    GRAFIKELEMENTE g;
 
+    GRAFIKELEMENTE g;
+    int level = 1;
+    double totattack = attack;
+
+    double count = lebentl/totattack;
     public COOKIECLICKER() {
-        if(count >= 1) {
-            count = 1;
-        } else {
-            count = count*10;
-        }
         
+
+        cg = new COOKIEGRAFIK();
         g = new GRAFIKELEMENTE();
         j = ZEICHENFENSTER.gibFenster().frame;
         j.addMouseListener(this);
+
+        cg.upgradekasten(50,205);
+        cg.text(50+17,205+25,""+level);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(300,100,100,100,4);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(100,50,500,15,33);
 
@@ -45,34 +49,58 @@ public class COOKIECLICKER implements MouseListener
     public void mouseClicked(MouseEvent e) {
         if(e.getX()>=300 && e.getX()<=400 && e.getY() >= 125 && e.getY() <= 225) {
             if(leben>0) {
-                leben = leben - attack;
-                totdmg = totdmg + attack;
+                leben = leben - totattack;
+                totdmg = totdmg + totattack;
                 removetl();
+
                 if(leben<0) {
                     leben = 0;
                 }
-                g.kons("Leben: " +leben);
+
+                g.kons("Leben: \t" + leben);
             }
+        } else if(e.getX()>=50 && e.getX()<=90 && e.getY() >= 230 && e.getY()<= 310 && level < 99) {
+            level++;
+            if(level<10) {
+                cg.upgradekasten(50,205); 
+                cg.text(50+17,205+25,""+level);
+            } else {
+                cg.upgradekasten(50,205);
+                cg.text(50+14,205+25,""+level);
+            }
+            totattack = attack + (0.1*(level-1)*attack);
+            calccount();
         }
     }
 
     public void removetl() {
-        if(totdmg>=lebentl) {
-            totdmg = totdmg - lebentl;
-            loeschetl(tl,(int)count);
+        if(totdmg>=lebentl*count) {
+            totdmg = totdmg - (lebentl*count);
+            loeschetl((int)count);
         }
     }
 
-    public void loeschetl(int tl,int count) {
+    public void loeschetl(int count) {
         for(int i=0;i<count;i++) {
-            ZEICHENFENSTER.gibFenster().fuelleRechteck(100+((tl-1)*10),50,10,15,4);
-            tl--;
-            System.out.println(tl);
+            if(tl>0) {
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(100+((tl-1)*10),50,10,15,4);
+                tl--;
+            }
         }
-       
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
     }
 
+    public void calccount() {
+        count = lebentl/totattack;
+        if(count>1) {
+            count=1;
+        } else {
+            count = 1/count;
+            count = (int) count;
+        }
+    }
+    
     public void mouseReleased(MouseEvent e) 
     {
     }
