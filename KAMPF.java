@@ -96,7 +96,7 @@ public class KAMPF
         for(int a=0;a<10;a++) {         //zeichne in spielfeld
             grafik.zeichneinfeld(a,kepos[a],anz[a]);                                                           //hat einfluss auf feld
         } 
-        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
+        grafik.kons("Kämpfer: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
         hindernisse();
         aanz1=anz[0];
         aanz2=anz[1];
@@ -108,7 +108,7 @@ public class KAMPF
         if(ton==true) {
             //musik.play();
         }
-        
+
         if(reihenfolge[0]>=5 && reihenfolge[0] <10) {
             complDecide();
         }
@@ -335,7 +335,7 @@ public class KAMPF
             grafik.kons(kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+" ist Tod");
             beendez();
         }
-        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kämepfer "+reihenfolge[0]+")");
+        grafik.kons("Kämpfer: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]);
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
         grafik.zeichneinfeld(reihenfolge[0],kepos[reihenfolge[0]],anz[reihenfolge[0]]);
         grafik.zeichneaktionswahl();
@@ -347,8 +347,8 @@ public class KAMPF
         aktionen=0;
         posx=kepos[reihenfolge[0]]%5;
         posy=kepos[reihenfolge[0]]/5;
-        if(reihenfolge[0]>=5 && reihenfolge[0] <10) {
-            complDecide();
+        if(reihenfolge[0]>5&& reihenfolge[0]<10) {
+            grafik.kons("Bestätige mit \"Zug beenden\" um fortzufahren!");
         }
     }
 
@@ -382,7 +382,7 @@ public class KAMPF
                 reihenfolge[help1]=a;
             }
         } 
-        grafik.kons("an der Reihe: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]+"  (Kamepfer "+reihenfolge[0]+")");
+        grafik.kons("Kämpfer: "+kaempfer[reihenfolge[0]].name+" Team "+team[reihenfolge[0]]);
     }
 
     public void startpos() {
@@ -509,9 +509,9 @@ public class KAMPF
 
     public void complDecide() {
         decideOrder();
-        if(getAction()!=2) {
+        if(getAction()==1) {
             decideOrder(); 
-            if(getAction()!=2) {
+            if(getAction()==1) {
                 decideOrder(); 
                 beendez();
             } else {
@@ -520,6 +520,18 @@ public class KAMPF
         } else {
             beendez();
         }
+    }
+    
+    public boolean pruefeSieg() {
+        boolean win=true;
+        for(int i=0;i<5;i++) {
+            if(tod[i]==true && win==true) {
+                win=true;
+            } else {
+                win=false;
+            }
+        }
+        return win;
     }
 }
 //          try {

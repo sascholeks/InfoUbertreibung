@@ -109,29 +109,29 @@ public class TASTATUR implements KeyListener
             switch (eingabe) {
                 case 24:
                     welt.tonan();
-                    welt.grafik.cheat("Ton an");
+                    welt.grafik.cheat("Ton: an");
                     break;
                 case 10:
                     welt.tonaus();
-                    welt.grafik.cheat("Ton aus");
+                    welt.grafik.cheat("Ton: aus");
                     break;
                 case 28:
                     welt.tonweltaus();
-                    welt.grafik.cheat("TonWelt aus");
+                    welt.grafik.cheat("TonWelt: aus");
                     break;
                 case 45:
                     welt.tonkampfaus();
-                    welt.grafik.cheat("Tonkampf aus");
+                    welt.grafik.cheat("Tonkampf: aus");
                     break;
                 case 347:
                     welt.gegnerpos[welt.aktpos]=100;
                     welt.zeichneansicht();
-                    welt.grafik.cheat("erstelle kaempfer");
+                    welt.grafik.cheat("Erstelle Kämpfer");
                     break;
                 case 248: 
                     welt.welt[welt.aktpos]=40;
                     welt.zeichneansicht();
-                    welt.grafik.cheat("erstelle dungeon");
+                    welt.grafik.cheat("Erstelle Dungeon");
                     break;
                 case 146:
                     welt.inv.anz[0]=welt.inv.anz[0]+100;
@@ -166,11 +166,11 @@ public class TASTATUR implements KeyListener
                     break;
                case 96:
                     welt.ignor=true;
-                    welt.grafik.cheat("ignoriere Events");
+                    welt.grafik.cheat("Ignoriere Events");
                     break;
                case 68:
                     welt.ignor=false;
-                    welt.grafik.cheat("beachte Events");
+                    welt.grafik.cheat("Beachte Events");
                     break;
                case 46:
                     for(int a=0;a<250000;a++) {
@@ -186,10 +186,10 @@ public class TASTATUR implements KeyListener
                case 249:
                     welt.welt[welt.aktpos]=41;
                     welt.zeichneansicht();
-                    welt.grafik.cheat("spawne Dorf");
+                    welt.grafik.cheat("Spawne Dorf");
                     break;
                default:
-                    welt.grafik.cheat("ungültiger Cheat"); 
+                    welt.grafik.cheat("Ungültiger Cheat"); 
             }
             kom=false;
             eingabe=0;

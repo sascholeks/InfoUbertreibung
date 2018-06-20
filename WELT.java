@@ -149,7 +149,7 @@ public class WELT implements MouseListener
                         hp2=0;
                         kontrolleweg=false;
                     }else {
-                        grafik.kons("bleibe auf dem Weg");
+                        grafik.kons("Bleibe auf dem Weg");
                         help4++;
                     }
                 }
@@ -218,7 +218,7 @@ public class WELT implements MouseListener
                         objschirm.haken();
                     }
                 }else {
-                    grafik.kons("keine Quest angenommen");
+                    grafik.kons("Keine Quest angenommen");
                 }
             }else if(objschirm.nav==true) {
                 hp14=0;
@@ -275,6 +275,7 @@ public class WELT implements MouseListener
                 mausfreigabe=false;
             }
         }
+        
     }
 
     public void generierewelt() {          //weltteil darf innerhalb 12 felder nur einmal vorkommen
