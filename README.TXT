@@ -43,6 +43,11 @@ Cheats:
         -lässt dich Events ignorieren
     *notice
         -Events werden wieder beachted
+    *jesus
+        -lässt dich über Wasser laufen
+        -gibt dir 5000 Anhänger
+        -Du kannst 1000 Wunden heilen 
+        :)
         
         
         

@@ -68,16 +68,7 @@ public class GRAFIKELEMENTE
     
     public void zeichnehinder(int wert,int feld) {
         switch (wert) {
-            case 0:
-            case 1:
-            case 2:
-            case 3:
-            case 4:
-            case 5:
-            case 6:
-            case 7:
-            case 8:
-            case 9:
+           
             case 11:
                 zeichnehindernis(feld);
                 break;
@@ -120,6 +111,7 @@ public class GRAFIKELEMENTE
 
     public void speerkämpfer(int[] x, int[] y, int feld, int f) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+20,40,4,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+35,y[feld/5]+18,2,10,2);
     }

@@ -525,6 +525,10 @@ public class ZEICHENFENSTER
             return dunkeldunkelgrau;
             case 38: Color hellgrün = new Color(0,180,20);
             return hellgrün;
+            case 39: Color wasserblau = new Color(15,215,255);
+            return wasserblau;
+            case 40: Color bootbraun = new Color(125,79,46);
+            return bootbraun;
             default: return graphic.getColor();
         }
 

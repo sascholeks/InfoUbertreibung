@@ -95,6 +95,8 @@ public class TASTATUR implements KeyListener
             eingabe=eingabe+19;    
         }else if(e.getKeyCode() ==72 && kom==true) {  //h
             eingabe=eingabe+20;  
+        }else if(e.getKeyCode() ==74 && kom==true) {  //j
+            eingabe=eingabe+21;
         }else if(e.getKeyCode() ==48 && kom==true) {  //0
             eingabe=eingabe+100;
         }else if(e.getKeyCode() ==49 && kom==true) {  //1
@@ -200,6 +202,17 @@ public class TASTATUR implements KeyListener
                     welt.gegnerpos[welt.aktpos]=100;
                     welt.bewegen(0);
                     welt.bewegen(2);
+                    break;
+               case 49:
+                    welt.boot=true;
+                    welt.inv.heiltrankkl=welt.inv.heiltrankkl+500;
+                    welt.inv.heiltrankgr=welt.inv.heiltrankgr+500;
+                    welt.inv.anz[0]=welt.inv.anz[0]+1000;
+                    welt.inv.anz[1]=welt.inv.anz[1]+1000;
+                    welt.inv.anz[2]=welt.inv.anz[2]+1000;
+                    welt.inv.anz[3]=welt.inv.anz[3]+1000;
+                    welt.inv.anz[4]=welt.inv.anz[4]+1000;
+                    welt.grafik.cheat("set player=jesus");
                     break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 

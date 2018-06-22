@@ -11,17 +11,18 @@ public class WELT implements MouseListener
     ALGOGR algsw;
     OBJBILDSCHIRM objschirm;
     KAMPFEINGABE kampf;
+    ALGOGEGNER alggeg;
     INVENTAR inv;
     Random r;
     Timer t;
     int[] welt,ansicht;
-    int[] gegnerpos,hp11;
+    int[] gegnerpos,hp11,anim;
     boolean[] quest;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
     int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,counter;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true;;
-    boolean ignor=false;
+    boolean ignor=false,boot=false;
     double schwerfaktor=1;
     String ort1,ort2;
     public WELT() {
@@ -30,11 +31,13 @@ public class WELT implements MouseListener
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
         objschirm=new OBJBILDSCHIRM();
+        alggeg= new ALGOGEGNER();
         inv=new INVENTAR();
         r=new Random();
         welt=new int[250000]; 
         ansicht=new int[49]; 
         gegnerpos=new int[250000];
+        anim=new int[4];  //für 4 felder bei bewanimation(int richtung)
         t = new Timer();
         for(int a=0;a<250000;a++) {
             gegnerpos[a]=101;
@@ -68,45 +71,61 @@ public class WELT implements MouseListener
         grafik.zeichnerahmen();
         switch(richtung) {
             case 0:
-            if((aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) && anzl==false) {
-                bildpos=bildpos-1;
-                aktpos=aktpos-1;
-            }else if(bewl==false) {
-                aktpos=aktpos-1;
-                aktansichtpos=aktansichtpos-1;
+            if(welt[aktpos-1]==6 && boot==false) {
+                break;
+            }else {
+                if((aktansichtpos==8 || aktansichtpos==15 || aktansichtpos==22 || aktansichtpos==29 || aktansichtpos==36) && anzl==false) {
+                    bildpos=bildpos-1;
+                    aktpos=aktpos-1;
+                }else if(bewl==false) {
+                    aktpos=aktpos-1;
+                    aktansichtpos=aktansichtpos-1;
+                }
             }
             anzr=false;
             bewr=false;
             break;
             case 1:
-            if((aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) && anzo==false) {
-                bildpos=bildpos-500;
-                aktpos=aktpos-500;
-            }else if(bewo==false) {
-                aktpos=aktpos-500;
-                aktansichtpos=aktansichtpos-7;
+            if(welt[aktpos-500]==6 && boot==false) {
+                break;
+            }else {
+                if((aktansichtpos==8 || aktansichtpos==9 || aktansichtpos==10 || aktansichtpos==11 || aktansichtpos==12) && anzo==false) {
+                    bildpos=bildpos-500;
+                    aktpos=aktpos-500;
+                }else if(bewo==false) {
+                    aktpos=aktpos-500;
+                    aktansichtpos=aktansichtpos-7;
+                }
             }
             anzu=false;
             bewu=false;
             break;
             case 2:
-            if((aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) && anzr==false) {
-                bildpos=bildpos+1;
-                aktpos=aktpos+1;
-            }else if(bewr==false) {
-                aktpos=aktpos+1;
-                aktansichtpos=aktansichtpos+1;
+            if(welt[aktpos+1]==6 && boot==false) {
+                break;
+            }else {
+                if((aktansichtpos==12 || aktansichtpos==19 || aktansichtpos==26 || aktansichtpos==33 || aktansichtpos==40) && anzr==false) {
+                    bildpos=bildpos+1;
+                    aktpos=aktpos+1;
+                }else if(bewr==false) {
+                    aktpos=aktpos+1;
+                    aktansichtpos=aktansichtpos+1;
+                }
             }
             anzl=false;
             bewl=false;
             break;
             case 3:
-            if((aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) && anzu==false) {
-                bildpos=bildpos+500;
-                aktpos=aktpos+500;
-            }else if(bewu==false) {
-                aktpos=aktpos+500;
-                aktansichtpos=aktansichtpos+7;
+            if(welt[aktpos+500]==6 && boot==false) {
+                break;
+            }else {
+                if((aktansichtpos==36 || aktansichtpos==37 || aktansichtpos==38 || aktansichtpos==39 || aktansichtpos==40) && anzu==false) {
+                    bildpos=bildpos+500;
+                    aktpos=aktpos+500;
+                }else if(bewu==false) {
+                    aktpos=aktpos+500;
+                    aktansichtpos=aktansichtpos+7;
+                }
             }
             anzo=false;
             bewo=false;
@@ -278,9 +297,10 @@ public class WELT implements MouseListener
         
     }
 
-    public void generierewelt() {          //weltteil darf innerhalb 12 felder nur einmal vorkommen
-        welt[0]=r.nextInt(25);             //IdentifikatorNr.1
-        do {                               //IdfNR.2
+    public void generierewelt() {  
+        //Ph.1
+        welt[0]=r.nextInt(25);              //IdentifikatorNr.1
+        do {                                //IdfNR.2
             genwelthelp=r.nextInt(25);
         }while(welt[0]==genwelthelp);
         welt[1]=genwelthelp;
@@ -320,9 +340,15 @@ public class WELT implements MouseListener
                 welt[x+y*500]=genwelthelp;
             }
         } 
+        //Ph.2
+        for(int a=0;a<250000;a++) {   //entfernung von seen
+            if(welt[a]==6) {
+                welt[a]=r.nextInt(17);  //erhöhung der Spawnchance
+            }
+        }
         for(int b=0;b<=4;b++) {       //wald generierung
             for(int a=0;a<250000;a++) {
-                if(welt[a]==3 && a>500 && a<249499) {
+                if(welt[a]==3 && a>501 && a<249498) {
                     switch(r.nextInt(3)) {  //typgenerierung
                         case 0:
                             hp12=3;
@@ -351,12 +377,33 @@ public class WELT implements MouseListener
                 }
             }
         }
-        for(int a=0;a<500;a++) {   //randzuweisung  
-            welt[a]=25;            //oben
-            welt[a*500]=25;        //links
-            welt[499+a*500]=25;    //rechts
-            welt[249500+a]=25;     //unten
+        for(int b=0;b<8;b++) {              //generierung seen
+            for(int a=0;a<250000;a++) {
+                if(welt[a]==6 && a>501 && a<249498) {
+                    switch(r.nextInt(4)) {    //richtung
+                        case 0:
+                            welt[a-1]=6;
+                            break;
+                        case 1:
+                            welt[a-500]=6;
+                            break;
+                        case 2:
+                            welt[a+1]=6;
+                            break;
+                        case 3:
+                            welt[a+500]=6;
+                            break;
+                    }
+                }
+            }
         }
+        for(int a=0;a<500;a++) {   //randzuweisung  
+            welt[a]=25;            
+            welt[a*500]=25;        
+            welt[499+a*500]=25;    
+            welt[249500+a]=25;     
+        }
+        //Ph.3
         int genwelthelp3=aktpos-1503;                //ab hier für algosw
         do { 
             genwelthelp=r.nextInt(7)*7+r.nextInt(7);
@@ -425,7 +472,7 @@ public class WELT implements MouseListener
         for(int a=0;a<2000;a++) {        //generierung dungeon
             do {
                 hp15=r.nextInt(250000);
-            }while(welt[hp15]>25);
+            }while(welt[hp15]>25 || welt[hp15]==6);
             welt[hp15]=40;
         }
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
@@ -433,7 +480,7 @@ public class WELT implements MouseListener
         for(int a=0;a<10000;a++) {                                        //generierung von 10000 gegnern 
             do {
                 genhelpkampf=r.nextInt(250000);
-            }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100);
+            }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100 || welt[genhelpkampf]==6);
             gegnerpos[genhelpkampf]=100;
         }
     }
@@ -471,7 +518,26 @@ public class WELT implements MouseListener
                 }
             }
         }
+        for(int a=0;a<49;a++) {            //seerand
+            if(welt[(bildpos+a%7+a/7*500)]==6) {
+                if(welt[(bildpos+a%7+a/7*500)-1]!=6) {
+                    grafik.zeichneufer(a,0);
+                }
+                if(welt[(bildpos+a%7+a/7*500)-500]!=6) {
+                    grafik.zeichneufer(a,1);
+                }
+                if(welt[(bildpos+a%7+a/7*500)+1]!=6) {
+                    grafik.zeichneufer(a,2);
+                }
+                if(welt[(bildpos+a%7+a/7*500)+500]!=6) {
+                    grafik.zeichneufer(a,3);
+                }
+            }    
+        }
         grafik.zeichnespieler(aktansichtpos);
+        if(welt[aktpos]==6) {
+            grafik.boot(aktansichtpos);
+        }
         if(hp14==0) {
             grafik.ortsanzeige(ort1,ort2);
         }
