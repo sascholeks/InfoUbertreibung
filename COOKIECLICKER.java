@@ -1,5 +1,5 @@
 import java.awt.event.MouseListener;
-import java.awt.event.MouseEvent; 
+import java.awt.event.MouseEvent;
 import java.awt.event.*;
 import javax.swing.*;
 import java.awt.*;
@@ -10,23 +10,37 @@ public class COOKIECLICKER implements MouseListener
     JFrame j;
     COOKIEGRAFIK cg;
 
-    double aleben = 3000;
-    double leben = aleben;
-    double lebentl = aleben/50;
-
+    double aleben;
+    double leben;
+    int tl;
+    double lebentl;
     double totdmg = 0;
-    int tl = 50;
-
     double attack = 30;
-
     GRAFIKELEMENTE g;
     int level = 1;
     double totattack = attack;
 
     double count = lebentl/totattack;
-    public COOKIECLICKER() {
+    public COOKIECLICKER(int dif) {
+        aleben = 3000;
+        leben = aleben;
         
-
+        tl = 50;
+        lebentl = aleben/tl;
+        
+        totdmg = 0;
+        attack = 30;
+        level = 1;
+        totattack = attack;
+        
+        
+        if(count>1) {
+            count = 1;
+        } else {
+            count = 1/count;
+            count = (int) count;
+        }  
+        
         cg = new COOKIEGRAFIK();
         g = new GRAFIKELEMENTE();
         j = ZEICHENFENSTER.gibFenster().frame;
@@ -74,9 +88,9 @@ public class COOKIECLICKER implements MouseListener
     }
 
     public void removetl() {
-        if(totdmg>=lebentl*count) {
+        while(totdmg>=lebentl*count) {
             totdmg = totdmg - (lebentl*count);
-            loeschetl((int)count);
+            loeschetl((int)count);          
         }
     }
 
@@ -94,13 +108,13 @@ public class COOKIECLICKER implements MouseListener
     public void calccount() {
         count = lebentl/totattack;
         if(count>1) {
-            count=1;
+            count = 1;
         } else {
             count = 1/count;
             count = (int) count;
-        }
+        }   
     }
-    
+
     public void mouseReleased(MouseEvent e) 
     {
     }
