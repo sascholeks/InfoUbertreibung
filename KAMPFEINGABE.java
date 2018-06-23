@@ -9,9 +9,10 @@ public class KAMPFEINGABE implements MouseListener
     int[] x,y;
     int help,feld=0,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
     boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
-    public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer,boolean tone)
+    public KAMPFEINGABE()
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        grafik=new GRAFIKELEMENTE();
         x=new int[5];
         y=new int[5];
         for(int a=0;a<5;a++) {
@@ -19,13 +20,17 @@ public class KAMPFEINGABE implements MouseListener
             y[a]=xyp;
             xyp=xyp+50;
         }
+    }
+    
+    public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer,boolean tone) {
+        int feld=0,konbewegt=0,konfeldaenderung=100,helpbew;
+        boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
         kampf = KAMPF.createKampf(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr,schwer,tone);
-        grafik=new GRAFIKELEMENTE();
         help=0;
         konbewegt=0;
         kampffreigabe=false;
     }
-
+    
     public void mouseReleased(MouseEvent e) {
         if(kampf.geheilt==false && e.getX()>458-20 && e.getX()<458+20 && e.getY()>130-20 && e.getY()<131+20) {       //heilen
             grafik.zeichneaktionsauswahl(0); 

@@ -136,8 +136,7 @@ public class KAMPF
                     }else if(kaempfer[reihenfolge[0]].name=="Speerkaempfer" && (kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-2==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+2==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]-10==feld || kepos[reihenfolge[0]]+5==feld || kepos[reihenfolge[0]]+10==feld || kepos[reihenfolge[0]]-6==feld || kepos[reihenfolge[0]]-4==feld || kepos[reihenfolge[0]]+4==feld || kepos[reihenfolge[0]]+6==feld)) {  
                         arrow.play();
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
-                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
-                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
+                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");    
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;                      
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
@@ -157,8 +156,7 @@ public class KAMPF
                     }else if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+5==feld) {    //Nahkämperangriff
                         schwertkampf.play();
                         leben[welt[feld]]=leben[welt[feld]]-dmg[reihenfolge[0]];
-                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");  
-                        grafik.kons("Er hat jetzt noch "+leben[welt[feld]]);   
+                        grafik.kons("Der feindliche "+kaempfer[welt[feld]].name+" hat "+dmg[reihenfolge[0]]+" Schaden erlitten");   
                         anz[welt[feld]]=(int)leben[welt[feld]]/kaempfer[welt[feld]].leben;        
                         dmg[welt[feld]]=kaempfer[welt[feld]].dmg*anz[welt[feld]];
                         grafik.anzahl(kepos[welt[feld]],anz[welt[feld]]);
@@ -176,6 +174,16 @@ public class KAMPF
                             anz[reihenfolge[0]]=(int)(leben[reihenfolge[0]]/kaempfer[reihenfolge[0]].leben);
                             grafik.anzahl(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
                             grafik.anzahlreihenfolge(kepos[reihenfolge[0]],anz[reihenfolge[0]]);
+                        }
+                        
+                        if(leben[reihenfolge[0]]<=0) {
+                            anz[welt[kepos[reihenfolge[0]]]]=0;
+                            grafik.kons("Der verbündete "+kaempfer[welt[feld]].name+" ist tod");
+                            tod[welt[feld]]=true;
+                            welt[kepos[reihenfolge[0]]]=10;
+                            zeichnereihenfolge();
+                            grafik.loeschemarkierung(kepos[reihenfolge[0]]);
+                            kontrollesieg();
                         }
                         
                         if(leben[welt[feld]]<=0) {              //kontolle tod

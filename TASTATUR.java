@@ -212,7 +212,13 @@ public class TASTATUR implements KeyListener
                     welt.inv.anz[2]=welt.inv.anz[2]+1000;
                     welt.inv.anz[3]=welt.inv.anz[3]+1000;
                     welt.inv.anz[4]=welt.inv.anz[4]+1000;
-                    welt.grafik.cheat("set player=jesus");
+                    welt.grafik.cheat("set player=Jesus");
+                    welt.quest[2]=true;       //für anzeige boot gekauft
+                    break;
+               case 251:
+                    welt.welt[welt.aktpos]=42;
+                    welt.zeichneansicht();
+                    welt.grafik.cheat("Spawne Hafen");
                     break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 
