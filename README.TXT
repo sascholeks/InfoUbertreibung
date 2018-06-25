@@ -25,9 +25,9 @@ Cheats:
         -Ton wird in der Welt deaktiviert
     -mutekampf
         -Ton wird im Kampf deaktiviert
-    -spawn*  (*0-101)
+    -spawn (*0-101)
         -Erstellt auf den aktuelle Feld ein Objekt der angegebenen ID
-    -give*   (*ID KAEMPFER)
+    -give (*ID KAEMPFER)
         -Gibt dir 100 Einheiten der angegebenen Art
     -giveall
         -Gibt dir 100 Einheiten jeder Art
