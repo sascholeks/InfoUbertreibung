@@ -7,6 +7,9 @@ Steuerung:
     Menü:     Esc
     Navi:     M
     Welt zeichnen (falls Möglich): Enter
+    
+    Clicker Dungeon:
+    Upgrade: W
    
     
 Generelle Informationen:
@@ -14,35 +17,34 @@ Generelle Informationen:
 
        
 Cheats:
-    *mute
-        -ton in WELT und KAMPF aus
-    *unmute
-        -ton in WELT und KAMPF an
-    *mutewelt
-        -ton in welt aus
-    *mutekampf
-        -ton in kampf aus
-    *spawn*  (*0-101)
-        -erstellt auf aktfeld Objekt
-    *give*   (*ID KAEMPFER)
-        -gibt kaempfer 100 Truppen
-    *giveall
-        -gibt von jedem kaempfer 100 Truppen
-    *neuewelt
-        -erstellt neue Welt
-    *genkampf
-        -erstellt neuen Kampf
-    *exit 
-        -verlässt den aktuellen Bildschirm und kehrt zur Welt zurück
-    *nonotice
-        -lässt dich Events ignorieren
-    *notice
-        -Events werden wieder beachted
-    *jesus
-        -lässt dich über Wasser laufen
-        -gibt dir 5000 Anhänger
-        -Du kannst 1000 Wunden heilen 
-        :)         
+    -mute
+        -Ton wird deaktiviert
+    -unmute
+        -Ton wird wieder aktiviert
+    -mutewelt
+        -Ton wird in der Welt deaktiviert
+    -mutekampf
+        -Ton wird im Kampf deaktiviert
+    -spawn*  (*0-101)
+        -Erstellt auf den aktuelle Feld ein Objekt der angegebenen ID
+    -give*   (*ID KAEMPFER)
+        -Gibt dir 100 Einheiten der angegebenen Art
+    -giveall
+        -Gibt dir 100 Einheiten jeder Art
+    -neuewelt
+        -Erstellt eine neue Welt
+    -genkampf
+        -Erstellt einen neuen Kampf
+    -exit 
+        -Du verlässt das aktuelle Menü oder Bildschirm und du kehrst zur Welt zurück
+    -nonotice
+        -Events wie z.B. Kämpfe bei Gegner oder Menüs werden ignoriert
+    -notice
+        -Alle Events werden wieder beachtet
+    -jesus
+        -Lässt dich über Wasser laufen
+        -Gibt dir 5000 Anhänger
+        -Du kannst 1000 Wunden heilen        
         
         
 Dev Info: 
