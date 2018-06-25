@@ -4,7 +4,7 @@ import java.awt.event.*;
 import javax.swing.*;
 import java.util.Random;
 
-public class COOKIECLICKER implements MouseListener
+public class COOKIECLICKER implements MouseListener, KeyListener
 {
     Random r;
     JFrame j;
@@ -22,23 +22,30 @@ public class COOKIECLICKER implements MouseListener
     int coins;
     int time;
     double count = lebentl/totattack;
-    public COOKIECLICKER(int dif) {
+    public COOKIECLICKER() {
+        cg = new COOKIEGRAFIK();
         r= new Random();
+        int dif = r.nextInt(4)+1;
         switch(dif) {
             case 1:
             aleben = (r.nextInt(5)+1)*500;
+            cg.img(250,75,200,200,0);
             break;
             case 2:
             aleben = (r.nextInt(5)+3)*1000;
+            cg.img(250,75,200,200,1);
             break;
             case 3:
             aleben = (r.nextInt(5)+2)*2000;
+            cg.img(250,75,200,200,2);
             break;
             case 4:
             aleben = (r.nextInt(1)+1)*10000;
+            cg.img(230,55,225,235,3);
             break;
             default:
             aleben = (r.nextInt(5)+1)*500;
+            cg.img(250,75,200,200,0);
             break;
         }
         coins = 0;
@@ -52,16 +59,15 @@ public class COOKIECLICKER implements MouseListener
         level = 1;
         totattack = attack;
 
-        cg = new COOKIEGRAFIK();
         j = ZEICHENFENSTER.gibFenster().frame;
         j.addMouseListener(this);
+        j.addKeyListener(this);
 
         cg.upgradekasten(50,205);
         cg.text(50+17,205+25,""+level);
         cg.leben(leben,100,205);
         cg.schaden((int)totattack,100,235);
         cg.coins(coins,100,265);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(300,100,100,100,4);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(100,50,500,15,33);
 
         for(int i=0; i<50;i++) {
@@ -80,8 +86,14 @@ public class COOKIECLICKER implements MouseListener
         t.start();
     }
 
+    public void keyPressed(KeyEvent e) { 
+        if((e.getKeyCode() == 87)) {         //w
+            upgrade();
+        }
+    }
+
     public void mouseClicked(MouseEvent e) {
-        if(e.getX()>=300 && e.getX()<=400 && e.getY() >= 125 && e.getY() <= 225) {
+        if(e.getX()>=230 && e.getX()<=463 && e.getY() >= 55 && e.getY() <= 225) {
             if(leben>0) {
                 leben = leben - totattack;
                 totdmg = totdmg + totattack;
@@ -94,21 +106,25 @@ public class COOKIECLICKER implements MouseListener
             }
             cg.leben(leben,100,205);
         } else if(e.getX()>=50 && e.getX()<=90 && e.getY() >= 230 && e.getY()<= 310 && level < 99) {
-            if(coins>=100) {
-                level++;
-                if(level<10) {
-                    cg.upgradekasten(50,205); 
-                    cg.text(50+17,205+25,""+level);
-                } else {
-                    cg.upgradekasten(50,205);
-                    cg.text(50+14,205+25,""+level);
-                }
-                totattack = attack + (0.1*(level-1)*attack);
-                calccount();
-                cg.schaden((int)totattack,100,235);
-                coins = coins - 100;
-                cg.coins(coins,100,265);
+            upgrade();
+        }
+    }
+
+    public void upgrade() {
+        if(coins>=100) {
+            level++;
+            if(level<10) {
+                cg.upgradekasten(50,205); 
+                cg.text(50+17,205+25,""+level);
+            } else {
+                cg.upgradekasten(50,205);
+                cg.text(50+14,205+25,""+level);
             }
+            totattack = attack + (0.1*(level-1)*attack);
+            calccount();
+            cg.schaden((int)totattack,100,235);
+            coins = coins - 100;
+            cg.coins(coins,100,265);
         }
     }
 
@@ -136,7 +152,7 @@ public class COOKIECLICKER implements MouseListener
         t.stop();
         leben = 0;
     }
-    
+
     public void calccount() {
         count = lebentl/totattack;
         if(count>1) {
@@ -145,6 +161,14 @@ public class COOKIECLICKER implements MouseListener
             count = 1/count;
             count = (int) count;
         }   
+    }
+
+    public void keyTyped(KeyEvent e) {
+
+    }
+
+    public void keyReleased(KeyEvent e) {
+
     }
 
     public void mouseReleased(MouseEvent e) 

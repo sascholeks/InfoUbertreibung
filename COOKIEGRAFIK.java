@@ -1,8 +1,46 @@
-
-public class COOKIEGRAFIK
+import javax.imageio.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
+import java.applet.Applet;
+public class COOKIEGRAFIK extends Applet
 {
+    BufferedImage img;
+    Graphics g;
+    JFrame f;
     public COOKIEGRAFIK() {
+        g = ZEICHENFENSTER.gibFenster().getGraphic();
+        f = ZEICHENFENSTER.gibFenster().frame;
+        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
+    }
 
+    public void img(int x,int y,int xs,int ys,int ID) {
+
+        try {
+            switch(ID) {
+                case 0:
+                img = ImageIO.read(new File("img\\cookie0.png"));
+                break;
+                case 1:
+                img = ImageIO.read(new File("img\\cookie1.png"));
+                break;
+                case 2:
+                img = ImageIO.read(new File("img\\cookie2.png"));
+                break;
+                case 3:
+                img = ImageIO.read(new File("img\\cookie3.png"));
+                break;
+                default:
+                img = ImageIO.read(new File("img\\cookie0.png"));
+                break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        g.drawImage(img,x,y,xs,ys,null);
+        ZEICHENFENSTER.gibFenster().repaint();
     }
 
     public void kasten(int x,int y) {

@@ -17,7 +17,7 @@ import java.awt.geom.*;
 public class ZEICHENFENSTER
 {
     public JFrame frame;
-    private CanvasPane canvas;
+    public CanvasPane canvas;
     private JPanel steuerungOst,steuerungSued;
     private Graphics2D graphic;
     private Color backgroundColor;
@@ -103,7 +103,7 @@ public class ZEICHENFENSTER
         }
         frame.setVisible(true);
     }
-    
+
     public Graphics getGraphic() {
         return graphic;
     }
@@ -144,6 +144,13 @@ public class ZEICHENFENSTER
         canvas.repaint();
     }
 
+    public void repaint() {
+        if(canvas==null) {
+            canvas = new CanvasPane();
+        }
+        canvas.repaint();
+    }
+
     /**
      * F�llt das Innere eines Kreises mit der angegebenen Farbe. 
      * @param x x-Koordinate des Mittelpunkts
@@ -161,13 +168,6 @@ public class ZEICHENFENSTER
         graphic.setColor(original);
     }
 
-    /**
-     * F�llt das Innere eines Kreises mit der angegebenen Farbe. 
-     * @param x x-Koordinate des Mittelpunkts
-     * @param y y-Koordinate des Mittelpunkts
-     * @param radius Kreisradius
-     * @param  farbnr  F�llfarbnummer f�r den Kreis (0 bis 8)
-     */
     public void fuelleKreis(int x, int y, int radius, int farbnr)
     {
         Color original=graphic.getColor();
@@ -283,7 +283,7 @@ public class ZEICHENFENSTER
         canvas.repaint();
         graphic.setColor(original);
     }
-    
+
     public Graphics2D getRechteck() {
         return graphic;
     }
