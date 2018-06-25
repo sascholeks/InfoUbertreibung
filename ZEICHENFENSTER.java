@@ -103,6 +103,10 @@ public class ZEICHENFENSTER
         }
         frame.setVisible(true);
     }
+    
+    public Graphics getGraphic() {
+        return graphic;
+    }
 
     /**
      * Gibt Information �ber die Sichtbarkeit.

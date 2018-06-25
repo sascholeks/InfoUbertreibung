@@ -2,52 +2,65 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
 import javax.swing.*;
-import java.awt.*;
-import java.awt.geom.*;
+import java.util.Random;
 
 public class COOKIECLICKER implements MouseListener
 {
+    Random r;
     JFrame j;
     COOKIEGRAFIK cg;
+    Timer t;
 
     double aleben;
     double leben;
     int tl;
     double lebentl;
-    double totdmg = 0;
-    double attack = 30;
-    GRAFIKELEMENTE g;
-    int level = 1;
+    double totdmg;
+    double attack;
+    int level;
     double totattack = attack;
-
+    int coins;
+    int time;
     double count = lebentl/totattack;
     public COOKIECLICKER(int dif) {
-        aleben = 3000;
+        r= new Random();
+        switch(dif) {
+            case 1:
+            aleben = (r.nextInt(5)+1)*500;
+            break;
+            case 2:
+            aleben = (r.nextInt(5)+3)*1000;
+            break;
+            case 3:
+            aleben = (r.nextInt(5)+2)*2000;
+            break;
+            case 4:
+            aleben = (r.nextInt(1)+1)*10000;
+            break;
+            default:
+            aleben = (r.nextInt(5)+1)*500;
+            break;
+        }
+        coins = 0;
         leben = aleben;
-        
+
         tl = 50;
         lebentl = aleben/tl;
-        
+
         totdmg = 0;
         attack = 30;
         level = 1;
         totattack = attack;
-        
-        
-        if(count>1) {
-            count = 1;
-        } else {
-            count = 1/count;
-            count = (int) count;
-        }  
-        
+
         cg = new COOKIEGRAFIK();
-        g = new GRAFIKELEMENTE();
         j = ZEICHENFENSTER.gibFenster().frame;
         j.addMouseListener(this);
 
         cg.upgradekasten(50,205);
         cg.text(50+17,205+25,""+level);
+        cg.leben(leben,100,205);
+        cg.schaden((int)totattack,100,235);
+        cg.coins(coins,100,265);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(300,100,100,100,4);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(100,50,500,15,33);
 
@@ -55,9 +68,16 @@ public class COOKIECLICKER implements MouseListener
             ZEICHENFENSTER.gibFenster().fuelleRechteck(100+(i*10),50,10,15,38);
         }
 
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
+        time = 0;
+        t = new Timer(1000, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    time++;
+                }    
+            });
 
-        g.kons("Leben:" +leben);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
+        calccount();
+        t.start();
     }
 
     public void mouseClicked(MouseEvent e) {
@@ -67,30 +87,37 @@ public class COOKIECLICKER implements MouseListener
                 totdmg = totdmg + totattack;
                 removetl();
 
-                if(leben<0) {
-                    leben = 0;
+                if(leben<=0) {
+                    stop();
                 }
 
-                g.kons("Leben: \t" + leben);
             }
+            cg.leben(leben,100,205);
         } else if(e.getX()>=50 && e.getX()<=90 && e.getY() >= 230 && e.getY()<= 310 && level < 99) {
-            level++;
-            if(level<10) {
-                cg.upgradekasten(50,205); 
-                cg.text(50+17,205+25,""+level);
-            } else {
-                cg.upgradekasten(50,205);
-                cg.text(50+14,205+25,""+level);
+            if(coins>=100) {
+                level++;
+                if(level<10) {
+                    cg.upgradekasten(50,205); 
+                    cg.text(50+17,205+25,""+level);
+                } else {
+                    cg.upgradekasten(50,205);
+                    cg.text(50+14,205+25,""+level);
+                }
+                totattack = attack + (0.1*(level-1)*attack);
+                calccount();
+                cg.schaden((int)totattack,100,235);
+                coins = coins - 100;
+                cg.coins(coins,100,265);
             }
-            totattack = attack + (0.1*(level-1)*attack);
-            calccount();
         }
     }
 
     public void removetl() {
         while(totdmg>=lebentl*count) {
             totdmg = totdmg - (lebentl*count);
-            loeschetl((int)count);          
+            loeschetl((int)count);      
+            coins = coins + 50;
+            cg.coins(coins,100,265);
         }
     }
 
@@ -105,6 +132,11 @@ public class COOKIECLICKER implements MouseListener
         ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
     }
 
+    public void stop() {
+        t.stop();
+        leben = 0;
+    }
+    
     public void calccount() {
         count = lebentl/totattack;
         if(count>1) {
