@@ -320,13 +320,10 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kons("Verloren");
     }
-    
-    public void conveyeransicht() {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,800,400,15);
+   
         //weltgr.baum();
         //weltgr.blume1();
         //weltgr.Blume2();
         //weltgr.Blume3();
-    }
 
 }
