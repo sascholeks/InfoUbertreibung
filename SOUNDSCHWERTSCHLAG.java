@@ -23,12 +23,11 @@ public class SOUNDSCHWERTSCHLAG
 
     public void play() 
     {
-        clip.start();
+        clip.loop(0);
     }
     
     public void playgeg() {
-        clip.start();
-        clip.loop(1);
+        clip.loop(0);
     }
 
     public void stop() 

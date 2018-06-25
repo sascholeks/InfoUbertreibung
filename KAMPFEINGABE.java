@@ -4,14 +4,15 @@ import java.awt.event.*;
 public class KAMPFEINGABE implements MouseListener 
 {
     private ZEICHENFENSTER f;
-    KAMPF kampf;
     GRAFIKELEMENTE grafik;
+    KAMPF kampf;
     int[] x,y;
-    int help,feld=100,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
+    int help,feld=0,xyp=20,konbewegt=0,konfeldaenderung=100,helpbew;
     boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
-    public KAMPFEINGABE(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer)
+    public KAMPFEINGABE()
     {
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
+        grafik=new GRAFIKELEMENTE();
         x=new int[5];
         y=new int[5];
         for(int a=0;a<5;a++) {
@@ -19,27 +20,33 @@ public class KAMPFEINGABE implements MouseListener
             y[a]=xyp;
             xyp=xyp+50;
         }
-        kampf=new KAMPF(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr,schwer);
-        grafik=new GRAFIKELEMENTE();
+    }
+    
+    public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer,boolean tone) {
+        int feld=0,konbewegt=0,konfeldaenderung=100,helpbew;
+        boolean heilen=false,heilenauswahl=false,kampffreigabe=false,konbewegen=false,gekämpft=false,sieg=false,verloren=false,hp1;
+        kampf = KAMPF.createKampf(ausanz0,ausanz1,ausanz2,ausanz3,ausanz4,geganz0,geganz1,geganz2,geganz3,geganz4,heiltrkl,heiltrgr,schwer,tone);
         help=0;
         konbewegt=0;
         kampffreigabe=false;
     }
-
+    
     public void mouseReleased(MouseEvent e) {
         if(kampf.geheilt==false && e.getX()>458-20 && e.getX()<458+20 && e.getY()>130-20 && e.getY()<131+20) {       //heilen
             grafik.zeichneaktionsauswahl(0); 
             heilen=true;
-            grafik.kons("wähle Größe");
+            grafik.kons("Wähle die Größe");
         }else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>82-20 && e.getY()<80+20) {              //kämpfen
             konbewegen=false;
             if(kampf.ug==true) {
                 grafik.loeschemarkierung(feld);
-                grafik.markiereaktuell(kampf.kepos[kampf.reihenfolge[0]]);
+                grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
             }
+            grafik.markiereaktuell(kampf.kepos[kampf.reihenfolge[0]]);
+            grafik.zeichneinfeld(kampf.reihenfolge[0],kampf.kepos[kampf.reihenfolge[0]],kampf.anz[kampf.reihenfolge[0]]);
             grafik.zeichneaktionsauswahl(1);
             kampffreigabe=true;
-            grafik.kons("wähle Gegner");
+            grafik.kons("Wähle einen Gegner");
             sieg=kampf.sieg;
             verloren=kampf.verloren;
         }else if(e.getX()>558-20 && e.getX()<558+20 && e.getY()>131-20 && e.getY()<131+20) {            //bewegen
@@ -56,24 +63,28 @@ public class KAMPFEINGABE implements MouseListener
                 konbewegt=0;
             }
             grafik.zeichneaktionsauswahl(2);
-            grafik.kons("wähle Feld");
+            grafik.kons("Wähle ein Feld!");
             konbewegen=true;
         }else if(e.getX()>508-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {           //zug beenden            
-            grafik.zeichneaktionsauswahl(3);
-            help++; 
-            gekämpft=false;
-            if(help==2) {
-                kampf.beendez();
-                help=0;
-                konbewegt=0;
-                konbewegen=false;
-                kampffreigabe=false;
-                grafik.loeschemarkierung(feld);
-                grafik.loeschemarkierung(helpbew);
-                grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
-                grafik.zeichneinfeld(kampf.welt[helpbew],helpbew,kampf.anz[kampf.welt[helpbew]]);
-            }else {
-                grafik.kons("Sicher, dass du den Zug beenden möchtest");
+            if(kampf.reihenfolge[0]>=0 && kampf.reihenfolge[0] <5) {
+                grafik.zeichneaktionsauswahl(3);
+                help++; 
+                gekämpft=false;
+                if(help==2) {
+                    kampf.beendez();
+                    help=0;
+                    konbewegt=0;
+                    konbewegen=false;
+                    kampffreigabe=false;
+                    grafik.loeschemarkierung(feld);
+                    grafik.loeschemarkierung(helpbew);
+                    grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
+                    grafik.zeichneinfeld(kampf.welt[helpbew],helpbew,kampf.anz[kampf.welt[helpbew]]);
+                }else {
+                    grafik.kons("Sicher, dass du den Zug beenden möchtest");
+                }
+            } else {
+                kampf.complDecide();
             }
         }else if(heilen==true && e.getX()>418 && e.getX()<437 && e.getY()>110 && e.getY()<130) {      //heilen
             heilen=false;
@@ -168,7 +179,7 @@ public class KAMPFEINGABE implements MouseListener
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[4]+3,y[2]+3,45,45,8);
             feld=14;
             konbewegt++;
-            
+
         }else if(konbewegen==true && e.getX()>x[0]+7 && e.getX()<x[0]+58 && e.getY()>y[3]+30 && e.getY()<y[3]+81) {
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+1,y[3]+1,49,49,2);
             ZEICHENFENSTER.gibFenster().fuelleRechteck(x[0]+3,y[3]+3,45,45,8);
@@ -349,12 +360,12 @@ public class KAMPFEINGABE implements MouseListener
         grafik.zeichneinfeld(kampf.welt[feld],feld,kampf.anz[kampf.welt[feld]]);
         if(konbewegt==2 && konbewegen==true) {
             konbewegen=false;
-            kampf.bewegen(feld);
+            kampf.bewegen(feld,false);
         }else if(konbewegt==1 && konbewegen==true) {
             helpbew=feld;
-            kampf.bewegen(feld);
+            kampf.bewegen(feld,false);
         }else if(kampffreigabe==true && gekämpft==true) {
-            kampf.kaempfen(feld);
+            kampf.kaempfen(feld,false);
             kampffreigabe=false;
             gekämpft=false;
             if(kampf.ug==true) {
@@ -362,6 +373,7 @@ public class KAMPFEINGABE implements MouseListener
             }
         }else if(kampffreigabe==true && gekämpft==false) {
         }
+
     }  
 
     public void mousePressed(MouseEvent e) 

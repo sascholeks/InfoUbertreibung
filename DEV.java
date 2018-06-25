@@ -2,7 +2,7 @@ import java.util.Random;
 
 public class DEV
 {
-
+    private static DEV devr;
     INVENTAR inv;
     GRAFIKELEMENTE grafik;
     Random r;
@@ -40,6 +40,7 @@ public class DEV
         inv.fuellestandart();                                         //nur zu testzwecken später löschen
 
         this.normal = normal;
+        devr = this;
 
         x=new int [5];
         y=new int [5];
@@ -112,7 +113,7 @@ public class DEV
     public void zeichnespielfeld() {
     }
 
-    public void kaempfen(int feld) {
+    public void kaempfen(int feld, boolean AI) {
         if(aktionen!=2 && gekaempft==false) {                   //kontolle bereits gekämpft und aktionen gemacht
             if(welt[feld]!=10) {                                //kontrolle gegner auf feld
                 if(team[welt[feld]]!=team[reihenfolge[0]]) {    //kontolle selbes team
@@ -186,24 +187,36 @@ public class DEV
                         }
                         gekaempft=true;
                     }else if(kepos[reihenfolge[0]]-1==feld && kepos[reihenfolge[0]]+1==feld && kepos[reihenfolge[0]]-5==feld && kepos[reihenfolge[0]]+5==feld){
-                        grafik.kons("für "+kaempfer[reihenfolge[0]].name+" unerreichbar");
+                        if(!AI) {
+                            grafik.kons("für "+kaempfer[reihenfolge[0]].name+" unerreichbar");
+                        }
                     }else {
-                        grafik.kons("Unerreichbar");
+                        if(!AI) {
+                            grafik.kons("Unerreichbar");
+                        }
                     }
                 }else if (team[welt[feld]]==team[reihenfolge[0]]) {
-                    grafik.kons("Du kannst keine Kämpfer aus deinem Team angreifen");
+                    if(!AI) {
+                        grafik.kons("Du kannst keine Kämpfer aus deinem Team angreifen");
+                    }
                 }
             }else {
-                grafik.kons("Kein Gegner gefunden");
+                if(!AI) {
+                    grafik.kons("Kein Gegner gefunden");
+                }
             }
         }else if(gekaempft==true) {
-            grafik.kons("In dieser Runde bereits gekämpft");
+            if(!AI) {
+                grafik.kons("In dieser Runde bereits gekämpft");
+            }
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits gemacht");
-        }       
+            if(!AI) {
+                grafik.kons("Max. Aktionen bereits gemacht");
+            }
+        }   
     }
 
-    public void bewegen(int feld) {
+    public void bewegen(int feld,boolean AI) {
         if(aktionen!=2 && bewegt==false && welt[feld]==10 && gekaempft==false) {
             if(kepos[reihenfolge[0]]-1==feld || kepos[reihenfolge[0]]-5==feld || kepos[reihenfolge[0]]+1==feld || kepos[reihenfolge[0]]+5==feld) {
                 grafik.loeschemarkierung(kepos[reihenfolge[0]]);
@@ -218,16 +231,26 @@ public class DEV
                     bewegt=true;
                 }
             }else {
-                grafik.kons("Feld nicht in Reichweite");
+                if(!AI) {
+                    grafik.kons("Feld nicht in Reichweite");
+                }
             }
         }else if(welt[feld]!=10) {
-            grafik.kons("Feld ist nicht frei");
+            if(!AI) {
+                grafik.kons("Feld ist nicht frei");
+            }
         }else if(bewegt==true) {
-            grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+            if(!AI) {
+                grafik.kons("In dieser Runde hast du  dich bereits 2 mal bewegt");
+            }
         }else if(aktionen==2) {
-            grafik.kons("Max. Aktionen bereits ausgeführt");
+            if(!AI) {
+                grafik.kons("Max. Aktionen bereits ausgeführt");
+            }
         }else if(gekaempft==true) {
-            grafik.kons("Nach dem Kampf kannst du nicht laufen");
+            if(!AI) {
+                grafik.kons("Nach dem Kampf kannst du nicht laufen");
+            }
         }
     }
 
@@ -388,7 +411,6 @@ public class DEV
             } catch(InterruptedException ex) {
                 Thread.currentThread().interrupt();
             }
-            grafik.zeichnesieg();
         }
     }
 
@@ -415,7 +437,7 @@ public class DEV
         alg.updateOrder(reihenfolge);
         for(int i=0;i<25;i++) {
             if(welt[i]==reihenfolge[0]) {
-                if(reihenfolge[0]<5) { //muss zu >=4 und <10
+                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=4 und <10
                     pos = i;
                 } else {
                     grafik.kons("Error: Die KI ist nicht am Zug!");
@@ -427,7 +449,7 @@ public class DEV
         Orderpos = alg.getOrderPos();
         if(pos!=-1 && pos!=-2) {
             alg.decide();
-            //action(alg.getActionType());
+            action(alg.getActionType());
         } else if(pos == -2) {
             grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
@@ -441,11 +463,11 @@ public class DEV
 
     public void action(int action) {
         switch(action) {
-            case 0:     //move
-            bewegen(getActionPos());
+            case 1:     //move
+            bewegen(getActionPos(),true);
             break;
-            case 1:     //attack    
-            kaempfen(getActionPos());
+            case 0:     //attack    
+            kaempfen(getActionPos(),true);
             break;
             case 2:     //stop
             beendezug();
@@ -467,9 +489,17 @@ public class DEV
         return alg.getActionType();
     }
 
-    public int[] getExtendRange() {
-        alg = new ALGORITHM(welt,anz,reihenfolge);
-        return alg.getExtendedAttack();
+    public static DEV getDev() {
+        if (devr==null) {
+            devr=new DEV();
+        }
+        return devr;
+    }
+
+    public void complDecide() {
+        decideOrder();
+        decideOrder();
+        decideOrder();
     }
 }
 //          try {

@@ -161,7 +161,7 @@ public class INVENTAR
         }
     }
     
-    public void fuellestandart() {
+    public void fuellestandart() {  //dev
         kaeauswahl[0]=0;
         kaeauswahl[1]=1;
         kaeauswahl[2]=2;

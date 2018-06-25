@@ -2,12 +2,13 @@ import java.util.Random;
 
 public class GRAFIKELEMENTE
 {
+    GRAFIKWELT weltgr;
     int ra = 10; //Verschiebung nach rechts
-
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
     public GRAFIKELEMENTE()
     {
+        weltgr= new GRAFIKWELT();
         r=new Random();
         x=new int [5];
         y=new int [5];
@@ -59,6 +60,19 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,50,20,6);
         ZEICHENFENSTER.gibFenster().fuelleKreis(550,100,20,6);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,150,20,6);
+        ZEICHENFENSTER.gibFenster().zeichneText("Heilen",430,130);
+        ZEICHENFENSTER.gibFenster().zeichneText("Kämpfen",478,80);
+        ZEICHENFENSTER.gibFenster().zeichneText("Bewegen",530,130);
+        ZEICHENFENSTER.gibFenster().zeichneText("Zug beenden",475,178);
+    }
+    
+    public void zeichnehinder(int wert,int feld) {
+        switch (wert) {
+           
+            case 11:
+                zeichnehindernis(feld);
+                break;
+        }
     }
 
     public void anzahlreihenfolge(int reihe,int anz) {   
@@ -97,6 +111,7 @@ public class GRAFIKELEMENTE
 
     public void speerkämpfer(int[] x, int[] y, int feld, int f) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+3,y[feld/5]+3,45,45,f);
+        
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+4,y[feld/5]+20,40,4,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x[feld%5]+35,y[feld/5]+18,2,10,2);
     }
@@ -276,23 +291,22 @@ public class GRAFIKELEMENTE
 
     public void zeichnesieg(int anz1,int anz2,int anz3,int anz4,int anz5,int hlkl,int hlgr,int gld) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(80,80,400,200,11);
-        ZEICHENFENSTER.gibFenster().zeichneText("Verlorene Truppen: ",90,100);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText("Verlorene Truppen: ",90,100);;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(95,110,100,50,16);        
         ZEICHENFENSTER.gibFenster().zeichneText("Bogenschützen: ",100,125);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz1+"",110,150);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(205,110,100,50,16);     
         ZEICHENFENSTER.gibFenster().zeichneText("Speerkämpfer:",210,125);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz2+"",220,150);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(315,110,100,50,16);       
         ZEICHENFENSTER.gibFenster().zeichneText("Schildknappe:",320,125);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz3+"",330,150);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(95,170,100,50,16);      
         ZEICHENFENSTER.gibFenster().zeichneText("Ritter:",100,185);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz4+"",110,210);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(205,170,100,50,16);    
         ZEICHENFENSTER.gibFenster().zeichneText("Paladin:",210,185);
-        
+        ZEICHENFENSTER.gibFenster().zeichneText(anz5+"",220,210);
         ZEICHENFENSTER.gibFenster().zeichneText("Erhaltene Tränke: ",95,240); 
         ZEICHENFENSTER.gibFenster().fuelleRechteck(100,245,110,30,16);
         ZEICHENFENSTER.gibFenster().zeichneText("Kleine Tränke: "+hlkl,105,260);
@@ -305,6 +319,14 @@ public class GRAFIKELEMENTE
     public void zeichneverloren() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kons("Verloren");
+    }
+    
+    public void conveyeransicht() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,800,400,15);
+        //weltgr.baum();
+        //weltgr.blume1();
+        //weltgr.Blume2();
+        //weltgr.Blume3();
     }
 
 }
