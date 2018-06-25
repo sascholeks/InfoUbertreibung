@@ -1,7 +1,8 @@
+
 public class COOKIEGRAFIK
 {
     public COOKIEGRAFIK() {
-        
+
     }
 
     public void kasten(int x,int y) {

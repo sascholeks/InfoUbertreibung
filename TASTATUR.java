@@ -11,6 +11,7 @@ public class TASTATUR implements KeyListener
         f = ZEICHENFENSTER.gibFenster().frame;     
         f.addKeyListener(this);
         welt=new WELT();
+        f.setDefaultCloseOperation(f.EXIT_ON_CLOSE);
     }
     
     public void keyPressed(KeyEvent e) { 
