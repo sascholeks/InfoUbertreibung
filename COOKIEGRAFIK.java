@@ -20,19 +20,19 @@ public class COOKIEGRAFIK extends Applet
         try {
             switch(ID) {
                 case 0:
-                img = ImageIO.read(new File("img\\cookie0.png"));
+                img = ImageIO.read(new File("cookie0.png"));
                 break;
                 case 1:
-                img = ImageIO.read(new File("img\\cookie1.png"));
+                img = ImageIO.read(new File("cookie1.png"));
                 break;
                 case 2:
-                img = ImageIO.read(new File("img\\cookie2.png"));
+                img = ImageIO.read(new File("cookie2.png"));
                 break;
                 case 3:
-                img = ImageIO.read(new File("img\\cookie3.png"));
+                img = ImageIO.read(new File("cookie3.png"));
                 break;
                 default:
-                img = ImageIO.read(new File("img\\cookie0.png"));
+                img = ImageIO.read(new File("cookie0.png"));
                 break;
             }
         } catch (IOException e) {
