@@ -41,6 +41,8 @@ Cheats:
         -Events wie z.B. Kämpfe bei Gegner oder Menüs werden ignoriert
     -notice
         -Alle Events werden wieder beachtet
+    -givemon
+        -macht dich zum Millionär
     -jesus
         -Lässt dich über Wasser laufen
         -Gibt dir 5000 Anhänger

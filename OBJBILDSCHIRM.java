@@ -1,7 +1,6 @@
 
 public class OBJBILDSCHIRM 
 {
-    GRAFIKELEMENTE grafik;
     int[] anz,ausanz,kaeauswahl,anzauswahl;
     boolean freigabe,hpt,shp,kas,kaserne,nav,haf;
     public OBJBILDSCHIRM()
@@ -26,7 +25,6 @@ public class OBJBILDSCHIRM
         kas=false;
         nav=false;
         haf=false;
-        grafik=new GRAFIKELEMENTE();
         ZEICHENFENSTER.gibFenster().loescheAlles();
          //png
         ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
@@ -106,12 +104,12 @@ public class OBJBILDSCHIRM
         nav=false;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,150,13,16);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,70,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,70,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,70,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,70,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,70,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,104,70,13);
         ZEICHENFENSTER.gibFenster().zeichneText("Kaufe Boot",61,75);
         ZEICHENFENSTER.gibFenster().zeichneText("Shop",61,95);
         ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,115);
@@ -169,19 +167,19 @@ public class OBJBILDSCHIRM
     }
     
     public void hakenhf() {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(112,70,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(113,71,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(114,72,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(115,73,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(116,76,3,1,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(117,73,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(118,72,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(119,71,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(120,70,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(121,69,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(122,68,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(123,67,3,3,2);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(124,66,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(132,70,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(133,71,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(129,72,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(130,73,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(131,76,3,1,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(132,73,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(133,72,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(134,71,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(135,70,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(136,69,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(137,68,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(138,67,3,3,2);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(139,66,3,3,2);
     }
     
     public void quest() {

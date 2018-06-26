@@ -76,7 +76,7 @@ public class INVENTAR
     }
     
     public void inventar() {
-        grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4],anz[5],anz[6],anz[7],anz[8],anz[9],ausanz[0],ausanz[1],ausanz[2],ausanz[3],ausanz[4],kaeauswahl[0],kaeauswahl[1],kaeauswahl[2],kaeauswahl[3],kaeauswahl[4]);   
+        grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4]);   
         zeichnegeld();
     }
     

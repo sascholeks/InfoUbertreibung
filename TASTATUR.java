@@ -221,6 +221,10 @@ public class TASTATUR implements KeyListener
                     welt.zeichneansicht();
                     welt.grafik.cheat("Spawne Hafen");
                     break;
+               case 75:
+                    welt.inv.geld=welt.inv.geld+100000;
+                    welt.grafik.cheat("Du bimst Millionär");
+                    break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 
             }

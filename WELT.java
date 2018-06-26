@@ -8,6 +8,7 @@ public class WELT implements MouseListener
     GRAFIKGGENERIERUNG grafikgen;
     private ZEICHENFENSTER f;
     //SOUNDMUSIKwelt musik;
+    SOUNDAUSWAHL soundausw;
     GRAFIKWELT grafik;
     ALGOGR algsw;
     OBJBILDSCHIRM objschirm;
@@ -30,6 +31,7 @@ public class WELT implements MouseListener
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafikgen=new GRAFIKGGENERIERUNG();
         //musik=new SOUNDMUSIKwelt();
+        soundausw=new SOUNDAUSWAHL();
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
         objschirm=new OBJBILDSCHIRM();
@@ -136,6 +138,7 @@ public class WELT implements MouseListener
         if(ignor==false) {
             if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
                 bewegungssperre=true;
+                kampf.aktionssperre=false;
                 kampf.kampf(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor,kampfton);
                 hp16=true;
                 //musik.stop();
@@ -187,6 +190,13 @@ public class WELT implements MouseListener
             hp16=false;
             bewegungssperre=false;
             gegnerpos[aktpos]=101;
+            inv.anz[0]=inv.anz[0]+kampf.kampf.verlorenanz[0];
+            inv.anz[1]=inv.anz[1]+kampf.kampf.verlorenanz[1];
+            inv.anz[2]=inv.anz[2]+kampf.kampf.verlorenanz[2];
+            inv.anz[3]=inv.anz[3]+kampf.kampf.verlorenanz[3];
+            inv.anz[4]=inv.anz[4]+kampf.kampf.verlorenanz[4];
+            schwerfaktor=schwerfaktor*1.02;
+            kampf.aktionssperre=true;
             if(ton==true) {
                 if(ton==true) {
                     //musik.play();
@@ -264,6 +274,7 @@ public class WELT implements MouseListener
                     }
                 }
             }
+            soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
             if(objschirm.hpt==true) {
                 hp13=0;
@@ -282,6 +293,7 @@ public class WELT implements MouseListener
                 ort2="Kaserne";
                 grafik.ortsanzeige(ort1,ort2);
             }
+            soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
             if(objschirm.hpt==true || objschirm.kas==true || objschirm.haf==true) {
                 bewegungssperre=false;
@@ -293,17 +305,21 @@ public class WELT implements MouseListener
             }else if(objschirm.shp==true) {
                 inv.kaufetruppen(2);
             }
+            soundausw.play();
         }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167 && mausfreigabe==true) {  //fld4
             if(objschirm.shp==true) {
                 inv.kaufetruppen(3);
             }
+            soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187 && mausfreigabe==true) {  //fld5
             if(objschirm.shp==true) {
                 inv.kaufetruppen(4);
             }else if(objschirm.nav==true) {
                 hp14=1;
                 grafik.loescheort();
+                
             }
+            soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
             if(objschirm.shp==true && hp13==0) {
                 objschirm.hauptstadt(quest[0]);
@@ -319,6 +335,7 @@ public class WELT implements MouseListener
                 zeichneansicht();
                 mausfreigabe=false;
             }
+            soundausw.play();
         }
 
     }
@@ -348,11 +365,13 @@ public class WELT implements MouseListener
                 genwelthelp=r.nextInt(25);
             }while(welt[a-2]==genwelthelp || welt[a-1]==genwelthelp || welt[a+499]==genwelthelp);
             welt[a]=genwelthelp;
-            grafikgen.ph1x5();
             do {                            //IdfNR.5,1
                 genwelthelp=r.nextInt(25);
             }while(welt[a+500-2]==genwelthelp || welt[a+500-1]==genwelthelp || welt[a-1]==genwelthelp || welt[a]==genwelthelp || welt[a+1]==genwelthelp);
             welt[a+500]=genwelthelp;
+        }
+        for(int a=0;a<25;a++) {
+            grafikgen.ph1x5();
         }
         grafikgen.ph1x51();
         for(int b=2;b<500;b++) {            //IdfNR.6
@@ -419,8 +438,8 @@ public class WELT implements MouseListener
                     }
                 }
             }
+            grafikgen.ph2xWald();
         }
-        grafikgen.ph2xWald();
         for(int b=0;b<11;b++) {              //generierung seen
             for(int a=0;a<250000;a++) {
                 if(welt[a]==6 && a>501 && a<249498) {
@@ -445,8 +464,8 @@ public class WELT implements MouseListener
             do {
                 welt[bildpos+a%7+a/7*500]=r.nextInt(25);
             }while(welt[bildpos+a%7+a/7*500]==6);
+            grafikgen.ph2xSee();
         }
-        grafikgen.ph2xSee();
         for(int a=0;a<500;a++) {   //randzuweisung  
             welt[a]=25;            
             welt[a*500]=25;        
@@ -529,8 +548,8 @@ public class WELT implements MouseListener
                     }
                 }
             }
+            grafikgen.ph3xalgosw();
         }  
-        grafikgen.ph3xalgosw();
         for(int a=0;a<1500;a++) {        //generierung dungeon
             do {
                 hp15=r.nextInt(250000);

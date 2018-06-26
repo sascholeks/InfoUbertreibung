@@ -23,11 +23,16 @@ public class SOUNDSCHWERTSCHLAG
 
     public void play() 
     {
-        clip.loop(0);
-    }
-    
-    public void playgeg() {
-        clip.loop(0);
+        clip.loop(100);
+        try
+        {
+            Thread.sleep(900);
+        } 
+        catch (InterruptedException e)
+        {
+            // ignoring exception at the moment
+        }
+        stop();
     }
 
     public void stop() 

@@ -1,13 +1,13 @@
 import java.io.File;
 import javax.sound.sampled.*;
-public class SOUNDARROW
+public class SOUNDAUSWAHL
 {
     private Clip clip;
-    public SOUNDARROW() 
+    public SOUNDAUSWAHL() 
     {
         try 
         {
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("pfeilschuss.wav"));  //hier .wav datei einfügen
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("soundauswahl.wav"));  //hier .wav datei einfügen
             AudioFormat format = ais.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format, ((int) ais.getFrameLength() * format.getFrameSize()));
             clip = (Clip) AudioSystem.getLine(info);
@@ -26,7 +26,7 @@ public class SOUNDARROW
         clip.loop(100);
         try
         {
-            Thread.sleep(900);
+            Thread.sleep(200);
         } 
         catch (InterruptedException e)
         {

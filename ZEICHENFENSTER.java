@@ -533,6 +533,8 @@ public class ZEICHENFENSTER
             return wasserblau;
             case 40: Color bootbraun = new Color(125,79,46);
             return bootbraun;
+            case 41: Color dunkelrot2=new Color(148,0,0);
+            return dunkelrot2;
             default: return graphic.getColor();
         }
 

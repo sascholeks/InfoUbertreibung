@@ -495,7 +495,7 @@ public class GRAFIKWELT
         Held(x[feld%7]-5,y[feld/7]-10);
     }
 
-    public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4,int anz5,int anz6,int anz7,int anz8,int anz9,int anz10,int anz11,int anz12,int anz13,int anz14,int aus0,int aus1,int aus2,int aus3,int aus4) {
+    public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,90,50,14);
@@ -523,46 +523,9 @@ public class GRAFIKWELT
         ZEICHENFENSTER.gibFenster().zeichneRechteck(190,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(190,90,50,14);
         ZEICHENFENSTER.gibFenster().zeichneText(anz3+"",192,102);
-
         ZEICHENFENSTER.gibFenster().zeichneRechteck(240,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(240,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz4+"",242,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,40,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(290,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz5+"",292,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(340,40,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(340,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz6+"",342,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(390,40,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(390,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz7+"",392,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(440,40,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(440,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz8+"",442,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(490,40,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(490,90,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz9+"",492,102);
-
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(75,140,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(125,140,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(175,140,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(225,140,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,140,50,50);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(75,190,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz10+"",77,202);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(125,190,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz11+"",127,202);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(175,190,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz12+"",177,202);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(225,190,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz13+"",227,202);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(275,190,50,14);
-        ZEICHENFENSTER.gibFenster().zeichneText(anz14+"",277,202);    
+        ZEICHENFENSTER.gibFenster().zeichneText(anz4+"",242,102); 
     }
     
     public void boot(int feld) {
