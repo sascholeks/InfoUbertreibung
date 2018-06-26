@@ -1,3 +1,4 @@
+/**
 import java.util.Random;
 public class KAMPFALT
 {
@@ -83,7 +84,7 @@ public class KAMPFALT
         grafik.markiereaktuell(kepos[reihenfolge[0]]);
 
         for(int a=0;a<6;a++) {           //zeichne Bilder in Reiehnfolge
-            grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);                         //hat einfluss auf reiehenfolg
+            //grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,team[reihenfolge[a]],a);                         //hat einfluss auf reiehenfolg
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
         for(int a=0;a<10;a++) {         //zeichne in spielfeld
@@ -415,9 +416,9 @@ public class KAMPFALT
     
     public void zeichnereihenfolge() {
         for(int a=0;a<6;a++) {
-            grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,reihenfolge[a]/5,a);
+            //grafik.zeichneKaempferreihenfolge(reihenfolge[a]%5,reihenfolge[a]/5,a);
             if(tod[reihenfolge[a]]==true) {
-                grafik.markieretot(a);
+                //grafik.markieretot(a);
             }
             grafik.anzahlreihenfolge(a,anz[reihenfolge[a]]);
         }
@@ -543,4 +544,4 @@ public class KAMPFALT
 
 
 
-
+*/

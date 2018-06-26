@@ -1,10 +1,14 @@
 import java.util.Random;
+import java.awt.event.*;
+import javax.swing.*;
 public class KAMPF {
     Random r;    
     GRAFIKELEMENTE grafik;
     KAEMPFER kaempfer;
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
+    ALGORITHM alg;
+    Timer t1,t2;
     //SOUNDMUSIKkam musik;
     int[] welt,reihenfolge,kepos,verlorenanz; 
     double[] leben,startlf;
@@ -12,6 +16,9 @@ public class KAMPF {
     int hlkl,hlgr,hpgen,hlp,hpz,aktionen,xpos;
     double schwerfaktor;
     boolean ton,bewegt,gekaempft,sieg,verloren,ug;
+    int Orderpos;
+    int anz;
+
     public KAMPF() {
         //musik=new SOUNDMUSIKkam();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
@@ -32,6 +39,21 @@ public class KAMPF {
         verloren=false;
         sieg=false;
         hlp=0;
+
+        t1 = new Timer(500, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    decideOrder();
+                    t1.stop();
+                }    
+            });
+
+        t2 = new Timer(500, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    decideOrder();
+                    beendezug();
+                    t2.stop();
+                }    
+            });
     }
 
     public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone) {
@@ -359,7 +381,7 @@ public class KAMPF {
             if(tod[reihenfolge[a]]==false) {
                 grafik.anzahlreihenfolge(a,(int)leben[reihenfolge[a]]/(kaempfer.leben(reihenfolge[a]%5)));
             }
-        
+
         }
         grafik.kons("Kämpfer: "+kaempfer.name(reihenfolge[0]%5)+" Team "+(reihenfolge[0]/5+1));
         if(tod[reihenfolge[0]]==false) {
@@ -404,6 +426,50 @@ public class KAMPF {
         }
     }
 
+    public int getOrderPos() {
+        alg = new ALGORITHM(welt,getanz(),reihenfolge);
+        Orderpos = alg.getOrderPos(); 
+        return Orderpos;
+    }
+
+    public int getAction() {
+        alg = new ALGORITHM(welt,getanz(),reihenfolge);
+        alg.decide();
+        return alg.getActionType();
+    }
+
+    public void complDecide() {
+        decideOrder();
+        if(getAction()==1) {
+            t1.start();
+            if(getAction()==1) {
+                t2.start();
+            } else {
+                beendezug();
+            }
+        } else {
+            beendezug();
+        }
+    }
+
+    public int[] getanz() {
+        int[] anz = new int[25];
+        for(int i=0;i<25;i++) {
+            anz[i] = (int)(leben[welt[i]]/(kaempfer.leben(welt[i]%5))); 
+        }
+        return anz;
+    }
+
+    public int getPos() {
+        int pos = 0;
+        for(int i=0;i<25;i++) {
+            if(reihenfolge[0] == welt[i]) { 
+                pos = i;
+            }
+        }
+        return pos;
+    }
+
     public void errechnexpos() {
         xpos=kepos[reihenfolge[0]]%5;
     }
@@ -411,7 +477,50 @@ public class KAMPF {
     public void dev() {
         kampf(2000,1,1,1,1,10,1,0,1,1,1,1,2.1,true);
     }
+
+    public int getActionPos() {
+        return alg.getActionPos();
+    }
+
+    public void action(int action) {
+        switch(action) {
+            case 1:     //move
+            bewege(getActionPos());
+            break;
+            case 0:     //attack    
+            kaempfen(getActionPos());
+            break;
+            case 2:     //stop
+            beendezug();
+            break;
+            default:   //heilen etc. fehlt;
+            //grafik.kons("AI Action Error!");
+        }
+    }
+
+    public void decideOrder() {
+        int pos=-1;
+        alg = new ALGORITHM(welt,getanz(),reihenfolge);
+        alg.updateOrder(reihenfolge);
+        for(int i=0;i<25;i++) {
+            if(welt[i]==reihenfolge[0]) {
+                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=4 und <10
+                    pos = i;
+                } else {
+                    grafik.kons("Error: Die KI ist nicht am Zug!");
+                    pos = -2;
+                }
+            }
+        }
+        Orderpos = alg.getOrderPos();
+        if(pos!=-1 && pos!=-2) {
+            alg.decide();
+            action(alg.getActionType());
+        } else if(pos == -2) {
+            grafik.kons("Error: Die KI ist nicht am Zug!");
+        }else {
+            grafik.kons("Error: KI decide error!");
+        }
+    }
 }
-
-
 

@@ -60,6 +60,13 @@ public class COOKIEGRAFIK extends Applet
         upgrade(x+5,y+45);
         typ(x+5,y+5);
     }
+    
+    public void upgradekasten1(int x,int y) {
+        kasten(x,y);
+        upgrade(x+5,y+45);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+5,y+5,30,30,36);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+8,24,24,11);
+    }
 
     public void typ(int x,int y) {
         ZEICHENFENSTER.gibFenster().fuelleKreis(x+15,y+15,15,36);
@@ -77,8 +84,8 @@ public class COOKIEGRAFIK extends Applet
         text(x+3,y+15,text);
     }
 
-    public void schaden(int attack, int x,int y) {
-        String text = "Schaden: " + attack;
+    public void schaden(int attack, int passive, int x,int y) {
+        String text = "Schaden: " + attack +"  +" + passive+"/s";
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y,110,20,11);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(x,y,110,20);
         text(x+3,y+15,text);

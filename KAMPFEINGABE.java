@@ -1,10 +1,12 @@
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
+import javax.swing.*;
 public class KAMPFEINGABE implements MouseListener 
 {
     private ZEICHENFENSTER f;
     GRAFIKELEMENTE grafik;
+    JFrame frame;
     KAMPF kampf;
     int[] x,y;
     int xyp=20,hlp2,feld,konbewegt;
@@ -21,6 +23,8 @@ public class KAMPFEINGABE implements MouseListener
             xyp=xyp+50;
         }
         aktionssperre=true;
+        frame = ZEICHENFENSTER.gibFenster().frame;
+        frame.setDefaultCloseOperation(frame.EXIT_ON_CLOSE);
     }
 
     public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double schwer,boolean tone) {
@@ -47,20 +51,20 @@ public class KAMPFEINGABE implements MouseListener
                 kampffreigabe=false;
                 grafik.zeichneaktionsauswahl(2);
             }else if(e.getX()>505-20 && e.getX()<508+20 && e.getY()>180-20 && e.getY()<180+20) {           //zug beenden            
-                //if(kampf.reihenfolge[0]>=0 && kampf.reihenfolge[0] <5) {
-                hlp2++;
-                grafik.kons("Zug beenden?");
-                grafik.zeichneaktionsauswahl(3);
-                if(hlp2==2) {
-                    hlp2=0;
-                    heilen=false;
+                if(kampf.reihenfolge[0]>=0 && kampf.reihenfolge[0] <5) {
+                    hlp2++;
+                    grafik.kons("Zug beenden?");
+                    grafik.zeichneaktionsauswahl(3);
+                    if(hlp2==2) {
+                        hlp2=0;
+                        heilen=false;
 
-                    kampffreigabe=false;
-                    kampf.beendezug();
+                        kampffreigabe=false;
+                        kampf.beendezug();
+                    }
+                } else {
+                    kampf.complDecide();
                 }
-                //} else {
-                //kampf.complDecide();
-                //}
             }
             if(heilen==true && e.getX()>418 && e.getX()<437 && e.getY()>110 && e.getY()<130) {      //heilen 2.Auswahl
                 heilen=false;
