@@ -9,6 +9,7 @@ public class KAMPF {
     SOUNDARROW arrow;
     ALGORITHM alg;
     Timer t1,t2;
+    OBJBILDSCHIRM obj;
     //SOUNDMUSIKkam musik;
     int[] welt,reihenfolge,kepos,verlorenanz; 
     double[] leben,startlf;
@@ -39,6 +40,7 @@ public class KAMPF {
         verloren=false;
         sieg=false;
         hlp=0;
+        obj = new OBJBILDSCHIRM();
 
         t1 = new Timer(500, new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
@@ -54,7 +56,10 @@ public class KAMPF {
                     t2.stop();
                 }    
             });
+
     }
+
+    
 
     public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone) {
         for(int a=0;a<25;a++) {
@@ -106,7 +111,9 @@ public class KAMPF {
                 kepos[a]=25;
             }
         }
+        
         zeichneansicht();
+
         if(ton==true) {
             //musik.play();
         }

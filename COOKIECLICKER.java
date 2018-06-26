@@ -9,7 +9,7 @@ public class COOKIECLICKER implements MouseListener, KeyListener
     Random r;
     JFrame j;
     COOKIEGRAFIK cg;
-    Timer t;
+    Timer t,t2;
     WELT w;
 
     double aleben;
@@ -26,34 +26,16 @@ public class COOKIECLICKER implements MouseListener, KeyListener
     int activedmg;
     int min,sec;
     double passive;
+    int type;
+    int dif;
     public COOKIECLICKER() {
         cg = new COOKIEGRAFIK();
         // w = new WELT();
         r= new Random();
-        int dif = r.nextInt(4)+1;
+        dif = r.nextInt(4)+1;
+        img();
         passive = 0;
-        switch(dif) {
-            case 1:
-            aleben = (r.nextInt(5)+1)*500;
-            cg.img(270,75,200,200,0);
-            break;
-            case 2:
-            aleben = (r.nextInt(5)+3)*1000;
-            cg.img(270,75,200,200,1);
-            break;
-            case 3:
-            aleben = (r.nextInt(5)+2)*2000;
-            cg.img(270,75,200,200,2);
-            break;
-            case 4:
-            aleben = (r.nextInt(1)+1)*10000;
-            cg.img(250,55,225,235,3);
-            break;
-            default:
-            aleben = (r.nextInt(5)+1)*500;
-            cg.img(270,75,200,200,0);
-            break;
-        }
+
         activedmg = 0;
         coins = 0;
         leben = aleben;
@@ -113,9 +95,68 @@ public class COOKIECLICKER implements MouseListener, KeyListener
                 }    
             });
 
+        t2 = new Timer(200, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    img();
+                    t2.stop();
+                }    
+            });
+
         ZEICHENFENSTER.gibFenster().zeichneRechteck(100,50,500,15);
         calccount();
         t.start();
+    }
+
+    public void img() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(250,70,225,235,8);
+        switch(dif) {
+            case 1:
+            aleben = (r.nextInt(5)+1)*500;
+            cg.img(270,75,200,200,0);
+            break;
+            case 2:
+            aleben = (r.nextInt(5)+3)*1000;
+            cg.img(270,75,200,200,1);
+            break;
+            case 3:
+            aleben = (r.nextInt(5)+2)*2000;
+            cg.img(270,75,200,200,2);
+            break;
+            case 4:
+            aleben = (r.nextInt(1)+1)*10000;
+            cg.img(250,55,225,235,3);
+            break;
+            default:
+            aleben = (r.nextInt(5)+1)*500;
+            cg.img(270,75,200,200,0);
+            break;
+        }
+    }
+
+    public void imga() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(250,70,225,235,8);
+        switch(dif) {
+            case 1:
+            aleben = (r.nextInt(5)+1)*500;
+            cg.imga(270,75,200,200,0);
+            break;
+            case 2:
+            aleben = (r.nextInt(5)+3)*1000;
+            cg.imga(270,75,200,200,1);
+            break;
+            case 3:
+            aleben = (r.nextInt(5)+2)*2000;
+            cg.imga(270,75,200,200,2);
+            break;
+            case 4:
+            aleben = (r.nextInt(1)+1)*10000;
+            cg.imga(250,55,225,235,3);
+            break;
+            default:
+            aleben = (r.nextInt(5)+1)*500;
+            cg.imga(270,75,200,200,0);
+            break;
+        }   
     }
 
     public void keyPressed(KeyEvent e) { 
@@ -155,6 +196,8 @@ public class COOKIECLICKER implements MouseListener, KeyListener
 
     public void attack(double attack) {
         if(leben>0) {
+            imga();
+            t2.start();
             leben = leben - attack;
             totdmg = totdmg + attack;
             removetl();
@@ -207,6 +250,7 @@ public class COOKIECLICKER implements MouseListener, KeyListener
 
     public void stop() {
         t.stop();
+        imga();
         leben = 0;
         w.zeichneansicht();
         w.hp16=false;

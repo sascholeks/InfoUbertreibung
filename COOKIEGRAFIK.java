@@ -43,6 +43,34 @@ public class COOKIEGRAFIK extends Applet
         ZEICHENFENSTER.gibFenster().repaint();
     }
 
+    public void imga(int x,int y,int xs,int ys,int ID) {
+
+        try {
+            switch(ID) {
+                case 0:
+                img = ImageIO.read(new File("cookie0a.png"));
+                break;
+                case 1:
+                img = ImageIO.read(new File("cookie1a.png"));
+                break;
+                case 2:
+                img = ImageIO.read(new File("cookie2a.png"));
+                break;
+                case 3:
+                img = ImageIO.read(new File("cookie3a.png"));
+                break;
+                default:
+                img = ImageIO.read(new File("cookie0a.png"));
+                break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        g.drawImage(img,x,y,xs,ys,null);
+        ZEICHENFENSTER.gibFenster().repaint();
+    }
+    
     public void kasten(int x,int y) {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y,40,40,11);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x,y+40,40,40,11);

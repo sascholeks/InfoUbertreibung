@@ -3,8 +3,12 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
 import java.util.Timer;
-public class WELT implements MouseListener 
+
+
+public class WELT implements MouseListener
 {
+    
+    
     GRAFIKGGENERIERUNG grafikgen;
     private ZEICHENFENSTER f;
     //SOUNDMUSIKwelt musik;
@@ -27,7 +31,9 @@ public class WELT implements MouseListener
     boolean ignor=false,boot=false;
     double schwerfaktor=1;
     String ort1,ort2;
+    boolean cookie = false;
     public WELT() {
+        
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafikgen=new GRAFIKGGENERIERUNG();
         //musik=new SOUNDMUSIKwelt();
@@ -317,7 +323,7 @@ public class WELT implements MouseListener
             }else if(objschirm.nav==true) {
                 hp14=1;
                 grafik.loescheort();
-                
+
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
@@ -651,6 +657,8 @@ public class WELT implements MouseListener
         xzerbew=(aktpos%500);
         yzerbew=aktpos/500;
     }
+    
+    
 
     public void kontrollerand() {
         zerteileansicht();

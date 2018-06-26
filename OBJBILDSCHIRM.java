@@ -1,10 +1,19 @@
-
+import javax.imageio.*;
+import javax.swing.*;
+import java.awt.*;
+import java.awt.image.*;
+import java.io.*;
 public class OBJBILDSCHIRM 
 {
     int[] anz,ausanz,kaeauswahl,anzauswahl;
     boolean freigabe,hpt,shp,kas,kaserne,nav,haf;
+    BufferedImage img;
+    Graphics g;
+    JFrame fr;
     public OBJBILDSCHIRM()
     {
+        g = ZEICHENFENSTER.gibFenster().getGraphic();
+        fr = ZEICHENFENSTER.gibFenster().frame;
         anz=new int[10];
         ausanz=new int[5];
         kaeauswahl=new int[5];
@@ -13,12 +22,45 @@ public class OBJBILDSCHIRM
             anz[a]=10;                 //anfang
             ausanz[a%5]=0; 
             kaeauswahl[a%5]=0;
-            
+
         }
         hpt=false;
         kaserne=false;
     }
-    
+
+    public void img(int x,int y,int xs,int ys,int ID) {
+        try {
+            switch(ID) {
+                case 0:
+                img = ImageIO.read(new File("dorf.png"));
+                break;
+                case 1:
+                img = ImageIO.read(new File("hafen.png"));
+                break;
+                case 2:
+                img = ImageIO.read(new File("stadt.png"));
+                break;
+                case 3:
+                img = ImageIO.read(new File("kampf1.png"));
+                break;
+                case 4:
+                img = ImageIO.read(new File("kampf2.png"));
+                break;
+                case 5:
+                img = ImageIO.read(new File("kampf3.png"));
+                break;
+                default:
+                img = ImageIO.read(new File("stadt.png"));
+                break;
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        g.drawImage(img,x,y,xs,ys,null);
+        ZEICHENFENSTER.gibFenster().repaint();
+    }
+
     public void hauptstadt(boolean erfüllt) {
         hpt=true;
         shp=false;
@@ -26,10 +68,11 @@ public class OBJBILDSCHIRM
         nav=false;
         haf=false;
         ZEICHENFENSTER.gibFenster().loescheAlles();
-         //png
+        img(0,0,700,300,2);
+
         ZEICHENFENSTER.gibFenster().fuelleRechteck(50,50,400,140,7);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(50,50,400,140);
-        
+
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,50,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,50,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,50,13,16);
@@ -43,7 +86,7 @@ public class OBJBILDSCHIRM
             haken();
         }
     }
-    
+
     public void shop() {
         shp=true;
         hpt=false;
@@ -72,7 +115,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneText("1 Paladin",61,155);
         ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,175);
     }
-    
+
     public void kaserne(boolean erfüllt) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
         kas=true;
@@ -95,9 +138,10 @@ public class OBJBILDSCHIRM
             haken();
         }
     }  
-    
+
     public void hafen(boolean gekauft) {
         ZEICHENFENSTER.gibFenster().loescheAlles();
+        img(0,0,700,300,1);
         haf=true;
         kas=false;
         shp=false;
@@ -117,7 +161,7 @@ public class OBJBILDSCHIRM
             hakenhf();
         }
     }
-    
+
     public void navi() {
         nav=true;
         hpt=false;
@@ -145,11 +189,11 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneText("Entferne Anzeige",61,155);
         ZEICHENFENSTER.gibFenster().zeichneText("Exit",61,175);
     }
-    
+
     public void esc() {
         //fertig machen
     }
-    
+
     public void haken() {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(112,70,3,3,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(113,71,3,3,2);
@@ -165,7 +209,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().fuelleRechteck(123,67,3,3,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(124,66,3,3,2);
     }
-    
+
     public void hakenhf() {
         ZEICHENFENSTER.gibFenster().fuelleRechteck(132,70,3,3,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(133,71,3,3,2);
@@ -181,7 +225,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().fuelleRechteck(138,67,3,3,2);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(139,66,3,3,2);
     }
-    
+
     public void quest() {
         kaserne=true;
     }

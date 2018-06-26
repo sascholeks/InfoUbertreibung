@@ -3,6 +3,7 @@ import java.util.Random;
 public class GRAFIKELEMENTE
 {
     GRAFIKWELT weltgr;
+    OBJBILDSCHIRM obj;
     int ra = 10; //Verschiebung nach rechts
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
@@ -10,6 +11,7 @@ public class GRAFIKELEMENTE
     {
         weltgr= new GRAFIKWELT();
         r=new Random();
+        obj = new OBJBILDSCHIRM();
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten
@@ -27,14 +29,31 @@ public class GRAFIKELEMENTE
 
     public void spielfeld() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
+        img();
         kampffeld();
         kampfreihenfolge();
         zeichneaktionswahl();
     }
 
+    public void img()
+    {
+        switch(r.nextInt(3)) {
+            case 0:
+            obj.img(0,0,700,300,3);
+            break;
+            case 1:
+            obj.img(0,0,700,300,4);
+            break;
+            case 2:
+            obj.img(0,0,700,300,5);
+            break;
+        }  
+    }
+    
     public void kampffeld() {
         for(int a=0;a<5;a++) {
             for(int b=0;b<5;b++) {
+                ZEICHENFENSTER.gibFenster().fuelleRechteck(x[a],y[b],50,50,11);
                 ZEICHENFENSTER.gibFenster().zeichneRechteck(x[a],y[b],50,50);
             }
         }
@@ -52,7 +71,7 @@ public class GRAFIKELEMENTE
     }
 
     public void zeichneaktionswahl() {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(400,50,200,80,8);
+        //ZEICHENFENSTER.gibFenster().fuelleRechteck(400,50,200,80,8);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,70,13);
         ZEICHENFENSTER.gibFenster().fuelleKreis(500,100,65,14);
         ZEICHENFENSTER.gibFenster().fuelleKreis(450,100,20,6);
