@@ -42,14 +42,14 @@ public class KAMPF {
         hlp=0;
         obj = new OBJBILDSCHIRM();
 
-        t1 = new Timer(500, new ActionListener() {
+        t1 = new Timer(200, new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     decideOrder();
                     t1.stop();
                 }    
             });
 
-        t2 = new Timer(500, new ActionListener() {
+        t2 = new Timer(200, new ActionListener() {
                 public void actionPerformed(ActionEvent evt) {
                     decideOrder();
                     beendezug();
@@ -509,7 +509,7 @@ public class KAMPF {
         alg.updateOrder(reihenfolge);
         for(int i=0;i<25;i++) {
             if(welt[i]==reihenfolge[0]) {
-                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=4 und <10
+                if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=5 und <10
                     pos = i;
                 } else {
                     grafik.kons("Error: Die KI ist nicht am Zug!");
@@ -524,7 +524,7 @@ public class KAMPF {
         } else if(pos == -2) {
             grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
-            grafik.kons("Error: KI decide error!");
+            beendezug();
         }
     }
 }

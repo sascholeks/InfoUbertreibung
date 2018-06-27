@@ -360,84 +360,90 @@ public class ALGORITHM
         int cSC=0;
         int EnemyStrCom = 0;
         int EnemyPos = 0;
-        if(getType()>=10) {
-            // graphic.kons("Error: Please select an Entity!");
-        } else if(getType()==5) { //muss zu 5 geändert werden
-            boolean moveback = false;
-            for(int i=0;i<25;i++) {
-                if(getAttackPos(pos)[i]==1 && welt[i] != 0) { //5 muss zu 0 geändert werden
-                    moveback = true;
-                }
-            }
-            if(moveback) {
-                moveaway();
-            } else {
+        if(anz[pos]==0) {
+            setActionType(2);
+            setActionPos(pos);
+        } else 
+        {
+            if(getType()>=10) {
+                // graphic.kons("Error: Please select an Entity!");
+            } else if(getType()==5) { //muss zu 5 geändert werden
+                boolean moveback = false;
                 for(int i=0;i<25;i++) {
-                    if(getenemyStr()[i]>EnemyStrCom) {
-                        EnemyStrCom = getenemyStr()[i];
-                        EnemyPos = i;
+                    if(getAttackPos(pos)[i]==1 && welt[i] != 0) { //5 muss zu 0 geändert werden
+                        moveback = true;
                     }
                 }
-                attackpos(EnemyPos);
-            }
-        } else {
-            for(int i=0;i<25;i++) {
-                if(checkEnemy()[i]==1) {
-                    cE++;
-                }
-            }
-            if(cE==0) {
-                for(int i=0;i<25;i++) {
-                    if(getPath()[i]==1) {
-                        cP++;
-                    }
-                }
-                if(cP!=0) {
-                    movenormal();
+                if(moveback) {
+                    moveaway();
                 } else {
-                    stop(); //attack strongest
+                    for(int i=0;i<25;i++) {
+                        if(getenemyStr()[i]>EnemyStrCom) {
+                            EnemyStrCom = getenemyStr()[i];
+                            EnemyPos = i;
+                        }
+                    }
+                    attackpos(EnemyPos);
                 }
             } else {
                 for(int i=0;i<25;i++) {
-                    if(getStrengthCom()[i]==1) {
-                        cSC++;
+                    if(checkEnemy()[i]==1) {
+                        cE++;
                     }
-                } 
-                if(cSC==0) {
-                    cP = 0;
+                }
+                if(cE==0) {
                     for(int i=0;i<25;i++) {
                         if(getPath()[i]==1) {
                             cP++;
                         }
                     }
                     if(cP!=0) {
-                        boolean check = false;
-                        int attackposition = 0;
-                        for(int i=0;i<25;i++) {
-                            if(getRange(pos)[i]==1 && welt[i] == 0) { //muss zu 0 geändert werden
-                                if(getSaveDeath(pos)==0) {
-                                    check = true;
-                                    attackposition = i;
-                                }
-                            }
-                        }
-                        if(check) {
-                            attackpos(attackposition);
-                        } else {
-                            moveaway();
-                        }
+                        movenormal();
                     } else {
-                        stop(); //heilen überprüfen
+                        stop(); //attack strongest
                     }
                 } else {
-                    int EnPos = 0;
-                    int EnStr = 0;
                     for(int i=0;i<25;i++) {
-                        if(checkEnemy()[i]==1 && getStrength(i) >= EnStr) {
-                            EnPos = i;
+                        if(getStrengthCom()[i]==1) {
+                            cSC++;
                         }
+                    } 
+                    if(cSC==0) {
+                        cP = 0;
+                        for(int i=0;i<25;i++) {
+                            if(getPath()[i]==1) {
+                                cP++;
+                            }
+                        }
+                        if(cP!=0) {
+                            boolean check = false;
+                            int attackposition = 0;
+                            for(int i=0;i<25;i++) {
+                                if(getRange(pos)[i]==1 && welt[i] == 0) { //muss zu 0 geändert werden
+                                    if(getSaveDeath(pos)==0) {
+                                        check = true;
+                                        attackposition = i;
+                                    }
+                                }
+                            }
+                            if(check) {
+                                attackpos(attackposition);
+                            } else {
+                                moveaway();
+                            }
+                        } else {
+                            stop(); //heilen überprüfen
+                        }
+                    } else {
+                        int EnPos = 0;
+                        int EnStr = 0;
+                        for(int i=0;i<25;i++) {
+                            if(checkEnemy()[i]==1 && getStrength(i) >= EnStr) {
+                                EnPos = i;
+                            }
+                        }
+                        attackpos(EnPos);
                     }
-                    attackpos(EnPos);
                 }
             }
         }

@@ -7,6 +7,7 @@ public class GRAFIKELEMENTE
     int ra = 10; //Verschiebung nach rechts
     int[] x,y;    //kordinaten der einzelnen [felder](geteilt-/=y & %=x)
     Random r;
+    int ID;
     public GRAFIKELEMENTE()
     {
         weltgr= new GRAFIKWELT();
@@ -15,7 +16,7 @@ public class GRAFIKELEMENTE
         x=new int [5];
         y=new int [5];
         int xyp=20;              //anfangskordinaten
-
+        ID = r.nextInt(3);
         for(int a=0;a<5;a++) {
             x[a]=xyp;
             y[a]=xyp;
@@ -29,15 +30,15 @@ public class GRAFIKELEMENTE
 
     public void spielfeld() {
         ZEICHENFENSTER.gibFenster().loescheAlles();
-        img();
+        img(ID);
         kampffeld();
         kampfreihenfolge();
         zeichneaktionswahl();
     }
 
-    public void img()
+    public void img(int ID)
     {
-        switch(r.nextInt(3)) {
+        switch(ID) {
             case 0:
             obj.img(0,0,700,300,3);
             break;
