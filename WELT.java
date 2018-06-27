@@ -3,15 +3,11 @@ import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
 import java.util.Timer;
-
-
-public class WELT implements MouseListener
+public class WELT implements MouseListener 
 {
-    
-    
     GRAFIKGGENERIERUNG grafikgen;
     private ZEICHENFENSTER f;
-    //SOUNDMUSIKwelt musik;
+    MUSIK musik;
     SOUNDAUSWAHL soundausw;
     GRAFIKWELT grafik;
     ALGOGR algsw;
@@ -23,20 +19,18 @@ public class WELT implements MouseListener
     Timer t;
     int[] welt,ansicht;
     int[] gegnerpos,hp11;
-    boolean[] quest;
+    boolean[] quest,besuchtapfel;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true;;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter,anzap=10;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true,hp21=false;
     boolean ignor=false,boot=false;
     double schwerfaktor=1;
     String ort1,ort2;
-    boolean cookie = false;
     public WELT() {
-        
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafikgen=new GRAFIKGGENERIERUNG();
-        //musik=new SOUNDMUSIKwelt();
+        musik=new MUSIK();
         soundausw=new SOUNDAUSWAHL();
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
@@ -48,6 +42,7 @@ public class WELT implements MouseListener
         welt=new int[250000]; 
         ansicht=new int[49]; 
         gegnerpos=new int[250000];
+        besuchtapfel=new boolean[250000];
         t = new Timer();
         for(int a=0;a<250000;a++) {
             gegnerpos[a]=101;
@@ -71,7 +66,7 @@ public class WELT implements MouseListener
         bewegungssperre=false;
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
         quest=new boolean[100];
-        //musik.play();
+        musik.spiele();
     }
 
     public void bewegen(int richtung) {
@@ -147,7 +142,7 @@ public class WELT implements MouseListener
                 kampf.aktionssperre=false;
                 kampf.kampf(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor,kampfton);
                 hp16=true;
-                //musik.stop();
+                musik.stop();
             }
             if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
                 grafik.loeschekons();
@@ -169,9 +164,23 @@ public class WELT implements MouseListener
                 bewegungssperre=true;
                 mausfreigabe=true;
                 objschirm.hafen(quest[2]);
+                hafx=aktpos%500;
+                hafy=aktpos/500;
             }else if(welt[aktpos]==27 && objschirm.kaserne==false) {
                 grafik.kons("Du darfst hier noch nicht rein!");
                 grafik.kons("Gehe zur Hauptstadt nach X: "+getpos(26)%500+" Y: "+getpos(26)/500);
+            }else if(welt[aktpos]==41) {                    //kontrolle dorf
+                grafik.loeschekons();
+                objschirm.dorf();
+                bewegungssperre=true;
+                mausfreigabe=true;
+                drfx=aktpos%500;
+                drfy=aktpos/500;
+            }
+            if(hp21==true && besuchtapfel[aktpos]==false && (welt[aktpos]==3 || welt[aktpos]==5 ||welt[aktpos]==11)) {
+                besuchtapfel[aktpos]=true;
+                inv.gesap++;
+                grafik.kons("+1 Apfel");
             }
             if(kontrolleweg==true) {
                 if(welt[aktpos]<26 || welt[aktpos]>39) {
@@ -205,10 +214,10 @@ public class WELT implements MouseListener
             kampf.aktionssperre=true;
             if(ton==true) {
                 if(ton==true) {
-                    //musik.play();
+                    musik.spiele();
                 }
             }
-        }
+        } 
         if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107 && mausfreigabe==true) {          //fld1
             if(objschirm.hpt==true) {
                 objschirm.kaserne=true;
@@ -279,6 +288,21 @@ public class WELT implements MouseListener
                         grafik.kons("nicht genug Geld");
                     }
                 }
+            }else if(objschirm.drf==true) {
+                if(hp21==false) {
+                    grafik.kons("Bringe "+anzap+" Äpfel");
+                    hp21=true;
+                }else if(hp21==true) {
+                    if(inv.gesap>=anzap) {  
+                        grafik.kons("Quest abgeschlossen");
+                        inv.geld=inv.geld+anzap*15;
+                        inv.gesap=inv.gesap-anzap;
+                        hp21=false;
+                        anzap=(int)(anzap*schwerfaktor*1.2);
+                    }else {
+                        grafik.kons("Es fehlen noch "+(anzap-inv.gesap)+ "Äpfel");
+                    }
+                }
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
@@ -293,6 +317,9 @@ public class WELT implements MouseListener
             }else if(objschirm.haf==true) {
                 hp13=2;
                 objschirm.shop();
+            }else if(objschirm.drf==true) {
+                hp13=3;
+                objschirm.shop();
             }else if(objschirm.nav==true) {
                 hp14=0;
                 ort1=(getpos(27)%500)+" : "+(getpos(27)/500);
@@ -301,20 +328,34 @@ public class WELT implements MouseListener
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
-            if(objschirm.hpt==true || objschirm.kas==true || objschirm.haf==true) {
+            if(objschirm.hpt==true || objschirm.kas==true || objschirm.haf==true || objschirm.drf==true) {
                 bewegungssperre=false;
                 objschirm.hpt=false;
                 ZEICHENFENSTER.gibFenster().loescheAlles();
                 grafik.zeichnerahmen();
                 zeichneansicht();
                 mausfreigabe=false;
+                objschirm.hpt=false;
+                objschirm.kas=false;
+                objschirm.haf=false;
+                objschirm.drf=false;
             }else if(objschirm.shp==true) {
                 inv.kaufetruppen(2);
+            }else if(objschirm.nav==true) {
+                hp14=0;
+                ort1=(hafx+" : "+hafy);
+                ort2="Hafen";
+                grafik.ortsanzeige(ort1,ort2);
             }
             soundausw.play();
         }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167 && mausfreigabe==true) {  //fld4
             if(objschirm.shp==true) {
                 inv.kaufetruppen(3);
+            }else if(objschirm.nav==true) {
+                hp14=0;
+                ort1=(drfx+" : "+drfy);
+                ort2="Dorf";
+                grafik.ortsanzeige(ort1,ort2);
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187 && mausfreigabe==true) {  //fld5
@@ -322,8 +363,7 @@ public class WELT implements MouseListener
                 inv.kaufetruppen(4);
             }else if(objschirm.nav==true) {
                 hp14=1;
-                grafik.loescheort();
-
+                grafik.loescheort();    
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
@@ -333,6 +373,8 @@ public class WELT implements MouseListener
                 objschirm.kaserne(quest[1]);
             }else if(objschirm.shp==true && hp13==2) {
                 objschirm.hafen(quest[2]);
+            }else if(objschirm.shp==true && hp13==3) {
+                objschirm.dorf();
             }else if(objschirm.nav==true) {
                 bewegungssperre=false;
                 objschirm.nav=false;
@@ -469,7 +511,18 @@ public class WELT implements MouseListener
         for(int a=0;a<49;a++) {         //sicherstellen des spwan auf land/insel
             do {
                 welt[bildpos+a%7+a/7*500]=r.nextInt(25);
-            }while(welt[bildpos+a%7+a/7*500]==6);
+            }while(welt[bildpos+a%7+a/7*500]==6); 
+            welt[bildpos-9996]=r.nextInt(25);
+            welt[bildpos-496]=r.nextInt(25);
+            welt[bildpos-500]=r.nextInt(25);
+            welt[bildpos-501]=r.nextInt(25);
+            welt[bildpos-502]=r.nextInt(25);
+            welt[bildpos+2001]=r.nextInt(25);
+            welt[bildpos+2002]=r.nextInt(25);
+            welt[bildpos+2003]=r.nextInt(25);
+            welt[bildpos+2004]=r.nextInt(25);
+            welt[bildpos+1504]=r.nextInt(25);
+            welt[bildpos+4]=r.nextInt(25);
             grafikgen.ph2xSee();
         }
         for(int a=0;a<500;a++) {   //randzuweisung  
@@ -481,10 +534,10 @@ public class WELT implements MouseListener
         grafikgen.ph2xRand();
         //Ph.3
         grafikgen.ph3xHafen();
-        for(int a=0;a<(hp19*2);a++) {   //generierung hafen
+        for(int a=0;a<((int)hp19*1.4);a++) {   //generierung hafen
             do {
                 hp20=r.nextInt(248997)+501;
-            }while(((welt[hp20-1]==6 && welt[hp20-500]==6 && welt[hp2+1]==6 && welt[hp20+500]==6) || (welt[hp20-1]!=6 && welt[hp20-500]!=6 && welt[hp2+1]!=6 && welt[hp20+500]!=6)));
+            }while(((welt[hp20-1]==6 && welt[hp20-500]==6 && welt[hp2+1]==6 && welt[hp20+500]==6) || (welt[hp20-1]!=6 && welt[hp20-500]!=6 && welt[hp2+1]!=6 && welt[hp20+500]!=6)) || (welt[hp20-1]==42 ||welt[hp20-500]==42 || welt[hp20+1]==42 || welt[hp20+500]==42));
             welt[hp20]=42;
         }  
         grafikgen.ph3();
@@ -494,7 +547,7 @@ public class WELT implements MouseListener
         }while((genwelthelp3%500+(genwelthelp%7))+(genwelthelp/500+(genwelthelp/7))*500==aktpos);
         do {
             genwelthelp2=r.nextInt(7)*7+r.nextInt(7);
-        }while(welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500]>25);                                               
+        }while(welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-500]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+500]>25);                                               
         algsw.eingabestartziel(genwelthelp,genwelthelp2);
         grafikgen.ph3xhpt();
         grafikgen.ph3xKaserne();
@@ -565,6 +618,12 @@ public class WELT implements MouseListener
         grafikgen.ph3xDungeon();
         welt[genwelthelp%7+(genwelthelp/7)*500+genwelthelp3]=26;
         welt[genwelthelp2%7+(genwelthelp2/7)*500+genwelthelp3]=27;  
+        for(int a=0;a<3000;a++) {       //generierung dörfer
+            do {
+                hp15=r.nextInt(250000);
+            }while(welt[hp15]>24);
+            welt[hp15]=41;
+        }
         for(int a=0;a<10000;a++) {                                        //generierung von 10000 gegnern 
             do {
                 genhelpkampf=r.nextInt(250000);
@@ -630,7 +689,7 @@ public class WELT implements MouseListener
         if(hp14==0) {
             grafik.ortsanzeige(ort1,ort2);
         }
-        ZEICHENFENSTER.gibFenster().zeichneText("V Alpha 1.0",630,298);
+        ZEICHENFENSTER.gibFenster().zeichneText("V Alpha 1.4",630,298);
     }
 
     public void berechneansicht() {      //inhalt wird von welt[] in ansicht[] überschrieben
@@ -657,8 +716,6 @@ public class WELT implements MouseListener
         xzerbew=(aktpos%500);
         yzerbew=aktpos/500;
     }
-    
-    
 
     public void kontrollerand() {
         zerteileansicht();
@@ -699,19 +756,19 @@ public class WELT implements MouseListener
 
     public void tonaus() {
         ton=false;
-        //musik.stop();
+        musik.stop();
         kampfton=false;
-        //kampf.kampf.musik.stop();
+        kampf.kampf.musik.stop();
     }
 
     public void tonan() {
         ton=true;
-        //musik.play();
+        musik.spiele();
         kampfton=true;        
     }
 
     public void tonweltaus() {
-        //musik.stop();
+        musik.stop();
         ton=false;
     }
 
@@ -721,7 +778,7 @@ public class WELT implements MouseListener
 
     public void tonkampfaus() {
         kampfton=false;
-        //kampf.kampf.musik.stop();
+        kampf.kampf.musik.stop();
     }
 
     public void mousePressed(MouseEvent e) 

@@ -4,7 +4,7 @@ import java.awt.event.*;
 public class TASTATUR implements KeyListener
 {
     private JFrame f;
-    WELT welt;
+    WELT welt; 
     boolean help=false,kom=false;
     int eingabe,hlp;
     public TASTATUR() {
@@ -38,10 +38,46 @@ public class TASTATUR implements KeyListener
         }else if (e.getKeyCode() == 10 && welt.bewegungssperre==false) {     //enter
             welt.zeichneansicht();
         }else if(e.getKeyCode() == 27) {                                     //esc
-            
-        }//else if(welt.kampf.sieg==true && welt.bewegungssperre==true) {
-           // welt.bewegungssperre=false;
-        //}
+            if(help==true) {
+                help=false;
+                welt.zeichneansicht();
+            }else if(welt.objschirm.hpt==true || welt.objschirm.kas==true || welt.objschirm.haf==true || welt.objschirm.drf==true) {
+                welt.bewegungssperre=false;
+                welt.objschirm.hpt=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                welt.grafik.zeichnerahmen();
+                welt.zeichneansicht();
+                welt.mausfreigabe=false;
+                welt.objschirm.hpt=false;
+                welt.objschirm.kas=false;
+                welt.objschirm.haf=false;
+                welt.objschirm.drf=false;
+                welt.soundausw.play();
+            }    
+            if(welt.objschirm.shp==true && welt.hp13==0) {
+                welt.objschirm.hauptstadt(welt.quest[0]);
+            }else if(welt.objschirm.shp==true && welt.hp13==1) {
+                welt.objschirm.kaserne(welt.quest[1]);
+            }else if(welt.objschirm.shp==true && welt.hp13==2) {
+                welt.objschirm.hafen(welt.quest[2]);
+            }else if(welt.objschirm.shp==true && welt.hp13==3) {
+                welt.objschirm.dorf();
+            }else if(welt.objschirm.nav==true) {
+                welt.bewegungssperre=false;
+                welt.objschirm.nav=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                welt.grafik.zeichnerahmen();
+                welt.zeichneansicht();
+                welt.mausfreigabe=false;
+            }else {
+                welt.grafik.loeschekons();
+                welt.bewegungssperre=true;
+                welt.mausfreigabe=true;
+                welt.objschirm.esc();
+                
+            }
+            welt.soundausw.play();
+        }
         
         //kommands
         if(e.getKeyCode() == 130) {
@@ -166,6 +202,7 @@ public class TASTATUR implements KeyListener
                case 38:
                     welt.zeichneansicht();
                     welt.hp16=false;
+                    welt.kampf.aktionssperre=false;
                     welt.grafik.cheat("Exit Screen");
                     break;
                case 96:

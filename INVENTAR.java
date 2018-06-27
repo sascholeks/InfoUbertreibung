@@ -5,7 +5,7 @@ public class INVENTAR
     int[] ausanz;
     int[] kaeauswahl;
     int[] anzauswahl;   //siehe unten
-    int heiltrankkl=0,heiltrankgr=0,geld;
+    int heiltrankkl=0,heiltrankgr=0,geld,gesap;
     public INVENTAR()
     {
         grafik=new GRAFIKWELT();
@@ -71,13 +71,21 @@ public class INVENTAR
     }
     
     public void zeichnegeld() {
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(400,150,100,20,12);
-        ZEICHENFENSTER.gibFenster().zeichneText("Geld: "+geld,405,165);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(255,145,100,20,12);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(255,145,100,20);
+        ZEICHENFENSTER.gibFenster().zeichneText("Geld: "+geld,260,160);
     }
     
     public void inventar() {
         grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4]);   
-        zeichnegeld();
+        zeichnegeld();  
+        zeichneäpfel();
+    }
+    
+    public void zeichneäpfel() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(255,115,100,20,12);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(255,115,100,20);
+        ZEICHENFENSTER.gibFenster().zeichneText("Äpfel: "+gesap,260,130);
     }
     
     public void waehlekaempferaus(int typ,int anza,int platz){

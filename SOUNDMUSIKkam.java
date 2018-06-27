@@ -7,7 +7,7 @@ public class SOUNDMUSIKkam
     {
         try 
         {
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("warmusik.wav"));  //hier .wav datei einfügen
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new File("kampfmusik.wav"));  
             AudioFormat format = ais.getFormat();
             DataLine.Info info = new DataLine.Info(Clip.class, format, ((int) ais.getFrameLength() * format.getFrameSize()));
             clip = (Clip) AudioSystem.getLine(info);
@@ -22,7 +22,7 @@ public class SOUNDMUSIKkam
     }
     
     public void play() 
-    {                   //ca. 27min
+    {                   
         clip.start();
         clip.loop(222);
     }

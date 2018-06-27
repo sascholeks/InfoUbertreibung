@@ -10,7 +10,7 @@ public class KAMPF {
     ALGORITHM alg;
     Timer t1,t2;
     OBJBILDSCHIRM obj;
-    //SOUNDMUSIKkam musik;
+    SOUNDMUSIKkam musik;
     int[] welt,reihenfolge,kepos,verlorenanz; 
     double[] leben,startlf;
     boolean[] tod;
@@ -21,7 +21,7 @@ public class KAMPF {
     int anz;
 
     public KAMPF() {
-        //musik=new SOUNDMUSIKkam();
+        musik=new SOUNDMUSIKkam();
         schwertkampf=new SOUNDSCHWERTSCHLAG();
         arrow=new SOUNDARROW();
         r=new Random();
@@ -110,12 +110,10 @@ public class KAMPF {
                 welt[a]=10;
                 kepos[a]=25;
             }
-        }
-        
+        }     
         zeichneansicht();
-
         if(ton==true) {
-            //musik.play();
+            musik.play();
         }
     }
 
@@ -407,7 +405,7 @@ public class KAMPF {
     }
 
     public void kontrollesieg() {
-        //musik.stop();
+        musik.stop();
         if(tod[0]==true && tod[1]==true && tod[2]==true && tod[3]==true && tod[4]==true) {
             grafik.kons("Verloren");
             try {

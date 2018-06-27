@@ -34,14 +34,6 @@ public class GRAFIKWELT
 
     public void kons(String st) { 
         if(i>=1) {   
-            int y=0;
-            while(y!=30) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265-y,400,20,33);
-                ZEICHENFENSTER.gibFenster().zeichneRechteck(290,265-y,400,20);
-                ZEICHENFENSTER.gibFenster().zeichneText(str2,295,280-y);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,283-y,401,20,8);
-                y=y+3;
-            }
             kons2(str2);
         }
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,265,400,20,11);
@@ -60,15 +52,7 @@ public class GRAFIKWELT
     }
 
     public void kons2(String str2) {  
-        if(i>=2) {  
-            int y=0;
-            while(y!=30) {
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,235-y,400,20,33);
-                ZEICHENFENSTER.gibFenster().zeichneRechteck(290,235-y,400,20);
-                ZEICHENFENSTER.gibFenster().zeichneText(str2,295,250-y);
-                ZEICHENFENSTER.gibFenster().fuelleRechteck(290,253-y,401,20,8);
-                y=y+3;
-            }            
+        if(i>=2) {       
             kons3(str3);
         }
         ZEICHENFENSTER.gibFenster().fuelleRechteck(290,235,400,20,33);
