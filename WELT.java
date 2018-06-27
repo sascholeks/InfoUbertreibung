@@ -24,7 +24,7 @@ public class WELT implements MouseListener
     int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy;
     int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter,anzap=10;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true,hp21=false;
-    boolean ignor=false,boot=false;
+    boolean ignor=false,boot=false,opttonan=true;
     double schwerfaktor=1;
     String ort1,ort2;
     public WELT() {
@@ -303,6 +303,25 @@ public class WELT implements MouseListener
                         grafik.kons("Es fehlen noch "+(anzap-inv.gesap)+ "Äpfel");
                     }
                 }
+            }else if(objschirm.esc==true) {
+                bewegungssperre=false;
+                objschirm.hpt=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                grafik.zeichnerahmen();
+                zeichneansicht();
+                mausfreigabe=false;
+                objschirm.esc=false;
+                objschirm.opt=false;
+            }else if(objschirm.opt==true) {
+                if(opttonan==true) {
+                    tonaus();
+                    opttonan=false;
+                    objschirm.optionen(opttonan);
+                }else if(opttonan==false) {
+                    tonan();
+                    opttonan=true;
+                    objschirm.optionen(opttonan);
+                }
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
@@ -325,6 +344,8 @@ public class WELT implements MouseListener
                 ort1=(getpos(27)%500)+" : "+(getpos(27)/500);
                 ort2="Kaserne";
                 grafik.ortsanzeige(ort1,ort2);
+            }else if(objschirm.esc==true) {
+                objschirm.optionen(opttonan);
             }
             soundausw.play();
         }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
@@ -346,6 +367,8 @@ public class WELT implements MouseListener
                 ort1=(hafx+" : "+hafy);
                 ort2="Hafen";
                 grafik.ortsanzeige(ort1,ort2);
+            }else if(objschirm.esc==true) {
+                System.exit(0);
             }
             soundausw.play();
         }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167 && mausfreigabe==true) {  //fld4
@@ -382,6 +405,8 @@ public class WELT implements MouseListener
                 grafik.zeichnerahmen();
                 zeichneansicht();
                 mausfreigabe=false;
+            }else if(objschirm.opt==true) {
+                objschirm.esc();
             }
             soundausw.play();
         }

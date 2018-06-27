@@ -69,6 +69,8 @@ public class TASTATUR implements KeyListener
                 welt.grafik.zeichnerahmen();
                 welt.zeichneansicht();
                 welt.mausfreigabe=false;
+            }else if(welt.objschirm.opt==true) {
+                welt.objschirm.esc();
             }else {
                 welt.grafik.loeschekons();
                 welt.bewegungssperre=true;

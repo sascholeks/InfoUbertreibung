@@ -6,7 +6,7 @@ import java.io.*;
 public class OBJBILDSCHIRM 
 {
     int[] anz,ausanz,kaeauswahl,anzauswahl;
-    boolean freigabe,hpt,shp,kas,kaserne,nav,haf,drf,esc,opt;
+    boolean freigabe,hpt,shp,kas,kaserne,nav,haf,drf,esc,opt,tonan;
     BufferedImage img;
     Graphics g;
     JFrame fr;
@@ -238,8 +238,7 @@ public class OBJBILDSCHIRM
         haf=false;
         drf=false;
         opt=false;
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(50,55,168,132,7);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(50,55,168,132);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,1000,500,7);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
@@ -251,7 +250,7 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneText("Verlassen",61,115);
     }
     
-    public void optionen() {
+    public void optionen(boolean tonan) {
         opt=true;
         nav=false;
         hpt=false;
@@ -261,7 +260,6 @@ public class OBJBILDSCHIRM
         drf=false;
         esc=false;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,1000,500,7);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
@@ -273,7 +271,11 @@ public class OBJBILDSCHIRM
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,144,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,164,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,164,150,13);
-        ZEICHENFENSTER.gibFenster().zeichneText("Ton aus",61,75);
+        if(tonan==true) {
+            ZEICHENFENSTER.gibFenster().zeichneText("Ton aus",61,75);
+        }else {
+            ZEICHENFENSTER.gibFenster().zeichneText("Ton an",61,75);
+        }
         ZEICHENFENSTER.gibFenster().zeichneText("--",61,95);
         ZEICHENFENSTER.gibFenster().zeichneText("--",61,115);
         ZEICHENFENSTER.gibFenster().zeichneText("--",61,135);
