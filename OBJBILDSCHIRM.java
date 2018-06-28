@@ -260,7 +260,8 @@ public class OBJBILDSCHIRM
         drf=false;
         esc=false;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,1000,500,7);
-        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,84,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,104,150,13,16);

@@ -21,9 +21,9 @@ public class WELT implements MouseListener
     int[] gegnerpos,hp11;
     boolean[] quest,besuchtapfel;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy;
-    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter,anzap=10;
-    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=false,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true,hp21=false;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy,weltwertvorher;
+    int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter,anzap=10,bewegterichtung;
+    boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=true,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true,hp21=false;
     boolean ignor=false,boot=false,opttonan=true;
     double schwerfaktor=1;
     String ort1,ort2;
@@ -88,6 +88,7 @@ public class WELT implements MouseListener
             }
             anzr=false;
             bewr=false;
+            bewegterichtung=0;
             break;
             case 1:
             if(welt[aktpos-500]==6 && boot==false) {
@@ -103,6 +104,7 @@ public class WELT implements MouseListener
             }
             anzu=false;
             bewu=false;
+            bewegterichtung=1;
             break;
             case 2:
             if(welt[aktpos+1]==6 && boot==false) {
@@ -118,6 +120,7 @@ public class WELT implements MouseListener
             }
             anzl=false;
             bewl=false;
+            bewegterichtung=2;
             break;
             case 3:
             if(welt[aktpos+500]==6 && boot==false) {
@@ -133,17 +136,11 @@ public class WELT implements MouseListener
             }
             anzo=false;
             bewo=false;
+            bewegterichtung=3;
             break;
         } 
         zeichneansicht();
         if(ignor==false) {
-            if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
-                bewegungssperre=true;
-                kampf.aktionssperre=false;
-                kampf.kampf(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor,kampfton);
-                hp16=true;
-                musik.stop();
-            }
             if(welt[aktpos]==26) {                                //ab hier kontrolle obj     //kontrolle  hptst
                 grafik.loeschekons();
                 bewegungssperre=true;
@@ -183,8 +180,8 @@ public class WELT implements MouseListener
                 grafik.kons("+1 Apfel");
             }
             if(kontrolleweg==true) {
-                if(welt[aktpos]<26 || welt[aktpos]>39) {
-                    if(help4==2) {
+                if((((welt[aktpos]==34 || welt[aktpos]==35 || welt[aktpos]==36) && bewegterichtung!=0) || ((welt[aktpos]==37 || welt[aktpos]==38 || welt[aktpos]==39) && bewegterichtung!=1) || ((welt[aktpos]==28|| welt[aktpos]==29 || welt[aktpos]==30) && bewegterichtung!=2) || ((welt[aktpos]==31 || welt[aktpos]==32 || welt[aktpos]==33) && bewegterichtung!=3)) || (welt[aktpos]<26 || welt[aktpos]>39)) {
+                    if(help4==1) {
                         grafik.kons("Quest abgebrochen");
                         help4=0;
                         objschirm.kaserne=false;
@@ -197,7 +194,15 @@ public class WELT implements MouseListener
                     }
                 }
             }
+            if(gegnerpos[aktpos]==100) {  //kontrolle gegner   
+                bewegungssperre=true;
+                kampf.aktionssperre=false;
+                kampf.kampf(inv.anz[0],inv.anz[1],inv.anz[2],inv.anz[3],inv.anz[4],(int)((r.nextInt(300)+20)*schwerfaktor),(int)((r.nextInt(100)+30)*schwerfaktor),(int)((r.nextInt(20)+50)*schwerfaktor),(int)((r.nextInt(50)+20)*schwerfaktor),(int)((r.nextInt(20)+25)*schwerfaktor),inv.heiltrankkl,inv.heiltrankgr,schwerfaktor,kampfton);
+                hp16=true;
+                musik.stop();
+            }
         }
+        weltwertvorher=welt[aktpos];  
     }
 
     public void mouseReleased(MouseEvent e) {
@@ -656,6 +661,7 @@ public class WELT implements MouseListener
             gegnerpos[genhelpkampf]=100;
         }
         grafikgen.ph3xGegner();
+        bewegungssperre=false;
     }
 
     public void generierestart() {

@@ -38,22 +38,6 @@ public class TASTATUR implements KeyListener
         }else if (e.getKeyCode() == 10 && welt.bewegungssperre==false) {     //enter
             welt.zeichneansicht();
         }else if(e.getKeyCode() == 27) {                                     //esc
-            if(help==true) {
-                help=false;
-                welt.zeichneansicht();
-            }else if(welt.objschirm.hpt==true || welt.objschirm.kas==true || welt.objschirm.haf==true || welt.objschirm.drf==true) {
-                welt.bewegungssperre=false;
-                welt.objschirm.hpt=false;
-                ZEICHENFENSTER.gibFenster().loescheAlles();
-                welt.grafik.zeichnerahmen();
-                welt.zeichneansicht();
-                welt.mausfreigabe=false;
-                welt.objschirm.hpt=false;
-                welt.objschirm.kas=false;
-                welt.objschirm.haf=false;
-                welt.objschirm.drf=false;
-                welt.soundausw.play();
-            }    
             if(welt.objschirm.shp==true && welt.hp13==0) {
                 welt.objschirm.hauptstadt(welt.quest[0]);
             }else if(welt.objschirm.shp==true && welt.hp13==1) {
@@ -71,12 +55,35 @@ public class TASTATUR implements KeyListener
                 welt.mausfreigabe=false;
             }else if(welt.objschirm.opt==true) {
                 welt.objschirm.esc();
-            }else {
+            }else if(welt.objschirm.esc==true) {
+                welt.bewegungssperre=false;
+                welt.objschirm.hpt=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                welt.grafik.zeichnerahmen();
+                welt.zeichneansicht();
+                welt.mausfreigabe=false;
+                welt.objschirm.esc=false;
+                welt.objschirm.opt=false;
+            }else if(help==true) {  //i
+                help=false;
+                welt.zeichneansicht();
+            }else if(welt.objschirm.hpt==true || welt.objschirm.kas==true || welt.objschirm.haf==true || welt.objschirm.drf==true) {
+                welt.bewegungssperre=false;
+                welt.objschirm.hpt=false;
+                ZEICHENFENSTER.gibFenster().loescheAlles();
+                welt.grafik.zeichnerahmen();
+                welt.zeichneansicht();
+                welt.mausfreigabe=false;
+                welt.objschirm.hpt=false;
+                welt.objschirm.kas=false;
+                welt.objschirm.haf=false;
+                welt.objschirm.drf=false;
+                welt.soundausw.play();    
+             }else {
                 welt.grafik.loeschekons();
                 welt.bewegungssperre=true;
                 welt.mausfreigabe=true;
                 welt.objschirm.esc();
-                
             }
             welt.soundausw.play();
         }
@@ -209,6 +216,7 @@ public class TASTATUR implements KeyListener
                     break;
                case 96:
                     welt.ignor=true;
+                    welt.kampf.kampf.musik.stop();
                     welt.grafik.cheat("Ignoriere Events");
                     break;
                case 68:

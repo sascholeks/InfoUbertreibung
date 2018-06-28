@@ -49,8 +49,6 @@ Cheats:
         -Du kannst 1000 Wunden heilen        
         
         
-Dev Info: 
- -ton/musik abgeschaltet
     
     
     

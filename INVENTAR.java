@@ -80,6 +80,16 @@ public class INVENTAR
         grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4]);   
         zeichnegeld();  
         zeichneäpfel();
+        zeichnehltr();
+    }
+    
+    public void zeichnehltr() {
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(85,115,150,20,12);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(85,115,150,20);
+        ZEICHENFENSTER.gibFenster().zeichneText("Kleine Heiltränke: "+heiltrankkl,90,130);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(85,145,150,20,12);
+        ZEICHENFENSTER.gibFenster().zeichneRechteck(85,145,150,20);
+        ZEICHENFENSTER.gibFenster().zeichneText("Große Heiltränke: "+heiltrankgr,90,160);
     }
     
     public void zeichneäpfel() {
