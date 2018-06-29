@@ -52,6 +52,12 @@ public class OBJBILDSCHIRM
                 case 6:
                 img = ImageIO.read(new File("kampf.jpg"));
                 break;
+                case 7:
+                img = ImageIO.read(new File("menü.png"));
+                break;
+                case 8:
+                img= ImageIO.read(new File("inventar.png"));
+                break;
                 default:
                 img = ImageIO.read(new File("stadt.png"));
                 break;
@@ -238,7 +244,7 @@ public class OBJBILDSCHIRM
         haf=false;
         drf=false;
         opt=false;
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,1000,500,7);
+        img(0,0,700,300,7);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);
@@ -259,7 +265,7 @@ public class OBJBILDSCHIRM
         haf=false;
         drf=false;
         esc=false;
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(0,0,1000,500,7);
+        img(0,0,700,300,7);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,64,150,13,16);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(59,64,150,13);;
         ZEICHENFENSTER.gibFenster().fuelleRechteck(59,84,150,13,16);

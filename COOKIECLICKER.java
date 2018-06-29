@@ -48,7 +48,7 @@ public class COOKIECLICKER implements MouseListener, KeyListener
         level = 1;
         level2 = 1;
         totattack = attack;
-
+        count = lebentl/totattack;
         j = ZEICHENFENSTER.gibFenster().frame;
         j.addMouseListener(this);
         j.addKeyListener(this);

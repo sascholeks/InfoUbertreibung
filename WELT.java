@@ -15,6 +15,7 @@ public class WELT implements MouseListener
     KAMPFEINGABE kampf;
     ALGOGEGNER alggeg;
     INVENTAR inv;
+    //COOKIECLICKER clicker;
     Random r;
     Timer t;
     int[] welt,ansicht;
@@ -37,6 +38,7 @@ public class WELT implements MouseListener
         objschirm=new OBJBILDSCHIRM();
         alggeg= new ALGOGEGNER();
         kampf=new KAMPFEINGABE();
+        //clicker=new COOKIECLICKER();
         inv=new INVENTAR();
         r=new Random();
         welt=new int[250000]; 
@@ -155,7 +157,15 @@ public class WELT implements MouseListener
                     schwerfaktor=schwerfaktor+0.05;
                 }
             }else if(welt[aktpos]==40) {                                //kontrolle dungeon
-                //ratsel
+                switch(r.nextInt(3)) {
+                    case 0:
+                        //clicker
+                        break;
+                    case 1:
+                        break;
+                    case 2:
+                        break;
+                }
             }else if(welt[aktpos]==42) {                    //kontrolle hafen
                 grafik.loeschekons();
                 bewegungssperre=true;
@@ -668,10 +678,10 @@ public class WELT implements MouseListener
         int genstart1,genstart2;
         do {
             genstart1=r.nextInt(500);
-        }while(genstart1<4 || genstart1>494);
+        }while(genstart1<5 || genstart1>493);
         do {
             genstart2=r.nextInt(500);
-        }while(genstart2<4 || genstart2>494);
+        }while(genstart2<5 || genstart2>493);
         aktpos=genstart2*500+genstart1;
     }
 

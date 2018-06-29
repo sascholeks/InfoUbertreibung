@@ -272,6 +272,12 @@ public class TASTATUR implements KeyListener
                     welt.inv.geld=welt.inv.geld+100000;
                     welt.grafik.cheat("Du bimst Millionär");
                     break;
+               case 94:
+                     for(int a=0;a<250000;a++) {
+                        welt.gegnerpos[a]=0;
+                    }
+                    welt.grafik.cheat("Entferne gegner");
+                    break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 
             }

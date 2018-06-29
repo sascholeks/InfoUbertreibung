@@ -480,7 +480,6 @@ public class GRAFIKWELT
     }
 
     public void zeichneinventar(int anz0,int anz1,int anz2,int anz3,int anz4) {
-        ZEICHENFENSTER.gibFenster().loescheAlles();
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,40,50,50);
         ZEICHENFENSTER.gibFenster().zeichneRechteck(40,90,50,14);
         ZEICHENFENSTER.gibFenster().zeichneText(anz0+"",42,102);

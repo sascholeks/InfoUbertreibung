@@ -1,6 +1,8 @@
+
 public class INVENTAR
 {
     GRAFIKWELT grafik;
+    OBJBILDSCHIRM schirm;
     int[] anz;
     int[] ausanz;
     int[] kaeauswahl;
@@ -9,6 +11,7 @@ public class INVENTAR
     public INVENTAR()
     {
         grafik=new GRAFIKWELT();
+        schirm=new OBJBILDSCHIRM();
         anz=new int[10];
         ausanz=new int[5];
         kaeauswahl=new int[5];
@@ -77,6 +80,8 @@ public class INVENTAR
     }
     
     public void inventar() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
+        schirm.img(0,0,700,300,8);
         grafik.zeichneinventar(anz[0],anz[1],anz[2],anz[3],anz[4]);   
         zeichnegeld();  
         zeichneäpfel();

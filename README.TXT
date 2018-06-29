@@ -35,6 +35,8 @@ Cheats:
         -Erstellt eine neue Welt
     -genkampf
         -Erstellt einen neuen Kampf
+    -clearenemie
+        -Entfernt alle Gegner auf der Welt
     -exit 
         -Du verlässt das aktuelle Menü oder Bildschirm und du kehrst zur Welt zurück
     -nonotice
@@ -46,7 +48,8 @@ Cheats:
     -jesus
         -Lässt dich über Wasser laufen
         -Gibt dir 5000 Anhänger
-        -Du kannst 1000 Wunden heilen        
+        -Du kannst 1000 Wunden heilen  
+        -leider bist du trotzdem arm :(
         
         
     
