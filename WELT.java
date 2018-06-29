@@ -1,23 +1,25 @@
+import java.awt.event.*;
+import javax.swing.*;
 import java.util.Random; 
 import java.awt.event.MouseListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.*;
-import java.util.Timer;
 public class WELT implements MouseListener 
 {
+    Timer timer;
     GRAFIKGGENERIERUNG grafikgen;
     private ZEICHENFENSTER f;
     MUSIK musik;
     SOUNDAUSWAHL soundausw;
     GRAFIKWELT grafik;
     ALGOGR algsw;
+    ALGOGEGNER algge;
     OBJBILDSCHIRM objschirm;
     KAMPFEINGABE kampf;
     ALGOGEGNER alggeg;
     INVENTAR inv;
     //COOKIECLICKER clicker;
     Random r;
-    Timer t;
     int[] welt,ansicht;
     int[] gegnerpos,hp11;
     boolean[] quest,besuchtapfel;
@@ -29,12 +31,19 @@ public class WELT implements MouseListener
     double schwerfaktor=1;
     String ort1,ort2;
     public WELT() {
+        r=new Random();
+        timer = new Timer(2000, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    bewegegegner();
+                }    
+            });
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafikgen=new GRAFIKGGENERIERUNG();
         musik=new MUSIK();
         soundausw=new SOUNDAUSWAHL();
         grafik=new GRAFIKWELT();
         algsw=new ALGOGR();
+        algge=new ALGOGEGNER();
         objschirm=new OBJBILDSCHIRM();
         alggeg= new ALGOGEGNER();
         kampf=new KAMPFEINGABE();
@@ -45,7 +54,6 @@ public class WELT implements MouseListener
         ansicht=new int[49]; 
         gegnerpos=new int[250000];
         besuchtapfel=new boolean[250000];
-        t = new Timer();
         for(int a=0;a<250000;a++) {
             gegnerpos[a]=101;
         }
@@ -743,6 +751,14 @@ public class WELT implements MouseListener
         for(int a=0;a<7;a++) {           //xfelder
             for(int b=0;b<7;b++) {       //yfelder
                 ansicht[a*7+b]=welt[bildpos+a*500+b];
+            }
+        }
+    }
+    
+    public void bewegegegner() {
+        for(int a=0;a<250000;a++) {
+            if(gegnerpos[a]==100) {
+                
             }
         }
     }
