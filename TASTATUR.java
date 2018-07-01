@@ -31,9 +31,11 @@ public class TASTATUR implements KeyListener
             if(help==false) {
                 welt.inventaraufruf();
                 help=true;
+                //welt.zeichner.stop();
             }else {
                 help=false;
                 welt.zeichneansicht();
+                //welt.zeichner.start();
             }
         }else if (e.getKeyCode() == 10 && welt.bewegungssperre==false) {     //enter
             welt.zeichneansicht();
@@ -67,6 +69,7 @@ public class TASTATUR implements KeyListener
             }else if(help==true) {  //i
                 help=false;
                 welt.zeichneansicht();
+                //welt.zeichner.start();
             }else if(welt.objschirm.hpt==true || welt.objschirm.kas==true || welt.objschirm.haf==true || welt.objschirm.drf==true) {
                 welt.bewegungssperre=false;
                 welt.objschirm.hpt=false;
@@ -213,6 +216,7 @@ public class TASTATUR implements KeyListener
                     welt.hp16=false;
                     welt.kampf.aktionssperre=false;
                     welt.grafik.cheat("Exit Screen");
+                    welt.kampf.kampf.musik.stop();
                     break;
                case 96:
                     welt.ignor=true;
@@ -277,6 +281,10 @@ public class TASTATUR implements KeyListener
                         welt.gegnerpos[a]=0;
                     }
                     welt.grafik.cheat("Entferne gegner");
+                    break;
+               case 83:
+                    welt.inv.gesap=welt.inv.gesap+1000;
+                    welt.grafik.cheat("1000 Äpfel erhalten");
                     break;
                default:
                     welt.grafik.cheat("Ungültiger Cheat"); 

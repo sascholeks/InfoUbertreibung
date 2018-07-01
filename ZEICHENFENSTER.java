@@ -536,6 +536,28 @@ public class ZEICHENFENSTER
             return bootbraun;
             case 41: Color dunkelrot2=new Color(148,0,0);
             return dunkelrot2;
+            case 42: Color minigame01=new Color(0,255,255);
+            return minigame01;
+            case 43: Color minigame02=new Color(0,255,155);
+            return minigame02;
+            case 44: Color minigame03=new Color(0,255,55);
+            return minigame03;
+            case 45: Color minigame04=new Color(50,255,0);
+            return minigame04;
+            case 46: Color minigame05=new Color(150,255,0);
+            return minigame05;
+            case 47: Color minigame06=new Color(250,255,0);
+            return minigame06;
+            case 48: Color minigame07=new Color(255,150,0);
+            return minigame07;
+            case 49: Color minigame08=new Color(255,50,0);
+            return minigame08;
+            case 50: Color minigame09=new Color(255,0,50);
+            return minigame09;
+            case 51: Color minigame10=new Color(255,0,150);
+            return minigame10;
+            case 52: Color minigame11=new Color(255,0,250);
+            return minigame11;
             default: return graphic.getColor();
         }
 

@@ -300,6 +300,7 @@ public class KAMPF {
             ZEICHENFENSTER.gibFenster().warte(1000);
             beendezug();
         }
+        kontrollesieg();
     }
 
     public void generierung() {

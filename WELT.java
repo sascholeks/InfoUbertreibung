@@ -6,7 +6,7 @@ import java.awt.event.MouseEvent;
 import java.awt.event.*;
 public class WELT implements MouseListener 
 {
-    Timer timer;
+    //Timer timer,zeichner;
     GRAFIKGGENERIERUNG grafikgen;
     private ZEICHENFENSTER f;
     MUSIK musik;
@@ -24,7 +24,7 @@ public class WELT implements MouseListener
     int[] gegnerpos,hp11;
     boolean[] quest,besuchtapfel;
     int genwelthelp,genwelthelp2,bildpos,aktpos,aktansichtpos,genhelpkampf;  
-    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy,weltwertvorher;
+    int zerx ,zery,xzerbew,yzerbew,count=0,helpmonsbew,drfx,drfy,hafx,hafy,weltwertvorher,hptpos;
     int hp1,hp2=0,hp3=0,help4=0,hp5=0,hp6=0,hp7,hp8,hp9=0,hp10,hp12,hp13,hp14,hp15,hp19,hp20,counter,anzap=10,bewegterichtung;
     boolean anzl,anzo,anzr,anzu,bewl,bewo,bewr,bewu,kongenehmigung=false,wegkont=false,bewegungssperre=true,kontrolleweg=false,quest2=false,mausfreigabe=false,hp16,ton=true,kampfton=true,hp21=false;
     boolean ignor=false,boot=false,opttonan=true;
@@ -32,11 +32,23 @@ public class WELT implements MouseListener
     String ort1,ort2;
     public WELT() {
         r=new Random();
-        timer = new Timer(2000, new ActionListener() {
-                public void actionPerformed(ActionEvent evt) {
-                    bewegegegner();
-                }    
-            });
+        //timer = new Timer(10, new ActionListener() {
+        //        public void actionPerformed(ActionEvent evt2) {
+        //            bewegegegner();
+        //        }    
+        //    });
+        //zeichner = new Timer(1000, new ActionListener() {
+        //        public void actionPerformed(ActionEvent evt3) {
+        //            try {
+        //                zeichneansicht();
+        //                Thread.sleep(4000);    
+        //                zeichner.stop();
+        //            } catch(InterruptedException ex) {
+        //                Thread.currentThread().interrupt();
+        //            }
+        //            zeichner.start();
+        //        }    
+        //    });
         ZEICHENFENSTER.gibFenster().frame.addMouseListener(this);
         grafikgen=new GRAFIKGGENERIERUNG();
         musik=new MUSIK();
@@ -77,6 +89,8 @@ public class WELT implements MouseListener
         grafik.kordinatenanzeige((aktpos%500)+" : "+(aktpos/500));
         quest=new boolean[100];
         musik.spiele();
+        //timer.start();
+        //zeichner.start();
     }
 
     public void bewegen(int richtung) {
@@ -167,12 +181,12 @@ public class WELT implements MouseListener
             }else if(welt[aktpos]==40) {                                //kontrolle dungeon
                 switch(r.nextInt(3)) {
                     case 0:
-                        //clicker
-                        break;
+                    //clicker
+                    break;
                     case 1:
-                        break;
+                    break;
                     case 2:
-                        break;
+                    break;
                 }
             }else if(welt[aktpos]==42) {                    //kontrolle hafen
                 grafik.loeschekons();
@@ -192,7 +206,7 @@ public class WELT implements MouseListener
                 drfx=aktpos%500;
                 drfy=aktpos/500;
             }
-            if(hp21==true && besuchtapfel[aktpos]==false && (welt[aktpos]==3 || welt[aktpos]==5 ||welt[aktpos]==11)) {
+            if(hp21==true && besuchtapfel[aktpos]==false && (welt[aktpos]==3 || welt[aktpos]==5 ||welt[aktpos]==11)) {  //kontrolle apfelbaum
                 besuchtapfel[aktpos]=true;
                 inv.gesap++;
                 grafik.kons("+1 Apfel");
@@ -236,204 +250,225 @@ public class WELT implements MouseListener
             schwerfaktor=schwerfaktor*1.02;
             kampf.aktionssperre=true;
             if(ton==true) {
-                if(ton==true) {
-                    musik.spiele();
-                }
+                musik.spiele();
             }
-        } 
-        if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107 && mausfreigabe==true) {          //fld1
-            if(objschirm.hpt==true) {
-                objschirm.kaserne=true;
-                hp2++;
-                hp13=0;
-                if(hp3==0) {
-                    hp3++;
-                    grafik.kons("folge dem Weg und Gelange zur Kaserne");
-                    kontrolleweg=true;
-                    hp8=1;
-                }else if(hp8==1) {
-                    grafik.kons("Quest bereits angenommen");
-                }else if(objschirm.kaserne==true) {
-                    grafik.kons("Quest bereits abgeschlossen");
-                }
-            }else if(objschirm.shp==true) {
-                inv.kaufetruppen(0);
-            }else if(objschirm.kas==true) {
-                if(hp2==1) { 
-                    hp13=1;
-                    grafik.kons("Truppen,Heiltränke und Geld erhalten");
-                    inv.anz[0]=inv.anz[0]+100;
-                    inv.anz[1]=inv.anz[1]+80;
-                    inv.anz[2]=inv.anz[2]+65;
-                    inv.anz[3]=inv.anz[3]+50;
-                    inv.anz[4]=inv.anz[4]+45;
-                    inv.geld=inv.geld+5000;
-                    inv.heiltrankkl=inv.heiltrankkl+5;
-                    inv.heiltrankgr=inv.heiltrankgr+2;
-                    kontrolleweg=false;
-                    hp2++;
-                    hp5=1;
-                    hp8=0;
-                    quest[0]=true;
-                }else if(hp5==1) {
-                    hp9=hp9+10;
-                    grafik.kons("Geh und Töte 10 Gegner");
-                    hp6=1;
-                }else  if(hp6==1 && counter==10) {
-                    grafik.kons("Heiltränke und Geld erhalten");
-                    inv.geld=inv.geld+8000*(int)hp9/100+1000;
-                    inv.heiltrankkl=inv.heiltrankkl+5*(int)hp9/50+2; 
-                    hp6=0;
-                    hp5=0;
-                    counter++;
-                    if(counter==10) {
-                        quest[1]=true;
-                        objschirm.haken();
-                    }
-                }else {
-                    grafik.kons("Keine Quest angenommen");
-                }
-            }else if(objschirm.nav==true) {
-                hp14=0;
-                ort1=(getpos(26)%500)+" : "+(getpos(26)/500);
-                ort2="Hauptstadt";
-                grafik.ortsanzeige(ort1,ort2);
-            }else if(objschirm.haf==true) {
-                if(boot==true) {
-                    grafik.kons("Du hast bereits ein Boot");
-                }else {
-                    if(inv.geld>=5000) {
-                        boot=true;
-                        inv.geld=inv.geld-5000;
-                        quest[2]=true;
-                        objschirm.hakenhf();
-                    }else {
-                        grafik.kons("nicht genug Geld");
-                    }
-                }
-            }else if(objschirm.drf==true) {
-                if(hp21==false) {
-                    grafik.kons("Bringe "+anzap+" Äpfel");
-                    hp21=true;
-                }else if(hp21==true) {
-                    if(inv.gesap>=anzap) {  
-                        grafik.kons("Quest abgeschlossen");
-                        inv.geld=inv.geld+anzap*15;
-                        inv.gesap=inv.gesap-anzap;
-                        hp21=false;
-                        anzap=(int)(anzap*schwerfaktor*1.2);
-                    }else {
-                        grafik.kons("Es fehlen noch "+(anzap-inv.gesap)+ "Äpfel");
-                    }
-                }
-            }else if(objschirm.esc==true) {
-                bewegungssperre=false;
-                objschirm.hpt=false;
-                ZEICHENFENSTER.gibFenster().loescheAlles();
-                grafik.zeichnerahmen();
-                zeichneansicht();
-                mausfreigabe=false;
-                objschirm.esc=false;
-                objschirm.opt=false;
-            }else if(objschirm.opt==true) {
-                if(opttonan==true) {
-                    tonaus();
-                    opttonan=false;
-                    objschirm.optionen(opttonan);
-                }else if(opttonan==false) {
-                    tonan();
-                    opttonan=true;
-                    objschirm.optionen(opttonan);
-                }
+        }else if(hp16==true && kampf.kampf.verloren==true) {
+            aktpos=hptpos;
+            bildpos=aktpos-1503;
+            aktansichtpos=24;
+            hp16=false;
+            bewegungssperre=false;
+            inv.anz[0]=0;
+            inv.anz[1]=0;
+            inv.anz[2]=0;
+            inv.anz[3]=0;
+            inv.anz[4]=0;
+            kampf.aktionssperre=true;
+            inv.geld=inv.geld-5000;
+            if(inv.geld<0) {
+                inv.geld=0;
+                boot=false;
             }
-            soundausw.play();
-        }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
-            if(objschirm.hpt==true) {
-                hp13=0;
-                objschirm.shop();
-            }else if(objschirm.shp==true) {
-                inv.kaufetruppen(1);
-            }else if(objschirm.kas==true) {
-                hp13=1;
-                objschirm.shop();   
-            }else if(objschirm.haf==true) {
-                hp13=2;
-                objschirm.shop();
-            }else if(objschirm.drf==true) {
-                hp13=3;
-                objschirm.shop();
-            }else if(objschirm.nav==true) {
-                hp14=0;
-                ort1=(getpos(27)%500)+" : "+(getpos(27)/500);
-                ort2="Kaserne";
-                grafik.ortsanzeige(ort1,ort2);
-            }else if(objschirm.esc==true) {
-                objschirm.optionen(opttonan);
+            if(ton==true) {
+                musik.spiele();
             }
-            soundausw.play();
-        }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
-            if(objschirm.hpt==true || objschirm.kas==true || objschirm.haf==true || objschirm.drf==true) {
-                bewegungssperre=false;
-                objschirm.hpt=false;
-                ZEICHENFENSTER.gibFenster().loescheAlles();
-                grafik.zeichnerahmen();
-                zeichneansicht();
-                mausfreigabe=false;
-                objschirm.hpt=false;
-                objschirm.kas=false;
-                objschirm.haf=false;
-                objschirm.drf=false;
-            }else if(objschirm.shp==true) {
-                inv.kaufetruppen(2);
-            }else if(objschirm.nav==true) {
-                hp14=0;
-                ort1=(hafx+" : "+hafy);
-                ort2="Hafen";
-                grafik.ortsanzeige(ort1,ort2);
-            }else if(objschirm.esc==true) {
-                System.exit(0);
-            }
-            soundausw.play();
-        }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167 && mausfreigabe==true) {  //fld4
-            if(objschirm.shp==true) {
-                inv.kaufetruppen(3);
-            }else if(objschirm.nav==true) {
-                hp14=0;
-                ort1=(drfx+" : "+drfy);
-                ort2="Dorf";
-                grafik.ortsanzeige(ort1,ort2);
-            }
-            soundausw.play();
-        }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187 && mausfreigabe==true) {  //fld5
-            if(objschirm.shp==true) {
-                inv.kaufetruppen(4);
-            }else if(objschirm.nav==true) {
-                hp14=1;
-                grafik.loescheort();    
-            }
-            soundausw.play();
-        }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
-            if(objschirm.shp==true && hp13==0) {
-                objschirm.hauptstadt(quest[0]);
-            }else if(objschirm.shp==true && hp13==1) {
-                objschirm.kaserne(quest[1]);
-            }else if(objschirm.shp==true && hp13==2) {
-                objschirm.hafen(quest[2]);
-            }else if(objschirm.shp==true && hp13==3) {
-                objschirm.dorf();
-            }else if(objschirm.nav==true) {
-                bewegungssperre=false;
-                objschirm.nav=false;
-                ZEICHENFENSTER.gibFenster().loescheAlles();
-                grafik.zeichnerahmen();
-                zeichneansicht();
-                mausfreigabe=false;
-            }else if(objschirm.opt==true) {
-                objschirm.esc();
-            }
-            soundausw.play();
         }
-
+        if(mausfreigabe==true) {
+            //zeichner.stop();
+            if(e.getX()>59 && e.getX()<209 && e.getY()>94 && e.getY()<107 && mausfreigabe==true) {          //fld1
+                if(objschirm.hpt==true) {
+                    objschirm.kaserne=true;
+                    hp2++;
+                    hp13=0;
+                    if(hp3==0) {
+                        hp3++;
+                        grafik.kons("folge dem Weg und Gelange zur Kaserne");
+                        kontrolleweg=true;
+                        hp8=1;
+                    }else if(hp8==1) {
+                        grafik.kons("Quest bereits angenommen");
+                    }else if(objschirm.kaserne==true) {
+                        grafik.kons("Quest bereits abgeschlossen");
+                    }
+                }else if(objschirm.shp==true) {
+                    inv.kaufetruppen(0);
+                }else if(objschirm.kas==true) {
+                    if(hp2==1) { 
+                        hp13=1;
+                        grafik.kons("Truppen,Heiltränke und Geld erhalten");
+                        inv.anz[0]=inv.anz[0]+100;
+                        inv.anz[1]=inv.anz[1]+80;
+                        inv.anz[2]=inv.anz[2]+65;
+                        inv.anz[3]=inv.anz[3]+50;
+                        inv.anz[4]=inv.anz[4]+45;
+                        inv.geld=inv.geld+5000;
+                        inv.heiltrankkl=inv.heiltrankkl+5;
+                        inv.heiltrankgr=inv.heiltrankgr+2;
+                        kontrolleweg=false;
+                        hp2++;
+                        hp5=1;
+                        hp8=0;
+                        quest[0]=true;
+                    }else if(hp5==1) {
+                        hp9=hp9+10;
+                        grafik.kons("Geh und Töte 10 Gegner");
+                        hp6=1;
+                    }else  if(hp6==1 && counter==10) {
+                        grafik.kons("Heiltränke und Geld erhalten");
+                        inv.geld=inv.geld+8000*(int)hp9/100+1000;
+                        inv.heiltrankkl=inv.heiltrankkl+5*(int)hp9/50+2; 
+                        hp6=0;
+                        hp5=0;
+                        counter++;
+                        if(counter==10) {
+                            quest[1]=true;
+                            objschirm.haken();
+                        }
+                    }else {
+                        grafik.kons("Keine Quest angenommen");
+                    }
+                }else if(objschirm.nav==true) {
+                    hp14=0;
+                    ort1=(getpos(26)%500)+" : "+(getpos(26)/500);
+                    ort2="Hauptstadt";
+                    grafik.ortsanzeige(ort1,ort2);
+                }else if(objschirm.haf==true) {
+                    if(boot==true) {
+                        grafik.kons("Du hast bereits ein Boot");
+                    }else {
+                        if(inv.geld>=5000) {
+                            boot=true;
+                            inv.geld=inv.geld-5000;
+                            quest[2]=true;
+                            objschirm.hakenhf();
+                        }else {
+                            grafik.kons("nicht genug Geld");
+                        }
+                    }
+                }else if(objschirm.drf==true) {
+                    if(hp21==false) {
+                        grafik.kons("Bringe "+anzap+" Äpfel");
+                        hp21=true;
+                    }else if(hp21==true) {
+                        if(inv.gesap>=anzap) {  
+                            grafik.kons("Quest abgeschlossen");
+                            inv.geld=inv.geld+anzap*15;
+                            inv.gesap=inv.gesap-anzap;
+                            hp21=false;
+                            anzap=(int)(anzap*schwerfaktor*1.2);
+                        }else {
+                            grafik.kons("Es fehlen noch "+(anzap-inv.gesap)+ "Äpfel");
+                        }
+                    }
+                }else if(objschirm.esc==true) {
+                    bewegungssperre=false;
+                    objschirm.hpt=false;
+                    ZEICHENFENSTER.gibFenster().loescheAlles();
+                    grafik.zeichnerahmen();
+                    zeichneansicht();
+                    mausfreigabe=false;
+                    objschirm.esc=false;
+                    objschirm.opt=false;
+                }else if(objschirm.opt==true) {
+                    if(opttonan==true) {
+                        tonaus();
+                        opttonan=false;
+                        objschirm.optionen(opttonan);
+                    }else if(opttonan==false) {
+                        tonan();
+                        opttonan=true;
+                        objschirm.optionen(opttonan);
+                    }
+                }
+                soundausw.play();
+            }else if(e.getX()>59 && e.getX()<209 && e.getY()>114 && e.getY()<127 && mausfreigabe==true) {    //fld2
+                if(objschirm.hpt==true) {
+                    hp13=0;
+                    objschirm.shop();
+                }else if(objschirm.shp==true) {
+                    inv.kaufetruppen(1);
+                }else if(objschirm.kas==true) {
+                    hp13=1;
+                    objschirm.shop();   
+                }else if(objschirm.haf==true) {
+                    hp13=2;
+                    objschirm.shop();
+                }else if(objschirm.drf==true) {
+                    hp13=3;
+                    objschirm.shop();
+                }else if(objschirm.nav==true) {
+                    hp14=0;
+                    ort1=(getpos(27)%500)+" : "+(getpos(27)/500);
+                    ort2="Kaserne";
+                    grafik.ortsanzeige(ort1,ort2);
+                }else if(objschirm.esc==true) {
+                    objschirm.optionen(opttonan);
+                }
+                soundausw.play();
+            }else if(e.getX()>59 && e.getX()<209 && e.getY()>134 && e.getY()<147 && mausfreigabe==true) {   //fld3
+                if(objschirm.hpt==true || objschirm.kas==true || objschirm.haf==true || objschirm.drf==true) {
+                    bewegungssperre=false;
+                    objschirm.hpt=false;
+                    ZEICHENFENSTER.gibFenster().loescheAlles();
+                    grafik.zeichnerahmen();
+                    zeichneansicht();
+                    mausfreigabe=false;
+                    objschirm.hpt=false;
+                    objschirm.kas=false;
+                    objschirm.haf=false;
+                    objschirm.drf=false;
+                    //zeichner.start();
+                }else if(objschirm.shp==true) {
+                    inv.kaufetruppen(2);
+                }else if(objschirm.nav==true) {
+                    hp14=0;
+                    ort1=(hafx+" : "+hafy);
+                    ort2="Hafen";
+                    grafik.ortsanzeige(ort1,ort2);
+                }else if(objschirm.esc==true) {
+                    System.exit(0);
+                }
+                soundausw.play();
+            }else  if(e.getX()>59 && e.getX()<209 && e.getY()>154 && e.getY()<167 && mausfreigabe==true) {  //fld4
+                if(objschirm.shp==true) {
+                    inv.kaufetruppen(3);
+                }else if(objschirm.nav==true) {
+                    hp14=0;
+                    ort1=(drfx+" : "+drfy);
+                    ort2="Dorf";
+                    grafik.ortsanzeige(ort1,ort2);
+                }
+                soundausw.play();
+            }else if(e.getX()>59 && e.getX()<209 && e.getY()>174 && e.getY()<187 && mausfreigabe==true) {  //fld5
+                if(objschirm.shp==true) {
+                    inv.kaufetruppen(4);
+                }else if(objschirm.nav==true) {
+                    hp14=1;
+                    grafik.loescheort();    
+                }
+                soundausw.play();
+            }else if(e.getX()>59 && e.getX()<209 && e.getY()>194 && e.getY()<207 && mausfreigabe==true) {  //fld6
+                if(objschirm.shp==true && hp13==0) {
+                    objschirm.hauptstadt(quest[0]);
+                }else if(objschirm.shp==true && hp13==1) {
+                    objschirm.kaserne(quest[1]);
+                }else if(objschirm.shp==true && hp13==2) {
+                    objschirm.hafen(quest[2]);
+                }else if(objschirm.shp==true && hp13==3) {
+                    objschirm.dorf();
+                }else if(objschirm.nav==true) {
+                    bewegungssperre=false;
+                    objschirm.nav=false;
+                    ZEICHENFENSTER.gibFenster().loescheAlles();
+                    grafik.zeichnerahmen();
+                    zeichneansicht();
+                    mausfreigabe=false;
+                }else if(objschirm.opt==true) {
+                    objschirm.esc();
+                }
+                soundausw.play();
+            }
+        }
     }
 
     public void generierewelt() {  
@@ -560,11 +595,8 @@ public class WELT implements MouseListener
             do {
                 welt[bildpos+a%7+a/7*500]=r.nextInt(25);
             }while(welt[bildpos+a%7+a/7*500]==6); 
-            welt[bildpos-9996]=r.nextInt(25);
-            welt[bildpos-496]=r.nextInt(25);
-            welt[bildpos-500]=r.nextInt(25);
-            welt[bildpos-501]=r.nextInt(25);
-            welt[bildpos-502]=r.nextInt(25);
+            welt[bildpos+996]=r.nextInt(25);
+            welt[bildpos+496]=r.nextInt(25);
             welt[bildpos+2001]=r.nextInt(25);
             welt[bildpos+2002]=r.nextInt(25);
             welt[bildpos+2003]=r.nextInt(25);
@@ -595,8 +627,9 @@ public class WELT implements MouseListener
         }while((genwelthelp3%500+(genwelthelp%7))+(genwelthelp/500+(genwelthelp/7))*500==aktpos);
         do {
             genwelthelp2=r.nextInt(7)*7+r.nextInt(7);
-        }while(welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-500]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+500]>25);                                               
+        }while(welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500]>24 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500-500]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+1]>25 || welt[genwelthelp3+genwelthelp2%7+genwelthelp2/7*500+500]>25);                                               
         algsw.eingabestartziel(genwelthelp,genwelthelp2);
+        hptpos=genwelthelp;
         grafikgen.ph3xhpt();
         grafikgen.ph3xKaserne();
         algsw.loese();
@@ -660,7 +693,7 @@ public class WELT implements MouseListener
         for(int a=0;a<1500;a++) {        //generierung dungeon
             do {
                 hp15=r.nextInt(250000);
-            }while(welt[hp15]>25 || welt[hp15]==6);
+            }while(welt[hp15]>24 || welt[hp15]==6);
             welt[hp15]=40;
         }
         grafikgen.ph3xDungeon();
@@ -674,8 +707,8 @@ public class WELT implements MouseListener
         }
         for(int a=0;a<10000;a++) {                                        //generierung von 10000 gegnern 
             do {
-                genhelpkampf=r.nextInt(250000);
-            }while(welt[genhelpkampf]>=24 || gegnerpos[genhelpkampf]==100 || welt[genhelpkampf]==6);
+                genhelpkampf=r.nextInt(23998)+501;
+            }while(welt[genhelpkampf]>24 || gegnerpos[genhelpkampf]==100 || welt[genhelpkampf]==6);
             gegnerpos[genhelpkampf]=100;
         }
         grafikgen.ph3xGegner();
@@ -754,13 +787,21 @@ public class WELT implements MouseListener
             }
         }
     }
-    
+
     public void bewegegegner() {
-        for(int a=0;a<250000;a++) {
-            if(gegnerpos[a]==100) {
-                
-            }
+        try {
+            for(int a=0;a<249500;a++) {
+                if(gegnerpos[a]==100) { 
+                    gegnerpos[a]=101;
+                    gegnerpos[algge.bewegen(a,welt[a-1],welt[a-500],welt[a+1],welt[a+500])]=100;
+                }
+            } 
+            //timer.stop();
+            Thread.sleep(4000);
+        } catch(InterruptedException ex) {
+            Thread.currentThread().interrupt();
         }
+        //timer.start();
     }
 
     public void navi() {

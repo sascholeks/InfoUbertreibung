@@ -1,21 +1,29 @@
-VERSION: Alpha Build 1.0
-
 
 Steuerung:
-    Bewegen:  WASD oder Pfeiltasten
-    Inventar: I
-    Menü:     Esc
-    Navi:     M
-    Welt zeichnen (falls Möglich): Enter
-    
+    Welt:
+      Bewegen:  WASD oder Pfeiltasten
+      Inventar: I
+      Menü:     Esc
+      Navi:     M
+      Welt zeichnen (falls Möglich): Enter
+      
+    Kampf
+      Alle Aktionen mit Maus
+      
+    Minigame 
+      Pfeiltasten oder WASD
     Clicker Dungeon:
-    Upgrade: W
+      Upgrade: W
    
     
 Generelle Informationen:
-    Gegner können sich in Wäldern(wlttyp 3,5,11) verstecken, also sei Vorsichtig!
+    Gegner können sich in Wäldern(welttyp 3,5,11) verstecken, also sei Vorsichtig!
+    Wenn du einen Kampf verlierst, verlierst du alle deine truppen,5000 Geld und dein Boot(wenn du weniger als 5000 Geld hast)
 
-       
+    
+    
+    
+    
 Cheats:
     -mute
         -Ton wird deaktiviert
