@@ -8,7 +8,7 @@ public class MINIGAME implements KeyListener
     Random r;
     MINIGAMEGRAFIK grafik;
     int[] feld;
-    int helpspawn;
+    int helpspawn,maxzahl;
     boolean bewegung=false;
     public MINIGAME()
     {
@@ -20,6 +20,7 @@ public class MINIGAME implements KeyListener
     }
     
     public void spiele() {
+        ZEICHENFENSTER.gibFenster().loescheAlles();
         for(int a=0;a<16;a++) {
             feld[a]=0;
         } 
@@ -28,6 +29,7 @@ public class MINIGAME implements KeyListener
         neuezahl();
         zeichneansicht();
         bewegung=true;
+        maxzahl=0;
     }
     
     public void verschieben(int richtung) {
@@ -76,6 +78,9 @@ public class MINIGAME implements KeyListener
                             }else if(feld[x+y*4+1]==feld[x+y*4]) {
                                 feld[x+y*4+1]=feld[x+y*4+1]*2;
                                 feld[x+y*4]=0;
+                                if(maxzahl<feld[x+y*4+1]) {
+                                    maxzahl=feld[x+y*4+1];
+                                }
                             }else {
                                 System.out.println("auftreten1");
                             } 
@@ -119,17 +124,19 @@ public class MINIGAME implements KeyListener
     }
     
     public void kontrolleende() {
+    
+           // bewegung=false;
         
     }
     
     public void keyPressed(KeyEvent e) { 
-        if(e.getKeyCode() == 65 || e.getKeyCode() == 37) {        //a
+        if((e.getKeyCode() == 65 || e.getKeyCode() == 37) && bewegung==true) {        //a
             verschieben(0);
-        }else if(e.getKeyCode() == 87 || e.getKeyCode() == 38) {  //w
+        }else if((e.getKeyCode() == 87 || e.getKeyCode() == 38) && bewegung==true) {  //w
             verschieben(1);
-        }else if(e.getKeyCode() == 68 || e.getKeyCode() == 39) {  //d
+        }else if((e.getKeyCode() == 68 || e.getKeyCode() == 39) && bewegung==true) {  //d
             verschieben(2);
-        }else if(e.getKeyCode() == 83 || e.getKeyCode() == 40) {  //s
+        }else if((e.getKeyCode() == 83 || e.getKeyCode() == 40) && bewegung==true) {  //s
             verschieben(3);
         }
     }

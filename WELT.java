@@ -18,6 +18,7 @@ public class WELT implements MouseListener
     KAMPFEINGABE kampf;
     ALGOGEGNER alggeg;
     INVENTAR inv;
+    MINIGAME game2;
     //COOKIECLICKER clicker;
     Random r;
     int[] welt,ansicht;
@@ -59,6 +60,7 @@ public class WELT implements MouseListener
         objschirm=new OBJBILDSCHIRM();
         alggeg= new ALGOGEGNER();
         kampf=new KAMPFEINGABE();
+        game2=new MINIGAME();
         //clicker=new COOKIECLICKER();
         inv=new INVENTAR();
         r=new Random();
@@ -184,6 +186,8 @@ public class WELT implements MouseListener
                     //clicker
                     break;
                     case 1:
+                    bewegungssperre=true;
+                    game2.spiele();
                     break;
                     case 2:
                     break;
