@@ -8,7 +8,7 @@ public class KAMPF {
     SOUNDSCHWERTSCHLAG schwertkampf;
     SOUNDARROW arrow;
     ALGORITHM alg;
-    Timer t1,t2;
+    Timer t1,t2,t3;
     OBJBILDSCHIRM obj;
     SOUNDMUSIKkam musik;
     int[] welt,reihenfolge,kepos,verlorenanz; 
@@ -57,9 +57,15 @@ public class KAMPF {
                 }    
             });
 
+        t3 = new Timer(200, new ActionListener() {
+                public void actionPerformed(ActionEvent evt) {
+                    complDecide();
+                    t3.stop();
+                }    
+            });
+
     }
 
-    
 
     public void kampf(int ausanz0,int ausanz1,int ausanz2,int ausanz3,int ausanz4,int geganz0,int geganz1,int geganz2,int geganz3,int geganz4,int heiltrkl,int heiltrgr,double swer,boolean tone) {
         for(int a=0;a<25;a++) {
@@ -300,6 +306,9 @@ public class KAMPF {
             ZEICHENFENSTER.gibFenster().warte(1000);
             beendezug();
         }
+        if(reihenfolge[0]>=5 && reihenfolge[0]<10) {
+            t3.start();
+        }
         kontrollesieg();
     }
 
@@ -513,7 +522,7 @@ public class KAMPF {
                 if(reihenfolge[0]>=5 && reihenfolge[0] <10) { //muss zu >=5 und <10
                     pos = i;
                 } else {
-                    grafik.kons("Error: Die KI ist nicht am Zug!");
+                    //grafik.kons("Error: Die KI ist nicht am Zug!");
                     pos = -2;
                 }
             }
@@ -523,7 +532,7 @@ public class KAMPF {
             alg.decide();
             action(alg.getActionType());
         } else if(pos == -2) {
-            grafik.kons("Error: Die KI ist nicht am Zug!");
+            //grafik.kons("Error: Die KI ist nicht am Zug!");
         }else {
             beendezug();
         }

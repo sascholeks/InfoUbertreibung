@@ -589,7 +589,6 @@ public class ALGORITHM
 
     public void movenormal() { //Abstand zu Gegnern halten + StrengthComparision + SaveDeath
         boolean up=false,down=false,left=false,right=false;
-
         int EnPos = -1;
         int EnStr = 0;
         for(int i=0;i<25;i++) {

@@ -91,7 +91,9 @@ public class COOKIECLICKER implements MouseListener, KeyListener
                         }
 
                     }
-                    attack(passive);
+                    if(level2>1) {
+                        attack(passive);
+                    }
                 }    
             });
 
@@ -252,8 +254,6 @@ public class COOKIECLICKER implements MouseListener, KeyListener
         t.stop();
         imga();
         leben = 0;
-        w.zeichneansicht();
-        w.hp16=false;
     }
 
     public void calccount() {
