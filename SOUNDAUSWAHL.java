@@ -13,7 +13,7 @@ public class SOUNDAUSWAHL
             clip = (Clip) AudioSystem.getLine(info);
             clip.open(ais);
             FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            gainControl.setValue(1.0F);
+            gainControl.setValue(0.4F);
         } 
         catch (Exception e) 
         {
