@@ -293,6 +293,7 @@ public class TASTATUR implements KeyListener
             eingabe=0;
             welt.bewegungssperre=false;
         }
+       
     } 
     
     public void keyTyped(KeyEvent e) { 
