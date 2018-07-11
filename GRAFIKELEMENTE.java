@@ -221,7 +221,7 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+19,1,1,30);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+21,1,1,30);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+23,1,1,12);
-        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+26,1,3,29);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+8,y+23,1,3,29);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+15,1,1,25);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+16,1,1,30);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+9,y+18,1,1,30);
@@ -456,6 +456,7 @@ public class GRAFIKELEMENTE
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+31,y+18,1,1,27);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+31,y+19,1,6,12);
         ZEICHENFENSTER.gibFenster().fuelleRechteck(x+32,y+18,1,1,12);
+        ZEICHENFENSTER.gibFenster().fuelleRechteck(x+19,y+19,1,1,0);
     }  
 
     public void sperrsoldat (int x, int y)
